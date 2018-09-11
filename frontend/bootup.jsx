@@ -1,7 +1,7 @@
 // This is the entry file for webpack.
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Root from './root';
+import Root from './components/root';
 import configureStore from './store/store';
 
 //TESTING//
@@ -23,6 +23,8 @@ document.addEventListener("DOMContentLoaded", () => {
   // window.createUser = UserActions.createUser; // V
   // window.fetchUser = UserActions.fetchUser; //V
   window.createSession = SessActions.createSession;
+  window.endSession = SessActions.endSession;
+
   // TESTING //
 
 });

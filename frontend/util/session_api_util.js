@@ -7,3 +7,10 @@ export const createSession = (credentials) => {
     }
   });
 };
+
+export const endSession = () => {
+  return $.ajax({
+    method: 'delete',
+    url: 'api/session'
+  });
+};
