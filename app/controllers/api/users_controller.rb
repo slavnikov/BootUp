@@ -10,7 +10,7 @@ class Api::UsersController < ApplicationController
   end
 
   def show
-    @user = User.find_by_credentials(params[:user][:email], params[:user][:password])
+    @user = User.find_by(id: params[:id])
 
     if @user
       render :show
