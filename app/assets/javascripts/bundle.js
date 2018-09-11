@@ -195,6 +195,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _util_users_api_util__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./util/users_api_util */ "./frontend/util/users_api_util.js");
 /* harmony import */ var _actions_user_actions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./actions/user_actions */ "./frontend/actions/user_actions.js");
 /* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./actions/session_actions */ "./frontend/actions/session_actions.js");
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 // This is the entry file for webpack.
 
 
@@ -206,7 +208,19 @@ __webpack_require__.r(__webpack_exports__);
  //TESTING//
 
 document.addEventListener("DOMContentLoaded", function () {
-  var store = Object(_store_store__WEBPACK_IMPORTED_MODULE_3__["default"])();
+  var preloaded_state = {};
+
+  if (window.current_user) {
+    preloaded_state = {
+      users: _defineProperty({}, window.current_user.id, window.current_user),
+      session: {
+        currentUserId: window.current_user.id
+      }
+    };
+    delete window.current_user;
+  }
+
+  var store = Object(_store_store__WEBPACK_IMPORTED_MODULE_3__["default"])(preloaded_state);
   var root = document.getElementById('root');
   react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_root__WEBPACK_IMPORTED_MODULE_2__["default"], {
     store: store
