@@ -7,6 +7,6 @@
     "npm": "^5.6.0"
   },
   "script": {
-    "postinstall": "./node_modules/.bin/webpack --mode=production"
+    "postinstall": "webpack --mode=production"
   }
 }
