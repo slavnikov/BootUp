@@ -1,11 +1,12 @@
 import * as UserUtil from '../util/users_api_util';
+import { receiveCurrentUser } from './session_actions';
 
 export const RECEIVE_USER = 'RECEIVE_USER';
 
 export const createUser = (user) => {
   return (dispatch) => {
     UserUtil.createUser(user).then((user) => {
-      dispatch(receiveUser(user));
+      dispatch(receiveCurrentUser(user));
     });
   };
 };

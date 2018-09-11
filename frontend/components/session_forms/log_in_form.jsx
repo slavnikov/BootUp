@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom'
 
 class LogInForm extends React.Component {
   constructor(props) {
@@ -12,26 +13,29 @@ class LogInForm extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    this.createSession(this.state);
+    this.props.createSession(this.state);
   }
 
   update(field) {
     return (e) => {
-      this.setState({[field]: e.taget.value});
+      this.setState({[field]: e.currentTarget.value});
     };
   }
 
   render () {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <label>Email
-          <input type="text" value={this.state.email} onChange={this.update("email")}></input>
-        </label>
-        <label>Password
-          <input type="password" value={this.state.password} onChange={this.update("password")}></input>
-        </label>
-        <button>Log In</button>
-      </form>
+      <div>
+        <form onSubmit={this.handleSubmit}>
+          <label>Email
+            <input type="text" value={this.state.email} onChange={this.update("email")}></input>
+          </label><br></br>
+          <label>Password
+            <input type="password" value={this.state.password} onChange={this.update("password")}></input>
+          </label><br></br>
+          <button>Log In</button>
+        </form>
+        <Link to='/signup'>Sign Up</Link>
+      </div>
     );
   }
 }
