@@ -59,11 +59,13 @@
   color: white;
   font-size: 14px;
   margin-top: 31px;
+  transition: background-color 0.5s;
 }
 
 .login-form button:hover, .signup-form button:hover {
   background-color: #037362;
   cursor: pointer;
+  margin-top: 30px;
 }
 
 .login-bottom, .signup-top {
