@@ -1,10 +1,35 @@
 .header {
   background-color: ligth-red;
   display: flex;
-  justify-content: space-between;
   height: 42px;
   padding: 12px 24px;
   align-items: center;
+  justify-content: space-between;
+}
+
+.header div {
+  /* flex-grow: 2; */
+  /* display: flex;
+  justify-content: center; */
+}
+
+#div1 {
+  /* justify-content: flex-start; */
+  width: 33%;
+}
+
+#div2 {
+  width: 34%;
+}
+
+#div3 {
+  width: 33%;
+
+  /* justify-content: flex-end; */
+}
+
+#div3 a {
+  float: right;
 }
 
 .header a {
@@ -22,6 +47,7 @@
   font-family: 'Modak', cursive;
   font-size: 27px;
   color: #034752;
+text-align: center;
 }
 
 .profilePic {
@@ -31,7 +57,7 @@
   background-color: black;
   border: 0px;
   padding: 0px;
-  margin-top: 3px;
+  float: right;
 }
 
 .profilePic:hover {

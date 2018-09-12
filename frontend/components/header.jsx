@@ -6,19 +6,17 @@ const Header = (props) => {
 
   return (
     <div className="header">
-      <div style={{width:"10px"}}>
-
+      <div id="div1">
+        <p>Start a Project</p>
       </div>
-      <div >
+      <div id="div2">
         <p className="logo">BootUp</p>
       </div>
-      <div>
-        <HeaderButton
-          currentUserId={ props.currentUserId }
-          endSession={ props.endSession }
-          users={props.users}
-        />
-      </div>
+      <HeaderButton
+        currentUserId={ props.currentUserId }
+        endSession={ props.endSession }
+        users={props.users}
+      />
     </div>
   );
 };
@@ -32,7 +30,7 @@ const HeaderButton = (props) => {
 
   if (props.currentUserId) {
     return (
-      <div>
+      <div id="div3">
         <button className="profilePic" onClick={menuToggle}></button>
         <menu className="hidden" id="menu">
           <header>{props.users[props.currentUserId].name}</header>
@@ -44,7 +42,9 @@ const HeaderButton = (props) => {
     );
   } else {
     return (
-      <Link to='/login'>Sign in</Link>
+      <div id="div3">
+        <Link to='/login' >Sign in</Link>
+      </div>
     );
   }
 };

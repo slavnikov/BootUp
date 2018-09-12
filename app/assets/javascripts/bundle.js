@@ -299,16 +299,16 @@ var Header = function Header(props) {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "header"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    style: {
-      width: "10px"
-    }
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    id: "div1"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Start a Project")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    id: "div2"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
     className: "logo"
-  }, "BootUp")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(HeaderButton, {
+  }, "BootUp")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(HeaderButton, {
     currentUserId: props.currentUserId,
     endSession: props.endSession,
     users: props.users
-  })));
+  }));
 };
 
 var HeaderButton = function HeaderButton(props) {
@@ -319,7 +319,9 @@ var HeaderButton = function HeaderButton(props) {
   };
 
   if (props.currentUserId) {
-    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      id: "div3"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
       className: "profilePic",
       onClick: menuToggle
     }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("menu", {
@@ -329,9 +331,11 @@ var HeaderButton = function HeaderButton(props) {
       onClick: props.endSession
     }, "Log Out"))));
   } else {
-    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      id: "div3"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
       to: "/login"
-    }, "Sign in");
+    }, "Sign in"));
   }
 };
 
