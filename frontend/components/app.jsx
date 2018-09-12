@@ -9,7 +9,6 @@ const App = () => {
   return (
     <div>
       <HeaderC/>
-      <h1>Hello from the app World!</h1>
       <AuthRoute exact path='/login' component = { LoginC }/>
       <AuthRoute exact path='/signup' component = { SignUpC }/>
     </div>

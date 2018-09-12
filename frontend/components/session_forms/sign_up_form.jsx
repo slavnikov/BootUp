@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 class SignUpForm extends React.Component {
   constructor(props) {
@@ -30,24 +31,50 @@ class SignUpForm extends React.Component {
 
   render () {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <label>Name
-          <input type="text" value={this.state.name} onChange={this.update("name")}></input>
-        </label><br></br>
-        <label>Email
-          <input type="text" value={this.state.email} onChange={this.update("email")}></input>
-        </label><br></br>
-      <label>Re-enter Email
-          <input type="text" value={this.state.reemail} onChange={this.update("reemail")}></input>
-        </label><br></br>
-        <label>Password
-          <input type="password" value={this.state.password} onChange={this.update("password")}></input>
-        </label><br></br>
-      <label>Re-enter Password
-          <input type="password" value={this.state.repassword} onChange={this.update("repassword")}></input>
-        </label><br></br>
-      <button>Sign Up</button>
-      </form>
+      <div className="signup-wrapper">
+        <div className="signup-top">
+          <p>Have an account? <Link to='/login'>Log in</Link></p>
+        </div>
+        <form onSubmit={this.handleSubmit} className="signup-form">
+          <h1>Sign up</h1>
+            <input
+              placeholder="Name"
+              type="text"
+              value={this.state.name}
+              onChange={this.update("name")}>
+            </input>
+          <br></br>
+            <input
+              placeholder="Email"
+              type="text"
+              value={this.state.email}
+              onChange={this.update("email")}>
+            </input>
+          <br></br>
+            <input
+              placeholder="Re-enter email"
+              type="text"
+              value={this.state.reemail}
+              onChange={this.update("reemail")}>
+            </input>
+          <br></br>
+            <input
+              placeholder="Password"
+              type="password"
+              value={this.state.password}
+              onChange={this.update("password")}>
+            </input>
+          <br></br>
+            <input
+              placeholder="Re-enter password"
+              type="password"
+              value={this.state.repassword}
+              onChange={this.update("repassword")}>
+            </input>
+          <br></br>
+          <button>Sign Up</button>
+        </form>
+      </div>
     );
   }
 }
