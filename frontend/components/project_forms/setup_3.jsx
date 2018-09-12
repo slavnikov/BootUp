@@ -12,12 +12,12 @@ const Setup3 = (props) => {
   const submitCountry = (e) => {
     props.receiveProjectProps({country: e.target.innerHTML});
     document.getElementById('country-button').innerHTML = e.currentTarget.innerHTML;
-    document.getElementById('next-step').href = '#/setup/4';
+    document.getElementById('next-step').href = '#/setup/new_project_overview';
   };
 
   const nextStep = () => {
     if (props.currentPrjProps.country) {
-      return "#/setup/4";
+      return "#/setup/new_project_overview";
     } else {
       return null;
     }

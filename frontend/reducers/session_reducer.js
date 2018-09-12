@@ -7,12 +7,12 @@ const SessionReducer = (state = {}, action) => {
     case RECEIVE_CURRENT_USER:
       return {
         currentUserId: action.user.id,
-        currentPrjProps: state.currentPrjProps
+        currentPrjProps: state.currentPrjProps || {}
       };
     case REMOVE_CURRENT_USER:
       return {
         currentUserId: null,
-        currentPrjProps: state.currentPrjProps
+        currentPrjProps: state.currentPrjProps || {}
       };
     case RECEIVE_PROJECT_PROPS:
       return {
