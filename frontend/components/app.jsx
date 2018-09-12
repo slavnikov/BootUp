@@ -4,6 +4,7 @@ import LoginC from './session_forms/log_in_container';
 import SignUpC from './session_forms/sign_up_container';
 import HeaderC from './header_container';
 import AuthRoute from '../util/route_util';
+import SetupC from './project_forms/setup_container';
 
 const App = () => {
   return (
@@ -11,6 +12,7 @@ const App = () => {
       <HeaderC/>
       <AuthRoute exact path='/login' component = { LoginC }/>
       <AuthRoute exact path='/signup' component = { SignUpC }/>
+      <Route path='/setup' component = { SetupC }/>
     </div>
   );
 };

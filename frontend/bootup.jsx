@@ -8,6 +8,7 @@ import configureStore from './store/store';
 import * as UserUtils from './util/users_api_util';
 import * as UserActions from './actions/user_actions';
 import * as SessActions from './actions/session_actions';
+import * as PrjActions from './actions/project_actions';
 //TESTING//
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -19,7 +20,8 @@ document.addEventListener("DOMContentLoaded", () => {
         [window.current_user.id]: window.current_user
       },
       session: {
-        currentUserId: window.current_user.id
+        currentUserId: window.current_user.id,
+        currentPrjProps: {}
       }
     };
     delete(window.current_user);
@@ -36,8 +38,9 @@ document.addEventListener("DOMContentLoaded", () => {
   // window.fetchUser = UserUtils.fetchUser; //V
   // window.createUser = UserActions.createUser; // V
   // window.fetchUser = UserActions.fetchUser; //V
-  window.createSession = SessActions.createSession;
-  window.endSession = SessActions.endSession;
+  // window.createSession = SessActions.createSession;
+  // window.endSession = SessActions.endSession;
+  // window.receiveProjectProps = PrjActions.receiveProjectProps;
 
   // TESTING //
 
