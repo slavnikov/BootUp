@@ -306,15 +306,28 @@ var Header = function Header(props) {
     className: "logo"
   }, "BootUp")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(HeaderButton, {
     currentUserId: props.currentUserId,
-    endSession: props.endSession
+    endSession: props.endSession,
+    users: props.users
   })));
 };
 
 var HeaderButton = function HeaderButton(props) {
+  var menuToggle = function menuToggle() {
+    var menu = document.getElementById('menu');
+    menu.classList.toggle('hidden');
+    menu.classList.toggle('user-menu');
+  };
+
   if (props.currentUserId) {
-    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      className: "profilePic",
+      onClick: menuToggle
+    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("menu", {
+      className: "hidden",
+      id: "menu"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("header", null, props.users[props.currentUserId].name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("footer", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
       onClick: props.endSession
-    }, "Log Out");
+    }, "Log Out"))));
   } else {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
       to: "/login"
@@ -342,7 +355,8 @@ __webpack_require__.r(__webpack_exports__);
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
-    currentUserId: state.session.currentUserId
+    currentUserId: state.session.currentUserId,
+    users: state.users
   };
 };
 

@@ -3,7 +3,8 @@ import Header from './header';
 
 const mapStateToProps = (state) => {
   return ({
-    currentUserId: state.session.currentUserId
+    currentUserId: state.session.currentUserId,
+    users: state.users
   });
 };
 

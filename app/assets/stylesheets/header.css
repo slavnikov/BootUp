@@ -23,3 +23,66 @@
   font-size: 27px;
   color: #034752;
 }
+
+.profilePic {
+  height: 36px;
+  width: 36px;
+  border-radius: 50%;
+  background-color: black;
+  border: 0px;
+  padding: 0px;
+  margin-top: 3px;
+}
+
+.profilePic:hover {
+  cursor: pointer;
+}
+
+.profilePic:focus {
+  outline: 0px;
+}
+
+.user-menu {
+  width: 725px;
+  height: 200px;
+  border: 1px solid #9b9e9e;
+  background-color: white;
+  position: absolute;
+  right: 18px;
+  top: 62px;
+  padding: 0px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.user-menu header {
+  height: 24px;
+  padding: 32px 36px 16px 36px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #282828;
+}
+
+.user-menu footer {
+  height: 21px;
+  padding: 24px 36px;
+  border-top: 1px solid #dcdedd;
+}
+
+.user-menu footer button {
+  background-color: white;
+  border: 0px;
+    color: #282828;
+    font-size: 14px;
+}
+
+.user-menu footer button:hover {
+  text-decoration: underline;
+  cursor: pointer;
+  color: #037362;
+}
+
+.hidden {
+  display: none;
+}
