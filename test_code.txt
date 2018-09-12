@@ -1,0 +1,13 @@
+///Ajax Requests///
+
+$.ajax({
+  method: 'post',
+  url: 'api/users',
+  data: {
+    user: {
+      name: 'mr.nobody',
+      email: 'noboedy@gmail.com',
+      password: 'iamprettylame'
+    }
+  }
+}).then((response) => console.log(response)

@@ -1,0 +1,114 @@
+.header {
+  background-color: ligth-red;
+  display: flex;
+  height: 42px;
+  padding: 12px 24px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header div {
+  /* flex-grow: 2; */
+  /* display: flex;
+  justify-content: center; */
+}
+
+#div1 {
+  /* justify-content: flex-start; */
+  width: 33%;
+}
+
+#div2 {
+  width: 34%;
+}
+
+#div3 {
+  width: 33%;
+
+  /* justify-content: flex-end; */
+}
+
+#div3 a {
+  float: right;
+}
+
+.header a {
+  text-decoration: none;
+  font-family: "Maison Neue Book", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  color: #282828;
+}
+
+.header a:hover {
+  color: #037362;
+}
+
+.logo {
+  font-family: 'Modak', cursive;
+  font-size: 27px;
+  color: #034752;
+text-align: center;
+}
+
+.profilePic {
+  height: 36px;
+  width: 36px;
+  border-radius: 50%;
+  background-color: black;
+  border: 0px;
+  padding: 0px;
+  float: right;
+}
+
+.profilePic:hover {
+  cursor: pointer;
+}
+
+.profilePic:focus {
+  outline: 0px;
+}
+
+.user-menu {
+  width: 725px;
+  height: 200px;
+  border: 1px solid #9b9e9e;
+  background-color: white;
+  position: absolute;
+  right: 18px;
+  top: 62px;
+  padding: 0px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.user-menu header {
+  height: 24px;
+  padding: 32px 36px 16px 36px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #282828;
+}
+
+.user-menu footer {
+  height: 21px;
+  padding: 24px 36px;
+  border-top: 1px solid #dcdedd;
+}
+
+.user-menu footer button {
+  background-color: white;
+  border: 0px;
+    color: #282828;
+    font-size: 14px;
+}
+
+.user-menu footer button:hover {
+  text-decoration: underline;
+  cursor: pointer;
+  color: #037362;
+}
+
+.hidden {
+  display: none;
+}
