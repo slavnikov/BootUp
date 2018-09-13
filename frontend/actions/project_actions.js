@@ -15,8 +15,7 @@ export const receiveCurrentProjectProps = (prj_props) => {
 export const createProject = (props) => {
   return (dispatch) => {
     PrjUtil.createProject(props).then((project) => {
-      // dispatch(receiveProject(project));
-      console.log(project);
+      dispatch(receiveProject(project));
     });
   };
 };
@@ -24,7 +23,7 @@ export const createProject = (props) => {
 export const updateProject = (props) => {
   return (dispatch) => {
     PrjUtil.updateProject(props).then((project) => {
-      console.log(project);
+      dispatch(receiveProject(project));
     });
   };
 };

@@ -138,15 +138,14 @@ var receiveCurrentProjectProps = function receiveCurrentProjectProps(prj_props) 
 var createProject = function createProject(props) {
   return function (dispatch) {
     _util_project_api_util__WEBPACK_IMPORTED_MODULE_0__["createProject"](props).then(function (project) {
-      // dispatch(receiveProject(project));
-      console.log(project);
+      dispatch(receiveProject(project));
     });
   };
 };
 var updateProject = function updateProject(props) {
   return function (dispatch) {
     _util_project_api_util__WEBPACK_IMPORTED_MODULE_0__["updateProject"](props).then(function (project) {
-      console.log(project);
+      dispatch(receiveProject(project));
     });
   };
 };
@@ -325,8 +324,8 @@ document.addEventListener("DOMContentLoaded", function () {
   // window.endSession = SessActions.endSession;
   // window.receiveCurrentProjectProps = PrjActions.receiveCurrentProjectProps;
 
-  window.updateProject = _actions_project_actions__WEBPACK_IMPORTED_MODULE_8__["updateProject"]; // window.createProject = PrjActions.createProject;
-  // TESTING //
+  window.updateProject = _actions_project_actions__WEBPACK_IMPORTED_MODULE_8__["updateProject"];
+  window.createProject = _actions_project_actions__WEBPACK_IMPORTED_MODULE_8__["createProject"]; // TESTING //
 });
 
 /***/ }),
@@ -1417,10 +1416,13 @@ function (_React$Component) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var _users_reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./users_reducer */ "./frontend/reducers/users_reducer.js");
+/* harmony import */ var _projects_reducer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./projects_reducer */ "./frontend/reducers/projects_reducer.js");
+
 
 
 var EntitiesReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
-  users: _users_reducer__WEBPACK_IMPORTED_MODULE_1__["default"]
+  users: _users_reducer__WEBPACK_IMPORTED_MODULE_1__["default"],
+  projects: _projects_reducer__WEBPACK_IMPORTED_MODULE_3__["default"]
 });
 /* harmony default export */ __webpack_exports__["default"] = (EntitiesReducer);
 
@@ -1446,6 +1448,40 @@ var ErrorsReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"]
 
 /***/ }),
 
+/***/ "./frontend/reducers/projects_reducer.js":
+/*!***********************************************!*\
+  !*** ./frontend/reducers/projects_reducer.js ***!
+  \***********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _actions_project_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/project_actions */ "./frontend/actions/project_actions.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_1__);
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+
+var ProjectsReducer = function ProjectsReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+
+  switch (action.type) {
+    case _actions_project_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_PROJECT"]:
+      return Object(lodash__WEBPACK_IMPORTED_MODULE_1__["merge"])({}, state, _defineProperty({}, action.project.id, action.project));
+
+    default:
+      return state;
+  }
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (ProjectsReducer);
+
+/***/ }),
+
 /***/ "./frontend/reducers/root_reducer.js":
 /*!*******************************************!*\
   !*** ./frontend/reducers/root_reducer.js ***!
@@ -1467,7 +1503,6 @@ __webpack_require__.r(__webpack_exports__);
 
 var RootReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
   entities: _entities_reducer__WEBPACK_IMPORTED_MODULE_4__["default"],
-  // users: UsersReducer,
   session: _session_reducer__WEBPACK_IMPORTED_MODULE_2__["default"],
   errors: _errors_reducer__WEBPACK_IMPORTED_MODULE_3__["default"]
 });

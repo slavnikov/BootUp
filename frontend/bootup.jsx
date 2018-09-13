@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // window.endSession = SessActions.endSession;
   // window.receiveCurrentProjectProps = PrjActions.receiveCurrentProjectProps;
   window.updateProject = PrjActions.updateProject;
-  // window.createProject = PrjActions.createProject;
+  window.createProject = PrjActions.createProject;
   // TESTING //
 
 });
