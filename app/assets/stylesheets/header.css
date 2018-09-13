@@ -5,6 +5,7 @@
   padding: 12px 24px;
   align-items: center;
   justify-content: space-between;
+  border-bottom: 1px solid #656969;
 }
 
 .header div {
@@ -47,7 +48,7 @@
   font-family: 'Modak', cursive;
   font-size: 27px;
   color: #034752;
-text-align: center;
+  text-align: center;
 }
 
 .profilePic {

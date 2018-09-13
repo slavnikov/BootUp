@@ -6,6 +6,15 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+User.create({
+  name: 'Demo User',
+  email: 'user@demo.com',
+  password: 'password',
+  biography: "This is a demo account for BootUp.com.",
+  location: "New York, NY, United States",
+  timezone_utc_offset: -5}
+)
+
 30.times do
   credentials = {
     name: Faker::Name.name,

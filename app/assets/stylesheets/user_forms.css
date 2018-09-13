@@ -1,7 +1,7 @@
 .login-wrapper, .signup-wrapper {
-  height: 711px;
+  /* height: 711px; */
   box-sizing: border-box;
-  border-top: 1px solid #656969;
+  /* border-top: 1px solid #656969; */
   border-bottom: 2px solid #9b9e9e;
   background-color: #f0f0f0;
   padding: 60px 18px;
@@ -11,7 +11,7 @@
 }
 
 .signup-wrapper {
-  height: 1019px;
+  /* height: 1019px; */
 }
 
 .login-form, .signup-form {
@@ -21,11 +21,11 @@
 }
 
 .login-form {
-  height: 484px;
+  /* min-height: 200px; */
 }
 
 .signup-form {
-  height: 835px;
+  /* height: 835px; */
 }
 
 .login-form h1, .signup-form h1 {
@@ -45,7 +45,7 @@
   font-size: 14px;
 }
 
-.login-form input:focus {
+.login-form input:focus, .signup-form input:focus {
   outline: none;
   box-shadow: none;
   border: 1px solid #009e74;
@@ -59,13 +59,14 @@
   color: white;
   font-size: 14px;
   margin-top: 31px;
-  transition: background-color 0.5s;
+  transition: background-color 0.5s, margin-top 0s, margin-bottom 0s;
 }
 
 .login-form button:hover, .signup-form button:hover {
   background-color: #037362;
   cursor: pointer;
   margin-top: 30px;
+  margin-bottom: 1px;
 }
 
 .login-bottom, .signup-top {
@@ -99,4 +100,17 @@
 
 .login-bottom p a:hover, .signup-top p a:hover {
   color: black;
+}
+
+.errors-aside {
+  background-color: #dd919d;
+  list-style: none;
+  padding: 0px;
+}
+
+.errors-aside li {
+  margin: 0px 20px;
+  padding: 15px 0px;
+  font-size: 14px;
+  color: #282828;
 }

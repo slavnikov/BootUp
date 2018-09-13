@@ -10,7 +10,8 @@ const Header = (props) => {
         <p>Start a Project</p>
       </div>
       <div id="div2">
-        <p className="logo">BootUp</p>
+        <Link to='/' ><p className="logo">BootUp</p></Link>
+
       </div>
       <HeaderButton
         currentUserId={ props.currentUserId }

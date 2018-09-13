@@ -6,7 +6,16 @@ class Api::UsersController < ApplicationController
       login(@user)
       render :show
     else
-      render json: @user.errors.full_messages, status: 422
+      errors = []
+      @user.errors.full_messages.each do |error|
+        if error == "Email has already been taken"
+          errors << "This email is already registered with an account."
+        end
+        if error == "Password is too short (minimum is 6 characters)"
+          errors << "The password must be at least 6 characters long."
+        end
+      end
+      render json: errors, status: 422
     end
   end
 
@@ -16,7 +25,7 @@ class Api::UsersController < ApplicationController
     if @user
       render :show
     else
-      render json: ["Invalid user credenitals provided."], status: 422
+      render json: ["Email and password do not match."], status: 422
     end
   end
 
