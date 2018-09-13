@@ -19,7 +19,8 @@ class Api::ProjectsController < ApplicationController
       :sub_category,
       :country,
       :story,
-      :end_date
+      :end_date,
+      :pledge_goal
     )
   end
 end

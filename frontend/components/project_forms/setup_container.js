@@ -5,7 +5,7 @@ import SetupForm from './setup_form';
 const mapStateToProps = (state) => {
   return ({
     currentPrjProps: state.session.currentPrjProps,
-    currentUser: state.users[state.session.currentUserId]
+    currentUser: state.entities.users[state.session.currentUserId]
   });
 };
 
