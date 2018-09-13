@@ -5,6 +5,7 @@ import Setup2 from './setup_2';
 import Setup3 from './setup_3';
 import NewPrjOverview from './new_prj_overview';
 import ProjectBasics from './prj_basics';
+import ProjectStory from './prj_story';
 
 const SetupForm = (props) => {
 
@@ -48,6 +49,12 @@ const SetupForm = (props) => {
         }}/>
         <Route path='/setup/basics' render={() => {
           return <ProjectBasics
+            currentPrjProps={props.currentPrjProps}
+            receiveProjectProps={props.receiveProjectProps}
+          />;
+        }}/>
+      <Route path='/setup/story' render={() => {
+          return <ProjectStory
             currentPrjProps={props.currentPrjProps}
             receiveProjectProps={props.receiveProjectProps}
           />;

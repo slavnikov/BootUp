@@ -13,6 +13,28 @@ class ProjectBasics extends React.Component {
     this.state = this.props.currentPrjProps;
   }
 
+  saveChanges () {
+    this.props.receiveProjectProps({
+      title: this.input('title'),
+      subtitle: this.input('subtitle'),
+      category: this.input('category'),
+      location: this.input('location'),
+      end_date: this.input('end_date'),
+      pledge_goal: this.input('pledge_goal')
+    });
+  }
+
+  discardChanges () {
+    const inputs = $(':input[type=text], :input[type=date], select');
+    inputs.each((idx, input) => {
+      input.value = this.props.currentPrjProps[input.id] || '';
+    });
+  }
+
+  input(id) {
+    return document.getElementById(id).value;
+  }
+
   render () {
     return (
       <main>
@@ -21,23 +43,23 @@ class ProjectBasics extends React.Component {
         <form>
           <div>
             <h6>Project title</h6>
-            <input type='text' value={this.props.currentPrjProps.title}></input>
+            <input id='title' type='text' value={this.props.currentPrjProps.title}></input>
             <p>Our search looks through w...</p>
           </div>
           <div>
             <h6>Short Blurb</h6>
-            <input type='text' value={this.props.currentPrjProps.subtitle}></input>
+            <input id='subtitle' type='text' value={this.props.currentPrjProps.subtitle}></input>
             <p>Give people a sense of what you’r...</p>
           </div>
           <div>
             <h6>Category</h6>
-            <select>
+            <select id='category'>
               {
-                categories.map((category) => {
+                categories.map((category, idx) => {
                   if (category === this.props.currentPrjProps.category) {
-                    return <li value={category} selected>{category}</li>;
+                    return <option key={idx} value={category} selected>{category}</option>;
                   } else {
-                    return <li value={category} >{category}</li>;
+                    return <option key={idx} value={category} >{category}</option>;
                   }
                 })
               }
@@ -45,22 +67,22 @@ class ProjectBasics extends React.Component {
           </div>
           <div>
             <h6>Project Location</h6>
-            <input type='text' value={this.props.currentPrjProps.location}></input>
+            <input id='location' type='text' value={this.props.currentPrjProps.location}></input>
           </div>
           <div>
             <h6>Funding Duration</h6>
-            <input type="date"></input>
+            <input id='end_date' type="date"></input>
           </div>
           <div>
             <h6>Funding Goal</h6>
-            <input type="text" value={this.props.currentPrjProps.pledge_goal}></input>
+            <input id='pledge_goal' type="text" value={this.props.currentPrjProps.pledge_goal}></input>
           </div>
-          <footer>
-            <button>Discard Changes</button>
-            <button>Save</button>
-          </footer>
         </form>
         <button>Delete Project</button>
+        <footer>
+          <button onClick={this.discardChanges.bind(this)}>Discard Changes</button>
+          <button onClick={this.saveChanges.bind(this)}>Save</button>
+        </footer>
       </main>
     );
   }
