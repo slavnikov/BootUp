@@ -111,7 +111,7 @@ var receiveSessionError = function receiveSessionError(errorArr) {
 /*!*********************************************!*\
   !*** ./frontend/actions/project_actions.js ***!
   \*********************************************/
-/*! exports provided: RECEIVE_CURRENT_PROJECT_PROPS, RECEIVE_PROJECT, receiveCurrentProjectProps, createProject, updateProject, receiveProject */
+/*! exports provided: RECEIVE_CURRENT_PROJECT_PROPS, RECEIVE_PROJECT, receiveCurrentProjectProps, createProject, deleteProject, updateProject, receiveProject */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -120,6 +120,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_PROJECT", function() { return RECEIVE_PROJECT; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveCurrentProjectProps", function() { return receiveCurrentProjectProps; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createProject", function() { return createProject; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteProject", function() { return deleteProject; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateProject", function() { return updateProject; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveProject", function() { return receiveProject; });
 /* harmony import */ var _util_project_api_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/project_api_util */ "./frontend/util/project_api_util.js");
@@ -145,6 +146,11 @@ var createProject = function createProject(props) {
     });
   };
 };
+var deleteProject = function deleteProject(id) {
+  return function (dispatch) {
+    return _util_project_api_util__WEBPACK_IMPORTED_MODULE_0__["deleteProject"](id);
+  };
+};
 var updateProject = function updateProject(props) {
   return function (dispatch) {
     _util_project_api_util__WEBPACK_IMPORTED_MODULE_0__["updateProject"](props).then(function (project) {
@@ -165,7 +171,7 @@ var receiveProject = function receiveProject(project) {
 /*!*********************************************!*\
   !*** ./frontend/actions/session_actions.js ***!
   \*********************************************/
-/*! exports provided: RECEIVE_CURRENT_USER, REMOVE_CURRENT_USER, RECEIVE_CURRENT_PROJECT, createSession, receiveCurrentUser, endSession, removeCurrentUser, receiveCurrentProject */
+/*! exports provided: RECEIVE_CURRENT_USER, REMOVE_CURRENT_USER, RECEIVE_CURRENT_PROJECT, CLEAR_CURRENT_PROJECT, createSession, receiveCurrentUser, endSession, removeCurrentUser, receiveCurrentProject, clearCurrentProject */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -173,11 +179,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_CURRENT_USER", function() { return RECEIVE_CURRENT_USER; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "REMOVE_CURRENT_USER", function() { return REMOVE_CURRENT_USER; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_CURRENT_PROJECT", function() { return RECEIVE_CURRENT_PROJECT; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CLEAR_CURRENT_PROJECT", function() { return CLEAR_CURRENT_PROJECT; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createSession", function() { return createSession; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveCurrentUser", function() { return receiveCurrentUser; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "endSession", function() { return endSession; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "removeCurrentUser", function() { return removeCurrentUser; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveCurrentProject", function() { return receiveCurrentProject; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "clearCurrentProject", function() { return clearCurrentProject; });
 /* harmony import */ var _user_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./user_actions */ "./frontend/actions/user_actions.js");
 /* harmony import */ var _error_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./error_actions */ "./frontend/actions/error_actions.js");
 /* harmony import */ var _util_session_api_util__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../util/session_api_util */ "./frontend/util/session_api_util.js");
@@ -186,7 +194,8 @@ __webpack_require__.r(__webpack_exports__);
 
 var RECEIVE_CURRENT_USER = 'RECEIVE_CURRENT_USER';
 var REMOVE_CURRENT_USER = 'REMOVE_CURRENT_USER';
-var RECEIVE_CURRENT_PROJECT = 'RECEIVE_CURRENT_PROJECT'; // credentials should be in the format {email: "some", password: "string"}
+var RECEIVE_CURRENT_PROJECT = 'RECEIVE_CURRENT_PROJECT';
+var CLEAR_CURRENT_PROJECT = 'CLEAR_CURRENT_PROJECT'; // credentials should be in the format {email: "some", password: "string"}
 
 var createSession = function createSession(credentials) {
   return function (dispatch) {
@@ -220,6 +229,11 @@ var receiveCurrentProject = function receiveCurrentProject(id) {
   return {
     type: RECEIVE_CURRENT_PROJECT,
     id: id
+  };
+};
+var clearCurrentProject = function clearCurrentProject() {
+  return {
+    type: CLEAR_CURRENT_PROJECT
   };
 };
 
@@ -310,11 +324,13 @@ document.addEventListener("DOMContentLoaded", function () {
   if (window.current_user) {
     preloaded_state = {
       entities: {
-        users: _defineProperty({}, window.current_user.id, window.current_user)
+        users: _defineProperty({}, window.current_user.id, window.current_user),
+        projects: _defineProperty({}, window.current_project.id, window.current_project)
       },
       session: {
         currentUserId: window.current_user.id,
-        tempPrjProps: {}
+        tempPrjProps: {},
+        currentProjectId: window.current_project.id
       }
     };
     delete window.current_user;
@@ -565,6 +581,9 @@ function (_React$Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(ProjectBasics).call(this, props));
     _this.state = _this.props.currentProject;
+    _this.state = {
+      redirect: false
+    };
     return _this;
   }
 
@@ -576,9 +595,9 @@ function (_React$Component) {
         title: this.input('title'),
         subtitle: this.input('subtitle'),
         category: this.input('category'),
-        location: this.input('location'),
+        country: this.input('country'),
         end_date: this.input('end_date'),
-        pledge_goal: this.input('pledge_goal')
+        pledge_goal: parseInt(this.input('pledge_goal'))
       });
     }
   }, {
@@ -592,6 +611,15 @@ function (_React$Component) {
       });
     }
   }, {
+    key: "deleteProject",
+    value: function deleteProject() {
+      this.props.deleteProject(this.props.currentProject.id);
+      this.props.clearCurrentProject();
+      this.setState({
+        redirect: true
+      });
+    }
+  }, {
     key: "input",
     value: function input(id) {
       return document.getElementById(id).value;
@@ -599,6 +627,12 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
+      if (this.state.redirect === true) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Redirect"], {
+          to: "/"
+        });
+      }
+
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("main", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("nav", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_prj_form_nav__WEBPACK_IMPORTED_MODULE_2__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "Project title"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         id: "title",
         type: "text",
@@ -616,9 +650,9 @@ function (_React$Component) {
           value: category
         }, category);
       }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "Project Location"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        id: "location",
+        id: "country",
         type: "text",
-        defaultValue: this.props.currentProject.location || ""
+        defaultValue: this.props.currentProject.country || ""
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "Project End Date"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         id: "end_date",
         type: "date",
@@ -627,7 +661,9 @@ function (_React$Component) {
         id: "pledge_goal",
         type: "text",
         defaultValue: this.props.currentProject.pledge_goal || ""
-      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", null, "Delete Project"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("footer", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: this.deleteProject.bind(this)
+      }, "Delete Project"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("footer", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: this.discardChanges.bind(this)
       }, "Discard Changes"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: this.saveChanges.bind(this)
@@ -953,13 +989,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ProjectStoryC", function() { return ProjectStoryC; });
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _actions_project_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../actions/project_actions */ "./frontend/actions/project_actions.js");
-/* harmony import */ var _setup_form__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./setup_form */ "./frontend/components/project_forms/setup_form.jsx");
-/* harmony import */ var _setup_1__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./setup_1 */ "./frontend/components/project_forms/setup_1.jsx");
-/* harmony import */ var _setup_2__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./setup_2 */ "./frontend/components/project_forms/setup_2.jsx");
-/* harmony import */ var _setup_3__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./setup_3 */ "./frontend/components/project_forms/setup_3.jsx");
-/* harmony import */ var _new_prj_overview__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./new_prj_overview */ "./frontend/components/project_forms/new_prj_overview.jsx");
-/* harmony import */ var _prj_basics__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./prj_basics */ "./frontend/components/project_forms/prj_basics.jsx");
-/* harmony import */ var _prj_story__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./prj_story */ "./frontend/components/project_forms/prj_story.jsx");
+/* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/session_actions */ "./frontend/actions/session_actions.js");
+/* harmony import */ var _setup_form__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./setup_form */ "./frontend/components/project_forms/setup_form.jsx");
+/* harmony import */ var _setup_1__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./setup_1 */ "./frontend/components/project_forms/setup_1.jsx");
+/* harmony import */ var _setup_2__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./setup_2 */ "./frontend/components/project_forms/setup_2.jsx");
+/* harmony import */ var _setup_3__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./setup_3 */ "./frontend/components/project_forms/setup_3.jsx");
+/* harmony import */ var _new_prj_overview__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./new_prj_overview */ "./frontend/components/project_forms/new_prj_overview.jsx");
+/* harmony import */ var _prj_basics__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./prj_basics */ "./frontend/components/project_forms/prj_basics.jsx");
+/* harmony import */ var _prj_story__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./prj_story */ "./frontend/components/project_forms/prj_story.jsx");
+
 
 
 
@@ -988,17 +1026,23 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     },
     updateProject: function updateProject(prj_props) {
       return dispatch(Object(_actions_project_actions__WEBPACK_IMPORTED_MODULE_1__["updateProject"])(prj_props));
+    },
+    deleteProject: function deleteProject(id) {
+      return dispatch(Object(_actions_project_actions__WEBPACK_IMPORTED_MODULE_1__["deleteProject"])(id));
+    },
+    clearCurrentProject: function clearCurrentProject() {
+      return dispatch(Object(_actions_session_actions__WEBPACK_IMPORTED_MODULE_2__["clearCurrentProject"])());
     }
   };
 };
 
-var SetupFormC = Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_setup_form__WEBPACK_IMPORTED_MODULE_2__["default"]);
-var Setup1C = Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_setup_1__WEBPACK_IMPORTED_MODULE_3__["default"]);
-var Setup2C = Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_setup_2__WEBPACK_IMPORTED_MODULE_4__["default"]);
-var Setup3C = Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_setup_3__WEBPACK_IMPORTED_MODULE_5__["default"]);
-var NewPrjOverviewC = Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_new_prj_overview__WEBPACK_IMPORTED_MODULE_6__["default"]);
-var ProjectBasicsC = Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_prj_basics__WEBPACK_IMPORTED_MODULE_7__["default"]);
-var ProjectStoryC = Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_prj_story__WEBPACK_IMPORTED_MODULE_8__["default"]);
+var SetupFormC = Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_setup_form__WEBPACK_IMPORTED_MODULE_3__["default"]);
+var Setup1C = Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_setup_1__WEBPACK_IMPORTED_MODULE_4__["default"]);
+var Setup2C = Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_setup_2__WEBPACK_IMPORTED_MODULE_5__["default"]);
+var Setup3C = Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_setup_3__WEBPACK_IMPORTED_MODULE_6__["default"]);
+var NewPrjOverviewC = Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_new_prj_overview__WEBPACK_IMPORTED_MODULE_7__["default"]);
+var ProjectBasicsC = Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_prj_basics__WEBPACK_IMPORTED_MODULE_8__["default"]);
+var ProjectStoryC = Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_prj_story__WEBPACK_IMPORTED_MODULE_9__["default"]);
 
 /***/ }),
 
@@ -1650,6 +1694,13 @@ var SessionReducer = function SessionReducer() {
         currentProjectId: action.id
       };
 
+    case _actions_session_actions__WEBPACK_IMPORTED_MODULE_0__["CLEAR_CURRENT_PROJECT"]:
+      return {
+        currentUserId: state.currentUserId,
+        tempPrjProps: {},
+        currentProjectId: null
+      };
+
     default:
       return state;
   }
@@ -1724,13 +1775,14 @@ var configureStore = function configureStore(presetConfig) {
 /*!*******************************************!*\
   !*** ./frontend/util/project_api_util.js ***!
   \*******************************************/
-/*! exports provided: createProject, updateProject */
+/*! exports provided: createProject, updateProject, deleteProject */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createProject", function() { return createProject; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateProject", function() { return updateProject; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteProject", function() { return deleteProject; });
 var createProject = function createProject(props) {
   return $.ajax({
     method: 'post',
@@ -1747,6 +1799,12 @@ var updateProject = function updateProject(props) {
     data: {
       project: props
     }
+  });
+};
+var deleteProject = function deleteProject(id) {
+  return $.ajax({
+    method: 'delete',
+    url: "api/projects/".concat(id)
   });
 };
 

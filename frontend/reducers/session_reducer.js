@@ -1,4 +1,4 @@
-import {RECEIVE_CURRENT_USER, REMOVE_CURRENT_USER, RECEIVE_CURRENT_PROJECT} from '../actions/session_actions';
+import {RECEIVE_CURRENT_USER, REMOVE_CURRENT_USER, RECEIVE_CURRENT_PROJECT, CLEAR_CURRENT_PROJECT} from '../actions/session_actions';
 import { RECEIVE_CURRENT_PROJECT_PROPS } from '../actions/project_actions';
 import { merge } from 'lodash';
 
@@ -28,6 +28,12 @@ const SessionReducer = (state = {}, action) => {
         tempPrjProps: {},
         currentProjectId: action.id
       };
+    case CLEAR_CURRENT_PROJECT:
+    return {
+      currentUserId: state.currentUserId,
+      tempPrjProps: {},
+      currentProjectId: null
+    };
     default:
       return state;
   }

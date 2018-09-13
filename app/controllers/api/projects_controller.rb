@@ -3,6 +3,10 @@ class Api::ProjectsController < ApplicationController
     @project = Project.new(project_params)
 
     if @project.save
+      user = current_user
+      user.current_project_id = @project.id
+      user.save
+
       render :show
     else
       render json: @project.errors.full_messages, status: 422
@@ -17,6 +21,11 @@ class Api::ProjectsController < ApplicationController
     else
       render json: @project.errors.full_messages, status: 422
     end
+  end
+
+  def destroy
+    @project = Project.find_by(id: params[:id])
+    @project.destroy
   end
 
   private

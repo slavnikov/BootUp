@@ -20,11 +20,15 @@ document.addEventListener("DOMContentLoaded", () => {
       entities: {
         users: {
           [window.current_user.id]: window.current_user
+        },
+        projects: {
+          [window.current_project.id]: window.current_project
         }
       },
       session: {
         currentUserId: window.current_user.id,
-        tempPrjProps: {}
+        tempPrjProps: {},
+        currentProjectId: window.current_project.id
       }
     };
     delete(window.current_user);

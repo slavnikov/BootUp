@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
-import { receiveCurrentProjectProps, createProject, updateProject } from '../../actions/project_actions';
+import { receiveCurrentProjectProps, createProject, updateProject, deleteProject } from '../../actions/project_actions';
+import { clearCurrentProject } from '../../actions/session_actions';
 import SetupForm from './setup_form';
 import Setup1 from './setup_1';
 import Setup2 from './setup_2';
@@ -20,7 +21,9 @@ const mapDispatchToProps = (dispatch) => {
   return ({
     receiveCurrentProjectProps: (prj_props) => dispatch(receiveCurrentProjectProps(prj_props)),
     createProject: (props) => dispatch(createProject(props)),
-    updateProject: (prj_props) => dispatch(updateProject(prj_props))
+    updateProject: (prj_props) => dispatch(updateProject(prj_props)),
+    deleteProject: (id) => dispatch(deleteProject(id)),
+    clearCurrentProject: () => dispatch(clearCurrentProject())
   });
 };
 

@@ -12,6 +12,9 @@ class ProjectBasics extends React.Component {
   constructor(props){
     super(props);
     this.state = this.props.currentProject;
+    this.state = {
+      redirect: false
+    };
   }
 
   saveChanges () {
@@ -20,9 +23,9 @@ class ProjectBasics extends React.Component {
       title: this.input('title'),
       subtitle: this.input('subtitle'),
       category: this.input('category'),
-      location: this.input('location'),
+      country: this.input('country'),
       end_date: this.input('end_date'),
-      pledge_goal: this.input('pledge_goal')
+      pledge_goal: parseInt(this.input('pledge_goal'))
     });
   }
 
@@ -33,11 +36,21 @@ class ProjectBasics extends React.Component {
     });
   }
 
+  deleteProject() {
+    this.props.deleteProject(this.props.currentProject.id);
+    this.props.clearCurrentProject();
+    this.setState({redirect: true});
+  }
+
   input(id) {
     return document.getElementById(id).value;
   }
 
   render () {
+    if (this.state.redirect === true) {
+      return <Redirect to='/'/>;
+    }
+
     return (
       <main>
         <nav>
@@ -66,7 +79,7 @@ class ProjectBasics extends React.Component {
           </div>
           <div>
             <h6>Project Location</h6>
-            <input id='location' type='text' defaultValue={this.props.currentProject.location || ""}></input>
+            <input id='country' type='text' defaultValue={this.props.currentProject.country || ""}></input>
           </div>
           <div>
             <h6>Project End Date</h6>
@@ -77,7 +90,7 @@ class ProjectBasics extends React.Component {
             <input id='pledge_goal' type="text" defaultValue={this.props.currentProject.pledge_goal || ""}></input>
           </div>
         </form>
-        <button>Delete Project</button>
+        <button onClick={this.deleteProject.bind(this)}>Delete Project</button>
         <footer>
           <button onClick={this.discardChanges.bind(this)}>Discard Changes</button>
           <button onClick={this.saveChanges.bind(this)}>Save</button>

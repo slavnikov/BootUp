@@ -17,3 +17,10 @@ export const updateProject = (props) => {
     }
   });
 };
+
+export const deleteProject = (id) => {
+  return $.ajax({
+    method: 'delete',
+    url: `api/projects/${id}`
+  });
+};

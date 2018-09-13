@@ -17,8 +17,14 @@ export const createProject = (props) => {
   return (dispatch) => {
     PrjUtil.createProject(props).then((project) => {
       dispatch(receiveProject(project));
-      dispatch(receiveCurrentProject(project.id))
+      dispatch(receiveCurrentProject(project.id));
     });
+  };
+};
+
+export const deleteProject = (id) => {
+  return (dispatch) => {
+    return PrjUtil.deleteProject(id);
   };
 };
 
