@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { receiveProjectProps } from '../../actions/project_actions';
+import { receiveCurrentProjectProps } from '../../actions/project_actions';
 import SetupForm from './setup_form';
 
 const mapStateToProps = (state) => {
@@ -11,7 +11,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return ({
-    receiveProjectProps: (prj_props) => dispatch(receiveProjectProps(prj_props))
+    receiveCurrentProjectProps: (prj_props) => dispatch(receiveCurrentProjectProps(prj_props))
   });
 };
 

@@ -8,7 +8,7 @@ class ProjectStory extends React.Component {
   }
 
   saveChanges () {
-    this.props.receiveProjectProps({
+    this.props.receiveCurrentProjectProps({
       story: this.input('story'),
     });
   }

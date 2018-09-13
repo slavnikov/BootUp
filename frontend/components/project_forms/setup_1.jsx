@@ -10,7 +10,7 @@ const Setup1 = (props) => {
   ];
 
   const submitCategory = (e) => {
-    props.receiveProjectProps({category: e.target.innerHTML});
+    props.receiveCurrentProjectProps({category: e.target.innerHTML});
     document.getElementById('category-button').innerHTML = e.currentTarget.innerHTML;
     document.getElementById('next-step').href = '#/setup/2';
   };

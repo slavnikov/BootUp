@@ -10,7 +10,7 @@ const Setup3 = (props) => {
   ];
 
   const submitCountry = (e) => {
-    props.receiveProjectProps({country: e.target.innerHTML});
+    props.receiveCurrentProjectProps({country: e.target.innerHTML});
     document.getElementById('country-button').innerHTML = e.currentTarget.innerHTML;
     document.getElementById('next-step').href = '#/setup/new_project_overview';
   };

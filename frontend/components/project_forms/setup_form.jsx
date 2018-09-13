@@ -17,14 +17,14 @@ const SetupForm = (props) => {
         <Route path='/setup/1' render={() => {
           return <Setup1
             currentPrjProps={props.currentPrjProps}
-            receiveProjectProps={props.receiveProjectProps}
+            receiveCurrentProjectProps={props.receiveCurrentProjectProps}
           />;
         }}/>
         <Route path='/setup/2' render={() => {
           if (props.currentPrjProps.category) {
             return <Setup2
               currentPrjProps={props.currentPrjProps}
-              receiveProjectProps={props.receiveProjectProps}
+              receiveCurrentProjectProps={props.receiveCurrentProjectProps}
             />;
           } else {
             return <Redirect to='/setup/1'/>;
@@ -34,7 +34,7 @@ const SetupForm = (props) => {
           if (props.currentPrjProps.subtitle) {
             return <Setup3
               currentPrjProps={props.currentPrjProps}
-              receiveProjectProps={props.receiveProjectProps}
+              receiveCurrentProjectProps={props.receiveCurrentProjectProps}
             />;
           } else {
             return <Redirect to='/setup/2'/>;
@@ -43,20 +43,20 @@ const SetupForm = (props) => {
         <Route path='/setup/new_project_overview' render={() => {
           return <NewPrjOverview
             currentPrjProps={props.currentPrjProps}
-            receiveProjectProps={props.receiveProjectProps}
+            receiveCurrentProjectProps={props.receiveCurrentProjectProps}
             currentUser={props.currentUser}
           />;
         }}/>
         <Route path='/setup/basics' render={() => {
           return <ProjectBasics
             currentPrjProps={props.currentPrjProps}
-            receiveProjectProps={props.receiveProjectProps}
+            receiveCurrentProjectProps={props.receiveCurrentProjectProps}
           />;
         }}/>
       <Route path='/setup/story' render={() => {
           return <ProjectStory
             currentPrjProps={props.currentPrjProps}
-            receiveProjectProps={props.receiveProjectProps}
+            receiveCurrentProjectProps={props.receiveCurrentProjectProps}
           />;
         }}/>
       </section>

@@ -6,6 +6,7 @@ import configureStore from './store/store';
 
 //TESTING//
 import * as UserUtils from './util/users_api_util';
+import * as PrjUtil from './util/project_api_util';
 import * as UserActions from './actions/user_actions';
 import * as SessActions from './actions/session_actions';
 import * as PrjActions from './actions/project_actions';
@@ -42,8 +43,9 @@ document.addEventListener("DOMContentLoaded", () => {
   // window.fetchUser = UserActions.fetchUser; //V
   // window.createSession = SessActions.createSession;
   // window.endSession = SessActions.endSession;
-  // window.receiveProjectProps = PrjActions.receiveProjectProps;
-
+  // window.receiveCurrentProjectProps = PrjActions.receiveCurrentProjectProps;
+  window.updateProject = PrjActions.updateProject;
+  // window.createProject = PrjActions.createProject;
   // TESTING //
 
 });

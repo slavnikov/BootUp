@@ -14,7 +14,7 @@ class ProjectBasics extends React.Component {
   }
 
   saveChanges () {
-    this.props.receiveProjectProps({
+    this.props.receiveCurrentProjectProps({
       title: this.input('title'),
       subtitle: this.input('subtitle'),
       category: this.input('category'),

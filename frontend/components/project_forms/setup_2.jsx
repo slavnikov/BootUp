@@ -11,7 +11,7 @@ const Setup2 = (props) => {
   };
 
   const submitSubtitle = () => {
-    props.receiveProjectProps({
+    props.receiveCurrentProjectProps({
       subtitle: document.getElementById("subtitle-text").value
     });
   };
