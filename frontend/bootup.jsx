@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
       },
       session: {
         currentUserId: window.current_user.id,
-        currentPrjProps: {}
+        tempPrjProps: {}
       }
     };
     delete(window.current_user);

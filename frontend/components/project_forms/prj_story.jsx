@@ -1,23 +1,24 @@
 import React from 'react';
 import { Route, Link, Redirect } from 'react-router-dom';
+import ProjectFormNavigation from './prj_form_nav';
 
 class ProjectStory extends React.Component {
   constructor(props){
     super(props);
-    this.state = this.props.currentPrjProps;
+    this.state = this.props.currentProject;
   }
 
   saveChanges () {
-    this.props.receiveCurrentProjectProps({
+    this.props.updateProject({
+      id: this.props.currentProject.id,
       story: this.input('story'),
     });
   }
 
   discardChanges () {
     const inputs = $(':input[type=text], :input[type=date], select, textarea');
-    debugger
     inputs.each((idx, input) => {
-      input.value = this.props.currentPrjProps[input.id] || '';
+      input.value = this.props.currentProject[input.id] || '';
     });
   }
 
@@ -29,11 +30,12 @@ class ProjectStory extends React.Component {
     return (
       <main>
         <nav>
+          <ProjectFormNavigation/>
         </nav>
         <form>
           <div>
             <h6>Project description</h6>
-            <textarea id='story' value={this.props.currentPrjProps.story}></textarea>
+            <textarea id='story' defaultValue={this.props.currentProject.story}></textarea>
             <p>Use your project description to shar...</p>
           </div>
         </form>

@@ -1,4 +1,5 @@
 import * as PrjUtil from '../util/project_api_util';
+import { receiveCurrentProject } from './session_actions';
 
 export const RECEIVE_CURRENT_PROJECT_PROPS = 'RECEIVE_CURRENT_PROJECT_PROPS';
 export const RECEIVE_PROJECT = 'RECEIVE_PROJECT';
@@ -16,6 +17,7 @@ export const createProject = (props) => {
   return (dispatch) => {
     PrjUtil.createProject(props).then((project) => {
       dispatch(receiveProject(project));
+      dispatch(receiveCurrentProject(project.id))
     });
   };
 };

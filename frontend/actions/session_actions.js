@@ -4,6 +4,7 @@ import * as SessUtil from '../util/session_api_util';
 
 export const RECEIVE_CURRENT_USER = 'RECEIVE_CURRENT_USER';
 export const REMOVE_CURRENT_USER = 'REMOVE_CURRENT_USER';
+export const RECEIVE_CURRENT_PROJECT = 'RECEIVE_CURRENT_PROJECT';
 
 // credentials should be in the format {email: "some", password: "string"}
 
@@ -39,5 +40,12 @@ export const endSession = () => {
 export const removeCurrentUser = () => {
   return ({
     type: REMOVE_CURRENT_USER
+  });
+};
+
+export const receiveCurrentProject = (id) => {
+  return ({
+    type: RECEIVE_CURRENT_PROJECT,
+    id: id
   });
 };

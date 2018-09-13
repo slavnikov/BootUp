@@ -16,7 +16,7 @@ const Setup1 = (props) => {
   };
 
   const nextStep = () => {
-    if (props.currentPrjProps.category) {
+    if (props.tempPrjProps.category) {
       return "#/setup/2";
     } else {
       return null;
@@ -27,11 +27,12 @@ const Setup1 = (props) => {
     <section>
       <h2>First, let’s get you set up.</h2>
       <h4>Pick a project category to connect with a specific<br></br> community. You can always update this later.</h4>
-      <button id='category-button'>{props.currentPrjProps.category || "Select your category"}</button>
+      <button id='category-button'>{props.tempPrjProps.category || "Select your category"}</button>
       <ul>
         {
-          categories.map((category) => {
+          categories.map((category, idx) => {
             return <li
+              key={idx}
               id={category}
               onClick={
                 submitCategory

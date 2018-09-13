@@ -3,7 +3,7 @@ import { Route, Link, Redirect } from 'react-router-dom';
 
 const Setup2 = (props) => {
   const nextStep = () => {
-    if (props.currentPrjProps.subtitle) {
+    if (props.tempPrjProps.subtitle) {
       return "#/setup/3";
     } else {
       return null;
