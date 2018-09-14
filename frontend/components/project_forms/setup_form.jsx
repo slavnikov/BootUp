@@ -3,7 +3,6 @@ import { Route, Link, Redirect } from 'react-router-dom';
 import { Setup1C, Setup2C, Setup3C, NewPrjOverviewC, ProjectBasicsC, ProjectStoryC} from './setup_container';
 
 const SetupForm = (props) => {
-
   return (
     <div>
         <Route path='/setup/1' render={() => {
@@ -23,11 +22,11 @@ const SetupForm = (props) => {
             return <Redirect to='/setup/2'/>;
           }
         }}/>
-      <Route path='/setup/setup/overview' render={() => {
+      <Route path='/setup/project/overview' render={() => {
             if (props.currentProject) {
               return <NewPrjOverviewC/>;
             } else {
-              return <Redirect to='/setup/setup/overview'/>;
+              return <Redirect to='/setup/project/overview'/>;
             }
         }}/>
       <Route path='/setup/new_project/basics' render={() => {

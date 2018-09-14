@@ -9,7 +9,7 @@ import { SetupFormC } from './project_forms/setup_container';
 const App = () => {
   return (
     <div>
-      <HeaderC/>
+      <Route exact path='/' component={ HeaderC }/>
       <AuthRoute exact path='/login' component = { LoginC }/>
       <AuthRoute exact path='/signup' component = { SignUpC }/>
       <Route path='/setup' component = { SetupFormC }/>

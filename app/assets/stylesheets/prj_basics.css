@@ -81,12 +81,46 @@
   border: 1px solid #dcdedd;
 }
 
+
 .li-inputs input:focus {
   outline: none;
   border: 1px solid #009e74;
 }
+
 .li-inputs input:hover {
   border: 1px solid #009e74;
+}
+
+.li-inputs textarea {
+  height: 200px;
+}
+
+.story-wrapper {
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid #dcdedd;
+  align-items: center;
+}
+
+.story-wrapper div:first-child {
+  border-bottom: 0px;
+}
+
+.story-wrapper textarea {
+  padding: 48px 60px;
+  height: 100%;
+  border-color: #dcdedd;
+  width:76%;
+  box-sizing: border-box;
+  height: 320px;
+  margin-bottom: 25px;
+  font-family: "Maison Neue Book", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #282828;
+  font-size: 16px;
+}
+
+.story-wrapper textarea:focus {
+  outline: none;
 }
 
 .basics-wrapper footer {

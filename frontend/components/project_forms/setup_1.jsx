@@ -1,5 +1,6 @@
 import React from 'react';
 import { Route, Link, Redirect } from 'react-router-dom';
+import HeaderC from '../header_container';
 
 const Setup1 = (props) => {
 
@@ -48,35 +49,38 @@ const Setup1 = (props) => {
   };
 
   return (
-    <div className='setup-wrapper'>
-    <div className="pg-counter">
-      <p >1 of 3</p>
-    </div>
-    <section className='setup-form'>
-      <h2>First, let’s get you set up.</h2>
-      <h4>Pick a project category to connect with a specific community. You can always update this later.</h4>
-      <button id='category-button' onClick={menuDrop}><p id='button-text' className="button-text">{props.tempPrjProps.category || "Select your category"}</p><i className="fa fa-caret-down" id="button-arrow"></i></button>
-        <ul className='hidden' id="ddm">
-          {
-            categories.map((category, idx) => {
-              return <li
-                key={idx}
-                id={category}
-                onClick={
-                  submitCategory
+    <div>
+      <HeaderC/>
+      <div className='setup-wrapper'>
+        <div className="pg-counter">
+          <p >1 of 3</p>
+        </div>
+        <section className='setup-form'>
+          <h2>First, let’s get you set up.</h2>
+          <h4>Pick a project category to connect with a specific community. You can always update this later.</h4>
+          <button id='category-button' onClick={menuDrop}><p id='button-text' className="button-text">{props.tempPrjProps.category || "Select your category"}</p><i className="fa fa-caret-down" id="button-arrow"></i></button>
+          <ul className='hidden' id="ddm">
+            {
+              categories.map((category, idx) => {
+                return <li
+                  key={idx}
+                  id={category}
+                  onClick={
+                    submitCategory
+                  }
+                  >
+                  <p>{category}</p></li>;
+                  })
                 }
-                >
-                <p>{category}</p></li>;
-            })
-          }
-        </ul>
-      <section className='bottom-section'>
-        <p>You’re back. This is major.</p>
-        <a id='next-step' href={nextStep()}>Next: Project Idea</a>
-      </section>
-      <p>To create a project, you're required to provide your location, age, national ID, banking and tax information, email, and mailing address. This information is necessary to prevent fraud, comply with the law, and — if your project is successful — to deliver funds. Please note: after launch, your ability to edit, hide, or delete a project is limited.</p>
-    </section>
-  </div>
+              </ul>
+              <section className='bottom-section'>
+                <p>You’re back. This is major.</p>
+                <a id='next-step' href={nextStep()}>Next: Project Idea</a>
+              </section>
+              <p>To create a project, you're required to provide your location, age, national ID, banking and tax information, email, and mailing address. This information is necessary to prevent fraud, comply with the law, and — if your project is successful — to deliver funds. Please note: after launch, your ability to edit, hide, or delete a project is limited.</p>
+            </section>
+          </div>
+    </div>
   );
 };
 

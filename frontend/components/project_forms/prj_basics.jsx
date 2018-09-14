@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route, Link, Redirect } from 'react-router-dom';
 import ProjectFormNavigation from './prj_form_nav';
+import HeaderC from '../header_container';
 
 const categories = [
   "Art", "Comics", "Crafts", "Dance", "Design", "Fashion",
@@ -52,7 +53,9 @@ class ProjectBasics extends React.Component {
     }
 
     return (
-      <main className='basics-wrapper'>
+      <div>
+        <HeaderC/>
+        <main className='basics-wrapper'>
         <header>
           <h1>Start with the basics</h1>
           <h2>Make it easy for people to learn about your project.</h2>
@@ -113,8 +116,8 @@ class ProjectBasics extends React.Component {
             <div className='li-inputs'>
               <input
                 id='pledge_goal'
-                type="text"
-                defaultValue={`$ ${this.props.currentProject.pledge_goal || ""}`}>
+                type="number"
+                defaultValue={this.props.currentProject.pledge_goal || ""}>
               </input>
             </div>
           </div>
@@ -125,6 +128,7 @@ class ProjectBasics extends React.Component {
           <button onClick={this.saveChanges.bind(this)}>Save</button>
         </footer>
       </main>
+      </div>
     );
   }
 }

@@ -1,5 +1,4 @@
-.header {
-  background-color: ligth-red;
+.basic-header {
   display: flex;
   height: 42px;
   padding: 12px 24px;
@@ -8,39 +7,79 @@
   border-bottom: 1px solid #656969;
 }
 
-.header div {
-  /* flex-grow: 2; */
-  /* display: flex;
-  justify-content: center; */
+.setup-header {
+  margin: 0 auto;
+  width: 85%;
+  display: flex;
+  height: 42px;
+  padding: 12px 24px;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 2px solid #E8E8E8;
 }
 
-#div1 {
-  /* justify-content: flex-start; */
-  width: 33%;
+.new-prj-header {
+  display: flex;
+  height: 70px;
+  padding: 12px 24px;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #E8E8E8;
 }
 
-#div2 {
-  width: 34%;
+.new-prj-nav {
+  display: flex;
+  height: 48px;
+  padding: 12px 24px;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #E8E8E8;
 }
 
-#div3 {
-  width: 33%;
-
-  /* justify-content: flex-end; */
+#div1 {width: 33%;}
+#div2 {width: 34%;}
+#div3 {width: 33%;}
+#div5 {
+  width: 50%;
+  display: flex;
+  align-items: center;
 }
 
-#div3 a {
-  float: right;
+#div5 p {
+  display: inline;
 }
 
-.header a {
+#div5 a:first-child {
+  margin-right: 20px;
+  margin-left: 0px;
+}
+
+#div5 a, #div6 a {
+  font-size: 16px;
+  margin-right: 20px;
+  margin-left: 20px;
+}
+
+#div6 {
+  width: 50%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.fa-caret-right {
+  color: #E8E8E8;
+}
+
+#div3 a {float: right;}
+
+.basic-header a, .setup-header a, .new-prj-header a, .new-prj-nav a {
   text-decoration: none;
   font-family: "Maison Neue Book", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px;
   color: #282828;
 }
 
-.header a:hover {
+.basic-header a:hover, setup-header a:hover, .new-prj-header a:hover, .new-prj-nav a:hover {
   color: #037362;
 }
 
@@ -49,6 +88,11 @@
   font-size: 27px;
   color: #034752;
   text-align: center;
+}
+.nav-logo {
+  font-family: 'Modak', cursive;
+  font-size: 27px;
+  color: #034752;
 }
 
 .profilePic {
