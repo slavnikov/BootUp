@@ -14,6 +14,8 @@ const Setup1 = (props) => {
     document.getElementById('button-text').innerHTML = e.currentTarget.id;
     document.getElementById('button-text').classList.add('black-text');
     document.getElementById('next-step').href = '#/setup/2';
+    const next_step = $('#next-step');
+    next_step.addClass("active");
     styleSelected();
     menuDrop();
   };
@@ -41,13 +43,15 @@ const Setup1 = (props) => {
     const ele = document.getElementById('ddm');
     ele.classList.toggle('hidden');
     ele.classList.toggle('drop-down');
+    const button = document.getElementById('category-button');
+    button.classList.toggle('black-border');
   };
 
   return (
-    <div>
-      <div className="pg-counter">
-        <p >1 of 3</p>
-      </div>
+    <div className='setup-wrapper'>
+    <div className="pg-counter">
+      <p >1 of 3</p>
+    </div>
     <section className='setup-form'>
       <h2>First, let’s get you set up.</h2>
       <h4>Pick a project category to connect with a specific community. You can always update this later.</h4>
@@ -67,8 +71,10 @@ const Setup1 = (props) => {
           }
         </ul>
       <section className='bottom-section'>
+        <p>You’re back. This is major.</p>
         <a id='next-step' href={nextStep()}>Next: Project Idea</a>
       </section>
+      <p>To create a project, you're required to provide your location, age, national ID, banking and tax information, email, and mailing address. This information is necessary to prevent fraud, comply with the law, and — if your project is successful — to deliver funds. Please note: after launch, your ability to edit, hide, or delete a project is limited.</p>
     </section>
   </div>
   );

@@ -12,7 +12,7 @@
 .pg-counter p {
   display: block;
   margin: 0px;
-  font-size: 13px;
+  font-size: 13.5px;
   padding-top: 15px;
 }
 
@@ -24,7 +24,7 @@
   align-items: center;
   max-width: 605px;
   padding: 0px 12px;
-  padding-top: 112px;
+  padding-top: 151px;
   margin-bottom: 84px;
 }
 
@@ -35,26 +35,33 @@
   display: inline;
   margin-bottom: 16px;
   margin-top: 0px;
+  letter-spacing: 0.9px;
 }
 
 .setup-form h4 {
   color: rgba(0,0,0,0.6);
-  font-size: 18.5px;
+  font-size: 18px;
   display: inline;
   text-align: center;
   font-weight: 100;
   margin-top: 0px;
   margin-bottom: 40px;
   padding: 0px 10px;
+  line-height: 1.25;
+  letter-spacing: .8px;
 }
 
 .setup-form button{
+  position: absolute;
+  width: 55%;
+  max-width: 605px;
+  min-width: 350px;
+  top: 375px;
   border-radius: 2px;
   box-shadow: 0 2px 6px 0 rgba(0,0,0,0.17);
-  border: 1px solid #ededed;
+  border: 1px solid #fcfcfc;
   background-color: white;
-  width: 100%;
-  padding: 15px 18px;
+  padding: 16.5px 18px;
   display: flex;
   justify-content: space-between;
   transition: border 0.5s, margin-top 0s, margin-bottom 0s;
@@ -64,10 +71,19 @@
   border: 1px solid black;
   margin-top: -1px;
   margin-bottom: 1px;
+  cursor: pointer;
 }
 
 .setup-form button:focus {
   outline: none;
+}
+
+.setup-form > p {
+  text-align: center;
+  font-size: 12.5px;
+  color: #9B9E9E;
+  line-height: 1.6;
+  margin-top: 65px;
 }
 
 .button-text {
@@ -90,16 +106,19 @@
 .drop-down {
   margin: 0 auto;
   position: absolute;
+  width: 55%;
   max-width: 605px;
+  min-width: 350px;
   box-sizing: border-box;
   list-style: none;
   padding: 0px;
-  top: 395px;
+  top: 436px;
   border: 1px solid black;
   padding: 6px 18px 6px 6px;
   background-color: white;
   height: 300px;
   overflow-y: scroll;
+  overflow-x: hidden;
   border-radius: 2px;
 }
 
@@ -108,9 +127,10 @@
   background-color: white;
   width: 579px;
   box-sizing: border-box;
-  padding: 15px 18px;
+  padding: 15px 15px;
   display: flex;
   justify-content: flex-start;
+  cursor: pointer;
 }
 
 .drop-down li:hover {
@@ -118,19 +138,152 @@
 }
 
 .drop-down li p {
+  color: #282828;
   margin: 0px;
   display: inline-block;
-  margin-right: 15px;
+  margin: 0px 15px 0px 0px;
+  font-size: 17.5px;
+  font-weight: lighter;
+}
+
+#subtitle-text {
+  height: 80px;
+  word-wrap: break-word;
+  width: 100%;
+  max-width: 605px;
+  box-sizing: border-box;
+  margin-top: 10px;
+  border-color: #dcdedd;
+  padding: 12px;
+  font-family: "Maison Neue Book", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  resize: none;
+}
+
+#subtitle-text:hover {
+  border-color: #009e74;
+}
+
+#subtitle-text:focus {
+  outline: none;
+  border-color: black;
+}
+
+.char-count {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  height: 30px;
+  align-items: center;
+}
+
+.char-count > p {
+  color: #656969;
+  font-size: 12px;
+  margin: 0px;
+}
+
+.verifications {
+  list-style: none;
+  margin: 0px;
+  padding: 0px;
+  width: 100%;
+  margin-top: 80px;
+}
+
+.verifications li {
+  margin: 0px;
+  height: 50px;
+  border: 1px solid white;
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.verifications li:hover {
+  border-color: #E8E8E8;
+}
+
+.verifications li p {
+  margin: 0px;
+  margin-left: 20px;
+}
+
+
+#v-check {
+  color: #E8E8E8;
+  font-size: 28px;
 }
 
 .bottom-section {
-  margin-top: 84px;
+  height: 45px;
+  width: 100%;
+  max-width: 605px;
+  min-width: 350px;
+  border-top: 1px solid #E8E8E8;
+  margin-top: 138px;
+  padding: 18px 0px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.bottom-section a {
+  text-decoration: none;
+  padding: 16px 18px;
+  font-size: 14px;
+  color: white;
+  background-color: #d3d3d3;
+}
+
+.bottom-section p {
+  color: #656969;
+  font-size: 14px;
+}
+
+.active {
+  background-color: #282828 !important;
+  transition: background-color 0.5s, margin-top 0.8s, margin-bottom 0.8s;
+}
+
+.active:hover {
+  background-color: black !important;
+  margin-top: -1px;
+  margin-bottom: 1px;
 }
 
 .pre-selected {
   background-color: #e8e8e8 !important;
 }
 
-.black-text {
-  color: black;
+.black-border {
+  border-color: black !important;
 }
+
+.black-text {
+  color: #282828 !important;
+}
+
+.deactivated {
+  pointer-events: none;
+}
+
+#boottom-section-2{
+  margin-top: 5px;
+  align-items: center;
+}
+
+#nav-back {
+  color: #656969;
+  background-color: white;
+  display: flex;
+  padding: 0px;
+}
+
+#nav-back p {
+  display: inline;
+  margin: 0px;
+  margin-left: 10px;
+}
+
+.fa-check-circle:before{content:"\f058"}

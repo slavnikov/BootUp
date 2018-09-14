@@ -522,11 +522,15 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var NewPrjOverview = function NewPrjOverview(props) {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("main", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, props.currentProject.category, " Project"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "by ", props.currentUser.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Prject overview"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("main", {
+    className: "overview-wrapper"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("header", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, props.currentProject.category, " Project"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "by ", props.currentUser.name)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
+    className: "overview-nav"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Project overview"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     to: "/setup/new_project/basics"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Baiscs"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Add an image, set your funidng goal, and more.")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Basics"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Add an image, set your funidng goal, and more.")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     to: "/setup/new_project/story"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Story"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Add a detailed project description.")));
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Story"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Add a detailed project description."))));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (NewPrjOverview);
@@ -837,6 +841,8 @@ var Setup1 = function Setup1(props) {
     document.getElementById('button-text').innerHTML = e.currentTarget.id;
     document.getElementById('button-text').classList.add('black-text');
     document.getElementById('next-step').href = '#/setup/2';
+    var next_step = $('#next-step');
+    next_step.addClass("active");
     styleSelected();
     menuDrop();
   };
@@ -864,9 +870,13 @@ var Setup1 = function Setup1(props) {
     var ele = document.getElementById('ddm');
     ele.classList.toggle('hidden');
     ele.classList.toggle('drop-down');
+    var button = document.getElementById('category-button');
+    button.classList.toggle('black-border');
   };
 
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "setup-wrapper"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "pg-counter"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "1 of 3")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
     className: "setup-form"
@@ -890,10 +900,10 @@ var Setup1 = function Setup1(props) {
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, category));
   })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
     className: "bottom-section"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "You\u2019re back. This is major."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     id: "next-step",
     href: nextStep()
-  }, "Next: Project Idea"))));
+  }, "Next: Project Idea")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "To create a project, you're required to provide your location, age, national ID, banking and tax information, email, and mailing address. This information is necessary to prevent fraud, comply with the law, and \u2014 if your project is successful \u2014 to deliver funds. Please note: after launch, your ability to edit, hide, or delete a project is limited.")));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Setup1);
@@ -930,26 +940,46 @@ var Setup2 = function Setup2(props) {
     });
   };
 
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Describe what you\u2019ll be creating."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "And don\u2019t worry, you can edit this later, too."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "setup-wrapper"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "pg-counter"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "2 of 3")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
+    className: "setup-form"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Describe what you\u2019ll be creating."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "And don\u2019t worry, you can edit this later, too."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
     id: "subtitle-text",
     maxLength: "135",
+    defaultValue: props.tempPrjProps.subtitle,
+    placeholder: "This will appear as the subtitle of your project.",
     onChange: function onChange(e) {
       var chars = document.getElementById('char-counter');
       chars.innerHTML = e.currentTarget.value.length;
 
-      if (e.currentTarget.value.length > 0) {
+      if (e.currentTarget.value !== "This will appear as the subtitle of your project.") {
         document.getElementById('next-step').href = '#/setup/3';
+        $('#next-step').addClass('active');
       } else {
-        document.getElementById('next-step').href = null;
+        $('#next-step').addClass('deactivated');
+        $('#next-step').removeClass('active');
       }
     }
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "char-count"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
     id: "char-counter"
-  }, "0"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "/135"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+  }, "0"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "/135")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
+    className: "bottom-section",
+    id: "boottom-section-2"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+    to: "/setup/1",
+    id: "nav-back"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+    className: "fa fa-long-arrow-left"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Category")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     id: "next-step",
     href: nextStep(),
     onClick: submitSubtitle
-  }, "Next: Location")));
+  }, "Next: Location")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "To create a project, you're required to provide your location, age, national ID, banking and tax information, email, and mailing address. This information is necessary to prevent fraud, comply with the law, and \u2014 if your project is successful \u2014 to deliver funds. Please note: after launch, your ability to edit, hide, or delete a project is limited.")));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Setup2);
@@ -979,10 +1009,27 @@ var Setup3 = function Setup3(props) {
 
   var submitCountry = function submitCountry(e) {
     props.receiveCurrentProjectProps({
-      country: e.target.innerHTML
-    });
-    document.getElementById('country-button').innerHTML = e.currentTarget.innerHTML;
+      country: e.target.id
+    }); // document.getElementById('country-button').innerHTML = e.currentTarget.innerHTML;
+
+    document.getElementById('button-text').innerHTML = e.currentTarget.id;
+    document.getElementById('button-text').classList.add('black-text');
     document.getElementById('next-step').href = '#/setup/setup/overview';
+    var next_step = $('#next-step');
+    next_step.addClass("active");
+    styleSelected();
+    menuDrop();
+  };
+
+  var styleSelected = function styleSelected() {
+    var lis = $("li");
+    lis.removeClass('pre-selected');
+    lis.each(function (idx, li) {
+      li.innerHTML = "<p>".concat(li.id, "</p>");
+    });
+    var chosen = $("#".concat(props.tempPrjProps.country));
+    chosen.addClass('pre-selected');
+    chosen.html("<p>".concat(chosen.attr('id'), "</p><i class=\"fa fa-check-circle\" id=\"check\"></i>"));
   };
 
   var nextStep = function nextStep() {
@@ -999,19 +1046,50 @@ var Setup3 = function Setup3(props) {
     }));
   };
 
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Finally, let\u2019s confirm your eligibility."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Tell us where you\u2019re based and confirm a few other details before we proceed."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    id: "country-button"
-  }, props.tempPrjProps.country || "Select your country"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, countries.map(function (country, idx) {
+  var menuDrop = function menuDrop() {
+    var ele = document.getElementById('ddm');
+    ele.classList.toggle('hidden');
+    ele.classList.toggle('drop-down');
+    var button = document.getElementById('country-button');
+    button.classList.toggle('black-border');
+  };
+
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "setup-wrapper"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "pg-counter"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "3 of 3")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
+    className: "setup-form"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Finally, let\u2019s confirm your eligibility."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Tell us where you\u2019re based and confirm a few other details before we proceed."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    id: "country-button",
+    onClick: menuDrop
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    id: "button-text",
+    className: "button-text"
+  }, props.tempPrjProps.country || "Select your country"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+    className: "fa fa-caret-down",
+    id: "button-arrow"
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+    className: "hidden",
+    id: "ddm"
+  }, countries.map(function (country, idx) {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
       key: idx,
       id: country,
       onClick: submitCountry
-    }, country);
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, country));
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
+    className: "bottom-section"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+    to: "/setup/2",
+    id: "nav-back"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+    className: "fa fa-long-arrow-left"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Project idea")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     id: "next-step",
     href: nextStep(),
     onClick: createProject
-  }, "Continue")));
+  }, "Continue")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "To create a project, you're required to provide your location, age, national ID, banking and tax information, email, and mailing address. This information is necessary to prevent fraud, comply with the law, and \u2014 if your project is successful \u2014 to deliver funds. Please note: after launch, your ability to edit, hide, or delete a project is limited.")));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Setup3);
@@ -1111,9 +1189,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var SetupForm = function SetupForm(props) {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "setup-wrapper"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     path: "/setup/1",
     render: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_setup_container__WEBPACK_IMPORTED_MODULE_2__["Setup1C"], null);

@@ -5,7 +5,7 @@ import { Setup1C, Setup2C, Setup3C, NewPrjOverviewC, ProjectBasicsC, ProjectStor
 const SetupForm = (props) => {
 
   return (
-    <div className='setup-wrapper'>
+    <div>
         <Route path='/setup/1' render={() => {
           return <Setup1C/>;
         }}/>
