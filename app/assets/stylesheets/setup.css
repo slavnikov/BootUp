@@ -1,0 +1,136 @@
+.setup-wrapper {
+  margin: 0 auto;
+  width: 90%;
+  background-color: white;
+}
+
+.pg-counter {
+  height: 29px;
+  padding: 0px 12px;
+}
+
+.pg-counter p {
+  display: block;
+  margin: 0px;
+  font-size: 13px;
+  padding-top: 15px;
+}
+
+.setup-form {
+  margin: 0 auto;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 605px;
+  padding: 0px 12px;
+  padding-top: 112px;
+  margin-bottom: 84px;
+}
+
+.setup-form h2 {
+  color: #000000;
+  font-size: 28.5px;
+  font-weight: lighter;
+  display: inline;
+  margin-bottom: 16px;
+  margin-top: 0px;
+}
+
+.setup-form h4 {
+  color: rgba(0,0,0,0.6);
+  font-size: 18.5px;
+  display: inline;
+  text-align: center;
+  font-weight: 100;
+  margin-top: 0px;
+  margin-bottom: 40px;
+  padding: 0px 10px;
+}
+
+.setup-form button{
+  border-radius: 2px;
+  box-shadow: 0 2px 6px 0 rgba(0,0,0,0.17);
+  border: 1px solid #ededed;
+  background-color: white;
+  width: 100%;
+  padding: 15px 18px;
+  display: flex;
+  justify-content: space-between;
+  transition: border 0.5s, margin-top 0s, margin-bottom 0s;
+}
+
+.setup-form button:hover {
+  border: 1px solid black;
+  margin-top: -1px;
+  margin-bottom: 1px;
+}
+
+.setup-form button:focus {
+  outline: none;
+}
+
+.button-text {
+  color: #656969;
+  text-align: left;
+  font-size: 18px;
+  margin: 0px;
+  padding: 0px;
+}
+
+#button-arrow {
+  font-size: 18.5px;
+}
+
+#check {
+  font-size: 18.5px;
+  color: #009e74 !important;
+}
+
+.drop-down {
+  margin: 0 auto;
+  position: absolute;
+  max-width: 605px;
+  box-sizing: border-box;
+  list-style: none;
+  padding: 0px;
+  top: 395px;
+  border: 1px solid black;
+  padding: 6px 18px 6px 6px;
+  background-color: white;
+  height: 300px;
+  overflow-y: scroll;
+  border-radius: 2px;
+}
+
+.drop-down li {
+  margin: 0px;
+  background-color: white;
+  width: 579px;
+  box-sizing: border-box;
+  padding: 15px 18px;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.drop-down li:hover {
+  background-color: #e8e8e8;
+}
+
+.drop-down li p {
+  margin: 0px;
+  display: inline-block;
+  margin-right: 15px;
+}
+
+.bottom-section {
+  margin-top: 84px;
+}
+
+.pre-selected {
+  background-color: #e8e8e8 !important;
+}
+
+.black-text {
+  color: black;
+}

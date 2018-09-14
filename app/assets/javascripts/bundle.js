@@ -776,6 +776,15 @@ function (_React$Component) {
       });
     }
   }, {
+    key: "deleteProject",
+    value: function deleteProject() {
+      this.props.deleteProject(this.props.currentProject.id);
+      this.props.clearCurrentProject();
+      this.setState({
+        redirect: true
+      });
+    }
+  }, {
     key: "input",
     value: function input(id) {
       return document.getElementById(id).value;
@@ -786,7 +795,9 @@ function (_React$Component) {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("main", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("nav", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_prj_form_nav__WEBPACK_IMPORTED_MODULE_2__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "Project description"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
         id: "story",
         defaultValue: this.props.currentProject.story
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Use your project description to shar..."))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", null, "Delete Project"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("footer", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Use your project description to shar..."))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: this.deleteProject.bind(this)
+      }, "Delete Project"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("footer", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: this.discardChanges.bind(this)
       }, "Discard Changes"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: this.saveChanges.bind(this)
@@ -817,14 +828,28 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var Setup1 = function Setup1(props) {
-  var categories = ["Art", "Comics", "Crafts", "Dance", "Design", "Fashion", "Film & Video", "Food", "Games", "Journalism", "Music", "Photography", "Publishing", "Technology", "Theater"];
+  var categories = ["Art", "Comics", "Crafts", "Dance", "Design", "Fashion", "Film", "Food", "Games", "Journalism", "Music", "Photography", "Publishing", "Technology", "Theater"];
 
   var submitCategory = function submitCategory(e) {
     props.receiveCurrentProjectProps({
-      category: e.target.innerHTML
+      category: e.target.id
     });
-    document.getElementById('category-button').innerHTML = e.currentTarget.innerHTML;
+    document.getElementById('button-text').innerHTML = e.currentTarget.id;
+    document.getElementById('button-text').classList.add('black-text');
     document.getElementById('next-step').href = '#/setup/2';
+    styleSelected();
+    menuDrop();
+  };
+
+  var styleSelected = function styleSelected() {
+    var lis = $("li");
+    lis.removeClass('pre-selected');
+    lis.each(function (idx, li) {
+      li.innerHTML = "<p>".concat(li.id, "</p>");
+    });
+    var chosen = $("#".concat(props.tempPrjProps.category));
+    chosen.addClass('pre-selected');
+    chosen.html("<p>".concat(chosen.attr('id'), "</p><i class=\"fa fa-check-circle\" id=\"check\"></i>"));
   };
 
   var nextStep = function nextStep() {
@@ -835,18 +860,40 @@ var Setup1 = function Setup1(props) {
     }
   };
 
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "First, let\u2019s get you set up."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Pick a project category to connect with a specific", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), " community. You can always update this later."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    id: "category-button"
-  }, props.tempPrjProps.category || "Select your category"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, categories.map(function (category, idx) {
+  var menuDrop = function menuDrop() {
+    var ele = document.getElementById('ddm');
+    ele.classList.toggle('hidden');
+    ele.classList.toggle('drop-down');
+  };
+
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "pg-counter"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "1 of 3")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
+    className: "setup-form"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "First, let\u2019s get you set up."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Pick a project category to connect with a specific community. You can always update this later."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    id: "category-button",
+    onClick: menuDrop
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    id: "button-text",
+    className: "button-text"
+  }, props.tempPrjProps.category || "Select your category"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+    className: "fa fa-caret-down",
+    id: "button-arrow"
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+    className: "hidden",
+    id: "ddm"
+  }, categories.map(function (category, idx) {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
       key: idx,
       id: category,
       onClick: submitCategory
-    }, category);
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, category));
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
+    className: "bottom-section"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     id: "next-step",
     href: nextStep()
-  }, "Next: Project Idea")));
+  }, "Next: Project Idea"))));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Setup1);
@@ -1064,7 +1111,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var SetupForm = function SetupForm(props) {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("header", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, " setup form"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "setup-wrapper"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     path: "/setup/1",
     render: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_setup_container__WEBPACK_IMPORTED_MODULE_2__["Setup1C"], null);
@@ -1112,7 +1161,7 @@ var SetupForm = function SetupForm(props) {
     render: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_setup_container__WEBPACK_IMPORTED_MODULE_2__["ProjectStoryC"], null);
     }
-  })));
+  }));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (SetupForm);

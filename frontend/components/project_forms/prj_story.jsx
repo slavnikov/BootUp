@@ -22,6 +22,12 @@ class ProjectStory extends React.Component {
     });
   }
 
+  deleteProject() {
+    this.props.deleteProject(this.props.currentProject.id);
+    this.props.clearCurrentProject();
+    this.setState({redirect: true});
+  }
+
   input(id) {
     return document.getElementById(id).value;
   }
@@ -39,7 +45,7 @@ class ProjectStory extends React.Component {
             <p>Use your project description to shar...</p>
           </div>
         </form>
-        <button>Delete Project</button>
+        <button onClick={this.deleteProject.bind(this)}>Delete Project</button>
         <footer>
           <button onClick={this.discardChanges.bind(this)}>Discard Changes</button>
           <button onClick={this.saveChanges.bind(this)}>Save</button>

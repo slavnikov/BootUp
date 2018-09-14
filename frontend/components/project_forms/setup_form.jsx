@@ -5,10 +5,7 @@ import { Setup1C, Setup2C, Setup3C, NewPrjOverviewC, ProjectBasicsC, ProjectStor
 const SetupForm = (props) => {
 
   return (
-    <div>
-      <header></header>
-      <p> setup form</p>
-      <section>
+    <div className='setup-wrapper'>
         <Route path='/setup/1' render={() => {
           return <Setup1C/>;
         }}/>
@@ -39,7 +36,6 @@ const SetupForm = (props) => {
       <Route path='/setup/new_project/story' render={() => {
           return <ProjectStoryC/>;
         }}/>
-      </section>
     </div>
   );
 };

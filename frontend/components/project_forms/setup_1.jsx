@@ -5,14 +5,28 @@ const Setup1 = (props) => {
 
   const categories = [
     "Art", "Comics", "Crafts", "Dance", "Design", "Fashion",
-    "Film & Video", "Food", "Games", "Journalism", "Music", "Photography",
+    "Film", "Food", "Games", "Journalism", "Music", "Photography",
     "Publishing", "Technology", "Theater"
   ];
 
   const submitCategory = (e) => {
-    props.receiveCurrentProjectProps({category: e.target.innerHTML});
-    document.getElementById('category-button').innerHTML = e.currentTarget.innerHTML;
+    props.receiveCurrentProjectProps({category: e.target.id});
+    document.getElementById('button-text').innerHTML = e.currentTarget.id;
+    document.getElementById('button-text').classList.add('black-text');
     document.getElementById('next-step').href = '#/setup/2';
+    styleSelected();
+    menuDrop();
+  };
+
+  const styleSelected = () => {
+    const lis = $("li");
+    lis.removeClass('pre-selected');
+    lis.each((idx, li) => {
+      li.innerHTML=`<p>${li.id}</p>`;
+    });
+    const chosen = $(`#${props.tempPrjProps.category}`);
+    chosen.addClass('pre-selected');
+    chosen.html(`<p>${chosen.attr('id')}</p><i class="fa fa-check-circle" id="check"></i>`);
   };
 
   const nextStep = () => {
@@ -23,29 +37,40 @@ const Setup1 = (props) => {
     }
   };
 
+  const menuDrop = () => {
+    const ele = document.getElementById('ddm');
+    ele.classList.toggle('hidden');
+    ele.classList.toggle('drop-down');
+  };
+
   return (
-    <section>
+    <div>
+      <div className="pg-counter">
+        <p >1 of 3</p>
+      </div>
+    <section className='setup-form'>
       <h2>First, let’s get you set up.</h2>
-      <h4>Pick a project category to connect with a specific<br></br> community. You can always update this later.</h4>
-      <button id='category-button'>{props.tempPrjProps.category || "Select your category"}</button>
-      <ul>
-        {
-          categories.map((category, idx) => {
-            return <li
-              key={idx}
-              id={category}
-              onClick={
-                submitCategory
-              }
-              >
-              {category}</li>;
-          })
-        }
-      </ul>
-      <section>
+      <h4>Pick a project category to connect with a specific community. You can always update this later.</h4>
+      <button id='category-button' onClick={menuDrop}><p id='button-text' className="button-text">{props.tempPrjProps.category || "Select your category"}</p><i className="fa fa-caret-down" id="button-arrow"></i></button>
+        <ul className='hidden' id="ddm">
+          {
+            categories.map((category, idx) => {
+              return <li
+                key={idx}
+                id={category}
+                onClick={
+                  submitCategory
+                }
+                >
+                <p>{category}</p></li>;
+            })
+          }
+        </ul>
+      <section className='bottom-section'>
         <a id='next-step' href={nextStep()}>Next: Project Idea</a>
       </section>
     </section>
+  </div>
   );
 };
 
