@@ -7,6 +7,7 @@ const NewPrjOverview = (props) => {
   let redirect = false;
 
   const checkForCompleteness = (prj_params) => {
+    debugger
     const all_done = prj_params.every((param) => {
       return props.currentProject[param];
     });

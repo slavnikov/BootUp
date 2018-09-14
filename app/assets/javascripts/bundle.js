@@ -526,6 +526,7 @@ var NewPrjOverview = function NewPrjOverview(props) {
   var redirect = false;
 
   var checkForCompleteness = function checkForCompleteness(prj_params) {
+    debugger;
     var all_done = prj_params.every(function (param) {
       return props.currentProject[param];
     });
@@ -669,15 +670,31 @@ function (_React$Component) {
         });
       }
 
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("main", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("nav", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_prj_form_nav__WEBPACK_IMPORTED_MODULE_2__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "Project title"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("main", {
+        className: "basics-wrapper"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("header", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Start with the basics"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Make it easy for people to learn about your project.")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+        className: "basics-form"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-li"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "li-text"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "Project title"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Write a clear, brief title that helps people quickly understand the gist of your project.")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "li-inputs"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Title"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         id: "title",
         type: "text",
         defaultValue: this.props.currentProject.title || ""
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Our search looks through w...")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "Short Blurb"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Subtitle"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         id: "subtitle",
         type: "text",
         defaultValue: this.props.currentProject.subtitle || ""
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Give people a sense of what you\u2019r...")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "Category"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-li"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "li-text"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "Category"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Choose the category that most closely aligns with your project. ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), "Think of where backers may look to find it. Reach a more specific community by also choosing a subcategory. ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), "You\u2019ll be able to change the category and subcategory even after your project is live.")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "li-inputs"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
         id: "category",
         defaultValue: this.props.currentProject.category
       }, categories.map(function (category, idx) {
@@ -685,19 +702,37 @@ function (_React$Component) {
           key: idx,
           value: category
         }, category);
-      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "Project Location"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-li"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "li-text"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "Project Location"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Enter the location that best describes where your project is based.")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "li-inputs"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         id: "country",
         type: "text",
         defaultValue: this.props.currentProject.country || ""
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "Project End Date"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-li"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "li-text"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "Project End Date"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Set a time limit for your campaign. You won\u2019t be able to change this after you launch.")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "li-inputs"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         id: "end_date",
         type: "date",
         defaultValue: this.props.currentProject.end_date || ""
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "Funding Goal"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-li"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "li-text"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "Funding Goal"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Set an achievable goal that covers what you need to complete your project. ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), "Funding is all-or-nothing. If you don\u2019t meet your goal, you won\u2019t receive any money.")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "li-inputs"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         id: "pledge_goal",
         type: "text",
-        defaultValue: this.props.currentProject.pledge_goal || ""
-      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        defaultValue: "$ ".concat(this.props.currentProject.pledge_goal || "")
+      })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: this.deleteProject.bind(this)
       }, "Delete Project"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("footer", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: this.discardChanges.bind(this)

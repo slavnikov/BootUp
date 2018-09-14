@@ -52,42 +52,71 @@ class ProjectBasics extends React.Component {
     }
 
     return (
-      <main>
-        <nav>
-          <ProjectFormNavigation/>
-        </nav>
-        <form>
-          <div>
-            <h6>Project title</h6>
-            <input id='title' type='text' defaultValue={this.props.currentProject.title || ""}></input>
-            <p>Our search looks through w...</p>
+      <main className='basics-wrapper'>
+        <header>
+          <h1>Start with the basics</h1>
+          <h2>Make it easy for people to learn about your project.</h2>
+        </header>
+        <form className='basics-form'>
+          <div className='form-li'>
+            <div className='li-text'>
+              <h6>Project title</h6>
+              <p>Write a clear, brief title that helps people quickly understand the gist of your project.</p>
+            </div>
+            <div className='li-inputs'>
+              <label>Title</label>
+              <input id='title' type='text' defaultValue={this.props.currentProject.title || ""}></input>
+              <label>Subtitle</label>
+              <input id='subtitle' type='text' defaultValue={this.props.currentProject.subtitle || ""}></input>
+            </div>
           </div>
-          <div>
-            <h6>Short Blurb</h6>
-            <input id='subtitle' type='text' defaultValue={this.props.currentProject.subtitle || ""}></input>
-            <p>Give people a sense of what you’r...</p>
+          <div className='form-li'>
+            <div className='li-text'>
+              <h6>Category</h6>
+              <p>Choose the category that most closely aligns with your project. <br></br><br></br>Think of where backers may look to find it. Reach a more specific community by also choosing a subcategory. <br></br><br></br>You’ll be able to change the category and subcategory even after your project is live.</p>
+            </div>
+            <div className='li-inputs'>
+              <select id='category' defaultValue={this.props.currentProject.category}>
+                {
+                  categories.map((category, idx) => {
+                    return <option key={idx} value={category} >{category}</option>;
+                    })
+                  }
+                </select>
+            </div>
           </div>
-          <div>
-            <h6>Category</h6>
-            <select id='category' defaultValue={this.props.currentProject.category}>
-              {
-                categories.map((category, idx) => {
-                  return <option key={idx} value={category} >{category}</option>;
-                })
-              }
-            </select>
+          <div className='form-li'>
+            <div className='li-text'>
+              <h6>Project Location</h6>
+              <p>Enter the location that best describes where your project is based.</p>
+            </div>
+            <div className='li-inputs'>
+              <input id='country' type='text' defaultValue={this.props.currentProject.country || ""}></input>
+            </div>
           </div>
-          <div>
-            <h6>Project Location</h6>
-            <input id='country' type='text' defaultValue={this.props.currentProject.country || ""}></input>
+
+          <div className='form-li'>
+            <div className='li-text'>
+              <h6>Project End Date</h6>
+              <p>Set a time limit for your campaign. You won’t be able to change this after you launch.</p>
+            </div>
+            <div className='li-inputs'>
+              <input id='end_date' type="date" defaultValue={this.props.currentProject.end_date || ""}></input>
+            </div>
           </div>
-          <div>
-            <h6>Project End Date</h6>
-            <input id='end_date' type="date" defaultValue={this.props.currentProject.end_date || ""}></input>
-          </div>
-          <div>
-            <h6>Funding Goal</h6>
-            <input id='pledge_goal' type="text" defaultValue={this.props.currentProject.pledge_goal || ""}></input>
+
+          <div className='form-li'>
+            <div className='li-text'>
+              <h6>Funding Goal</h6>
+              <p>Set an achievable goal that covers what you need to complete your project. <br></br><br></br>Funding is all-or-nothing. If you don’t meet your goal, you won’t receive any money.</p>
+            </div>
+            <div className='li-inputs'>
+              <input
+                id='pledge_goal'
+                type="text"
+                defaultValue={`$ ${this.props.currentProject.pledge_goal || ""}`}>
+              </input>
+            </div>
           </div>
         </form>
         <button onClick={this.deleteProject.bind(this)}>Delete Project</button>
