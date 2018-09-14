@@ -26,7 +26,25 @@
   width: 80%;
   font-weight: 100;
   font-size: 16px;
-  color: #656d72
+  color: #282828;
+}
+
+.overview-wrapper h4 {
+  width: 79%;
+  font-weight: lighter;
+  font-size: 18px;
+  color: #282828;
+  margin-top: 52px;
+  margin-bottom: 2px;
+}
+
+.overview-wrapper > p {
+  margin: 0px;
+  font-size: 14px;
+  font-color: inherit;
+  color: #656969;
+  margin-top: 5px;
+  width: 79%;
 }
 
 .overview-nav {
@@ -47,8 +65,8 @@
   box-sizing: border-box;
   padding: 10px;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
+  align-items: center;
   border-bottom: 0px ;
   text-decoration: none;
 }
@@ -75,4 +93,45 @@
   font-color: inherit;
   color: #95959E;
   margin-top: 5px;
+}
+
+.fa-check {
+  margin: 0px 15px 0px 5px;
+  border: 1px solid #dcdedd;
+  border-radius: 50%;
+  padding: 10px;
+  color: #dcdedd;
+  background-color: white;
+}
+
+.nav-item-complete {
+  background-color: #037362 !important;
+  color: white !important;
+  border-color: white !important;
+}
+
+.overview-wrapper footer {
+  width: 100%;
+  border-top: 1px solid #dcdedd;
+  margin-top: 54px;
+  padding-top: 50px;
+  padding-left: 190px;
+}
+
+.overview-wrapper footer button {
+  color: #656969;
+  background: white;
+  border: 0px;
+  font-size: 16px;
+  padding: 10px;
+}
+
+.overview-wrapper footer button:hover {
+  color: #282828;
+  background-color: #f0f0f0;
+}
+
+.fa-trash-o {
+  font-size: 20px;
+  margin-right: 7px;
 }
