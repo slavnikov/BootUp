@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import HeaderC from '../header_container';
 
 class SignUpForm extends React.Component {
   constructor(props) {
@@ -52,58 +53,61 @@ class SignUpForm extends React.Component {
 
   render () {
     return (
-      <div className="signup-wrapper">
-        <div className="signup-top">
-          <p>Have an account? <Link to='/login' onClick={() => {this.props.receiveSessionError([]);}}>Log in</Link></p>
-        </div>
-        <form onSubmit={this.handleSubmit} className="signup-form">
-          <h1>Sign up</h1>
-          <aside >
-            <ul className='errors-aside'>
-              {
-                this.props.sessionErrors.map((error, idx) => {
-                  return <li key={idx}>{error}</li>;
-                })
-              }
-            </ul>
-          </aside>
-          <input
-            placeholder="Name"
-            type="text"
-            value={this.state.name}
-            onChange={this.update("name")}>
-          </input>
-          <br></br>
-          <input
-            placeholder="Email"
-            type="text"
-            value={this.state.email}
-            onChange={this.update("email")}>
-          </input>
-          <br></br>
-          <input
-            placeholder="Re-enter email"
-            type="text"
-            value={this.state.reemail}
-            onChange={this.update("reemail")}>
-          </input>
-          <br></br>
-          <input
-            placeholder="Password"
-            type="password"
-            value={this.state.password}
-            onChange={this.update("password")}>
-          </input>
-          <br></br>
-          <input
-            placeholder="Re-enter password"
-            type="password"
-            value={this.state.repassword}
-            onChange={this.update("repassword")}>
-          </input>
-          <br></br>
-          <button>Sign Up</button>
-        </form>
+      <div>
+        <HeaderC/>
+        <div className="signup-wrapper">
+          <div className="signup-top">
+            <p>Have an account? <Link to='/login' onClick={() => {this.props.receiveSessionError([]);}}>Log in</Link></p>
+          </div>
+          <form onSubmit={this.handleSubmit} className="signup-form">
+            <h1>Sign up</h1>
+            <aside >
+              <ul className='errors-aside'>
+                {
+                  this.props.sessionErrors.map((error, idx) => {
+                    return <li key={idx}>{error}</li>;
+                    })
+                  }
+                </ul>
+              </aside>
+              <input
+                placeholder="Name"
+                type="text"
+                value={this.state.name}
+                onChange={this.update("name")}>
+              </input>
+              <br></br>
+              <input
+                placeholder="Email"
+                type="text"
+                value={this.state.email}
+                onChange={this.update("email")}>
+              </input>
+              <br></br>
+              <input
+                placeholder="Re-enter email"
+                type="text"
+                value={this.state.reemail}
+                onChange={this.update("reemail")}>
+              </input>
+              <br></br>
+              <input
+                placeholder="Password"
+                type="password"
+                value={this.state.password}
+                onChange={this.update("password")}>
+              </input>
+              <br></br>
+              <input
+                placeholder="Re-enter password"
+                type="password"
+                value={this.state.repassword}
+                onChange={this.update("repassword")}>
+              </input>
+              <br></br>
+              <button>Sign Up</button>
+            </form>
+          </div>
       </div>
     );
   }

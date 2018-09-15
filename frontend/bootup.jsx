@@ -32,6 +32,18 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     };
     delete(window.current_user);
+  } else {
+    preloaded_state = {
+      entities: {
+        users: {},
+        projects: {}
+      },
+      session: {
+        currentUserId: null,
+        tempPrjProps: {},
+        currentProjectId: null
+      }
+    };
   }
 
   const store = configureStore(preloaded_state);
@@ -48,8 +60,9 @@ document.addEventListener("DOMContentLoaded", () => {
   // window.createSession = SessActions.createSession;
   // window.endSession = SessActions.endSession;
   // window.receiveCurrentProjectProps = PrjActions.receiveCurrentProjectProps;
-  window.updateProject = PrjActions.updateProject;
-  window.createProject = PrjActions.createProject;
+  // window.updateProject = PrjActions.updateProject;
+  // window.createProject = PrjActions.createProject;
+  window.fetchProject = PrjActions.fetchProject;
   // TESTING //
 
 });

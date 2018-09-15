@@ -18,13 +18,6 @@ export const updateProject = (props) => {
   });
 };
 
-export const deleteProject = (id) => {
-  return $.ajax({
-    method: 'delete',
-    url: `api/projects/${id}`
-  });
-};
-
 export const submitProject = (id) => {
   return $.ajax({
     method: 'patch',
@@ -34,5 +27,19 @@ export const submitProject = (id) => {
         complete: true
       }
     }
+  });
+};
+
+export const fetchProject = (id) => {
+  return $.ajax({
+    method: 'get',
+    url: `api/projects/${id}`
+  });
+};
+
+export const deleteProject = (id) => {
+  return $.ajax({
+    method: 'delete',
+    url: `api/projects/${id}`
   });
 };

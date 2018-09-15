@@ -287,14 +287,3 @@
 }
 
 .fa-check-circle:before{content:"\f058"}
-
-.fa-spin {
-  font-size: 48px !important;
-  color: #009E74 !important;
-}
-
-.spinner-wrapper {
-  display: flex;
-  justify-content: center;
-  padding-top: 50px;
-}

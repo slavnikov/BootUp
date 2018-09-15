@@ -16,9 +16,33 @@ export const receiveCurrentProjectProps = (prj_props) => {
 export const createProject = (props) => {
   return (dispatch) => {
     dispatch(clearCurrentProject());
-    PrjUtil.createProject(props).then((project) => {
-      dispatch(receiveProject(project));
-      dispatch(receiveCurrentProject(project.id));
+    PrjUtil.createProject(props).then((payload) => {
+      dispatch(receiveProject(payload));
+      dispatch(receiveCurrentProject(payload.project.id));
+    });
+  };
+};
+
+export const updateProject = (props) => {
+  return (dispatch) => {
+    PrjUtil.updateProject(props).then((payload) => {
+      dispatch(receiveProject(payload));
+    });
+  };
+};
+
+export const submitProject = (id) => {
+  return (dispatch) => {
+    PrjUtil.submitProject(id).then((payload) => {
+      dispatch(receiveProject(payload));
+    });
+  };
+};
+
+export const fetchProject = (id) => {
+  return (dispatch) => {
+    PrjUtil.fetchProject(id).then((payload) => {
+      dispatch(receiveProject(payload));
     });
   };
 };
@@ -29,25 +53,9 @@ export const deleteProject = (id) => {
   };
 };
 
-export const updateProject = (props) => {
-  return (dispatch) => {
-    PrjUtil.updateProject(props).then((project) => {
-      dispatch(receiveProject(project));
-    });
-  };
-};
-
-export const receiveProject = (project) => {
+export const receiveProject = (payload) => {
   return ({
     type: RECEIVE_PROJECT,
-    project: project
+    payload: payload
   });
-};
-
-export const submitProject = (id) => {
-  return (dispatch) => {
-    PrjUtil.submitProject(id).then((project) => {
-      dispatch(receiveProject(project));
-    });
-  };
 };

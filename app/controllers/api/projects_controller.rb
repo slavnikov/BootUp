@@ -6,8 +6,9 @@ class Api::ProjectsController < ApplicationController
       user = current_user
       user.current_project_id = @project.id
       user.save
+      @user = @project.admin
 
-      render :show
+      render :show_payload
     else
       render json: @project.errors.full_messages, status: 422
     end
@@ -17,7 +18,21 @@ class Api::ProjectsController < ApplicationController
     @project = Project.find_by(id: params[:id])
 
     if @project.update(project_params)
-      render :show
+      @user = @project.admin
+
+      render :show_payload
+    else
+      render json: @project.errors.full_messages, status: 422
+    end
+  end
+
+  def show
+    @project = Project.find_by(id: params[:id])
+
+    if @project
+      @user = @project.admin
+
+      render :show_payload
     else
       render json: @project.errors.full_messages, status: 422
     end

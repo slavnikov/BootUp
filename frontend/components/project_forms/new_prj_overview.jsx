@@ -39,7 +39,6 @@ class NewProjectOverview extends React.Component {
   }
 
   render () {
-    debugger
     if (this.state.redirect) {
       return <Redirect to='/'/>;
     }
@@ -47,7 +46,7 @@ class NewProjectOverview extends React.Component {
     if (!this.props.currentProject) {
       return (
         <div className='spinner-wrapper'>
-          <i className="fa fa-refresh fa-spin"></i>;
+          <i className="fa fa-refresh fa-spin"></i>
         </div>
       );
     }
