@@ -24,3 +24,15 @@ export const deleteProject = (id) => {
     url: `api/projects/${id}`
   });
 };
+
+export const submitProject = (id) => {
+  return $.ajax({
+    method: 'patch',
+    url: `api/projects/${id}`,
+    data: {
+      project: {
+        complete: true
+      }
+    }
+  });
+};

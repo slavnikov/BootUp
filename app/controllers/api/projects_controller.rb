@@ -40,7 +40,8 @@ class Api::ProjectsController < ApplicationController
       :country,
       :story,
       :end_date,
-      :pledge_goal
+      :pledge_goal,
+      :complete
     )
   end
 end

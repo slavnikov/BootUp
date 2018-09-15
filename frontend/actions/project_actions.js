@@ -43,3 +43,11 @@ export const receiveProject = (project) => {
     project: project
   });
 };
+
+export const submitProject = (id) => {
+  return (dispatch) => {
+    PrjUtil.submitProject(id).then((project) => {
+      dispatch(receiveProject(project));
+    });
+  };
+};

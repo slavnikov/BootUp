@@ -111,7 +111,7 @@ var receiveSessionError = function receiveSessionError(errorArr) {
 /*!*********************************************!*\
   !*** ./frontend/actions/project_actions.js ***!
   \*********************************************/
-/*! exports provided: RECEIVE_CURRENT_PROJECT_PROPS, RECEIVE_PROJECT, receiveCurrentProjectProps, createProject, deleteProject, updateProject, receiveProject */
+/*! exports provided: RECEIVE_CURRENT_PROJECT_PROPS, RECEIVE_PROJECT, receiveCurrentProjectProps, createProject, deleteProject, updateProject, receiveProject, submitProject */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -123,6 +123,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteProject", function() { return deleteProject; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateProject", function() { return updateProject; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveProject", function() { return receiveProject; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "submitProject", function() { return submitProject; });
 /* harmony import */ var _util_project_api_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/project_api_util */ "./frontend/util/project_api_util.js");
 /* harmony import */ var _session_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./session_actions */ "./frontend/actions/session_actions.js");
 
@@ -163,6 +164,13 @@ var receiveProject = function receiveProject(project) {
   return {
     type: RECEIVE_PROJECT,
     project: project
+  };
+};
+var submitProject = function submitProject(id) {
+  return function (dispatch) {
+    _util_project_api_util__WEBPACK_IMPORTED_MODULE_0__["submitProject"](id).then(function (project) {
+      dispatch(receiveProject(project));
+    });
   };
 };
 
@@ -642,13 +650,13 @@ function (_React$Component) {
     _this.state = {
       redirect: false
     };
-    _this.completeCount = 0;
+    _this.completeCount = {};
     return _this;
   }
 
   _createClass(NewProjectOverview, [{
     key: "checkForCompleteness",
-    value: function checkForCompleteness(prj_params) {
+    value: function checkForCompleteness(prj_params, idx) {
       var _this2 = this;
 
       var all_done = prj_params.every(function (param) {
@@ -656,7 +664,7 @@ function (_React$Component) {
       });
 
       if (all_done) {
-        this.completeCount++;
+        this.completeCount[idx] = true;
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
           className: "fa fa-check nav-item-complete"
         });
@@ -678,10 +686,16 @@ function (_React$Component) {
   }, {
     key: "submitButton",
     value: function submitButton() {
-      if (this.completeCount === 2) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-          to: "/"
-        }, "Next: Submit Project");
+      var _this3 = this;
+
+      if ([1, 2].every(function (idx) {
+        return _this3.completeCount[idx];
+      })) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          onClick: function onClick() {
+            return _this3.props.submitProject(_this3.props.currentProject.id);
+          }
+        }, "Submit Project");
       } else {
         return null;
       }
@@ -689,6 +703,8 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
+      debugger;
+
       if (this.state.redirect) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Redirect"], {
           to: "/"
@@ -709,9 +725,9 @@ function (_React$Component) {
         className: "overview-nav"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Project overview"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
         to: "/setup/new_project/basics"
-      }, this.checkForCompleteness(['title', 'subtitle', 'category', 'country', 'end_date', 'pledge_goal']), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Basics"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Add an image, set your funidng goal, and more."))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+      }, this.checkForCompleteness(['title', 'subtitle', 'category', 'country', 'end_date', 'pledge_goal'], 1), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Basics"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Add an image, set your funidng goal, and more."))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
         to: "/setup/new_project/story"
-      }, this.checkForCompleteness(['story']), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Story"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Add a detailed project description.")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, this.completeCount, " of 2 complete"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "When everything is done, your project will go live instantly."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("footer", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      }, this.checkForCompleteness(['story'], 2), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Story"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Add a detailed project description.")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, Object.keys(this.completeCount).length, " of 2 complete"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "When everything is done, your project will go live instantly."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("footer", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: this.deleteProject.bind(this)
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
         className: "fa fa-trash-o"
@@ -1184,8 +1200,8 @@ function (_React$Component) {
     value: function finalButton() {
       if (this.checkForCompleteness()) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-          to: "/"
-        }, "Next: Submit Project");
+          to: "/setup/project/overview"
+        }, "Project Overview");
       } else {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
           onClick: this.saveChanges.bind(this)
@@ -1679,6 +1695,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     },
     clearCurrentProject: function clearCurrentProject() {
       return dispatch(Object(_actions_session_actions__WEBPACK_IMPORTED_MODULE_2__["clearCurrentProject"])());
+    },
+    submitProject: function submitProject(id) {
+      return dispatch(Object(_actions_project_actions__WEBPACK_IMPORTED_MODULE_1__["submitProject"])(id));
     }
   };
 };
@@ -2416,7 +2435,7 @@ var configureStore = function configureStore(presetConfig) {
 /*!*******************************************!*\
   !*** ./frontend/util/project_api_util.js ***!
   \*******************************************/
-/*! exports provided: createProject, updateProject, deleteProject */
+/*! exports provided: createProject, updateProject, deleteProject, submitProject */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2424,6 +2443,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createProject", function() { return createProject; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateProject", function() { return updateProject; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteProject", function() { return deleteProject; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "submitProject", function() { return submitProject; });
 var createProject = function createProject(props) {
   return $.ajax({
     method: 'post',
@@ -2446,6 +2466,17 @@ var deleteProject = function deleteProject(id) {
   return $.ajax({
     method: 'delete',
     url: "api/projects/".concat(id)
+  });
+};
+var submitProject = function submitProject(id) {
+  return $.ajax({
+    method: 'patch',
+    url: "api/projects/".concat(id),
+    data: {
+      project: {
+        complete: true
+      }
+    }
   });
 };
 

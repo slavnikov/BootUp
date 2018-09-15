@@ -51,7 +51,7 @@ class ProjectStory extends React.Component {
 
   finalButton () {
     if (this.checkForCompleteness()) {
-      return <Link to='/'>Next: Submit Project</Link>;
+      return <Link to='/setup/project/overview'>Project Overview</Link>;
     } else {
       return <button onClick={this.saveChanges.bind(this)}>Save</button>;
     }

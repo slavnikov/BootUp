@@ -120,7 +120,7 @@
   box-sizing: border-box;
 }
 
-.overview-wrapper footer button {
+.overview-wrapper footer button:first-child {
   color: #656969;
   background: white;
   border: 0px;
@@ -128,13 +128,13 @@
   padding: 10px;
 }
 
-.overview-wrapper footer button:hover {
+.overview-wrapper footer button:first-child:hover {
   color: #282828;
   background-color: #f0f0f0;
   cursor: pointer;
 }
 
-.overview-wrapper footer a {
+.overview-wrapper footer button {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -149,7 +149,7 @@
   transition: background-color 0.5s, margin-top 0.5s, margin-bottom 0.5s;
 }
 
-.overview-wrapper footer a:hover {
+.overview-wrapper footer button:hover {
   background-color: #023239;
   margin-top: -1px;
   margin-bottom: 1px;
