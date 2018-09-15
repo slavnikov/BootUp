@@ -23,11 +23,7 @@ const SetupForm = (props) => {
           }
         }}/>
       <Route path='/setup/project/overview' render={() => {
-            if (props.currentProject) {
-              return <NewPrjOverviewC/>;
-            } else {
-              return <Redirect to='/setup/project/overview'/>;
-            }
+          return <NewPrjOverviewC/>;
         }}/>
       <Route path='/setup/new_project/basics' render={() => {
           return <ProjectBasicsC/>;

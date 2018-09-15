@@ -3,55 +3,102 @@ import { Route, Link, Redirect } from 'react-router-dom';
 import ProjectFormNavigation from './prj_form_nav';
 import HeaderC from '../header_container';
 
-const categories = [
-  "Art", "Comics", "Crafts", "Dance", "Design", "Fashion",
-  "Film & Video", "Food", "Games", "Journalism", "Music", "Photography",
-  "Publishing", "Technology", "Theater"
-];
-
 class ProjectBasics extends React.Component {
   constructor(props){
     super(props);
-    this.state = this.props.currentProject;
     this.state = {
-      redirect: false
+      categories_hidden: true,
+      countries_hidden: true,
+      title: this.props.currentProject.title,
+      subtitle: this.props.currentProject.subtitle,
+      category: this.props.currentProject.category,
+      country: this.props.currentProject.country,
+      end_date: this.props.currentProject.end_date,
+      pledge_goal: this.props.currentProject.pledge_goal
     };
+    this.categories = [
+      "Art", "Comics", "Crafts", "Dance", "Design", "Fashion",
+      "Film & Video", "Food", "Games", "Journalism", "Music", "Photography",
+      "Publishing", "Technology", "Theater"
+    ];
+    this.countries = [
+      'US', 'UK', 'Canada', 'Australia',' New Zealand', 'the Netherlands', 'Denmark',
+      'Ireland', 'Norway', 'Sweden', 'Germany', 'France', 'Spain', 'Italy', 'Austria',
+      'Belgium', 'Switzerland', 'Luxembourg', 'Hong Kong', 'Singapore', 'Mexico', 'Japan'
+    ];
+    this.menuDropCategory = this.menuDropCategory.bind(this);
+    this.menuDropCountry = this.menuDropCountry.bind(this);
   }
 
   saveChanges () {
     this.props.updateProject({
       id: this.props.currentProject.id,
-      title: this.input('title'),
-      subtitle: this.input('subtitle'),
-      category: this.input('category'),
-      country: this.input('country'),
-      end_date: this.input('end_date'),
-      pledge_goal: parseInt(this.input('pledge_goal'))
+      title: this.state.title,
+      subtitle: this.state.subtitle,
+      category: this.state.category,
+      country: this.state.country,
+      end_date: this.state.end_date,
+      pledge_goal: parseInt(this.state.pledge_goal),
     });
   }
 
   discardChanges () {
-    const inputs = $(':input[type=text], :input[type=date], select');
-    inputs.each((idx, input) => {
-      input.value = this.props.currentProject[input.id] || '';
+    this.setState({
+      title: this.props.currentProject.title,
+      subtitle: this.props.currentProject.subtitle,
+      category: this.props.currentProject.category,
+      country: this.props.currentProject.country,
+      end_date: this.props.currentProject.end_date,
+      pledge_goal: this.props.currentProject.pledge_goal
     });
   }
 
-  deleteProject() {
-    this.props.deleteProject(this.props.currentProject.id);
-    this.props.clearCurrentProject();
-    this.setState({redirect: true});
+  menuDropCategory () {
+    this.setState({categories_hidden: !this.state.categories_hidden});
   }
 
-  input(id) {
-    return document.getElementById(id).value;
+  menuDropCountry () {
+    this.setState({countries_hidden: !this.state.countries_hidden});
+  }
+
+  edit (field) {
+    return (e) => {
+      if (field === 'pledge_goal') {
+        this.setState({[field]: parseInt(e.currentTarget.value)});
+      } else {
+        this.setState({[field]: e.currentTarget.value});
+      }
+    };
+  }
+
+  checkForCompleteness () {
+    return (['title', 'subtitle', 'category', 'country', 'end_date', 'pledge_goal'].every((prop) => {
+      return this.props.currentProject[prop];
+    }) && ['title', 'subtitle', 'category', 'country', 'end_date', 'pledge_goal'].every((prop) => {
+      return this.props.currentProject[prop] === this.state[prop];
+    }));
+  }
+
+  changesMade () {
+    const anyChanges = ['title', 'subtitle', 'category', 'country', 'end_date', 'pledge_goal'].every((prop) => {
+      return this.props.currentProject[prop] === this.state[prop];
+    });
+    if (anyChanges) {
+      return null;
+    } else {
+      return <button onClick={this.discardChanges.bind(this)}>Discard Changes</button>;
+    }
+  }
+
+  finalButton () {
+    if (this.checkForCompleteness()) {
+      return <Link to='/setup/new_project/story'>Next: Story</Link>;
+    } else {
+      return <button onClick={this.saveChanges.bind(this)}>Save</button>;
+    }
   }
 
   render () {
-    if (this.state.redirect === true) {
-      return <Redirect to='/'/>;
-    }
-
     return (
       <div>
         <HeaderC/>
@@ -68,33 +115,115 @@ class ProjectBasics extends React.Component {
             </div>
             <div className='li-inputs'>
               <label>Title</label>
-              <input id='title' type='text' defaultValue={this.props.currentProject.title || ""}></input>
+              <input id='title' type='text' defaultValue={this.state.title} onChange={this.edit('title')}></input>
               <label>Subtitle</label>
-              <input id='subtitle' type='text' defaultValue={this.props.currentProject.subtitle || ""}></input>
+              <input id='subtitle' type='text' defaultValue={this.state.subtitle} onChange={this.edit('subtitle')}></input>
             </div>
           </div>
+
           <div className='form-li'>
             <div className='li-text'>
               <h6>Category</h6>
               <p>Choose the category that most closely aligns with your project. <br></br><br></br>Think of where backers may look to find it. Reach a more specific community by also choosing a subcategory. <br></br><br></br>You’ll be able to change the category and subcategory even after your project is live.</p>
             </div>
             <div className='li-inputs'>
-              <select id='category' defaultValue={this.props.currentProject.category}>
+              <button
+                id='category-button-basics'
+                onClick={this.menuDropCategory}
+                className={`${this.state.categories_hidden ? '' : 'black-border'} ddm-button`}
+              >
+                <p
+                  id='button-text'
+                  className={`button-text black-text`}>
+                  {this.state.category}
+                </p>
+                <i className="fa fa-caret-down" id="button-arrow"></i>
+              </button>
+              <ul className={this.state.categories_hidden ? 'hidden' : 'drop-down'} id="ddm-basics">
                 {
-                  categories.map((category, idx) => {
-                    return <option key={idx} value={category} >{category}</option>;
-                    })
-                  }
-                </select>
+                  this.categories.map((category, idx) => {
+                    if (this.state.category === category) {
+                      return <li
+                        key={idx}
+                        id={category}
+                        className={'pre-selected'}
+                        onClick={
+                          () => {
+                            this.setState({category: category});
+                            this.menuDropCategory();
+                          }
+                        }
+                        >
+                        <p>{category}</p><i className="fa fa-check-circle" id="check"></i></li>;
+                    } else {
+                      return <li
+                        key={idx}
+                        id={category}
+                        onClick={
+                          () => {
+                            this.setState({category: category});
+                            this.menuDropCategory();
+                          }
+                        }
+                        >
+                        <p>{category}</p></li>;
+                    }
+                  })
+                }
+              </ul>
             </div>
           </div>
+
           <div className='form-li'>
             <div className='li-text'>
               <h6>Project Location</h6>
               <p>Enter the location that best describes where your project is based.</p>
             </div>
             <div className='li-inputs'>
-              <input id='country' type='text' defaultValue={this.props.currentProject.country || ""}></input>
+              <button
+                id='country-button-basics'
+                onClick={this.menuDropCountry}
+                className={`${this.state.countries_hidden ? '' : 'black-border'} ddm-button`}
+              >
+                <p
+                  id='button-text'
+                  className={`button-text black-text`}>
+                  {this.state.country}
+                </p>
+                <i className="fa fa-caret-down" id="button-arrow"></i>
+              </button>
+              <ul className={this.state.countries_hidden ? 'hidden' : 'drop-down'} id="ddm-countires-basics">
+                {
+                  this.countries.map((country, idx) => {
+                    if (this.state.country === country) {
+                      return <li
+                        key={idx}
+                        id={country}
+                        className={'pre-selected'}
+                        onClick={
+                          () => {
+                            this.setState({country: country});
+                            this.menuDropCountry();
+                          }
+                        }
+                        >
+                        <p>{country}</p><i className="fa fa-check-circle" id="check"></i></li>;
+                    } else {
+                      return <li
+                        key={idx}
+                        id={country}
+                        onClick={
+                          () => {
+                            this.setState({country: country});
+                            this.menuDropCountry();
+                          }
+                        }
+                        >
+                        <p>{country}</p></li>;
+                    }
+                  })
+                }
+              </ul>
             </div>
           </div>
 
@@ -104,7 +233,7 @@ class ProjectBasics extends React.Component {
               <p>Set a time limit for your campaign. You won’t be able to change this after you launch.</p>
             </div>
             <div className='li-inputs'>
-              <input id='end_date' type="date" defaultValue={this.props.currentProject.end_date || ""}></input>
+              <input id='end_date' type="date" defaultValue={this.state.end_date || ""} onChange={this.edit('end_date')}></input>
             </div>
           </div>
 
@@ -117,15 +246,15 @@ class ProjectBasics extends React.Component {
               <input
                 id='pledge_goal'
                 type="number"
-                defaultValue={this.props.currentProject.pledge_goal || ""}>
+                defaultValue={this.state.pledge_goal || ""}
+                onChange={this.edit('pledge_goal')}>
               </input>
             </div>
           </div>
         </form>
-        <button onClick={this.deleteProject.bind(this)}>Delete Project</button>
         <footer>
-          <button onClick={this.discardChanges.bind(this)}>Discard Changes</button>
-          <button onClick={this.saveChanges.bind(this)}>Save</button>
+          {this.changesMade()}
+          {this.finalButton()}
         </footer>
       </main>
       </div>

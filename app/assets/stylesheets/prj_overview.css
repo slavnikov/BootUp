@@ -114,8 +114,10 @@
   width: 100%;
   border-top: 1px solid #dcdedd;
   margin-top: 54px;
-  padding-top: 50px;
-  padding-left: 190px;
+  padding: 50px 190px;
+  display: flex;
+  justify-content: space-between;
+  box-sizing: border-box;
 }
 
 .overview-wrapper footer button {
@@ -130,6 +132,27 @@
   color: #282828;
   background-color: #f0f0f0;
   cursor: pointer;
+}
+
+.overview-wrapper footer a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  width: 170px;
+  margin-left: 10px;
+  height: 42px;
+  border: none;
+  background-color: #034752;
+  color: white;
+  font-size: 14px;
+  transition: background-color 0.5s, margin-top 0.5s, margin-bottom 0.5s;
+}
+
+.overview-wrapper footer a:hover {
+  background-color: #023239;
+  margin-top: -1px;
+  margin-bottom: 1px;
 }
 
 .fa-trash-o {

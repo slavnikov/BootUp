@@ -140,6 +140,7 @@ var receiveCurrentProjectProps = function receiveCurrentProjectProps(prj_props) 
 };
 var createProject = function createProject(props) {
   return function (dispatch) {
+    dispatch(Object(_session_actions__WEBPACK_IMPORTED_MODULE_1__["clearCurrentProject"])());
     _util_project_api_util__WEBPACK_IMPORTED_MODULE_0__["createProject"](props).then(function (project) {
       dispatch(receiveProject(project));
       dispatch(Object(_session_actions__WEBPACK_IMPORTED_MODULE_1__["receiveCurrentProject"])(project.id));
@@ -497,7 +498,7 @@ var HeaderNewProjectNav = function HeaderNewProjectNav(props) {
   }, "BootUp")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     to: "/setup/new_project/basics"
   }, "Basics"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    class: "fa fa-caret-right"
+    className: "fa fa-caret-right"
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     to: "/setup/new_project/story"
   }, "Story")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -605,72 +606,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
 /* harmony import */ var _header_container__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../header_container */ "./frontend/components/header_container.js");
-
-
-
-
-var NewPrjOverview = function NewPrjOverview(props) {
-  var completeCount = 0;
-  var redirect = false;
-
-  var checkForCompleteness = function checkForCompleteness(prj_params) {
-    var all_done = prj_params.every(function (param) {
-      return props.currentProject[param];
-    });
-
-    if (all_done) {
-      completeCount++;
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-        className: "fa fa-check nav-item-complete"
-      });
-    } else {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-        className: "fa fa-check"
-      });
-    }
-  };
-
-  var deleteProject = function deleteProject() {
-    props.deleteProject(props.currentProject.id);
-    props.clearCurrentProject();
-    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Redirect"], {
-      to: "/"
-    });
-  };
-
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_header_container__WEBPACK_IMPORTED_MODULE_2__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("main", {
-    className: "overview-wrapper"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("header", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, props.currentProject.category, " Project"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "by ", props.currentUser.name)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
-    className: "overview-nav"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Project overview"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-    to: "/setup/new_project/basics"
-  }, checkForCompleteness(['title', 'subtitle', 'category', 'country', 'end_date', 'pledge_goal']), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Basics"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Add an image, set your funidng goal, and more."))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-    to: "/setup/new_project/story"
-  }, checkForCompleteness(['story']), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Story"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Add a detailed project description.")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, completeCount, " of 2 complete"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "When everything is done, your project will go live instantly."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("footer", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    onClick: deleteProject
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fa fa-trash-o"
-  }), "Delete Project"))));
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (NewPrjOverview);
-
-/***/ }),
-
-/***/ "./frontend/components/project_forms/prj_basics.jsx":
-/*!**********************************************************!*\
-  !*** ./frontend/components/project_forms/prj_basics.jsx ***!
-  \**********************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
-/* harmony import */ var _prj_form_nav__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./prj_form_nav */ "./frontend/components/project_forms/prj_form_nav.jsx");
-/* harmony import */ var _header_container__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../header_container */ "./frontend/components/header_container.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -693,7 +628,142 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
-var categories = ["Art", "Comics", "Crafts", "Dance", "Design", "Fashion", "Film & Video", "Food", "Games", "Journalism", "Music", "Photography", "Publishing", "Technology", "Theater"];
+var NewProjectOverview =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(NewProjectOverview, _React$Component);
+
+  function NewProjectOverview(props) {
+    var _this;
+
+    _classCallCheck(this, NewProjectOverview);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(NewProjectOverview).call(this, props));
+    _this.state = {
+      redirect: false
+    };
+    _this.completeCount = 0;
+    return _this;
+  }
+
+  _createClass(NewProjectOverview, [{
+    key: "checkForCompleteness",
+    value: function checkForCompleteness(prj_params) {
+      var _this2 = this;
+
+      var all_done = prj_params.every(function (param) {
+        return _this2.props.currentProject[param];
+      });
+
+      if (all_done) {
+        this.completeCount++;
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+          className: "fa fa-check nav-item-complete"
+        });
+      } else {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+          className: "fa fa-check"
+        });
+      }
+    }
+  }, {
+    key: "deleteProject",
+    value: function deleteProject() {
+      this.props.deleteProject(this.props.currentProject.id);
+      this.props.clearCurrentProject();
+      this.setState({
+        redirect: true
+      });
+    }
+  }, {
+    key: "submitButton",
+    value: function submitButton() {
+      if (this.completeCount === 2) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+          to: "/"
+        }, "Next: Submit Project");
+      } else {
+        return null;
+      }
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      if (this.state.redirect) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Redirect"], {
+          to: "/"
+        });
+      }
+
+      if (!this.props.currentProject) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "spinner-wrapper"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+          className: "fa fa-refresh fa-spin"
+        }), ";");
+      }
+
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_header_container__WEBPACK_IMPORTED_MODULE_2__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("main", {
+        className: "overview-wrapper"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("header", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, this.props.currentProject.category, " Project"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "by ", this.props.currentUser.name)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
+        className: "overview-nav"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Project overview"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        to: "/setup/new_project/basics"
+      }, this.checkForCompleteness(['title', 'subtitle', 'category', 'country', 'end_date', 'pledge_goal']), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Basics"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Add an image, set your funidng goal, and more."))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        to: "/setup/new_project/story"
+      }, this.checkForCompleteness(['story']), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Story"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Add a detailed project description.")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, this.completeCount, " of 2 complete"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "When everything is done, your project will go live instantly."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("footer", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: this.deleteProject.bind(this)
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "fa fa-trash-o"
+      }), "Delete Project"), this.submitButton())));
+    }
+  }]);
+
+  return NewProjectOverview;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+/* harmony default export */ __webpack_exports__["default"] = (NewProjectOverview);
+
+/***/ }),
+
+/***/ "./frontend/components/project_forms/prj_basics.jsx":
+/*!**********************************************************!*\
+  !*** ./frontend/components/project_forms/prj_basics.jsx ***!
+  \**********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+/* harmony import */ var _prj_form_nav__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./prj_form_nav */ "./frontend/components/project_forms/prj_form_nav.jsx");
+/* harmony import */ var _header_container__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../header_container */ "./frontend/components/header_container.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+
+
+
+
 
 var ProjectBasics =
 /*#__PURE__*/
@@ -706,10 +776,20 @@ function (_React$Component) {
     _classCallCheck(this, ProjectBasics);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(ProjectBasics).call(this, props));
-    _this.state = _this.props.currentProject;
     _this.state = {
-      redirect: false
+      categories_hidden: true,
+      countries_hidden: true,
+      title: _this.props.currentProject.title,
+      subtitle: _this.props.currentProject.subtitle,
+      category: _this.props.currentProject.category,
+      country: _this.props.currentProject.country,
+      end_date: _this.props.currentProject.end_date,
+      pledge_goal: _this.props.currentProject.pledge_goal
     };
+    _this.categories = ["Art", "Comics", "Crafts", "Dance", "Design", "Fashion", "Film & Video", "Food", "Games", "Journalism", "Music", "Photography", "Publishing", "Technology", "Theater"];
+    _this.countries = ['US', 'UK', 'Canada', 'Australia', ' New Zealand', 'the Netherlands', 'Denmark', 'Ireland', 'Norway', 'Sweden', 'Germany', 'France', 'Spain', 'Italy', 'Austria', 'Belgium', 'Switzerland', 'Luxembourg', 'Hong Kong', 'Singapore', 'Mexico', 'Japan'];
+    _this.menuDropCategory = _this.menuDropCategory.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.menuDropCountry = _this.menuDropCountry.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     return _this;
   }
 
@@ -718,46 +798,98 @@ function (_React$Component) {
     value: function saveChanges() {
       this.props.updateProject({
         id: this.props.currentProject.id,
-        title: this.input('title'),
-        subtitle: this.input('subtitle'),
-        category: this.input('category'),
-        country: this.input('country'),
-        end_date: this.input('end_date'),
-        pledge_goal: parseInt(this.input('pledge_goal'))
+        title: this.state.title,
+        subtitle: this.state.subtitle,
+        category: this.state.category,
+        country: this.state.country,
+        end_date: this.state.end_date,
+        pledge_goal: parseInt(this.state.pledge_goal)
       });
     }
   }, {
     key: "discardChanges",
     value: function discardChanges() {
+      this.setState({
+        title: this.props.currentProject.title,
+        subtitle: this.props.currentProject.subtitle,
+        category: this.props.currentProject.category,
+        country: this.props.currentProject.country,
+        end_date: this.props.currentProject.end_date,
+        pledge_goal: this.props.currentProject.pledge_goal
+      });
+    }
+  }, {
+    key: "menuDropCategory",
+    value: function menuDropCategory() {
+      this.setState({
+        categories_hidden: !this.state.categories_hidden
+      });
+    }
+  }, {
+    key: "menuDropCountry",
+    value: function menuDropCountry() {
+      this.setState({
+        countries_hidden: !this.state.countries_hidden
+      });
+    }
+  }, {
+    key: "edit",
+    value: function edit(field) {
       var _this2 = this;
 
-      var inputs = $(':input[type=text], :input[type=date], select');
-      inputs.each(function (idx, input) {
-        input.value = _this2.props.currentProject[input.id] || '';
+      return function (e) {
+        if (field === 'pledge_goal') {
+          _this2.setState(_defineProperty({}, field, parseInt(e.currentTarget.value)));
+        } else {
+          _this2.setState(_defineProperty({}, field, e.currentTarget.value));
+        }
+      };
+    }
+  }, {
+    key: "checkForCompleteness",
+    value: function checkForCompleteness() {
+      var _this3 = this;
+
+      return ['title', 'subtitle', 'category', 'country', 'end_date', 'pledge_goal'].every(function (prop) {
+        return _this3.props.currentProject[prop];
+      }) && ['title', 'subtitle', 'category', 'country', 'end_date', 'pledge_goal'].every(function (prop) {
+        return _this3.props.currentProject[prop] === _this3.state[prop];
       });
     }
   }, {
-    key: "deleteProject",
-    value: function deleteProject() {
-      this.props.deleteProject(this.props.currentProject.id);
-      this.props.clearCurrentProject();
-      this.setState({
-        redirect: true
+    key: "changesMade",
+    value: function changesMade() {
+      var _this4 = this;
+
+      var anyChanges = ['title', 'subtitle', 'category', 'country', 'end_date', 'pledge_goal'].every(function (prop) {
+        return _this4.props.currentProject[prop] === _this4.state[prop];
       });
+
+      if (anyChanges) {
+        return null;
+      } else {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          onClick: this.discardChanges.bind(this)
+        }, "Discard Changes");
+      }
     }
   }, {
-    key: "input",
-    value: function input(id) {
-      return document.getElementById(id).value;
+    key: "finalButton",
+    value: function finalButton() {
+      if (this.checkForCompleteness()) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+          to: "/setup/new_project/story"
+        }, "Next: Story");
+      } else {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          onClick: this.saveChanges.bind(this)
+        }, "Save");
+      }
     }
   }, {
     key: "render",
     value: function render() {
-      if (this.state.redirect === true) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Redirect"], {
-          to: "/"
-        });
-      }
+      var _this5 = this;
 
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_header_container__WEBPACK_IMPORTED_MODULE_3__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("main", {
         className: "basics-wrapper"
@@ -772,36 +904,112 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Title"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         id: "title",
         type: "text",
-        defaultValue: this.props.currentProject.title || ""
+        defaultValue: this.state.title,
+        onChange: this.edit('title')
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Subtitle"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         id: "subtitle",
         type: "text",
-        defaultValue: this.props.currentProject.subtitle || ""
+        defaultValue: this.state.subtitle,
+        onChange: this.edit('subtitle')
       }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form-li"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "li-text"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "Category"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Choose the category that most closely aligns with your project. ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), "Think of where backers may look to find it. Reach a more specific community by also choosing a subcategory. ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), "You\u2019ll be able to change the category and subcategory even after your project is live.")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "li-inputs"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
-        id: "category",
-        defaultValue: this.props.currentProject.category
-      }, categories.map(function (category, idx) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
-          key: idx,
-          value: category
-        }, category);
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        id: "category-button-basics",
+        onClick: this.menuDropCategory,
+        className: "".concat(this.state.categories_hidden ? '' : 'black-border', " ddm-button")
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        id: "button-text",
+        className: "button-text black-text"
+      }, this.state.category), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "fa fa-caret-down",
+        id: "button-arrow"
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+        className: this.state.categories_hidden ? 'hidden' : 'drop-down',
+        id: "ddm-basics"
+      }, this.categories.map(function (category, idx) {
+        if (_this5.state.category === category) {
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+            key: idx,
+            id: category,
+            className: 'pre-selected',
+            onClick: function onClick() {
+              _this5.setState({
+                category: category
+              });
+
+              _this5.menuDropCategory();
+            }
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, category), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+            className: "fa fa-check-circle",
+            id: "check"
+          }));
+        } else {
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+            key: idx,
+            id: category,
+            onClick: function onClick() {
+              _this5.setState({
+                category: category
+              });
+
+              _this5.menuDropCategory();
+            }
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, category));
+        }
       })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form-li"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "li-text"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "Project Location"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Enter the location that best describes where your project is based.")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "li-inputs"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        id: "country",
-        type: "text",
-        defaultValue: this.props.currentProject.country || ""
-      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        id: "country-button-basics",
+        onClick: this.menuDropCountry,
+        className: "".concat(this.state.countries_hidden ? '' : 'black-border', " ddm-button")
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        id: "button-text",
+        className: "button-text black-text"
+      }, this.state.country), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "fa fa-caret-down",
+        id: "button-arrow"
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+        className: this.state.countries_hidden ? 'hidden' : 'drop-down',
+        id: "ddm-countires-basics"
+      }, this.countries.map(function (country, idx) {
+        if (_this5.state.country === country) {
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+            key: idx,
+            id: country,
+            className: 'pre-selected',
+            onClick: function onClick() {
+              _this5.setState({
+                country: country
+              });
+
+              _this5.menuDropCountry();
+            }
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, country), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+            className: "fa fa-check-circle",
+            id: "check"
+          }));
+        } else {
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+            key: idx,
+            id: country,
+            onClick: function onClick() {
+              _this5.setState({
+                country: country
+              });
+
+              _this5.menuDropCountry();
+            }
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, country));
+        }
+      })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form-li"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "li-text"
@@ -810,7 +1018,8 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         id: "end_date",
         type: "date",
-        defaultValue: this.props.currentProject.end_date || ""
+        defaultValue: this.state.end_date || "",
+        onChange: this.edit('end_date')
       }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form-li"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -820,14 +1029,9 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         id: "pledge_goal",
         type: "number",
-        defaultValue: this.props.currentProject.pledge_goal || ""
-      })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        onClick: this.deleteProject.bind(this)
-      }, "Delete Project"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("footer", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        onClick: this.discardChanges.bind(this)
-      }, "Discard Changes"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        onClick: this.saveChanges.bind(this)
-      }, "Save"))));
+        defaultValue: this.state.pledge_goal || "",
+        onChange: this.edit('pledge_goal')
+      })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("footer", null, this.changesMade(), this.finalButton())));
     }
   }]);
 
@@ -883,6 +1087,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _header_container__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../header_container */ "./frontend/components/header_container.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -915,7 +1121,9 @@ function (_React$Component) {
     _classCallCheck(this, ProjectStory);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(ProjectStory).call(this, props));
-    _this.state = _this.props.currentProject;
+    _this.state = {
+      story: _this.props.currentProject.story
+    };
     return _this;
   }
 
@@ -924,32 +1132,65 @@ function (_React$Component) {
     value: function saveChanges() {
       this.props.updateProject({
         id: this.props.currentProject.id,
-        story: this.input('story')
+        story: this.state.story
       });
     }
   }, {
     key: "discardChanges",
     value: function discardChanges() {
+      this.setState({
+        story: this.props.currentProject.story
+      });
+    }
+  }, {
+    key: "edit",
+    value: function edit(field) {
       var _this2 = this;
 
-      var inputs = $(':input[type=text], :input[type=date], select, textarea');
-      inputs.each(function (idx, input) {
-        input.value = _this2.props.currentProject[input.id] || '';
+      return function (e) {
+        _this2.setState(_defineProperty({}, field, e.currentTarget.value));
+      };
+    }
+  }, {
+    key: "checkForCompleteness",
+    value: function checkForCompleteness() {
+      var _this3 = this;
+
+      return ['story'].every(function (prop) {
+        return _this3.props.currentProject[prop];
+      }) && ['story'].every(function (prop) {
+        return _this3.props.currentProject[prop] === _this3.state[prop];
       });
     }
   }, {
-    key: "deleteProject",
-    value: function deleteProject() {
-      this.props.deleteProject(this.props.currentProject.id);
-      this.props.clearCurrentProject();
-      this.setState({
-        redirect: true
+    key: "changesMade",
+    value: function changesMade() {
+      var _this4 = this;
+
+      var anyChanges = ['story'].every(function (prop) {
+        return _this4.props.currentProject[prop] === _this4.state[prop];
       });
+
+      if (anyChanges) {
+        return null;
+      } else {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          onClick: this.discardChanges.bind(this)
+        }, "Discard Changes");
+      }
     }
   }, {
-    key: "input",
-    value: function input(id) {
-      return document.getElementById(id).value;
+    key: "finalButton",
+    value: function finalButton() {
+      if (this.checkForCompleteness()) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+          to: "/"
+        }, "Next: Submit Project");
+      } else {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          onClick: this.saveChanges.bind(this)
+        }, "Save");
+      }
     }
   }, {
     key: "render",
@@ -968,18 +1209,15 @@ function (_React$Component) {
         className: "li-inputs"
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
         id: "story",
-        defaultValue: this.props.currentProject.story
+        value: this.state.story,
+        onChange: this.edit(['story'])
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form-li"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "li-text"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "Risks and challenges"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Be honest about the potential risks and challenges of this project and how you plan to overcome them to complete it.")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "li-inputs"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", null)))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("footer", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        onClick: this.discardChanges.bind(this)
-      }, "Discard Changes"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        onClick: this.saveChanges.bind(this)
-      }, "Save"))));
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", null)))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("footer", null, this.changesMade(), this.finalButton())));
     }
   }]);
 
@@ -1001,88 +1239,123 @@ function (_React$Component) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
-/* harmony import */ var _header_container__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../header_container */ "./frontend/components/header_container.js");
+/* harmony import */ var _header_container__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../header_container */ "./frontend/components/header_container.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 
 
 
-var Setup1 = function Setup1(props) {
-  var categories = ["Art", "Comics", "Crafts", "Dance", "Design", "Fashion", "Film", "Food", "Games", "Journalism", "Music", "Photography", "Publishing", "Technology", "Theater"];
+var Setup1Class =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(Setup1Class, _React$Component);
 
-  var submitCategory = function submitCategory(e) {
-    props.receiveCurrentProjectProps({
-      category: e.target.id
-    });
-    document.getElementById('button-text').innerHTML = e.currentTarget.id;
-    document.getElementById('button-text').classList.add('black-text');
-    document.getElementById('next-step').href = '#/setup/2';
-    var next_step = $('#next-step');
-    next_step.addClass("active");
-    styleSelected();
-    menuDrop();
-  };
+  function Setup1Class(props) {
+    var _this;
 
-  var styleSelected = function styleSelected() {
-    var lis = $("li");
-    lis.removeClass('pre-selected');
-    lis.each(function (idx, li) {
-      li.innerHTML = "<p>".concat(li.id, "</p>");
-    });
-    var chosen = $("#".concat(props.tempPrjProps.category));
-    chosen.addClass('pre-selected');
-    chosen.html("<p>".concat(chosen.attr('id'), "</p><i class=\"fa fa-check-circle\" id=\"check\"></i>"));
-  };
+    _classCallCheck(this, Setup1Class);
 
-  var nextStep = function nextStep() {
-    if (props.tempPrjProps.category) {
-      return "#/setup/2";
-    } else {
-      return null;
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(Setup1Class).call(this, props));
+    _this.state = {
+      hidden: true,
+      chosen: false
+    };
+    _this.menuDrop = _this.menuDrop.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.submitCategory = _this.submitCategory.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.categories = ["Art", "Comics", "Crafts", "Dance", "Design", "Fashion", "Film", "Food", "Games", "Journalism", "Music", "Photography", "Publishing", "Technology", "Theater"];
+    return _this;
+  }
+
+  _createClass(Setup1Class, [{
+    key: "submitCategory",
+    value: function submitCategory(e) {
+      this.props.receiveCurrentProjectProps({
+        category: e.target.id
+      });
+      this.setState({
+        chosen: true
+      });
+      this.menuDrop();
     }
-  };
+  }, {
+    key: "menuDrop",
+    value: function menuDrop() {
+      this.setState({
+        hidden: !this.state.hidden
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this2 = this;
 
-  var menuDrop = function menuDrop() {
-    var ele = document.getElementById('ddm');
-    ele.classList.toggle('hidden');
-    ele.classList.toggle('drop-down');
-    var button = document.getElementById('category-button');
-    button.classList.toggle('black-border');
-  };
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_header_container__WEBPACK_IMPORTED_MODULE_1__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "setup-wrapper"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "pg-counter"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "1 of 3")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
+        className: "setup-form"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "First, let\u2019s get you set up."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Pick a project category to connect with a specific community. You can always update this later."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        id: "category-button",
+        onClick: this.menuDrop,
+        className: "".concat(this.state.hidden ? '' : 'black-border', " ddm-button")
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        id: "button-text",
+        className: "button-text ".concat(this.props.tempPrjProps.category ? 'black-text' : '')
+      }, this.props.tempPrjProps.category || "Select your category"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "fa fa-caret-down",
+        id: "button-arrow"
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+        className: this.state.hidden ? 'hidden' : 'drop-down',
+        id: "ddm"
+      }, this.categories.map(function (category, idx) {
+        if (_this2.props.tempPrjProps.category === category) {
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+            key: idx,
+            id: category,
+            className: 'pre-selected',
+            onClick: _this2.submitCategory
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, category), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+            className: "fa fa-check-circle",
+            id: "check"
+          }));
+        } else {
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+            key: idx,
+            id: category,
+            onClick: _this2.submitCategory
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, category));
+        }
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
+        className: "bottom-section"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "You\u2019re back. This is major."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        id: "next-step",
+        href: this.props.tempPrjProps.category ? '#/setup/2' : null,
+        className: this.props.tempPrjProps.category ? 'active' : null
+      }, "Next: Project Idea")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "To create a project, you're required to provide your location, age, national ID, banking and tax information, email, and mailing address. This information is necessary to prevent fraud, comply with the law, and \u2014 if your project is successful \u2014 to deliver funds. Please note: after launch, your ability to edit, hide, or delete a project is limited."))));
+    }
+  }]);
 
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_header_container__WEBPACK_IMPORTED_MODULE_2__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "setup-wrapper"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "pg-counter"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "1 of 3")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
-    className: "setup-form"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "First, let\u2019s get you set up."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Pick a project category to connect with a specific community. You can always update this later."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    id: "category-button",
-    onClick: menuDrop
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-    id: "button-text",
-    className: "button-text"
-  }, props.tempPrjProps.category || "Select your category"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fa fa-caret-down",
-    id: "button-arrow"
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-    className: "hidden",
-    id: "ddm"
-  }, categories.map(function (category, idx) {
-    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-      key: idx,
-      id: category,
-      onClick: submitCategory
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, category));
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
-    className: "bottom-section"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "You\u2019re back. This is major."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    id: "next-step",
-    href: nextStep()
-  }, "Next: Project Idea")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "To create a project, you're required to provide your location, age, national ID, banking and tax information, email, and mailing address. This information is necessary to prevent fraud, comply with the law, and \u2014 if your project is successful \u2014 to deliver funds. Please note: after launch, your ability to edit, hide, or delete a project is limited."))));
-};
+  return Setup1Class;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
-/* harmony default export */ __webpack_exports__["default"] = (Setup1);
+/* harmony default export */ __webpack_exports__["default"] = (Setup1Class);
 
 /***/ }),
 
@@ -1097,70 +1370,101 @@ var Setup1 = function Setup1(props) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
-/* harmony import */ var _header_container__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../header_container */ "./frontend/components/header_container.js");
+/* harmony import */ var _header_container__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../header_container */ "./frontend/components/header_container.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 
 
 
-var Setup2 = function Setup2(props) {
-  var nextStep = function nextStep() {
-    if (props.tempPrjProps.subtitle) {
-      return "#/setup/3";
-    } else {
-      return null;
+
+var Setup2Class =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(Setup2Class, _React$Component);
+
+  function Setup2Class(props) {
+    var _this;
+
+    _classCallCheck(this, Setup2Class);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(Setup2Class).call(this, props));
+    _this.state = {
+      subtitle: _this.props.tempPrjProps.subtitle || ""
+    };
+    _this.submitSubtitle = _this.submitSubtitle.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    return _this;
+  }
+
+  _createClass(Setup2Class, [{
+    key: "submitSubtitle",
+    value: function submitSubtitle(e) {
+      this.props.receiveCurrentProjectProps({
+        subtitle: this.state.subtitle
+      });
     }
-  };
+  }, {
+    key: "render",
+    value: function render() {
+      var _this2 = this;
 
-  var submitSubtitle = function submitSubtitle() {
-    props.receiveCurrentProjectProps({
-      subtitle: document.getElementById("subtitle-text").value
-    });
-  };
-
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_header_container__WEBPACK_IMPORTED_MODULE_2__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "setup-wrapper"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "pg-counter"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "2 of 3")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
-    className: "setup-form"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Describe what you\u2019ll be creating."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "And don\u2019t worry, you can edit this later, too."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
-    id: "subtitle-text",
-    maxLength: "135",
-    defaultValue: props.tempPrjProps.subtitle,
-    placeholder: "This will appear as the subtitle of your project.",
-    onChange: function onChange(e) {
-      var chars = document.getElementById('char-counter');
-      chars.innerHTML = e.currentTarget.value.length;
-
-      if (e.currentTarget.value !== "This will appear as the subtitle of your project.") {
-        document.getElementById('next-step').href = '#/setup/3';
-        $('#next-step').addClass('active');
-      } else {
-        $('#next-step').addClass('deactivated');
-        $('#next-step').removeClass('active');
-      }
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_header_container__WEBPACK_IMPORTED_MODULE_1__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "setup-wrapper"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "pg-counter"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "2 of 3")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
+        className: "setup-form"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Describe what you\u2019ll be creating."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "And don\u2019t worry, you can edit this later, too."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
+        id: "subtitle-text",
+        maxLength: "135",
+        defaultValue: this.state.subtitle,
+        placeholder: "This will appear as the subtitle of your project.",
+        onChange: function onChange(e) {
+          return _this2.setState({
+            subtitle: e.currentTarget.value
+          });
+        }
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "char-count"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        id: "char-counter"
+      }, this.state.subtitle.length), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "/135")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
+        className: "bottom-section",
+        id: "boottom-section-2"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+        to: "/setup/1",
+        id: "nav-back"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "fa fa-long-arrow-left"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Category")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        id: "next-step",
+        href: this.state.subtitle.length > 0 ? '#/setup/3' : null,
+        className: this.state.subtitle.length > 0 ? 'active' : 'deactivated',
+        onClick: this.submitSubtitle
+      }, "Next: Location")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "To create a project, you're required to provide your location, age, national ID, banking and tax information, email, and mailing address. This information is necessary to prevent fraud, comply with the law, and \u2014 if your project is successful \u2014 to deliver funds. Please note: after launch, your ability to edit, hide, or delete a project is limited."))));
     }
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "char-count"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-    id: "char-counter"
-  }, "0"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "/135")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
-    className: "bottom-section",
-    id: "boottom-section-2"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-    to: "/setup/1",
-    id: "nav-back"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fa fa-long-arrow-left"
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Category")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    id: "next-step",
-    href: nextStep(),
-    onClick: submitSubtitle
-  }, "Next: Location")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "To create a project, you're required to provide your location, age, national ID, banking and tax information, email, and mailing address. This information is necessary to prevent fraud, comply with the law, and \u2014 if your project is successful \u2014 to deliver funds. Please note: after launch, your ability to edit, hide, or delete a project is limited."))));
-};
+  }]);
 
-/* harmony default export */ __webpack_exports__["default"] = (Setup2);
+  return Setup2Class;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+/* harmony default export */ __webpack_exports__["default"] = (Setup2Class);
 
 /***/ }),
 
@@ -1179,100 +1483,138 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _header_container__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../header_container */ "./frontend/components/header_container.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 
 
 
 
-var Setup3 = function Setup3(props) {
-  var countries = ['US', 'UK', 'Canada', 'Australia', ' New Zealand', 'the Netherlands', 'Denmark', 'Ireland', 'Norway', 'Sweden', 'Germany', 'France', 'Spain', 'Italy', 'Austria', 'Belgium', 'Switzerland', 'Luxembourg', 'Hong Kong', 'Singapore', 'Mexico', 'Japan'];
 
-  var submitCountry = function submitCountry(e) {
-    props.receiveCurrentProjectProps({
-      country: e.target.id
-    }); // document.getElementById('country-button').innerHTML = e.currentTarget.innerHTML;
+var Setup3Class =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(Setup3Class, _React$Component);
 
-    document.getElementById('button-text').innerHTML = e.currentTarget.id;
-    document.getElementById('button-text').classList.add('black-text');
-    document.getElementById('next-step').href = '#/setup/project/overview';
-    var next_step = $('#next-step');
-    next_step.addClass("active");
-    styleSelected();
-    menuDrop();
-  };
+  function Setup3Class(props) {
+    var _this;
 
-  var styleSelected = function styleSelected() {
-    var lis = $("li");
-    lis.removeClass('pre-selected');
-    lis.each(function (idx, li) {
-      li.innerHTML = "<p>".concat(li.id, "</p>");
-    });
-    var chosen = $("#".concat(props.tempPrjProps.country));
-    chosen.addClass('pre-selected');
-    chosen.html("<p>".concat(chosen.attr('id'), "</p><i class=\"fa fa-check-circle\" id=\"check\"></i>"));
-  };
+    _classCallCheck(this, Setup3Class);
 
-  var nextStep = function nextStep() {
-    if (props.tempPrjProps.country) {
-      return "#/setup/project/overview";
-    } else {
-      return null;
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(Setup3Class).call(this, props));
+    _this.state = {
+      hidden: true,
+      chosen: false
+    };
+    _this.menuDrop = _this.menuDrop.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.submitCountry = _this.submitCountry.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.createProject = _this.createProject.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.countries = ['US', 'UK', 'Canada', 'Australia', ' New Zealand', 'the Netherlands', 'Denmark', 'Ireland', 'Norway', 'Sweden', 'Germany', 'France', 'Spain', 'Italy', 'Austria', 'Belgium', 'Switzerland', 'Luxembourg', 'Hong Kong', 'Singapore', 'Mexico', 'Japan'];
+    return _this;
+  }
+
+  _createClass(Setup3Class, [{
+    key: "submitCountry",
+    value: function submitCountry(e) {
+      this.props.receiveCurrentProjectProps({
+        country: e.target.id
+      });
+      this.setState({
+        chosen: true
+      });
+      this.menuDrop();
     }
-  };
+  }, {
+    key: "menuDrop",
+    value: function menuDrop() {
+      this.setState({
+        hidden: !this.state.hidden
+      });
+    }
+  }, {
+    key: "createProject",
+    value: function createProject() {
+      this.props.createProject(Object(lodash__WEBPACK_IMPORTED_MODULE_2__["merge"])(this.props.tempPrjProps, {
+        admin_id: this.props.currentUser.id
+      }));
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this2 = this;
 
-  var createProject = function createProject() {
-    props.createProject(Object(lodash__WEBPACK_IMPORTED_MODULE_2__["merge"])(props.tempPrjProps, {
-      admin_id: props.currentUser.id
-    }));
-  };
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_header_container__WEBPACK_IMPORTED_MODULE_3__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "setup-wrapper"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "pg-counter"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "3 of 3")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
+        className: "setup-form"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Finally, let\u2019s confirm your eligibility."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Tell us where you\u2019re based and confirm a few other details before we proceed."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        id: "country-button",
+        onClick: this.menuDrop,
+        className: "".concat(this.state.hidden ? '' : 'black-border', " ddm-button")
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        id: "button-text",
+        className: "button-text ".concat(this.props.tempPrjProps.country ? 'black-text' : '')
+      }, this.props.tempPrjProps.country || "Select your country"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "fa fa-caret-down",
+        id: "button-arrow"
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+        className: this.state.hidden ? 'hidden' : 'drop-down',
+        id: "ddm"
+      }, this.countries.map(function (country, idx) {
+        if (_this2.props.tempPrjProps.country === country) {
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+            key: idx,
+            id: country,
+            className: 'pre-selected',
+            onClick: _this2.submitCountry
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, country), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+            className: "fa fa-check-circle",
+            id: "check"
+          }));
+        } else {
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+            key: idx,
+            id: country,
+            onClick: _this2.submitCountry
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, country));
+        }
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
+        className: "bottom-section"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        to: "/setup/2",
+        id: "nav-back"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "fa fa-long-arrow-left"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Project idea")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        id: "next-step",
+        href: this.props.tempPrjProps.country ? '#/setup/project/overview' : null,
+        className: this.props.tempPrjProps.country ? 'active' : 'deactivated',
+        onClick: this.createProject
+      }, "Continue")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "To create a project, you're required to provide your location, age, national ID, banking and tax information, email, and mailing address. This information is necessary to prevent fraud, comply with the law, and \u2014 if your project is successful \u2014 to deliver funds. Please note: after launch, your ability to edit, hide, or delete a project is limited."))));
+    }
+  }]);
 
-  var menuDrop = function menuDrop() {
-    var ele = document.getElementById('ddm');
-    ele.classList.toggle('hidden');
-    ele.classList.toggle('drop-down');
-    var button = document.getElementById('country-button');
-    button.classList.toggle('black-border');
-  };
+  return Setup3Class;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_header_container__WEBPACK_IMPORTED_MODULE_3__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "setup-wrapper"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "pg-counter"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "3 of 3")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
-    className: "setup-form"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Finally, let\u2019s confirm your eligibility."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Tell us where you\u2019re based and confirm a few other details before we proceed."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    id: "country-button",
-    onClick: menuDrop
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-    id: "button-text",
-    className: "button-text"
-  }, props.tempPrjProps.country || "Select your country"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fa fa-caret-down",
-    id: "button-arrow"
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-    className: "hidden",
-    id: "ddm"
-  }, countries.map(function (country, idx) {
-    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-      key: idx,
-      id: country,
-      onClick: submitCountry
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, country));
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
-    className: "bottom-section"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-    to: "/setup/2",
-    id: "nav-back"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fa fa-long-arrow-left"
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Project idea")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    id: "next-step",
-    href: nextStep(),
-    onClick: createProject
-  }, "Continue")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "To create a project, you're required to provide your location, age, national ID, banking and tax information, email, and mailing address. This information is necessary to prevent fraud, comply with the law, and \u2014 if your project is successful \u2014 to deliver funds. Please note: after launch, your ability to edit, hide, or delete a project is limited."))));
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (Setup3);
+/* harmony default export */ __webpack_exports__["default"] = (Setup3Class);
 
 /***/ }),
 
@@ -1399,13 +1741,7 @@ var SetupForm = function SetupForm(props) {
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     path: "/setup/project/overview",
     render: function render() {
-      if (props.currentProject) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_setup_container__WEBPACK_IMPORTED_MODULE_2__["NewPrjOverviewC"], null);
-      } else {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Redirect"], {
-          to: "/setup/project/overview"
-        });
-      }
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_setup_container__WEBPACK_IMPORTED_MODULE_2__["NewPrjOverviewC"], null);
     }
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     path: "/setup/new_project/basics",

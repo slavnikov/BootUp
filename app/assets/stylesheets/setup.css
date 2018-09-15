@@ -51,7 +51,7 @@
   letter-spacing: .8px;
 }
 
-.setup-form button{
+.ddm-button {
   position: absolute;
   width: 55%;
   max-width: 605px;
@@ -67,14 +67,14 @@
   transition: border 0.5s, margin-top 0s, margin-bottom 0s;
 }
 
-.setup-form button:hover {
+.ddm-button:hover {
   border: 1px solid black;
   margin-top: -1px;
   margin-bottom: 1px;
   cursor: pointer;
 }
 
-.setup-form button:focus {
+.ddm-button:focus {
   outline: none;
 }
 
@@ -287,3 +287,14 @@
 }
 
 .fa-check-circle:before{content:"\f058"}
+
+.fa-spin {
+  font-size: 48px !important;
+  color: #009E74 !important;
+}
+
+.spinner-wrapper {
+  display: flex;
+  justify-content: center;
+  padding-top: 50px;
+}

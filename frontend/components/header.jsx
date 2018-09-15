@@ -55,7 +55,7 @@ const HeaderNewProjectNav = (props) => {
       <div id="div5">
         <Link to='/' ><p className="nav-logo">BootUp</p></Link>
         <Link to='/setup/new_project/basics'>Basics</Link>
-        <i class="fa fa-caret-right"></i>
+        <i className="fa fa-caret-right"></i>
           <Link to='/setup/new_project/story'>Story</Link>
       </div>
       <div id="div6">

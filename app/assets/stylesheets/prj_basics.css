@@ -77,7 +77,6 @@
   box-sizing: border-box;
   padding: 12px;
   height: 42px;
-  box-sizing: border-box;
   border: 1px solid #dcdedd;
 }
 
@@ -93,6 +92,39 @@
 
 .li-inputs textarea {
   height: 200px;
+}
+
+
+#category-button-basics{
+  position: relative;
+  width: 450px;
+  box-sizing: border-box;
+  top: 0px;
+}
+
+#country-button-basics {
+  position: relative;
+  width: 450px;
+  box-sizing: border-box;
+  top: 0px;
+}
+
+#ddm-basics {
+    width: 450px;
+    position: relative;
+    top: 5px;
+    margin: 0px;
+    height: 200px;
+}
+
+
+#ddm-countires-basics {
+  width: 450px;
+  height: 200px;
+  box-sizing: border-box;
+  position: relative;
+  top: 5px;
+  margin: 0px;
 }
 
 .story-wrapper {
@@ -146,10 +178,31 @@ border-top: 1px solid #dcdedd
   transition: background-color 0.5s, margin-top 0.5s, margin-bottom 0.5s;
 }
 
-.basics-wrapper footer button:hover {
+.basics-wrapper footer button:hover{
   background-color: #037362;
   cursor: pointer;
   margin-top: -1px;
+}
+
+.basics-wrapper footer a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  width: 170px;
+  margin-left: 10px;
+  height: 42px;
+  border: none;
+  background-color: #034752;
+  color: white;
+  font-size: 14px;
+  transition: background-color 0.5s, margin-top 0.5s, margin-bottom 0.5s;
+}
+
+.basics-wrapper footer a:hover {
+  background-color: #023239;
+  margin-top: -1px;
+  margin-bottom: 1px;
 }
 
 .basics-form div:last-child {

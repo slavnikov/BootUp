@@ -6,31 +6,55 @@ import HeaderC from '../header_container';
 class ProjectStory extends React.Component {
   constructor(props){
     super(props);
-    this.state = this.props.currentProject;
+    this.state = {
+      story: this.props.currentProject.story
+    };
   }
 
   saveChanges () {
     this.props.updateProject({
       id: this.props.currentProject.id,
-      story: this.input('story'),
+      story: this.state.story,
     });
   }
 
   discardChanges () {
-    const inputs = $(':input[type=text], :input[type=date], select, textarea');
-    inputs.each((idx, input) => {
-      input.value = this.props.currentProject[input.id] || '';
+    this.setState({
+      story: this.props.currentProject.story,
     });
   }
 
-  deleteProject() {
-    this.props.deleteProject(this.props.currentProject.id);
-    this.props.clearCurrentProject();
-    this.setState({redirect: true});
+  edit (field) {
+    return (e) => {
+      this.setState({[field]: e.currentTarget.value});
+    };
   }
 
-  input(id) {
-    return document.getElementById(id).value;
+  checkForCompleteness () {
+    return (['story'].every((prop) => {
+      return this.props.currentProject[prop];
+    }) && ['story'].every((prop) => {
+      return this.props.currentProject[prop] === this.state[prop];
+    }));
+  }
+
+  changesMade () {
+    const anyChanges = ['story'].every((prop) => {
+      return this.props.currentProject[prop] === this.state[prop];
+    });
+    if (anyChanges) {
+      return null;
+    } else {
+      return <button onClick={this.discardChanges.bind(this)}>Discard Changes</button>;
+    }
+  }
+
+  finalButton () {
+    if (this.checkForCompleteness()) {
+      return <Link to='/'>Next: Submit Project</Link>;
+    } else {
+      return <button onClick={this.saveChanges.bind(this)}>Save</button>;
+    }
   }
 
   render () {
@@ -52,7 +76,11 @@ class ProjectStory extends React.Component {
                 <div className='li-inputs'>
                 </div>
               </div>
-              <textarea id='story' defaultValue={this.props.currentProject.story}></textarea>
+              <textarea
+                id='story'
+                value={this.state.story}
+                onChange={this.edit(['story'])}>
+              </textarea>
             </div>
 
             <div className='form-li'>
@@ -66,8 +94,8 @@ class ProjectStory extends React.Component {
             </div>
           </form>
           <footer>
-            <button onClick={this.discardChanges.bind(this)}>Discard Changes</button>
-            <button onClick={this.saveChanges.bind(this)}>Save</button>
+            {this.changesMade()}
+            {this.finalButton()}
           </footer>
         </main>
       </div>
