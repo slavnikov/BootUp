@@ -89,7 +89,6 @@ class Setup3Class extends React.Component {
                 id='next-step'
                 href={this.props.tempPrjProps.country ? '#/setup/project/overview' : null}
                 className={this.props.tempPrjProps.country ? 'active' : 'deactivated'}
-                onClick={this.createProject}
               >Continue
               </a>
             </section>

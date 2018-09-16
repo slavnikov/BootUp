@@ -49,8 +49,32 @@ class ProjectPage extends React.Component {
                 <a id='prj-location'>{this.props.project.country}</a>
               </div>
             </div>
+            <div id='main-right'>
+              <div id='money-bar'>
+              </div>
+              <div id='green-money-bar'>
+              </div>
+              <h5 id='money-green'>$5,048</h5>
+              <h6>pledged of $40,000</h6>
+              <h5>155</h5>
+              <h6>backers</h6>
+              <h5>6</h5>
+              <h6>days to go</h6>
+            </div>
           </section>
         </main>
+        <ul id='prj-nav'>
+          <li>Campaign</li>
+        </ul>
+        <section id='project-bottom'>
+          <div id='prj-story'>
+            <h1>About</h1>
+            <p>Many lemonade drinks are watered down; contain too much sugar and preservatives or very little if any authentic lemon juice. It was during a winter storm coupled with a craving for fresh squeezed lemonade (wishing Spring would soon arrive) that inspired a quest to develop a stellar lemonade drink.Many lemonade drinks are watered down; contain too much sugar and preservatives or very little if any authentic lemon juice. It was during a winter storm coupled with a craving for fresh squeezed lemonade (wishing Spring would soon arrive) that inspired a quest to develop a stellar lemonade drink.Many lemonade drinks are watered down; contain too much sugar and preservatives or very little if any authentic lemon juice. It was during a winter storm coupled with a craving for fresh squeezed lemonade (wishing Spring would soon arrive) that inspired a quest to develop a stellar lemonade drink.Many lemonade drinks are watered down; contain too much sugar and preservatives or very little if any authentic lemon juice. It was during a winter storm coupled with a craving for fresh squeezed lemonade (wishing Spring would soon arrive) that inspired a quest to develop a stellar lemonade drink.Many lemonade drinks are watered down; contain too much sugar and preservatives or very little if any authentic lemon juice. It was during a winter storm coupled with a craving for fresh squeezed lemonade (wishing Spring would soon arrive) that inspired a quest to develop a stellar lemonade drink.Many lemonade drinks are watered down; contain too much sugar and preservatives or very little if any authentic lemon juice. It was during a winter storm coupled with a craving for fresh squeezed lemonade (wishing Spring would soon arrive) that inspired a quest to develop a stellar lemonade drink.</p>
+          </div>
+          <div id='prj-rewards'>
+            <h1>Support</h1>
+          </div>
+        </section>
       </div>
     );
   }

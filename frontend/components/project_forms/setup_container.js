@@ -4,7 +4,8 @@ import {
   createProject,
   updateProject,
   submitProject,
-  deleteProject
+  deleteProject,
+  fetchProject
 } from '../../actions/project_actions';
 import { clearCurrentProject } from '../../actions/session_actions';
 import SetupForm from './setup_form';
@@ -19,7 +20,8 @@ const mapStateToProps = (state) => {
   return ({
     tempPrjProps: state.session.tempPrjProps,
     currentUser: state.entities.users[state.session.currentUserId],
-    currentProject: state.entities.projects[state.session.currentProjectId]
+    currentProject: state.entities.projects[state.session.currentProjectId],
+    currentProjectId: state.session.currentProjectId
   });
 };
 
@@ -31,6 +33,7 @@ const mapDispatchToProps = (dispatch) => {
     deleteProject: (id) => dispatch(deleteProject(id)),
     clearCurrentProject: () => dispatch(clearCurrentProject()),
     submitProject: (id) => dispatch(submitProject(id)),
+    fetchProject: (id) => dispatch(fetchProject(id))
   });
 };
 

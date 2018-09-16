@@ -423,11 +423,11 @@ var App = function App() {
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     path: "/project/:project_id",
     component: _project_project_container__WEBPACK_IMPORTED_MODULE_6__["default"]
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_7__["default"], {
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_7__["AuthRoute"], {
     exact: true,
     path: "/login",
     component: _session_forms_log_in_container__WEBPACK_IMPORTED_MODULE_2__["default"]
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_7__["default"], {
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_7__["AuthRoute"], {
     exact: true,
     path: "/signup",
     component: _session_forms_sign_up_container__WEBPACK_IMPORTED_MODULE_3__["default"]
@@ -705,7 +705,23 @@ function (_React$Component) {
         class: "fa fa-map-marker"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
         id: "prj-location"
-      }, this.props.project.country))))));
+      }, this.props.project.country))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        id: "main-right"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        id: "money-bar"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        id: "green-money-bar"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
+        id: "money-green"
+      }, "$5,048"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "pledged of $40,000"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "155"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "backers"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "6"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "days to go")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+        id: "prj-nav"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Campaign")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
+        id: "project-bottom"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        id: "prj-story"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "About"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Many lemonade drinks are watered down; contain too much sugar and preservatives or very little if any authentic lemon juice. It was during a winter storm coupled with a craving for fresh squeezed lemonade (wishing Spring would soon arrive) that inspired a quest to develop a stellar lemonade drink.Many lemonade drinks are watered down; contain too much sugar and preservatives or very little if any authentic lemon juice. It was during a winter storm coupled with a craving for fresh squeezed lemonade (wishing Spring would soon arrive) that inspired a quest to develop a stellar lemonade drink.Many lemonade drinks are watered down; contain too much sugar and preservatives or very little if any authentic lemon juice. It was during a winter storm coupled with a craving for fresh squeezed lemonade (wishing Spring would soon arrive) that inspired a quest to develop a stellar lemonade drink.Many lemonade drinks are watered down; contain too much sugar and preservatives or very little if any authentic lemon juice. It was during a winter storm coupled with a craving for fresh squeezed lemonade (wishing Spring would soon arrive) that inspired a quest to develop a stellar lemonade drink.Many lemonade drinks are watered down; contain too much sugar and preservatives or very little if any authentic lemon juice. It was during a winter storm coupled with a craving for fresh squeezed lemonade (wishing Spring would soon arrive) that inspired a quest to develop a stellar lemonade drink.Many lemonade drinks are watered down; contain too much sugar and preservatives or very little if any authentic lemon juice. It was during a winter storm coupled with a craving for fresh squeezed lemonade (wishing Spring would soon arrive) that inspired a quest to develop a stellar lemonade drink.")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        id: "prj-rewards"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Support"))));
     }
   }]);
 
@@ -771,6 +787,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
 /* harmony import */ var _header_container__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../header_container */ "./frontend/components/header_container.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_3__);
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -788,6 +806,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -858,6 +877,17 @@ function (_React$Component) {
       }
     }
   }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      if (this.props.currentUser && Object.values(this.props.tempPrjProps).length === 3 && !this.props.currentProjectId) {
+        this.props.createProject(Object(lodash__WEBPACK_IMPORTED_MODULE_3__["merge"])(this.props.tempPrjProps, {
+          admin_id: this.props.currentUser.id
+        }));
+      } else if (this.props.currentProjectId && !this.props.currentProject) {
+        this.props.fetchProject(this.props.currentProjectId);
+      }
+    }
+  }, {
     key: "render",
     value: function render() {
       if (this.state.redirect) {
@@ -866,7 +896,7 @@ function (_React$Component) {
         });
       }
 
-      if (!this.props.currentProject) {
+      if (!this.props.currentUser || !this.props.currentProject) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "spinner-wrapper"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
@@ -879,9 +909,9 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("header", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, this.props.currentProject.category, " Project"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "by ", this.props.currentUser.name)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
         className: "overview-nav"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Project overview"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-        to: "/setup/new_project/basics"
+        to: "/setup/project/basics"
       }, this.checkForCompleteness(['title', 'subtitle', 'category', 'country', 'end_date', 'pledge_goal'], 1), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Basics"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Add an image, set your funidng goal, and more."))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-        to: "/setup/new_project/story"
+        to: "/setup/project/story"
       }, this.checkForCompleteness(['story'], 2), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Story"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Add a detailed project description.")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, Object.keys(this.completeCount).length, " of 2 complete"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "When everything is done, your project will go live instantly."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("footer", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: this.deleteProject.bind(this)
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
@@ -1776,8 +1806,7 @@ function (_React$Component) {
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Project idea")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
         id: "next-step",
         href: this.props.tempPrjProps.country ? '#/setup/project/overview' : null,
-        className: this.props.tempPrjProps.country ? 'active' : 'deactivated',
-        onClick: this.createProject
+        className: this.props.tempPrjProps.country ? 'active' : 'deactivated'
       }, "Continue")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "To create a project, you're required to provide your location, age, national ID, banking and tax information, email, and mailing address. This information is necessary to prevent fraud, comply with the law, and \u2014 if your project is successful \u2014 to deliver funds. Please note: after launch, your ability to edit, hide, or delete a project is limited."))));
     }
   }]);
@@ -1830,7 +1859,8 @@ var mapStateToProps = function mapStateToProps(state) {
   return {
     tempPrjProps: state.session.tempPrjProps,
     currentUser: state.entities.users[state.session.currentUserId],
-    currentProject: state.entities.projects[state.session.currentProjectId]
+    currentProject: state.entities.projects[state.session.currentProjectId],
+    currentProjectId: state.session.currentProjectId
   };
 };
 
@@ -1853,6 +1883,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     },
     submitProject: function submitProject(id) {
       return dispatch(Object(_actions_project_actions__WEBPACK_IMPORTED_MODULE_1__["submitProject"])(id));
+    },
+    fetchProject: function fetchProject(id) {
+      return dispatch(Object(_actions_project_actions__WEBPACK_IMPORTED_MODULE_1__["fetchProject"])(id));
     }
   };
 };
@@ -1880,12 +1913,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
 /* harmony import */ var _setup_container__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./setup_container */ "./frontend/components/project_forms/setup_container.js");
+/* harmony import */ var _util_route_util__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../util/route_util */ "./frontend/util/route_util.jsx");
+
 
 
 
 
 var SetupForm = function SetupForm(props) {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     path: "/setup/1",
     render: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_setup_container__WEBPACK_IMPORTED_MODULE_2__["Setup1C"], null);
@@ -1912,22 +1947,16 @@ var SetupForm = function SetupForm(props) {
         });
       }
     }
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_3__["ProtectedRoute"], {
     path: "/setup/project/overview",
-    render: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_setup_container__WEBPACK_IMPORTED_MODULE_2__["NewPrjOverviewC"], null);
-    }
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
-    path: "/setup/new_project/basics",
-    render: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_setup_container__WEBPACK_IMPORTED_MODULE_2__["ProjectBasicsC"], null);
-    }
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
-    path: "/setup/new_project/story",
-    render: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_setup_container__WEBPACK_IMPORTED_MODULE_2__["ProjectStoryC"], null);
-    }
-  }));
+    component: _setup_container__WEBPACK_IMPORTED_MODULE_2__["NewPrjOverviewC"]
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_3__["ProtectedRoute"], {
+    path: "/setup/project/basics",
+    component: _setup_container__WEBPACK_IMPORTED_MODULE_2__["ProjectBasicsC"]
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_3__["ProtectedRoute"], {
+    path: "/setup/project/story",
+    component: _setup_container__WEBPACK_IMPORTED_MODULE_2__["ProjectStoryC"]
+  })));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (SetupForm);
@@ -2177,6 +2206,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
 /* harmony import */ var _header_container__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../header_container */ "./frontend/components/header_container.js");
+/* harmony import */ var _util_route_util__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../util/route_util */ "./frontend/util/route_util.jsx");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -2196,6 +2226,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
 
 
 
@@ -2684,11 +2715,13 @@ var deleteProject = function deleteProject(id) {
 /*!**************************************!*\
   !*** ./frontend/util/route_util.jsx ***!
   \**************************************/
-/*! exports provided: default */
+/*! exports provided: AuthRoute, ProtectedRoute */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AuthRoute", function() { return AuthRoute; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ProtectedRoute", function() { return ProtectedRoute; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
@@ -2701,12 +2734,17 @@ var Auth = function Auth(_ref) {
   var Component = _ref.component,
       path = _ref.path,
       loggedIn = _ref.loggedIn,
-      exact = _ref.exact;
+      exact = _ref.exact,
+      tempPrjProps = _ref.tempPrjProps;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     path: path,
     exact: exact,
     render: function render(props) {
-      if (loggedIn) {
+      if (loggedIn && Object.values(tempPrjProps).length === 3) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Redirect"], {
+          to: "/setup/project/overview"
+        });
+      } else if (loggedIn) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Redirect"], {
           to: "/"
         });
@@ -2717,13 +2755,35 @@ var Auth = function Auth(_ref) {
   });
 };
 
+var Protected = function Protected(_ref2) {
+  var Component = _ref2.component,
+      path = _ref2.path,
+      loggedIn = _ref2.loggedIn,
+      exact = _ref2.exact;
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+    route: path,
+    exact: exact,
+    render: function render(props) {
+      if (loggedIn) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Component, props);
+      } else {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Redirect"], {
+          to: "/login"
+        });
+      }
+    }
+  });
+};
+
 var msp = function msp(state) {
   return {
-    loggedIn: Boolean(state.session.currentUserId)
+    loggedIn: Boolean(state.session.currentUserId),
+    tempPrjProps: state.session.tempPrjProps
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["withRouter"])(Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(msp)(Auth)));
+var AuthRoute = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["withRouter"])(Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(msp)(Auth));
+var ProtectedRoute = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["withRouter"])(Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(msp)(Protected));
 
 /***/ }),
 

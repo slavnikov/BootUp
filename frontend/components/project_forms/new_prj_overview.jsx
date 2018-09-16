@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route, Link, Redirect } from 'react-router-dom';
 import HeaderC from '../header_container';
+import {merge} from 'lodash';
 
 class NewProjectOverview extends React.Component {
   constructor (props) {
@@ -38,12 +39,20 @@ class NewProjectOverview extends React.Component {
     }
   }
 
+  componentDidMount () {
+    if (this.props.currentUser && Object.values(this.props.tempPrjProps).length === 3 && !this.props.currentProjectId) {
+      this.props.createProject(merge(this.props.tempPrjProps, {admin_id: this.props.currentUser.id}));
+    } else if (this.props.currentProjectId && !this.props.currentProject) {
+      this.props.fetchProject(this.props.currentProjectId);
+    }
+  }
+
   render () {
     if (this.state.redirect) {
       return <Redirect to='/'/>;
     }
 
-    if (!this.props.currentProject) {
+    if (!this.props.currentUser || !this.props.currentProject) {
       return (
         <div className='spinner-wrapper'>
           <i className="fa fa-refresh fa-spin"></i>
@@ -61,14 +70,14 @@ class NewProjectOverview extends React.Component {
           </header>
           <section className='overview-nav'>
             <h2>Project overview</h2>
-            <Link to='/setup/new_project/basics'>
+            <Link to='/setup/project/basics'>
               {this.checkForCompleteness(['title', 'subtitle', 'category', 'country', 'end_date', 'pledge_goal'], 1)}
               <div>
                 <h3>Basics</h3>
                 <p>Add an image, set your funidng goal, and more.</p>
               </div>
             </Link>
-            <Link to='/setup/new_project/story'>
+            <Link to='/setup/project/story'>
               {this.checkForCompleteness(['story'], 2)}
               <div>
                 <h3>Story</h3>

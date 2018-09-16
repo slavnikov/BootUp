@@ -5,7 +5,7 @@ import SignUpC from './session_forms/sign_up_container';
 import HeaderC from './header_container';
 import { SetupFormC } from './project_forms/setup_container';
 import ProjectPage from './project/project_container';
-import AuthRoute from '../util/route_util';
+import {AuthRoute, ProtectedRoute} from '../util/route_util';
 
 const App = () => {
   return (

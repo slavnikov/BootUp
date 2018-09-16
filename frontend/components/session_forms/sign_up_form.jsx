@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import HeaderC from '../header_container';
+import {AuthRoute, ProtectedRoute} from '../../util/route_util';
 
 class SignUpForm extends React.Component {
   constructor(props) {
