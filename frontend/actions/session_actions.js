@@ -12,8 +12,8 @@ export const CLEAR_CURRENT_PROJECT = 'CLEAR_CURRENT_PROJECT';
 export const createSession = (credentials) => {
   return (dispatch) => {
     SessUtil.createSession(credentials).then(
-      (user) => {
-        dispatch(receiveCurrentUser(user));
+      (payload) => {
+        dispatch(receiveCurrentUser(payload));
         dispatch(receiveSessionError([]));
       },
       (response) => {
@@ -23,10 +23,10 @@ export const createSession = (credentials) => {
   };
 };
 
-export const receiveCurrentUser = (user) => {
+export const receiveCurrentUser = (payload) => {
   return ({
     type: RECEIVE_CURRENT_USER,
-    user: user
+    payload: payload
   });
 };
 

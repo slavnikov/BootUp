@@ -6,7 +6,7 @@ const SessionReducer = (state = {}, action) => {
   switch (action.type) {
     case RECEIVE_CURRENT_USER:
       return {
-        currentUserId: action.user.id,
+        currentUserId: action.payload.user.id,
         tempPrjProps: state.tempPrjProps || {},
         currentProjectId: state.currentProjectId || null,
       };

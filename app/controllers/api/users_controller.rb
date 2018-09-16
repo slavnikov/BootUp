@@ -4,6 +4,8 @@ class Api::UsersController < ApplicationController
 
     if @user.save
       login(@user)
+      @projects = @user.projects
+      
       render :show
     else
       errors = []

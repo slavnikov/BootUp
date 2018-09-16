@@ -216,18 +216,18 @@ var CLEAR_CURRENT_PROJECT = 'CLEAR_CURRENT_PROJECT'; // credentials should be in
 
 var createSession = function createSession(credentials) {
   return function (dispatch) {
-    _util_session_api_util__WEBPACK_IMPORTED_MODULE_2__["createSession"](credentials).then(function (user) {
-      dispatch(receiveCurrentUser(user));
+    _util_session_api_util__WEBPACK_IMPORTED_MODULE_2__["createSession"](credentials).then(function (payload) {
+      dispatch(receiveCurrentUser(payload));
       dispatch(Object(_error_actions__WEBPACK_IMPORTED_MODULE_1__["receiveSessionError"])([]));
     }, function (response) {
       dispatch(Object(_error_actions__WEBPACK_IMPORTED_MODULE_1__["receiveSessionError"])(response.responseJSON));
     });
   };
 };
-var receiveCurrentUser = function receiveCurrentUser(user) {
+var receiveCurrentUser = function receiveCurrentUser(payload) {
   return {
     type: RECEIVE_CURRENT_USER,
-    user: user
+    payload: payload
   };
 };
 var endSession = function endSession() {
@@ -278,8 +278,8 @@ __webpack_require__.r(__webpack_exports__);
 var RECEIVE_USER = 'RECEIVE_USER';
 var createUser = function createUser(user) {
   return function (dispatch) {
-    _util_users_api_util__WEBPACK_IMPORTED_MODULE_0__["createUser"](user).then(function (user) {
-      dispatch(Object(_session_actions__WEBPACK_IMPORTED_MODULE_1__["receiveCurrentUser"])(user));
+    _util_users_api_util__WEBPACK_IMPORTED_MODULE_0__["createUser"](user).then(function (payload) {
+      dispatch(Object(_session_actions__WEBPACK_IMPORTED_MODULE_1__["receiveCurrentUser"])(payload));
     }, function (errors) {
       dispatch(Object(_error_actions__WEBPACK_IMPORTED_MODULE_2__["receiveSessionError"])(errors.responseJSON));
     });
@@ -287,15 +287,15 @@ var createUser = function createUser(user) {
 };
 var fetchUser = function fetchUser(id) {
   return function (dispatch) {
-    _util_users_api_util__WEBPACK_IMPORTED_MODULE_0__["fetchUser"](id).then(function (user) {
-      dispatch(receiveUser(user));
+    _util_users_api_util__WEBPACK_IMPORTED_MODULE_0__["fetchUser"](id).then(function (payload) {
+      dispatch(receiveUser(payload));
     });
   };
 };
-var receiveUser = function receiveUser(user) {
+var receiveUser = function receiveUser(payload) {
   return {
     type: RECEIVE_USER,
-    user: user
+    payload: payload
   };
 };
 
@@ -342,7 +342,7 @@ document.addEventListener("DOMContentLoaded", function () {
     preloaded_state = {
       entities: {
         users: _defineProperty({}, window.current_user.id, window.current_user),
-        projects: _defineProperty({}, window.current_project.id, window.current_project)
+        projects: window.projects.projects
       },
       session: {
         currentUserId: window.current_user.id,
@@ -498,7 +498,8 @@ var HeaderBasic = function HeaderBasic(props) {
   }, "BootUp"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(HeaderButton, {
     currentUserId: props.currentUserId,
     endSession: props.endSession,
-    users: props.users
+    users: props.users,
+    projects: props.projects
   }));
 };
 
@@ -576,7 +577,17 @@ var HeaderButton = function HeaderButton(props) {
     }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("menu", {
       className: "hidden",
       id: "menu"
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("header", null, props.users[props.currentUserId].name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("footer", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("header", null, props.users[props.currentUserId].name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("main", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+      id: "ddm-project-list"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "MY PROJECTS"), props.projects.map(function (project, idx) {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+        key: idx
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        to: "project/".concat(project.id)
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        id: "li-prj-img"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, project.title || "Untitled Project")));
+    }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("footer", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
       onClick: props.endSession
     }, "Log Out"))));
   } else {
@@ -609,9 +620,20 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var mapStateToProps = function mapStateToProps(state) {
+  var projects;
+
+  if (state.session.currentUserId) {
+    projects = Object.values(state.entities.projects).filter(function (project) {
+      return project.admin_id === state.session.currentUserId;
+    });
+  } else {
+    projects = [];
+  }
+
   return {
     currentUserId: state.session.currentUserId,
-    users: state.entities.users
+    users: state.entities.users,
+    projects: projects
   };
 };
 
@@ -879,7 +901,7 @@ function (_React$Component) {
   }, {
     key: "componentDidMount",
     value: function componentDidMount() {
-      if (this.props.currentUser && Object.values(this.props.tempPrjProps).length === 3 && !this.props.currentProjectId) {
+      if (this.props.currentUser && Object.values(this.props.tempPrjProps).length === 3) {
         this.props.createProject(Object(lodash__WEBPACK_IMPORTED_MODULE_3__["merge"])(this.props.tempPrjProps, {
           admin_id: this.props.currentUser.id
         }));
@@ -2440,9 +2462,13 @@ var ErrorsReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"]
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_project_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/project_actions */ "./frontend/actions/project_actions.js");
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _actions_user_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions/user_actions */ "./frontend/actions/user_actions.js");
+/* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../actions/session_actions */ "./frontend/actions/session_actions.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_3__);
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
 
 
 
@@ -2453,7 +2479,11 @@ var ProjectsReducer = function ProjectsReducer() {
 
   switch (action.type) {
     case _actions_project_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_PROJECT"]:
-      return Object(lodash__WEBPACK_IMPORTED_MODULE_1__["merge"])({}, state, _defineProperty({}, action.payload.project.id, action.payload.project));
+      return Object(lodash__WEBPACK_IMPORTED_MODULE_3__["merge"])({}, state, _defineProperty({}, action.payload.project.id, action.payload.project));
+
+    case _actions_session_actions__WEBPACK_IMPORTED_MODULE_2__["RECEIVE_CURRENT_USER"]:
+    case _actions_user_actions__WEBPACK_IMPORTED_MODULE_1__["RECEIVE_USER"]:
+      return Object(lodash__WEBPACK_IMPORTED_MODULE_3__["merge"])({}, state, action.payload.projects);
 
     default:
       return state;
@@ -2545,7 +2575,7 @@ var SessionReducer = function SessionReducer() {
   switch (action.type) {
     case _actions_session_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_CURRENT_USER"]:
       return {
-        currentUserId: action.user.id,
+        currentUserId: action.payload.user.id,
         tempPrjProps: state.tempPrjProps || {},
         currentProjectId: state.currentProjectId || null
       };
@@ -2615,7 +2645,7 @@ var UsersReducer = function UsersReducer() {
   switch (action.type) {
     case _actions_user_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_USER"]:
     case _actions_session_actions__WEBPACK_IMPORTED_MODULE_1__["RECEIVE_CURRENT_USER"]:
-      return Object(lodash__WEBPACK_IMPORTED_MODULE_3__["merge"])({}, state, _defineProperty({}, action.user.id, action.user));
+      return Object(lodash__WEBPACK_IMPORTED_MODULE_3__["merge"])({}, state, _defineProperty({}, action.payload.user.id, action.payload.user));
 
     case _actions_project_actions__WEBPACK_IMPORTED_MODULE_2__["RECEIVE_PROJECT"]:
       return Object(lodash__WEBPACK_IMPORTED_MODULE_3__["merge"])({}, state, _defineProperty({}, action.payload.user.id, action.payload.user));

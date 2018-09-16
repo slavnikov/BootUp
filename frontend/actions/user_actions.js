@@ -7,11 +7,11 @@ export const RECEIVE_USER = 'RECEIVE_USER';
 export const createUser = (user) => {
   return (dispatch) => {
     UserUtil.createUser(user).then(
-      (user) => {
-        dispatch(receiveCurrentUser(user));
+      (payload) => {
+        dispatch(receiveCurrentUser(payload));
       },
       (errors) => {
-        dispatch(receiveSessionError(errors.responseJSON))
+        dispatch(receiveSessionError(errors.responseJSON));
       }
     );
   };
@@ -19,15 +19,15 @@ export const createUser = (user) => {
 
 export const fetchUser = (id) => {
   return (dispatch) => {
-    UserUtil.fetchUser(id).then((user) => {
-      dispatch(receiveUser(user));
+    UserUtil.fetchUser(id).then((payload) => {
+      dispatch(receiveUser(payload));
     });
   };
 };
 
-export const receiveUser = (user) => {
+export const receiveUser = (payload) => {
   return ({
     type: RECEIVE_USER,
-    user: user
+    payload: payload
   });
 };

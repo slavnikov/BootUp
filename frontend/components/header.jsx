@@ -27,6 +27,7 @@ const HeaderBasic = (props) => {
         currentUserId={ props.currentUserId }
         endSession={ props.endSession }
         users={props.users}
+        projects={props.projects}
         />
     </div>
   );
@@ -88,13 +89,29 @@ const HeaderButton = (props) => {
     menu.classList.toggle('hidden');
     menu.classList.toggle('user-menu');
   };
-
   if (props.currentUserId) {
     return (
       <div id="div3">
         <button className="profilePic" onClick={menuToggle}></button>
         <menu className="hidden" id="menu">
           <header>{props.users[props.currentUserId].name}</header>
+          <main>
+            <div></div>
+            <div></div>
+            <ul id='ddm-project-list'>
+              <h3>MY PROJECTS</h3>
+              {props.projects.map((project, idx) => {
+                return (
+                  <li key={idx}>
+                    <Link to={`project/${project.id}`}>
+                      <div id='li-prj-img'></div>
+                      <h6>{project.title || "Untitled Project"}</h6>
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+          </main>
           <footer>
             <button onClick={props.endSession}>Log Out</button>
           </footer>

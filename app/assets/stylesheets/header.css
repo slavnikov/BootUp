@@ -115,7 +115,7 @@
 
 .user-menu {
   width: 725px;
-  height: 200px;
+  height: 450px;
   border: 1px solid #9b9e9e;
   background-color: white;
   position: absolute;
@@ -133,6 +133,49 @@
   font-size: 18px;
   font-weight: bold;
   color: #282828;
+}
+
+.user-menu main {
+  display: flex;
+  justify-content: flex-end;
+  height: 280px;
+}
+
+#ddm-project-list {
+  width: 340px;
+  list-style: none;
+  box-sizing: border-box;
+  margin: 0px;
+}
+
+#ddm-project-list h3 {
+  margin: 0px 0px 10px 0px;
+  font-size: 13px;
+  font-weight: bold;
+  color: #282828;
+}
+
+#ddm-project-list li a {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+  float: none;
+}
+
+#ddm-project-list li a h6 {
+  margin: 0px 0px 0px 15px;
+  font-weight: lighter;
+  font-size: 14px;
+}
+
+#ddm-project-list li a:hover {
+  text-decoration: underline;
+}
+
+#li-prj-img {
+  width: 50px;
+  height: 30px;
+  background: grey;
 }
 
 .user-menu footer {

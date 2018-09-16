@@ -21,9 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
         users: {
           [window.current_user.id]: window.current_user
         },
-        projects: {
-          [window.current_project.id]: window.current_project
-        }
+        projects: window.projects.projects
       },
       session: {
         currentUserId: window.current_user.id,
