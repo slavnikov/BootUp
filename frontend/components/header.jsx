@@ -91,6 +91,15 @@ const HeaderButton = (props) => {
     menu.classList.toggle('hidden');
     menu.classList.toggle('user-menu');
   };
+
+  const imageThumb = (project) => {
+    if (project.imageUrl) {
+      return <div id='li-prj-img' className='transparent-back'><img src={project.imageUrl} id='thumb-render'></img></div>;
+    } else {
+      return <div id='li-prj-img'></div>;
+    }
+  };
+
   if (props.currentUserId) {
     return (
       <div id="div3">
@@ -105,8 +114,8 @@ const HeaderButton = (props) => {
               {props.projects.map((project, idx) => {
                 return (
                   <li key={idx}>
-                    <Link to={`project/${project.id}`}>
-                      <div id='li-prj-img'></div>
+                    <Link to={`/project/${project.id}`} onClick={menuToggle}>
+                      {imageThumb(project)}
                       <h6>{project.title || "Untitled Project"}</h6>
                     </Link>
                   </li>

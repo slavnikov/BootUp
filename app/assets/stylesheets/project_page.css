@@ -16,9 +16,6 @@
 }
 
 .project-main section:last-child {
-  /* margin: 0px 18px 30px 18px;
-  height: 445px;
-  box-sizing: border-box; */
   display: flex;
   margin: 0px 10%;
 
@@ -66,10 +63,44 @@
   margin-bottom: 0px;
 }
 
+#edit-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  width: 100px;
+  height: 42px;
+  border: none;
+  background-color: #034752;
+  color: white;
+  font-size: 14px;
+  transition: background-color 0.5s, margin-top 0s, margin-bottom 0s;
+}
+
+#edit-button:hover {
+  background-color: #023239;
+  margin-top: -1px;
+  margin-bottom: 1px;
+}
+
 #project-picture {
   width: 820px;
   height: 460px;
-  background-color: black;
+  background-color: grey;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow-y: hidden;
+}
+
+#project-picture h1 {
+  font-weight: lighter;
+  color: #282828;
+}
+
+#prj-page-image {
+  width: 100%;
+  height: auto;
 }
 
 #misc-info {

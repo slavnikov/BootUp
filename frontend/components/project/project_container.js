@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import ProjecPage from './project';
 import { fetchProject } from '../../actions/project_actions';
+import { receiveCurrentProject } from '../../actions/session_actions';
 
 const mapStateToProps = (state, ownProps) => {
   const project = state.entities.projects[ownProps.match.params.project_id];
@@ -11,13 +12,15 @@ const mapStateToProps = (state, ownProps) => {
 
   return ({
     project: project,
-    admin: admin
+    admin: admin,
+    currentUserId: state.session.currentUserId
   });
 };
 
 const mapDispatchToProps = (dispatch) => {
   return ({
-    fetchProject: (id) => dispatch(fetchProject(id))
+    fetchProject: (id) => dispatch(fetchProject(id)),
+    receiveCurrentProject: (id) => dispatch(receiveCurrentProject(id)),
   });
 };
 

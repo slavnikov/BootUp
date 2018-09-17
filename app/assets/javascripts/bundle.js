@@ -578,6 +578,22 @@ var HeaderButton = function HeaderButton(props) {
     menu.classList.toggle('user-menu');
   };
 
+  var imageThumb = function imageThumb(project) {
+    if (project.imageUrl) {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        id: "li-prj-img",
+        className: "transparent-back"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        src: project.imageUrl,
+        id: "thumb-render"
+      }));
+    } else {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        id: "li-prj-img"
+      });
+    }
+  };
+
   if (props.currentUserId) {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       id: "div3"
@@ -593,10 +609,9 @@ var HeaderButton = function HeaderButton(props) {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
         key: idx
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-        to: "project/".concat(project.id)
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        id: "li-prj-img"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, project.title || "Untitled Project")));
+        to: "/project/".concat(project.id),
+        onClick: menuToggle
+      }, imageThumb(project), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, project.title || "Untitled Project")));
     }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("footer", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
       onClick: props.endSession
     }, "Log Out"))));
@@ -672,6 +687,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _header_container__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../header_container */ "./frontend/components/header_container.js");
 /* harmony import */ var _util_loading_spinner__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../util/loading_spinner */ "./frontend/components/util/loading_spinner.jsx");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -694,6 +710,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
+
 var ProjectPage =
 /*#__PURE__*/
 function (_React$Component) {
@@ -711,6 +728,40 @@ function (_React$Component) {
       this.props.fetchProject(this.props.match.params.project_id);
     }
   }, {
+    key: "renderProjectImage",
+    value: function renderProjectImage() {
+      if (this.props.project.imageUrl) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          id: "project-picture",
+          className: "transparent-back"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+          src: this.props.project.imageUrl,
+          id: "prj-page-image"
+        }));
+      } else {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          id: "project-picture"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "your project pciture will go here ..."));
+      }
+    }
+  }, {
+    key: "rednerEditButton",
+    value: function rednerEditButton() {
+      var _this = this;
+
+      if (this.props.project.admin_id === this.props.currentUserId) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
+          id: "edit-button",
+          to: "/setup/project/overview",
+          onClick: function onClick() {
+            _this.props.receiveCurrentProject(_this.props.project.id);
+          }
+        }, "Edit Project");
+      } else {
+        return null;
+      }
+    }
+  }, {
     key: "render",
     value: function render() {
       if (!this.props.project) {
@@ -725,16 +776,14 @@ function (_React$Component) {
         id: "admin-info"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "admin-pic"
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "By\xA0", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", null, this.props.admin.name))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "By\xA0", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", null, this.props.admin.name)), this.rednerEditButton()), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         id: "project-titles"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, this.props.project.title || "your project title will go here..."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, this.props.project.subtitle))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, this.props.project.title || "your project title will go here..."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, this.props.project.subtitle)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "main-left"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        id: "project-picture"
-      }, "pciture will go here"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, this.renderProjectImage(), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "misc-info"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-        class: "fa fa-map-marker"
+        className: "fa fa-map-marker"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
         id: "prj-location"
       }, this.props.project.country))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -745,13 +794,13 @@ function (_React$Component) {
         id: "green-money-bar"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
         id: "money-green"
-      }, "$5,048"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "pledged of $40,000"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "155"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "backers"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "6"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "days to go")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+      }, "$5,048"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "pledged of $", this.props.project.pledge_goal || " your pledge goal here..."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "155"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "backers"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "6"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "days to go")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
         id: "prj-nav"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Campaign")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
         id: "project-bottom"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "prj-story"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "About"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Many lemonade drinks are watered down; contain too much sugar and preservatives or very little if any authentic lemon juice. It was during a winter storm coupled with a craving for fresh squeezed lemonade (wishing Spring would soon arrive) that inspired a quest to develop a stellar lemonade drink.Many lemonade drinks are watered down; contain too much sugar and preservatives or very little if any authentic lemon juice. It was during a winter storm coupled with a craving for fresh squeezed lemonade (wishing Spring would soon arrive) that inspired a quest to develop a stellar lemonade drink.Many lemonade drinks are watered down; contain too much sugar and preservatives or very little if any authentic lemon juice. It was during a winter storm coupled with a craving for fresh squeezed lemonade (wishing Spring would soon arrive) that inspired a quest to develop a stellar lemonade drink.Many lemonade drinks are watered down; contain too much sugar and preservatives or very little if any authentic lemon juice. It was during a winter storm coupled with a craving for fresh squeezed lemonade (wishing Spring would soon arrive) that inspired a quest to develop a stellar lemonade drink.Many lemonade drinks are watered down; contain too much sugar and preservatives or very little if any authentic lemon juice. It was during a winter storm coupled with a craving for fresh squeezed lemonade (wishing Spring would soon arrive) that inspired a quest to develop a stellar lemonade drink.Many lemonade drinks are watered down; contain too much sugar and preservatives or very little if any authentic lemon juice. It was during a winter storm coupled with a craving for fresh squeezed lemonade (wishing Spring would soon arrive) that inspired a quest to develop a stellar lemonade drink.")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "About"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, this.props.project.story || "the story you tell us about your project will go here ...")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "prj-rewards"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Support"))));
     }
@@ -776,6 +825,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _project__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./project */ "./frontend/components/project/project.jsx");
 /* harmony import */ var _actions_project_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/project_actions */ "./frontend/actions/project_actions.js");
+/* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/session_actions */ "./frontend/actions/session_actions.js");
+
 
 
 
@@ -790,7 +841,8 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
 
   return {
     project: project,
-    admin: admin
+    admin: admin,
+    currentUserId: state.session.currentUserId
   };
 };
 
@@ -798,6 +850,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     fetchProject: function fetchProject(id) {
       return dispatch(Object(_actions_project_actions__WEBPACK_IMPORTED_MODULE_2__["fetchProject"])(id));
+    },
+    receiveCurrentProject: function receiveCurrentProject(id) {
+      return dispatch(Object(_actions_session_actions__WEBPACK_IMPORTED_MODULE_3__["receiveCurrentProject"])(id));
     }
   };
 };
