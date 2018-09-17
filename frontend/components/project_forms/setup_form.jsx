@@ -11,7 +11,7 @@ const SetupForm = (props) => {
             return <Setup1C/>;
           }}/>
         <Route path='/setup/2' render={() => {
-          if (props.tempPrjProps.category) {
+          if (props.tempPrjProps.category_id) {
             return <Setup2C/>;
           } else {
             return <Redirect to='/setup/1'/>;

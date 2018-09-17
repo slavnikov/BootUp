@@ -45,6 +45,7 @@ class NewProjectOverview extends React.Component {
     } else if (this.props.currentProjectId && !this.props.currentProject) {
       this.props.fetchProject(this.props.currentProjectId);
     }
+    this.props.fetchCategoryIndex();
   }
 
   render () {
@@ -52,7 +53,7 @@ class NewProjectOverview extends React.Component {
       return <Redirect to='/'/>;
     }
 
-    if (!this.props.currentUser || !this.props.currentProject) {
+    if (!this.props.currentUser || !this.props.currentProject || !this.props.categories[1]) {
       return (
         <div className='spinner-wrapper'>
           <i className="fa fa-refresh fa-spin"></i>
@@ -65,7 +66,7 @@ class NewProjectOverview extends React.Component {
         <HeaderC/>
         <main className="overview-wrapper">
           <header>
-            <h1>{this.props.currentProject.category} Project</h1>
+            <h1>{this.props.categories[this.props.currentProject.category_id].name} Project</h1>
             <h3>by {this.props.currentUser.name}</h3>
           </header>
           <section className='overview-nav'>

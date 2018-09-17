@@ -8,6 +8,7 @@ import {
   fetchProject,
   updateProjectImage
 } from '../../actions/project_actions';
+import { fetchCategoryIndex } from '../../actions/category_actions';
 import { clearCurrentProject } from '../../actions/session_actions';
 import SetupForm from './setup_form';
 import Setup1 from './setup_1';
@@ -22,7 +23,8 @@ const mapStateToProps = (state) => {
     tempPrjProps: state.session.tempPrjProps,
     currentUser: state.entities.users[state.session.currentUserId],
     currentProject: state.entities.projects[state.session.currentProjectId],
-    currentProjectId: state.session.currentProjectId
+    currentProjectId: state.session.currentProjectId,
+    categories: state.entities.categories
   });
 };
 
@@ -36,6 +38,7 @@ const mapDispatchToProps = (dispatch) => {
     submitProject: (id) => dispatch(submitProject(id)),
     fetchProject: (id) => dispatch(fetchProject(id)),
     updateProjectImage: (id, formData) => dispatch(updateProjectImage(id, formData)),
+    fetchCategoryIndex: () => dispatch(fetchCategoryIndex())
   });
 };
 

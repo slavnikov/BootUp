@@ -86,6 +86,37 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./frontend/actions/category_actions.js":
+/*!**********************************************!*\
+  !*** ./frontend/actions/category_actions.js ***!
+  \**********************************************/
+/*! exports provided: RECEIVE_CATEGORY_INDEX, fetchCategoryIndex, receiveCategoryIndex */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_CATEGORY_INDEX", function() { return RECEIVE_CATEGORY_INDEX; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchCategoryIndex", function() { return fetchCategoryIndex; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveCategoryIndex", function() { return receiveCategoryIndex; });
+/* harmony import */ var _util_category_api_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/category_api_util */ "./frontend/util/category_api_util.js");
+
+var RECEIVE_CATEGORY_INDEX = 'FETCH_CATEGORY_INDEX';
+var fetchCategoryIndex = function fetchCategoryIndex() {
+  return function (dispatch) {
+    _util_category_api_util__WEBPACK_IMPORTED_MODULE_0__["fetchCategoryIndex"]().then(function (categories) {
+      dispatch(receiveCategoryIndex(categories));
+    });
+  };
+};
+var receiveCategoryIndex = function receiveCategoryIndex(categories) {
+  return {
+    type: RECEIVE_CATEGORY_INDEX,
+    categories: categories
+  };
+};
+
+/***/ }),
+
 /***/ "./frontend/actions/error_actions.js":
 /*!*******************************************!*\
   !*** ./frontend/actions/error_actions.js ***!
@@ -339,6 +370,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_user_actions__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./actions/user_actions */ "./frontend/actions/user_actions.js");
 /* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./actions/session_actions */ "./frontend/actions/session_actions.js");
 /* harmony import */ var _actions_project_actions__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./actions/project_actions */ "./frontend/actions/project_actions.js");
+/* harmony import */ var _actions_category_actions__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./actions/category_actions */ "./frontend/actions/category_actions.js");
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 // This is the entry file for webpack.
@@ -346,6 +378,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
  //TESTING//
+
 
 
 
@@ -400,8 +433,9 @@ document.addEventListener("DOMContentLoaded", function () {
   // window.receiveCurrentProjectProps = PrjActions.receiveCurrentProjectProps;
   // window.updateProject = PrjActions.updateProject;
   // window.createProject = PrjActions.createProject;
+  // window.fetchProject = PrjActions.fetchProject;
 
-  window.fetchProject = _actions_project_actions__WEBPACK_IMPORTED_MODULE_8__["fetchProject"]; // TESTING //
+  window.fetchCategoryIndex = _actions_category_actions__WEBPACK_IMPORTED_MODULE_9__["fetchCategoryIndex"]; // TESTING //
 });
 
 /***/ }),
@@ -998,6 +1032,8 @@ function (_React$Component) {
       } else if (this.props.currentProjectId && !this.props.currentProject) {
         this.props.fetchProject(this.props.currentProjectId);
       }
+
+      this.props.fetchCategoryIndex();
     }
   }, {
     key: "render",
@@ -1008,7 +1044,7 @@ function (_React$Component) {
         });
       }
 
-      if (!this.props.currentUser || !this.props.currentProject) {
+      if (!this.props.currentUser || !this.props.currentProject || !this.props.categories[1]) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "spinner-wrapper"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
@@ -1018,7 +1054,7 @@ function (_React$Component) {
 
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_header_container__WEBPACK_IMPORTED_MODULE_2__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("main", {
         className: "overview-wrapper"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("header", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, this.props.currentProject.category, " Project"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "by ", this.props.currentUser.name)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("header", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, this.props.categories[this.props.currentProject.category_id].name, " Project"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "by ", this.props.currentUser.name)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
         className: "overview-nav"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Project overview"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
         to: "/setup/project/basics"
@@ -1053,6 +1089,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
 /* harmony import */ var _prj_form_nav__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./prj_form_nav */ "./frontend/components/project_forms/prj_form_nav.jsx");
 /* harmony import */ var _header_container__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../header_container */ "./frontend/components/header_container.js");
+/* harmony import */ var _util_loading_spinner__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../util/loading_spinner */ "./frontend/components/util/loading_spinner.jsx");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -1078,6 +1115,7 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 
 
 
+
 var ProjectBasics =
 /*#__PURE__*/
 function (_React$Component) {
@@ -1094,13 +1132,13 @@ function (_React$Component) {
       countries_hidden: true,
       title: _this.props.currentProject.title,
       subtitle: _this.props.currentProject.subtitle,
-      category: _this.props.currentProject.category,
+      category_id: _this.props.currentProject.category_id,
       country: _this.props.currentProject.country,
       end_date: _this.props.currentProject.end_date,
       pledge_goal: _this.props.currentProject.pledge_goal,
       img_url: _this.props.currentProject.imageUrl
     };
-    _this.categories = ["Art", "Comics", "Crafts", "Dance", "Design", "Fashion", "Film & Video", "Food", "Games", "Journalism", "Music", "Photography", "Publishing", "Technology", "Theater"];
+    _this.categories = _this.props.categories;
     _this.countries = ['US', 'UK', 'Canada', 'Australia', ' New Zealand', 'the Netherlands', 'Denmark', 'Ireland', 'Norway', 'Sweden', 'Germany', 'France', 'Spain', 'Italy', 'Austria', 'Belgium', 'Switzerland', 'Luxembourg', 'Hong Kong', 'Singapore', 'Mexico', 'Japan'];
     _this.menuDropCategory = _this.menuDropCategory.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.menuDropCountry = _this.menuDropCountry.bind(_assertThisInitialized(_assertThisInitialized(_this)));
@@ -1108,12 +1146,21 @@ function (_React$Component) {
   }
 
   _createClass(ProjectBasics, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.props.fetchCategoryIndex();
+    }
+  }, {
     key: "componentWillReceiveProps",
     value: function componentWillReceiveProps(nextProps) {
       if (this.state.img_url !== nextProps.currentProject.imageUrl) {
         this.setState({
           img_url: nextProps.currentProject.imageUrl
         });
+      }
+
+      if (this.categories.length !== Object.values(nextProps.categories).length) {
+        this.categories = nextProps.categories;
       }
     }
   }, {
@@ -1123,7 +1170,7 @@ function (_React$Component) {
         id: this.props.currentProject.id,
         title: this.state.title,
         subtitle: this.state.subtitle,
-        category: this.state.category,
+        category_id: this.state.category_id,
         country: this.state.country,
         end_date: this.state.end_date,
         pledge_goal: parseInt(this.state.pledge_goal)
@@ -1135,7 +1182,7 @@ function (_React$Component) {
       this.setState({
         title: this.props.currentProject.title,
         subtitle: this.props.currentProject.subtitle,
-        category: this.props.currentProject.category,
+        category_id: this.props.currentProject.category_id,
         country: this.props.currentProject.country,
         end_date: this.props.currentProject.end_date,
         pledge_goal: this.props.currentProject.pledge_goal
@@ -1181,9 +1228,9 @@ function (_React$Component) {
     value: function checkForCompleteness() {
       var _this3 = this;
 
-      return ['title', 'subtitle', 'category', 'country', 'end_date', 'pledge_goal'].every(function (prop) {
+      return ['title', 'subtitle', 'category_id', 'country', 'end_date', 'pledge_goal'].every(function (prop) {
         return _this3.props.currentProject[prop];
-      }) && ['title', 'subtitle', 'category', 'country', 'end_date', 'pledge_goal'].every(function (prop) {
+      }) && ['title', 'subtitle', 'category_id', 'country', 'end_date', 'pledge_goal'].every(function (prop) {
         return _this3.props.currentProject[prop] === _this3.state[prop];
       });
     }
@@ -1192,7 +1239,7 @@ function (_React$Component) {
     value: function changesMade() {
       var _this4 = this;
 
-      var anyChanges = ['title', 'subtitle', 'category', 'country', 'end_date', 'pledge_goal'].every(function (prop) {
+      var anyChanges = ['title', 'subtitle', 'category_id', 'country', 'end_date', 'pledge_goal'].every(function (prop) {
         return _this4.props.currentProject[prop] === _this4.state[prop];
       });
 
@@ -1240,6 +1287,10 @@ function (_React$Component) {
     value: function render() {
       var _this5 = this;
 
+      if (!this.categories[1]) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_loading_spinner__WEBPACK_IMPORTED_MODULE_4__["default"], null);
+      }
+
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_header_container__WEBPACK_IMPORTED_MODULE_3__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("main", {
         className: "basics-wrapper"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("header", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Start with the basics"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Make it easy for people to learn about your project.")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
@@ -1285,41 +1336,41 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         id: "button-text",
         className: "button-text black-text"
-      }, this.state.category), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+      }, this.categories[this.state.category_id].name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
         className: "fa fa-caret-down",
         id: "button-arrow"
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
         className: this.state.categories_hidden ? 'hidden' : 'drop-down',
         id: "ddm-basics"
-      }, this.categories.map(function (category, idx) {
-        if (_this5.state.category === category) {
+      }, Object.values(this.categories).map(function (category, idx) {
+        if (_this5.state.category_id === category.id) {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
             key: idx,
-            id: category,
+            id: category.id,
             className: 'pre-selected',
             onClick: function onClick() {
               _this5.setState({
-                category: category
+                category_id: category.id
               });
 
               _this5.menuDropCategory();
             }
-          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, category), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, category.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
             className: "fa fa-check-circle",
             id: "check"
           }));
         } else {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
             key: idx,
-            id: category,
+            id: category.id,
             onClick: function onClick() {
               _this5.setState({
-                category: category
+                category_id: category.id
               });
 
               _this5.menuDropCategory();
             }
-          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, category));
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, category.name));
         }
       })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form-li"
@@ -1601,6 +1652,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _header_container__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../header_container */ "./frontend/components/header_container.js");
+/* harmony import */ var _util_loading_spinner__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../util/loading_spinner */ "./frontend/components/util/loading_spinner.jsx");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1622,6 +1674,7 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 
 
 
+
 var Setup1Class =
 /*#__PURE__*/
 function (_React$Component) {
@@ -1639,7 +1692,7 @@ function (_React$Component) {
     };
     _this.menuDrop = _this.menuDrop.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.submitCategory = _this.submitCategory.bind(_assertThisInitialized(_assertThisInitialized(_this)));
-    _this.categories = ["Art", "Comics", "Crafts", "Dance", "Design", "Fashion", "Film", "Food", "Games", "Journalism", "Music", "Photography", "Publishing", "Technology", "Theater"];
+    _this.categories = _this.props.categories;
     return _this;
   }
 
@@ -1647,7 +1700,7 @@ function (_React$Component) {
     key: "submitCategory",
     value: function submitCategory(e) {
       this.props.receiveCurrentProjectProps({
-        category: e.target.id
+        category_id: parseInt(e.target.id)
       });
       this.setState({
         chosen: true
@@ -1662,9 +1715,34 @@ function (_React$Component) {
       });
     }
   }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.props.fetchCategoryIndex();
+    }
+  }, {
+    key: "componentWillReceiveProps",
+    value: function componentWillReceiveProps(nextProps) {
+      if (this.categories.length !== Object.values(nextProps.categories).length) {
+        this.categories = nextProps.categories;
+      }
+    }
+  }, {
+    key: "buttonText",
+    value: function buttonText() {
+      if (this.categories[this.props.tempPrjProps.category_id]) {
+        return this.categories[this.props.tempPrjProps.category_id].name;
+      } else {
+        return "Select your category";
+      }
+    }
+  }, {
     key: "render",
     value: function render() {
       var _this2 = this;
+
+      if (this.categories.length === 0) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_loading_spinner__WEBPACK_IMPORTED_MODULE_2__["default"], null);
+      }
 
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_header_container__WEBPACK_IMPORTED_MODULE_1__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "setup-wrapper"
@@ -1678,37 +1756,37 @@ function (_React$Component) {
         className: "".concat(this.state.hidden ? '' : 'black-border', " ddm-button")
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         id: "button-text",
-        className: "button-text ".concat(this.props.tempPrjProps.category ? 'black-text' : '')
-      }, this.props.tempPrjProps.category || "Select your category"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "button-text ".concat(this.props.tempPrjProps.category_id ? 'black-text' : '')
+      }, this.buttonText()), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
         className: "fa fa-caret-down",
         id: "button-arrow"
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
         className: this.state.hidden ? 'hidden' : 'drop-down',
         id: "ddm"
-      }, this.categories.map(function (category, idx) {
-        if (_this2.props.tempPrjProps.category === category) {
+      }, Object.values(this.categories).map(function (category, idx) {
+        if (_this2.props.tempPrjProps.category_id === category.id) {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
             key: idx,
-            id: category,
+            id: category.id,
             className: 'pre-selected',
             onClick: _this2.submitCategory
-          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, category), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, category.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
             className: "fa fa-check-circle",
             id: "check"
           }));
         } else {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
             key: idx,
-            id: category,
+            id: category.id,
             onClick: _this2.submitCategory
-          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, category));
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, category.name));
         }
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
         className: "bottom-section"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "You\u2019re back. This is major."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
         id: "next-step",
-        href: this.props.tempPrjProps.category ? '#/setup/2' : null,
-        className: this.props.tempPrjProps.category ? 'active' : null
+        href: this.props.tempPrjProps.category_id ? '#/setup/2' : null,
+        className: this.props.tempPrjProps.category_id ? 'active' : null
       }, "Next: Project Idea")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "To create a project, you're required to provide your location, age, national ID, banking and tax information, email, and mailing address. This information is necessary to prevent fraud, comply with the law, and \u2014 if your project is successful \u2014 to deliver funds. Please note: after launch, your ability to edit, hide, or delete a project is limited."))));
     }
   }]);
@@ -1996,14 +2074,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ProjectStoryC", function() { return ProjectStoryC; });
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _actions_project_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../actions/project_actions */ "./frontend/actions/project_actions.js");
-/* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/session_actions */ "./frontend/actions/session_actions.js");
-/* harmony import */ var _setup_form__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./setup_form */ "./frontend/components/project_forms/setup_form.jsx");
-/* harmony import */ var _setup_1__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./setup_1 */ "./frontend/components/project_forms/setup_1.jsx");
-/* harmony import */ var _setup_2__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./setup_2 */ "./frontend/components/project_forms/setup_2.jsx");
-/* harmony import */ var _setup_3__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./setup_3 */ "./frontend/components/project_forms/setup_3.jsx");
-/* harmony import */ var _new_prj_overview__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./new_prj_overview */ "./frontend/components/project_forms/new_prj_overview.jsx");
-/* harmony import */ var _prj_basics__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./prj_basics */ "./frontend/components/project_forms/prj_basics.jsx");
-/* harmony import */ var _prj_story__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./prj_story */ "./frontend/components/project_forms/prj_story.jsx");
+/* harmony import */ var _actions_category_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/category_actions */ "./frontend/actions/category_actions.js");
+/* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/session_actions */ "./frontend/actions/session_actions.js");
+/* harmony import */ var _setup_form__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./setup_form */ "./frontend/components/project_forms/setup_form.jsx");
+/* harmony import */ var _setup_1__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./setup_1 */ "./frontend/components/project_forms/setup_1.jsx");
+/* harmony import */ var _setup_2__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./setup_2 */ "./frontend/components/project_forms/setup_2.jsx");
+/* harmony import */ var _setup_3__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./setup_3 */ "./frontend/components/project_forms/setup_3.jsx");
+/* harmony import */ var _new_prj_overview__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./new_prj_overview */ "./frontend/components/project_forms/new_prj_overview.jsx");
+/* harmony import */ var _prj_basics__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./prj_basics */ "./frontend/components/project_forms/prj_basics.jsx");
+/* harmony import */ var _prj_story__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./prj_story */ "./frontend/components/project_forms/prj_story.jsx");
+
 
 
 
@@ -2020,7 +2100,8 @@ var mapStateToProps = function mapStateToProps(state) {
     tempPrjProps: state.session.tempPrjProps,
     currentUser: state.entities.users[state.session.currentUserId],
     currentProject: state.entities.projects[state.session.currentProjectId],
-    currentProjectId: state.session.currentProjectId
+    currentProjectId: state.session.currentProjectId,
+    categories: state.entities.categories
   };
 };
 
@@ -2039,7 +2120,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
       return dispatch(Object(_actions_project_actions__WEBPACK_IMPORTED_MODULE_1__["deleteProject"])(id));
     },
     clearCurrentProject: function clearCurrentProject() {
-      return dispatch(Object(_actions_session_actions__WEBPACK_IMPORTED_MODULE_2__["clearCurrentProject"])());
+      return dispatch(Object(_actions_session_actions__WEBPACK_IMPORTED_MODULE_3__["clearCurrentProject"])());
     },
     submitProject: function submitProject(id) {
       return dispatch(Object(_actions_project_actions__WEBPACK_IMPORTED_MODULE_1__["submitProject"])(id));
@@ -2049,17 +2130,20 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     },
     updateProjectImage: function updateProjectImage(id, formData) {
       return dispatch(Object(_actions_project_actions__WEBPACK_IMPORTED_MODULE_1__["updateProjectImage"])(id, formData));
+    },
+    fetchCategoryIndex: function fetchCategoryIndex() {
+      return dispatch(Object(_actions_category_actions__WEBPACK_IMPORTED_MODULE_2__["fetchCategoryIndex"])());
     }
   };
 };
 
-var SetupFormC = Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_setup_form__WEBPACK_IMPORTED_MODULE_3__["default"]);
-var Setup1C = Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_setup_1__WEBPACK_IMPORTED_MODULE_4__["default"]);
-var Setup2C = Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_setup_2__WEBPACK_IMPORTED_MODULE_5__["default"]);
-var Setup3C = Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_setup_3__WEBPACK_IMPORTED_MODULE_6__["default"]);
-var NewPrjOverviewC = Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_new_prj_overview__WEBPACK_IMPORTED_MODULE_7__["default"]);
-var ProjectBasicsC = Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_prj_basics__WEBPACK_IMPORTED_MODULE_8__["default"]);
-var ProjectStoryC = Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_prj_story__WEBPACK_IMPORTED_MODULE_9__["default"]);
+var SetupFormC = Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_setup_form__WEBPACK_IMPORTED_MODULE_4__["default"]);
+var Setup1C = Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_setup_1__WEBPACK_IMPORTED_MODULE_5__["default"]);
+var Setup2C = Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_setup_2__WEBPACK_IMPORTED_MODULE_6__["default"]);
+var Setup3C = Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_setup_3__WEBPACK_IMPORTED_MODULE_7__["default"]);
+var NewPrjOverviewC = Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_new_prj_overview__WEBPACK_IMPORTED_MODULE_8__["default"]);
+var ProjectBasicsC = Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_prj_basics__WEBPACK_IMPORTED_MODULE_9__["default"]);
+var ProjectStoryC = Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_prj_story__WEBPACK_IMPORTED_MODULE_10__["default"]);
 
 /***/ }),
 
@@ -2091,7 +2175,7 @@ var SetupForm = function SetupForm(props) {
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     path: "/setup/2",
     render: function render() {
-      if (props.tempPrjProps.category) {
+      if (props.tempPrjProps.category_id) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_setup_container__WEBPACK_IMPORTED_MODULE_2__["Setup2C"], null);
       } else {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Redirect"], {
@@ -2550,6 +2634,35 @@ var LoadingSpinner = function LoadingSpinner(props) {
 
 /***/ }),
 
+/***/ "./frontend/reducers/categories_reducer.js":
+/*!*************************************************!*\
+  !*** ./frontend/reducers/categories_reducer.js ***!
+  \*************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _actions_category_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/category_actions */ "./frontend/actions/category_actions.js");
+
+
+var CategoriesReducer = function CategoriesReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+
+  switch (action.type) {
+    case _actions_category_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_CATEGORY_INDEX"]:
+      return action.categories;
+
+    default:
+      return state;
+  }
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (CategoriesReducer);
+
+/***/ }),
+
 /***/ "./frontend/reducers/entities_reducer.js":
 /*!***********************************************!*\
   !*** ./frontend/reducers/entities_reducer.js ***!
@@ -2562,12 +2675,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var _users_reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./users_reducer */ "./frontend/reducers/users_reducer.js");
 /* harmony import */ var _projects_reducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./projects_reducer */ "./frontend/reducers/projects_reducer.js");
+/* harmony import */ var _categories_reducer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./categories_reducer */ "./frontend/reducers/categories_reducer.js");
+
 
 
 
 var EntitiesReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
   users: _users_reducer__WEBPACK_IMPORTED_MODULE_1__["default"],
-  projects: _projects_reducer__WEBPACK_IMPORTED_MODULE_2__["default"]
+  projects: _projects_reducer__WEBPACK_IMPORTED_MODULE_2__["default"],
+  categories: _categories_reducer__WEBPACK_IMPORTED_MODULE_3__["default"]
 });
 /* harmony default export */ __webpack_exports__["default"] = (EntitiesReducer);
 
@@ -2821,6 +2937,25 @@ var configureStore = function configureStore(presetConfig) {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (configureStore);
+
+/***/ }),
+
+/***/ "./frontend/util/category_api_util.js":
+/*!********************************************!*\
+  !*** ./frontend/util/category_api_util.js ***!
+  \********************************************/
+/*! exports provided: fetchCategoryIndex */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchCategoryIndex", function() { return fetchCategoryIndex; });
+var fetchCategoryIndex = function fetchCategoryIndex() {
+  return $.ajax({
+    method: 'get',
+    url: '/api/categories'
+  });
+};
 
 /***/ }),
 

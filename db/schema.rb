@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_17_160957) do
+ActiveRecord::Schema.define(version: 2018_09_17_193140) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,7 +45,6 @@ ActiveRecord::Schema.define(version: 2018_09_17_160957) do
   create_table "projects", force: :cascade do |t|
     t.integer "admin_id", null: false
     t.string "subtitle", null: false
-    t.string "category", null: false
     t.string "sub_category"
     t.string "country", null: false
     t.text "story"
@@ -55,6 +54,7 @@ ActiveRecord::Schema.define(version: 2018_09_17_160957) do
     t.boolean "complete", default: false
     t.integer "pledge_goal"
     t.string "title"
+    t.integer "category_id", null: false
   end
 
   create_table "users", force: :cascade do |t|

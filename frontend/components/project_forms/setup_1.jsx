@@ -1,5 +1,6 @@
 import React from 'react';
 import HeaderC from '../header_container';
+import LoadingSpinner from '../util/loading_spinner';
 
 class Setup1Class extends React.Component {
   constructor (props) {
@@ -10,15 +11,11 @@ class Setup1Class extends React.Component {
     };
     this.menuDrop = this.menuDrop.bind(this);
     this.submitCategory = this.submitCategory.bind(this);
-    this.categories = [
-      "Art", "Comics", "Crafts", "Dance", "Design", "Fashion",
-      "Film", "Food", "Games", "Journalism", "Music", "Photography",
-      "Publishing", "Technology", "Theater"
-    ];
+    this.categories = this.props.categories;
   }
 
   submitCategory (e) {
-    this.props.receiveCurrentProjectProps({category: e.target.id});
+    this.props.receiveCurrentProjectProps({category_id: parseInt(e.target.id)});
     this.setState({chosen: true});
     this.menuDrop();
   }
@@ -27,7 +24,28 @@ class Setup1Class extends React.Component {
     this.setState({hidden: !this.state.hidden});
   }
 
+  componentDidMount() {
+    this.props.fetchCategoryIndex();
+  }
+
+  componentWillReceiveProps (nextProps) {
+    if (this.categories.length !== Object.values(nextProps.categories).length) {
+      this.categories = nextProps.categories;
+    }
+  }
+
+  buttonText () {
+    if (this.categories[this.props.tempPrjProps.category_id]) {
+      return this.categories[this.props.tempPrjProps.category_id].name;
+    } else {
+      return "Select your category";
+    }
+  }
+
   render () {
+    if (this.categories.length === 0) {
+      return <LoadingSpinner/>;
+    }
     return (
       <div>
         <HeaderC/>
@@ -45,32 +63,32 @@ class Setup1Class extends React.Component {
             >
               <p
                 id='button-text'
-                className={`button-text ${this.props.tempPrjProps.category ? 'black-text' : ''}`}>
-                {this.props.tempPrjProps.category || "Select your category"}</p>
+                className={`button-text ${this.props.tempPrjProps.category_id ? 'black-text' : ''}`}>
+                {this.buttonText()}</p>
               <i className="fa fa-caret-down" id="button-arrow"></i>
             </button>
             <ul className={this.state.hidden ? 'hidden' : 'drop-down'} id="ddm">
               {
-                this.categories.map((category, idx) => {
-                  if (this.props.tempPrjProps.category === category) {
+                Object.values(this.categories).map((category, idx) => {
+                  if (this.props.tempPrjProps.category_id === category.id) {
                     return <li
                       key={idx}
-                      id={category}
+                      id={category.id}
                       className={'pre-selected'}
                       onClick={
                         this.submitCategory
                       }
                       >
-                      <p>{category}</p><i className="fa fa-check-circle" id="check"></i></li>;
+                      <p>{category.name}</p><i className="fa fa-check-circle" id="check"></i></li>;
                   } else {
                     return <li
                       key={idx}
-                      id={category}
+                      id={category.id}
                       onClick={
                         this.submitCategory
                       }
                       >
-                      <p>{category}</p></li>;
+                      <p>{category.name}</p></li>;
                   }
                 })
               }
@@ -79,8 +97,8 @@ class Setup1Class extends React.Component {
               <p>You’re back. This is major.</p>
               <a
                 id='next-step'
-                href={this.props.tempPrjProps.category ? '#/setup/2' : null}
-                className={this.props.tempPrjProps.category ? 'active' : null}
+                href={this.props.tempPrjProps.category_id ? '#/setup/2' : null}
+                className={this.props.tempPrjProps.category_id ? 'active' : null}
               >Next: Project Idea
               </a>
             </section>

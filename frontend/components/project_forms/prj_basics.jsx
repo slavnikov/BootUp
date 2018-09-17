@@ -2,6 +2,7 @@ import React from 'react';
 import { Route, Link, Redirect } from 'react-router-dom';
 import ProjectFormNavigation from './prj_form_nav';
 import HeaderC from '../header_container';
+import LoadingSpinner from '../util/loading_spinner';
 
 class ProjectBasics extends React.Component {
   constructor(props){
@@ -11,17 +12,13 @@ class ProjectBasics extends React.Component {
       countries_hidden: true,
       title: this.props.currentProject.title,
       subtitle: this.props.currentProject.subtitle,
-      category: this.props.currentProject.category,
+      category_id: this.props.currentProject.category_id,
       country: this.props.currentProject.country,
       end_date: this.props.currentProject.end_date,
       pledge_goal: this.props.currentProject.pledge_goal,
       img_url: this.props.currentProject.imageUrl
     };
-    this.categories = [
-      "Art", "Comics", "Crafts", "Dance", "Design", "Fashion",
-      "Film & Video", "Food", "Games", "Journalism", "Music", "Photography",
-      "Publishing", "Technology", "Theater"
-    ];
+    this.categories = this.props.categories;
     this.countries = [
       'US', 'UK', 'Canada', 'Australia',' New Zealand', 'the Netherlands', 'Denmark',
       'Ireland', 'Norway', 'Sweden', 'Germany', 'France', 'Spain', 'Italy', 'Austria',
@@ -31,9 +28,16 @@ class ProjectBasics extends React.Component {
     this.menuDropCountry = this.menuDropCountry.bind(this);
   }
 
+  componentDidMount() {
+    this.props.fetchCategoryIndex();
+  }
+
   componentWillReceiveProps (nextProps) {
     if (this.state.img_url !== nextProps.currentProject.imageUrl) {
       this.setState({img_url: nextProps.currentProject.imageUrl});
+    }
+    if (this.categories.length !== Object.values(nextProps.categories).length) {
+      this.categories = nextProps.categories;
     }
   }
 
@@ -42,7 +46,7 @@ class ProjectBasics extends React.Component {
       id: this.props.currentProject.id,
       title: this.state.title,
       subtitle: this.state.subtitle,
-      category: this.state.category,
+      category_id: this.state.category_id,
       country: this.state.country,
       end_date: this.state.end_date,
       pledge_goal: parseInt(this.state.pledge_goal),
@@ -53,7 +57,7 @@ class ProjectBasics extends React.Component {
     this.setState({
       title: this.props.currentProject.title,
       subtitle: this.props.currentProject.subtitle,
-      category: this.props.currentProject.category,
+      category_id: this.props.currentProject.category_id,
       country: this.props.currentProject.country,
       end_date: this.props.currentProject.end_date,
       pledge_goal: this.props.currentProject.pledge_goal,
@@ -87,15 +91,15 @@ class ProjectBasics extends React.Component {
   }
 
   checkForCompleteness () {
-    return (['title', 'subtitle', 'category', 'country', 'end_date', 'pledge_goal'].every((prop) => {
+    return (['title', 'subtitle', 'category_id', 'country', 'end_date', 'pledge_goal'].every((prop) => {
       return this.props.currentProject[prop];
-    }) && ['title', 'subtitle', 'category', 'country', 'end_date', 'pledge_goal'].every((prop) => {
+    }) && ['title', 'subtitle', 'category_id', 'country', 'end_date', 'pledge_goal'].every((prop) => {
       return this.props.currentProject[prop] === this.state[prop];
     }));
   }
 
   changesMade () {
-    const anyChanges = ['title', 'subtitle', 'category', 'country', 'end_date', 'pledge_goal'].every((prop) => {
+    const anyChanges = ['title', 'subtitle', 'category_id', 'country', 'end_date', 'pledge_goal'].every((prop) => {
       return this.props.currentProject[prop] === this.state[prop];
     });
     if (anyChanges) {
@@ -129,6 +133,10 @@ class ProjectBasics extends React.Component {
   }
 
   render () {
+    if (!this.categories[1]) {
+      return <LoadingSpinner/>;
+    }
+
     return (
       <div>
         <HeaderC/>
@@ -182,38 +190,38 @@ class ProjectBasics extends React.Component {
                 <p
                   id='button-text'
                   className={`button-text black-text`}>
-                  {this.state.category}
+                  {this.categories[this.state.category_id].name}
                 </p>
                 <i className="fa fa-caret-down" id="button-arrow"></i>
               </button>
               <ul className={this.state.categories_hidden ? 'hidden' : 'drop-down'} id="ddm-basics">
                 {
-                  this.categories.map((category, idx) => {
-                    if (this.state.category === category) {
+                    Object.values(this.categories).map((category, idx) => {
+                    if (this.state.category_id === category.id) {
                       return <li
                         key={idx}
-                        id={category}
+                        id={category.id}
                         className={'pre-selected'}
                         onClick={
                           () => {
-                            this.setState({category: category});
+                            this.setState({category_id: category.id});
                             this.menuDropCategory();
                           }
                         }
                         >
-                        <p>{category}</p><i className="fa fa-check-circle" id="check"></i></li>;
+                        <p>{category.name}</p><i className="fa fa-check-circle" id="check"></i></li>;
                     } else {
                       return <li
                         key={idx}
-                        id={category}
+                        id={category.id}
                         onClick={
                           () => {
-                            this.setState({category: category});
+                            this.setState({category_id: category.id});
                             this.menuDropCategory();
                           }
                         }
                         >
-                        <p>{category}</p></li>;
+                        <p>{category.name}</p></li>;
                     }
                   })
                 }

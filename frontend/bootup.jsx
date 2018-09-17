@@ -10,6 +10,7 @@ import * as PrjUtil from './util/project_api_util';
 import * as UserActions from './actions/user_actions';
 import * as SessActions from './actions/session_actions';
 import * as PrjActions from './actions/project_actions';
+import * as CatActions from './actions/category_actions';
 //TESTING//
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -59,7 +60,8 @@ document.addEventListener("DOMContentLoaded", () => {
   // window.receiveCurrentProjectProps = PrjActions.receiveCurrentProjectProps;
   // window.updateProject = PrjActions.updateProject;
   // window.createProject = PrjActions.createProject;
-  window.fetchProject = PrjActions.fetchProject;
+  // window.fetchProject = PrjActions.fetchProject;
+  window.fetchCategoryIndex = CatActions.fetchCategoryIndex;
   // TESTING //
 
 });
