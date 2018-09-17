@@ -1,0 +1,87 @@
+#home-gallery {
+  padding: 0px 5% 0px 5%;
+  height: 815px;
+  box-sizing: border-box;
+}
+
+#home-gallery > h1 {
+  font-weight: lighter;
+  color: #282828;
+  margin-top: 43px;
+  font-size: 26px;
+}
+
+#galleries {
+  display: flex;
+  justify-content: flex-start;
+}
+
+#feature > p {
+  font-size: 12px;
+  color: #282828;
+}
+
+#featured-image{
+  height: 605px;
+  width: 605px;
+  border-top: 1px solid black;
+  box-sizing: border-box;
+  background-color: grey;
+  color: #282828;
+}
+
+#featured-image h1{
+  font-weight: lighter;
+  bottom: -475px;
+  left: 15px;
+  position: relative;
+  display: inline;
+  background-color: white;
+  font-size: 29px;
+  padding: 11px;
+}
+
+#featured-image h4 {
+  font-weight: lighter;
+  bottom: -504px;
+  left: -209px;
+  position: relative;
+  display: inline;
+  background-color: white;
+  font-size: 16px;
+  text-transform: capitalize;
+  padding: 7px;
+}
+
+#gallery-options {
+  border-top: 1px solid black;
+  margin-left: 100px;
+  width: 700px;
+  height: 605px;
+  margin-top: 42px;
+}
+
+#gallery-options ul {
+  width: 100%;
+  list-style: none;
+  padding-left: 0px;
+  margin: 0px;
+}
+
+#gallery-options ul li {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  height: 102px;
+  width: 100%;
+  padding: 18px 0px;
+  border-bottom: 1px solid #dcdedd;
+  font-size: 14px;
+}
+
+#gallery-thumb {
+  background-color: grey;
+  width: 115px;
+  height: 65px;
+  margin-right: 30px;
+}

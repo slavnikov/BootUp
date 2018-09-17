@@ -1,0 +1,27 @@
+#home-subheader {
+  display: flex;
+  justify-content: space-around;
+  border-bottom: 1px solid #656969;
+  height: 90px;
+  box-sizing: border-box;
+}
+
+#home-subheader div {
+  padding-top: 29px;
+  padding-left: 3%;
+  flex-grow: 1;
+  border-right: 2px solid #dcdedd;
+}
+
+#home-subheader div p {
+  color: #656969;
+  margin: 0px;
+  font-size: 14px;
+}
+
+#home-subheader div h6 {
+  margin: 0px;
+  font-size: 15px;
+  color: #282828;
+  margin-top: 4px;
+}

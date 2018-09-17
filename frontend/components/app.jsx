@@ -6,11 +6,12 @@ import HeaderC from './header_container';
 import { SetupFormC } from './project_forms/setup_container';
 import ProjectPage from './project/project_container';
 import {AuthRoute, ProtectedRoute} from '../util/route_util';
+import HomePageC from './home_page/home_page_container';
 
 const App = () => {
   return (
     <div>
-      <Route exact path='/' component={ HeaderC }/>
+      <Route exact path='/' component={ HomePageC }/>
       <Route path='/project/:project_id' component={ ProjectPage }/>
       <AuthRoute exact path='/login' component = { LoginC }/>
       <AuthRoute exact path='/signup' component = { SignUpC }/>

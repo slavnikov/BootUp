@@ -61,7 +61,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // window.updateProject = PrjActions.updateProject;
   // window.createProject = PrjActions.createProject;
   // window.fetchProject = PrjActions.fetchProject;
-  window.fetchCategoryIndex = CatActions.fetchCategoryIndex;
+  window.fetchCategoryProjects = CatActions.fetchCategoryProjects;
   // TESTING //
 
 });

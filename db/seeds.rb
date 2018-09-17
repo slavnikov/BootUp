@@ -5,6 +5,12 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+User.destroy_all
+Category.destroy_all
+
+%w(Art Comics Crafts Dance Design Fashion Film Food Games Journalism Music Photography Publishing Technology Theater).each do |category|
+  Category.create({name: category})
+end
 
 User.create({
   name: 'Demo User',

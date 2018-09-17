@@ -1,3 +1,7 @@
+if @projects
+  projects = @projects
+end
+
 json.set! 'projects' do
   projects.each do |project|
     json.set! project.id do
