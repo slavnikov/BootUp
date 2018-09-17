@@ -5,8 +5,9 @@ import LogInContainer from './session_forms/log_in_container';
 const Header = (props) => {
   return (
     <Switch>
+      <Route path='/setup/project/basics'render={() => { return <HeaderNewProjectNav {...props}/>;}}/>;}}/>
+      <Route path='/setup/project/story'render={() => { return <HeaderNewProjectNav {...props}/>;}}/>;}}/>
       <Route path='/setup/project/' render={() => { return <HeaderNewProject {...props}/>;}}/>
-      <Route path='/setup/new_project/'render={() => { return <HeaderNewProjectNav {...props}/>;}}/>;}}/>
       <Route path='/setup' render={() => { return <HeaderSetup {...props}/>;}}/>
       <Route path='/' render={() => { return <HeaderBasic {...props}/>;}}/>;
     </Switch>
@@ -56,9 +57,9 @@ const HeaderNewProjectNav = (props) => {
     <div className="new-prj-nav">
       <div id="div5">
         <Link to='/' ><p className="nav-logo">BootUp</p></Link>
-        <Link to='/setup/new_project/basics'>Basics</Link>
+        <Link to='/setup/project/basics'>Basics</Link>
         <i className="fa fa-caret-right"></i>
-          <Link to='/setup/new_project/story'>Story</Link>
+          <Link to='/setup/project/story'>Story</Link>
       </div>
       <div id="div6">
         <Link to='/setup/project/overview'>Exit to Project Overview</Link>

@@ -468,16 +468,21 @@ __webpack_require__.r(__webpack_exports__);
 
 var Header = function Header(props) {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+    path: "/setup/project/basics",
+    render: function render() {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(HeaderNewProjectNav, props);
+    }
+  }), ";}}/>", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+    path: "/setup/project/story",
+    render: function render() {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(HeaderNewProjectNav, props);
+    }
+  }), ";}}/>", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     path: "/setup/project/",
     render: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(HeaderNewProject, props);
     }
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
-    path: "/setup/new_project/",
-    render: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(HeaderNewProjectNav, props);
-    }
-  }), ";}}/>", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     path: "/setup",
     render: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(HeaderSetup, props);
@@ -540,11 +545,11 @@ var HeaderNewProjectNav = function HeaderNewProjectNav(props) {
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
     className: "nav-logo"
   }, "BootUp")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-    to: "/setup/new_project/basics"
+    to: "/setup/project/basics"
   }, "Basics"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
     className: "fa fa-caret-right"
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-    to: "/setup/new_project/story"
+    to: "/setup/project/story"
   }, "Story")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     id: "div6"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
