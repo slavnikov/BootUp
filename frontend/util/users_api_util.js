@@ -14,3 +14,13 @@ export const fetchUser = (id) => {
     url: `api/users/${id}`,
   });
 };
+
+export const updateUser = (newProps) => {
+  return $.ajax({
+    method: 'patch',
+    url: `api/users/${newProps.id}`,
+    data: {
+      user: newProps
+    }
+  });
+};

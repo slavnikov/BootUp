@@ -17,6 +17,19 @@ export const createUser = (user) => {
   };
 };
 
+export const updateUser = (newProps) => {
+  return (dispatch) => {
+    UserUtil.updateUser(newProps).then(
+      (payload) => {
+        dispatch(receiveUser(payload));
+      },
+      (errors) => {
+        dispatch(receiveSessionError(errors.responseJSON));
+      }
+    );
+  };
+};
+
 export const fetchUser = (id) => {
   return (dispatch) => {
     UserUtil.fetchUser(id).then((payload) => {

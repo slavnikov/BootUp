@@ -268,13 +268,14 @@ var clearCurrentProject = function clearCurrentProject() {
 /*!******************************************!*\
   !*** ./frontend/actions/user_actions.js ***!
   \******************************************/
-/*! exports provided: RECEIVE_USER, createUser, fetchUser, receiveUser */
+/*! exports provided: RECEIVE_USER, createUser, updateUser, fetchUser, receiveUser */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_USER", function() { return RECEIVE_USER; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createUser", function() { return createUser; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateUser", function() { return updateUser; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchUser", function() { return fetchUser; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveUser", function() { return receiveUser; });
 /* harmony import */ var _util_users_api_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/users_api_util */ "./frontend/util/users_api_util.js");
@@ -288,6 +289,15 @@ var createUser = function createUser(user) {
   return function (dispatch) {
     _util_users_api_util__WEBPACK_IMPORTED_MODULE_0__["createUser"](user).then(function (payload) {
       dispatch(Object(_session_actions__WEBPACK_IMPORTED_MODULE_1__["receiveCurrentUser"])(payload));
+    }, function (errors) {
+      dispatch(Object(_error_actions__WEBPACK_IMPORTED_MODULE_2__["receiveSessionError"])(errors.responseJSON));
+    });
+  };
+};
+var updateUser = function updateUser(newProps) {
+  return function (dispatch) {
+    _util_users_api_util__WEBPACK_IMPORTED_MODULE_0__["updateUser"](newProps).then(function (payload) {
+      dispatch(receiveUser(payload));
     }, function (errors) {
       dispatch(Object(_error_actions__WEBPACK_IMPORTED_MODULE_2__["receiveSessionError"])(errors.responseJSON));
     });
@@ -760,6 +770,11 @@ function (_React$Component) {
           to: "/setup/project/overview",
           onClick: function onClick() {
             _this.props.receiveCurrentProject(_this.props.project.id);
+
+            _this.props.updateUser({
+              id: _this.props.currentUserId,
+              current_project_id: _this.props.project.id
+            });
           }
         }, "Edit Project");
       } else {
@@ -831,6 +846,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _project__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./project */ "./frontend/components/project/project.jsx");
 /* harmony import */ var _actions_project_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/project_actions */ "./frontend/actions/project_actions.js");
 /* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/session_actions */ "./frontend/actions/session_actions.js");
+/* harmony import */ var _actions_user_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../actions/user_actions */ "./frontend/actions/user_actions.js");
+
 
 
 
@@ -858,6 +875,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     },
     receiveCurrentProject: function receiveCurrentProject(id) {
       return dispatch(Object(_actions_session_actions__WEBPACK_IMPORTED_MODULE_3__["receiveCurrentProject"])(id));
+    },
+    updateUser: function updateUser(newProps) {
+      return dispatch(Object(_actions_user_actions__WEBPACK_IMPORTED_MODULE_4__["updateUser"])(newProps));
     }
   };
 };
@@ -2981,13 +3001,14 @@ var endSession = function endSession() {
 /*!*****************************************!*\
   !*** ./frontend/util/users_api_util.js ***!
   \*****************************************/
-/*! exports provided: createUser, fetchUser */
+/*! exports provided: createUser, fetchUser, updateUser */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createUser", function() { return createUser; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchUser", function() { return fetchUser; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateUser", function() { return updateUser; });
 var createUser = function createUser(user) {
   return $.ajax({
     method: 'post',
@@ -3001,6 +3022,15 @@ var fetchUser = function fetchUser(id) {
   return $.ajax({
     method: 'get',
     url: "api/users/".concat(id)
+  });
+};
+var updateUser = function updateUser(newProps) {
+  return $.ajax({
+    method: 'patch',
+    url: "api/users/".concat(newProps.id),
+    data: {
+      user: newProps
+    }
   });
 };
 

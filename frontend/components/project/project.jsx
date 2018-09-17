@@ -34,7 +34,13 @@ class ProjectPage extends React.Component {
         <Link
           id='edit-button'
           to='/setup/project/overview'
-          onClick={() => {this.props.receiveCurrentProject(this.props.project.id);}}>
+          onClick={() => {
+            this.props.receiveCurrentProject(this.props.project.id);
+            this.props.updateUser({
+              id: this.props.currentUserId,
+              current_project_id: this.props.project.id
+            });
+          }}>
           Edit Project
         </Link>
       );

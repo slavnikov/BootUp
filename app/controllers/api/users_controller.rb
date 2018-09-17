@@ -5,7 +5,7 @@ class Api::UsersController < ApplicationController
     if @user.save
       login(@user)
       @projects = @user.projects
-      
+
       render :show
     else
       errors = []
@@ -18,6 +18,18 @@ class Api::UsersController < ApplicationController
         end
       end
       render json: errors, status: 422
+    end
+  end
+
+  def update
+    @user = User.find_by(id: params[:id])
+
+    if @user.update(user_params)
+      @projects = @user.projects
+
+      render :show
+    else
+      render json: @user.errors.full_messages, status: 422
     end
   end
 
@@ -34,6 +46,6 @@ class Api::UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:name, :email, :password, :biography, :location, :timezone_utc_offset)
+    params.require(:user).permit(:name, :email, :password, :biography, :location, :timezone_utc_offset, :current_project_id)
   end
 end
