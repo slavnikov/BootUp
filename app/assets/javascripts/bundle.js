@@ -111,7 +111,7 @@ var receiveSessionError = function receiveSessionError(errorArr) {
 /*!*********************************************!*\
   !*** ./frontend/actions/project_actions.js ***!
   \*********************************************/
-/*! exports provided: RECEIVE_CURRENT_PROJECT_PROPS, RECEIVE_PROJECT, receiveCurrentProjectProps, createProject, updateProject, submitProject, fetchProject, deleteProject, receiveProject */
+/*! exports provided: RECEIVE_CURRENT_PROJECT_PROPS, RECEIVE_PROJECT, receiveCurrentProjectProps, createProject, updateProject, updateProjectImage, submitProject, fetchProject, deleteProject, receiveProject */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -121,6 +121,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveCurrentProjectProps", function() { return receiveCurrentProjectProps; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createProject", function() { return createProject; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateProject", function() { return updateProject; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateProjectImage", function() { return updateProjectImage; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "submitProject", function() { return submitProject; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchProject", function() { return fetchProject; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteProject", function() { return deleteProject; });
@@ -149,9 +150,16 @@ var createProject = function createProject(props) {
     });
   };
 };
-var updateProject = function updateProject(props) {
+var updateProject = function updateProject(formData) {
   return function (dispatch) {
-    _util_project_api_util__WEBPACK_IMPORTED_MODULE_0__["updateProject"](props).then(function (payload) {
+    _util_project_api_util__WEBPACK_IMPORTED_MODULE_0__["updateProject"](formData).then(function (payload) {
+      dispatch(receiveProject(payload));
+    });
+  };
+};
+var updateProjectImage = function updateProjectImage(id, formData) {
+  return function (dispatch) {
+    _util_project_api_util__WEBPACK_IMPORTED_MODULE_0__["updateProjectImage"](id, formData).then(function (payload) {
       dispatch(receiveProject(payload));
     });
   };
@@ -517,7 +525,8 @@ var HeaderNewProject = function HeaderNewProject(props) {
   }, "BootUp"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(HeaderButton, {
     currentUserId: props.currentUserId,
     endSession: props.endSession,
-    users: props.users
+    users: props.users,
+    projects: props.projects
   }));
 };
 
@@ -557,7 +566,8 @@ var HeaderSetup = function HeaderSetup(props) {
   }, "BootUp"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(HeaderButton, {
     currentUserId: props.currentUserId,
     endSession: props.endSession,
-    users: props.users
+    users: props.users,
+    projects: props.projects
   }));
 };
 
@@ -1007,7 +1017,8 @@ function (_React$Component) {
       category: _this.props.currentProject.category,
       country: _this.props.currentProject.country,
       end_date: _this.props.currentProject.end_date,
-      pledge_goal: _this.props.currentProject.pledge_goal
+      pledge_goal: _this.props.currentProject.pledge_goal,
+      img_url: _this.props.currentProject.imageUrl
     };
     _this.categories = ["Art", "Comics", "Crafts", "Dance", "Design", "Fashion", "Film & Video", "Food", "Games", "Journalism", "Music", "Photography", "Publishing", "Technology", "Theater"];
     _this.countries = ['US', 'UK', 'Canada', 'Australia', ' New Zealand', 'the Netherlands', 'Denmark', 'Ireland', 'Norway', 'Sweden', 'Germany', 'France', 'Spain', 'Italy', 'Austria', 'Belgium', 'Switzerland', 'Luxembourg', 'Hong Kong', 'Singapore', 'Mexico', 'Japan'];
@@ -1017,6 +1028,15 @@ function (_React$Component) {
   }
 
   _createClass(ProjectBasics, [{
+    key: "componentWillReceiveProps",
+    value: function componentWillReceiveProps(nextProps) {
+      if (this.state.img_url !== nextProps.currentProject.imageUrl) {
+        this.setState({
+          img_url: nextProps.currentProject.imageUrl
+        });
+      }
+    }
+  }, {
     key: "saveChanges",
     value: function saveChanges() {
       this.props.updateProject({
@@ -1069,6 +1089,14 @@ function (_React$Component) {
       };
     }
   }, {
+    key: "handleFile",
+    value: function handleFile(e) {
+      var formData = new FormData();
+      var image = e.currentTarget.files[0];
+      formData.append('project[image]', image);
+      this.props.updateProjectImage(this.props.currentProject.id, formData);
+    }
+  }, {
     key: "checkForCompleteness",
     value: function checkForCompleteness() {
       var _this3 = this;
@@ -1110,6 +1138,24 @@ function (_React$Component) {
       }
     }
   }, {
+    key: "imageInput",
+    value: function imageInput() {
+      if (this.state.img_url) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+          className: "project-image-render",
+          src: this.state.img_url
+        });
+      } else {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          id: "no-image"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          id: "pic-icon-circle"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+          className: "fa fa-file-image-o"
+        })), "Select image file");
+      }
+    }
+  }, {
     key: "render",
     value: function render() {
       var _this5 = this;
@@ -1127,14 +1173,26 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Title"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         id: "title",
         type: "text",
-        defaultValue: this.state.title,
+        value: this.state.title,
         onChange: this.edit('title')
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Subtitle"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         id: "subtitle",
         type: "text",
-        defaultValue: this.state.subtitle,
+        value: this.state.subtitle,
         onChange: this.edit('subtitle')
       }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-li"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "li-text"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "Project image"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Add an image that clearly represents your project.", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), "Choose one that looks good at different sizes. It will appear in different sizes in different places: on your project page, across the Kickstarter website and mobile apps, and (when shared) on social channels.", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), "You may want to avoid including banners, badges, and text because they may not be legible at smaller sizes.", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "li-inputs"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        id: "add-image-label"
+      }, this.imageInput(), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        id: "image-input",
+        type: "file",
+        onChange: this.handleFile.bind(this)
+      })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form-li"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "li-text"
@@ -1241,7 +1299,7 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         id: "end_date",
         type: "date",
-        defaultValue: this.state.end_date || "",
+        value: this.state.end_date || "",
         onChange: this.edit('end_date')
       }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form-li"
@@ -1252,7 +1310,7 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         id: "pledge_goal",
         type: "number",
-        defaultValue: this.state.pledge_goal || "",
+        value: this.state.pledge_goal || "",
         onChange: this.edit('pledge_goal')
       })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("footer", null, this.changesMade(), this.finalButton())));
     }
@@ -1894,8 +1952,8 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     createProject: function createProject(props) {
       return dispatch(Object(_actions_project_actions__WEBPACK_IMPORTED_MODULE_1__["createProject"])(props));
     },
-    updateProject: function updateProject(prj_props) {
-      return dispatch(Object(_actions_project_actions__WEBPACK_IMPORTED_MODULE_1__["updateProject"])(prj_props));
+    updateProject: function updateProject(formData) {
+      return dispatch(Object(_actions_project_actions__WEBPACK_IMPORTED_MODULE_1__["updateProject"])(formData));
     },
     deleteProject: function deleteProject(id) {
       return dispatch(Object(_actions_project_actions__WEBPACK_IMPORTED_MODULE_1__["deleteProject"])(id));
@@ -1908,6 +1966,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     },
     fetchProject: function fetchProject(id) {
       return dispatch(Object(_actions_project_actions__WEBPACK_IMPORTED_MODULE_1__["fetchProject"])(id));
+    },
+    updateProjectImage: function updateProjectImage(id, formData) {
+      return dispatch(Object(_actions_project_actions__WEBPACK_IMPORTED_MODULE_1__["updateProjectImage"])(id, formData));
     }
   };
 };
@@ -2687,13 +2748,14 @@ var configureStore = function configureStore(presetConfig) {
 /*!*******************************************!*\
   !*** ./frontend/util/project_api_util.js ***!
   \*******************************************/
-/*! exports provided: createProject, updateProject, submitProject, fetchProject, deleteProject */
+/*! exports provided: createProject, updateProject, updateProjectImage, submitProject, fetchProject, deleteProject */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createProject", function() { return createProject; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateProject", function() { return updateProject; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateProjectImage", function() { return updateProjectImage; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "submitProject", function() { return submitProject; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchProject", function() { return fetchProject; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteProject", function() { return deleteProject; });
@@ -2706,13 +2768,22 @@ var createProject = function createProject(props) {
     }
   });
 };
-var updateProject = function updateProject(props) {
+var updateProject = function updateProject(formData) {
   return $.ajax({
     method: 'patch',
-    url: "api/projects/".concat(props.id),
+    url: "api/projects/".concat(formData.id),
     data: {
-      project: props
+      project: formData
     }
+  });
+};
+var updateProjectImage = function updateProjectImage(id, formData) {
+  return $.ajax({
+    method: 'patch',
+    url: "api/projects/".concat(id),
+    data: formData,
+    contentType: false,
+    processData: false
   });
 };
 var submitProject = function submitProject(id) {

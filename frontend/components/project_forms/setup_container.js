@@ -5,7 +5,8 @@ import {
   updateProject,
   submitProject,
   deleteProject,
-  fetchProject
+  fetchProject,
+  updateProjectImage
 } from '../../actions/project_actions';
 import { clearCurrentProject } from '../../actions/session_actions';
 import SetupForm from './setup_form';
@@ -29,11 +30,12 @@ const mapDispatchToProps = (dispatch) => {
   return ({
     receiveCurrentProjectProps: (prj_props) => dispatch(receiveCurrentProjectProps(prj_props)),
     createProject: (props) => dispatch(createProject(props)),
-    updateProject: (prj_props) => dispatch(updateProject(prj_props)),
+    updateProject: (formData) => dispatch(updateProject(formData)),
     deleteProject: (id) => dispatch(deleteProject(id)),
     clearCurrentProject: () => dispatch(clearCurrentProject()),
     submitProject: (id) => dispatch(submitProject(id)),
-    fetchProject: (id) => dispatch(fetchProject(id))
+    fetchProject: (id) => dispatch(fetchProject(id)),
+    updateProjectImage: (id, formData) => dispatch(updateProjectImage(id, formData)),
   });
 };
 

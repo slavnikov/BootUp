@@ -14,7 +14,6 @@ import * as PrjActions from './actions/project_actions';
 
 document.addEventListener("DOMContentLoaded", () => {
   let preloaded_state = {};
-
   if (window.current_user) {
     preloaded_state = {
       entities: {

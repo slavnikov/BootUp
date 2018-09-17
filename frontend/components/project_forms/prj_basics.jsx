@@ -14,7 +14,8 @@ class ProjectBasics extends React.Component {
       category: this.props.currentProject.category,
       country: this.props.currentProject.country,
       end_date: this.props.currentProject.end_date,
-      pledge_goal: this.props.currentProject.pledge_goal
+      pledge_goal: this.props.currentProject.pledge_goal,
+      img_url: this.props.currentProject.imageUrl
     };
     this.categories = [
       "Art", "Comics", "Crafts", "Dance", "Design", "Fashion",
@@ -28,6 +29,12 @@ class ProjectBasics extends React.Component {
     ];
     this.menuDropCategory = this.menuDropCategory.bind(this);
     this.menuDropCountry = this.menuDropCountry.bind(this);
+  }
+
+  componentWillReceiveProps (nextProps) {
+    if (this.state.img_url !== nextProps.currentProject.imageUrl) {
+      this.setState({img_url: nextProps.currentProject.imageUrl});
+    }
   }
 
   saveChanges () {
@@ -49,7 +56,7 @@ class ProjectBasics extends React.Component {
       category: this.props.currentProject.category,
       country: this.props.currentProject.country,
       end_date: this.props.currentProject.end_date,
-      pledge_goal: this.props.currentProject.pledge_goal
+      pledge_goal: this.props.currentProject.pledge_goal,
     });
   }
 
@@ -69,6 +76,14 @@ class ProjectBasics extends React.Component {
         this.setState({[field]: e.currentTarget.value});
       }
     };
+  }
+
+  handleFile (e) {
+    const formData = new FormData();
+    const image = e.currentTarget.files[0];
+    formData.append('project[image]', image);
+
+    this.props.updateProjectImage(this.props.currentProject.id, formData);
   }
 
   checkForCompleteness () {
@@ -98,6 +113,21 @@ class ProjectBasics extends React.Component {
     }
   }
 
+  imageInput () {
+    if (this.state.img_url) {
+      return <img className='project-image-render' src={this.state.img_url}></img>;
+    } else {
+      return (
+        <div id='no-image'>
+          <div id='pic-icon-circle'>
+            <i className="fa fa-file-image-o"></i>
+          </div>
+          Select image file
+        </div>
+      );
+    }
+  }
+
   render () {
     return (
       <div>
@@ -115,9 +145,26 @@ class ProjectBasics extends React.Component {
             </div>
             <div className='li-inputs'>
               <label>Title</label>
-              <input id='title' type='text' defaultValue={this.state.title} onChange={this.edit('title')}></input>
+              <input id='title' type='text' value={this.state.title} onChange={this.edit('title')}></input>
               <label>Subtitle</label>
-              <input id='subtitle' type='text' defaultValue={this.state.subtitle} onChange={this.edit('subtitle')}></input>
+              <input id='subtitle' type='text' value={this.state.subtitle} onChange={this.edit('subtitle')}></input>
+            </div>
+          </div>
+
+          <div className='form-li'>
+            <div className='li-text'>
+              <h6>Project image</h6>
+              <p>
+                Add an image that clearly represents your project.<br></br><br></br>
+                Choose one that looks good at different sizes. It will appear in different sizes in different places: on your project page, across the Kickstarter website and mobile apps, and (when shared) on social channels.<br></br><br></br>
+                You may want to avoid including banners, badges, and text because they may not be legible at smaller sizes.<br></br><br></br>
+            </p>
+            </div>
+            <div className='li-inputs'>
+              <label id='add-image-label'>
+                {this.imageInput()}
+                <input id='image-input' type='file' onChange={this.handleFile.bind(this)}></input>
+              </label>
             </div>
           </div>
 
@@ -233,7 +280,7 @@ class ProjectBasics extends React.Component {
               <p>Set a time limit for your campaign. You won’t be able to change this after you launch.</p>
             </div>
             <div className='li-inputs'>
-              <input id='end_date' type="date" defaultValue={this.state.end_date || ""} onChange={this.edit('end_date')}></input>
+              <input id='end_date' type="date" value={this.state.end_date || ""} onChange={this.edit('end_date')}></input>
             </div>
           </div>
 
@@ -246,7 +293,7 @@ class ProjectBasics extends React.Component {
               <input
                 id='pledge_goal'
                 type="number"
-                defaultValue={this.state.pledge_goal || ""}
+                value={this.state.pledge_goal || ""}
                 onChange={this.edit('pledge_goal')}>
               </input>
             </div>

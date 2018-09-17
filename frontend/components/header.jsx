@@ -45,6 +45,7 @@ const HeaderNewProject = (props) => {
         currentUserId={ props.currentUserId }
         endSession={ props.endSession }
         users={props.users}
+        projects={props.projects}
         />
     </div>
   );
@@ -78,6 +79,7 @@ const HeaderSetup =  (props) => {
         currentUserId={ props.currentUserId }
         endSession={ props.endSession }
         users={props.users}
+        projects={props.projects}
         />
     </div>
   );

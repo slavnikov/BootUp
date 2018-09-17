@@ -56,6 +56,7 @@ class Api::ProjectsController < ApplicationController
       :story,
       :end_date,
       :pledge_goal,
+      :image,
       :complete
     )
   end

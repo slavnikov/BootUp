@@ -8,13 +8,23 @@ export const createProject = (props) => {
   });
 };
 
-export const updateProject = (props) => {
+export const updateProject = (formData) => {
   return $.ajax({
     method: 'patch',
-    url: `api/projects/${props.id}`,
+    url: `api/projects/${formData.id}`,
     data: {
-      project: props
+      project: formData
     }
+  });
+};
+
+export const updateProjectImage = (id, formData) => {
+  return $.ajax({
+    method: 'patch',
+    url: `api/projects/${id}`,
+    data: formData,
+    contentType: false,
+    processData: false
   });
 };
 

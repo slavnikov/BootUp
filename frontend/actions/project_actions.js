@@ -23,9 +23,17 @@ export const createProject = (props) => {
   };
 };
 
-export const updateProject = (props) => {
+export const updateProject = (formData) => {
   return (dispatch) => {
-    PrjUtil.updateProject(props).then((payload) => {
+    PrjUtil.updateProject(formData).then((payload) => {
+      dispatch(receiveProject(payload));
+    });
+  };
+};
+
+export const updateProjectImage = (id, formData) => {
+  return (dispatch) => {
+    PrjUtil.updateProjectImage(id, formData).then((payload) => {
       dispatch(receiveProject(payload));
     });
   };
