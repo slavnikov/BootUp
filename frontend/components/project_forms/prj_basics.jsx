@@ -107,7 +107,7 @@ class ProjectBasics extends React.Component {
 
   finalButton () {
     if (this.checkForCompleteness()) {
-      return <Link to='/setup/new_project/story'>Next: Story</Link>;
+      return <Link to='/setup/project/story'>Next: Story</Link>;
     } else {
       return <button onClick={this.saveChanges.bind(this)}>Save</button>;
     }

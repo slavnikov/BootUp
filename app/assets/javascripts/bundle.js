@@ -1184,7 +1184,7 @@ function (_React$Component) {
     value: function finalButton() {
       if (this.checkForCompleteness()) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-          to: "/setup/new_project/story"
+          to: "/setup/project/story"
         }, "Next: Story");
       } else {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
