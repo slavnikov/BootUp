@@ -159,27 +159,31 @@ var receiveSessionError = function receiveSessionError(errorArr) {
 /*!*********************************************!*\
   !*** ./frontend/actions/project_actions.js ***!
   \*********************************************/
-/*! exports provided: RECEIVE_CURRENT_PROJECT_PROPS, RECEIVE_PROJECT, receiveCurrentProjectProps, createProject, updateProject, updateProjectImage, submitProject, fetchProject, deleteProject, receiveProject */
+/*! exports provided: RECEIVE_CURRENT_PROJECT_PROPS, RECEIVE_PROJECT, RECEIVE_PROJECTS, receiveCurrentProjectProps, createProject, updateProject, updateProjectImage, submitProject, fetchProject, fetchProjects, deleteProject, receiveProject, receiveProjects */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_CURRENT_PROJECT_PROPS", function() { return RECEIVE_CURRENT_PROJECT_PROPS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_PROJECT", function() { return RECEIVE_PROJECT; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_PROJECTS", function() { return RECEIVE_PROJECTS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveCurrentProjectProps", function() { return receiveCurrentProjectProps; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createProject", function() { return createProject; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateProject", function() { return updateProject; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateProjectImage", function() { return updateProjectImage; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "submitProject", function() { return submitProject; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchProject", function() { return fetchProject; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchProjects", function() { return fetchProjects; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteProject", function() { return deleteProject; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveProject", function() { return receiveProject; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveProjects", function() { return receiveProjects; });
 /* harmony import */ var _util_project_api_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/project_api_util */ "./frontend/util/project_api_util.js");
 /* harmony import */ var _session_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./session_actions */ "./frontend/actions/session_actions.js");
 
 
 var RECEIVE_CURRENT_PROJECT_PROPS = 'RECEIVE_CURRENT_PROJECT_PROPS';
-var RECEIVE_PROJECT = 'RECEIVE_PROJECT'; // porject properties will be sent in in segments as user completes parts of form
+var RECEIVE_PROJECT = 'RECEIVE_PROJECT';
+var RECEIVE_PROJECTS = 'RECEIVE_PROJECTS'; // porject properties will be sent in in segments as user completes parts of form
 // project cannot be submitted until all necessary props are filled in
 // prj_props format {title: "some title", country: "USA"}
 
@@ -226,6 +230,13 @@ var fetchProject = function fetchProject(id) {
     });
   };
 };
+var fetchProjects = function fetchProjects() {
+  return function (dispatch) {
+    _util_project_api_util__WEBPACK_IMPORTED_MODULE_0__["fetchProjects"]().then(function (payload) {
+      dispatch(receiveProjects(payload));
+    });
+  };
+};
 var deleteProject = function deleteProject(id) {
   return function (dispatch) {
     return _util_project_api_util__WEBPACK_IMPORTED_MODULE_0__["deleteProject"](id);
@@ -234,6 +245,12 @@ var deleteProject = function deleteProject(id) {
 var receiveProject = function receiveProject(payload) {
   return {
     type: RECEIVE_PROJECT,
+    payload: payload
+  };
+};
+var receiveProjects = function receiveProjects(payload) {
+  return {
+    type: RECEIVE_PROJECTS,
     payload: payload
   };
 };
@@ -450,9 +467,9 @@ document.addEventListener("DOMContentLoaded", function () {
   // window.receiveCurrentProjectProps = PrjActions.receiveCurrentProjectProps;
   // window.updateProject = PrjActions.updateProject;
   // window.createProject = PrjActions.createProject;
-  // window.fetchProject = PrjActions.fetchProject;
 
-  window.fetchCategoryProjects = _actions_category_actions__WEBPACK_IMPORTED_MODULE_9__["fetchCategoryProjects"]; // TESTING //
+  window.fetchProjects = _actions_project_actions__WEBPACK_IMPORTED_MODULE_8__["fetchProjects"]; // window.fetchCategoryProjects = CatActions.fetchCategoryProjects;
+  // TESTING //
 });
 
 /***/ }),
@@ -760,19 +777,33 @@ __webpack_require__.r(__webpack_exports__);
 var HomeGallery = function HomeGallery(props) {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("main", {
     id: "home-gallery"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, props.categories[props.category_id].name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, props.categories[props.currCatId].name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
     id: "galleries"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("aside", {
     id: "feature"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "FEATURED PROJECT"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     id: "featured-image"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-    to: "/"
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Title Goes Here"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "by Admin Authorson"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("aside", {
+    to: "/project/".concat(props.projectsArr[0].id)
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+    src: props.projectsArr[0].imageUrl
+  }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    id: "feature-titles"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, props.projectsArr[0].title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "by ".concat(props.users[props.projectsArr[0].admin_id].name)))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("aside", {
     id: "gallery-options"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    id: "gallery-thumb"
-  }), "test li")))));
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, props.projectsArr.map(function (project, idx) {
+    if (idx === 0) {
+      return;
+    } else {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        id: "gallery-thumb"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        src: project.imageUrl
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        to: "/project/".concat(project.id)
+      }, project.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, project.subtitle)));
+    }
+  })))));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (HomeGallery);
@@ -846,16 +877,21 @@ function (_React$Component) {
     key: "componentDidMount",
     value: function componentDidMount() {
       this.props.fetchCategoryIndex();
+      this.props.fetchProjects();
     }
   }, {
     key: "render",
     value: function render() {
       var _this2 = this;
 
-      if (Object.keys(this.props.categories).length === 0) {
+      if (Object.keys(this.props.categories).length === 0 || Object.keys(this.props.projects).length === 0) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_loading_spinner__WEBPACK_IMPORTED_MODULE_2__["default"], null);
       }
 
+      var currCatId = parseInt(this.state.category_id) || parseInt(Object.keys(this.props.categories)[0]);
+      var projectsArr = Object.values(this.props.projects).filter(function (project) {
+        return project.category_id === currCatId;
+      });
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_header_container__WEBPACK_IMPORTED_MODULE_1__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         id: "home-subheader"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "September 17, 2018"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "Bringing creative projects to life.")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "TOTAL USERS"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "31")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "ACTIVE PROJECTS"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, " 6")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "LIVE PROJECTS"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "2"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
@@ -872,8 +908,10 @@ function (_React$Component) {
           className: _this2.state.category_id === category_id ? 'chosen-nav' : ''
         }, _this2.props.categories[category_id].name);
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_home_gallery__WEBPACK_IMPORTED_MODULE_3__["default"], {
-        category_id: this.state.category_id,
-        categories: this.props.categories
+        categories: this.props.categories,
+        currCatId: currCatId,
+        projectsArr: projectsArr,
+        users: this.props.users
       }));
     }
   }]);
@@ -896,7 +934,9 @@ function (_React$Component) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _actions_category_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../actions/category_actions */ "./frontend/actions/category_actions.js");
-/* harmony import */ var _home_page__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./home_page */ "./frontend/components/home_page/home_page.jsx");
+/* harmony import */ var _actions_project_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/project_actions */ "./frontend/actions/project_actions.js");
+/* harmony import */ var _home_page__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./home_page */ "./frontend/components/home_page/home_page.jsx");
+
 
 
 
@@ -904,7 +944,8 @@ __webpack_require__.r(__webpack_exports__);
 var mapStateToProps = function mapStateToProps(state) {
   return {
     categories: state.entities.categories,
-    projects: state.entities.projects
+    projects: state.entities.projects,
+    users: state.entities.users
   };
 };
 
@@ -913,13 +954,13 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     fetchCategoryIndex: function fetchCategoryIndex() {
       return dispatch(Object(_actions_category_actions__WEBPACK_IMPORTED_MODULE_1__["fetchCategoryIndex"])());
     },
-    fetchCategoryProjects: function fetchCategoryProjects(id) {
-      return dispatch(Object(_actions_category_actions__WEBPACK_IMPORTED_MODULE_1__["fetchCategoryProjects"])(id));
+    fetchProjects: function fetchProjects() {
+      return dispatch(Object(_actions_project_actions__WEBPACK_IMPORTED_MODULE_2__["fetchProjects"])());
     }
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_home_page__WEBPACK_IMPORTED_MODULE_2__["default"]));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_home_page__WEBPACK_IMPORTED_MODULE_3__["default"]));
 
 /***/ }),
 
@@ -972,6 +1013,13 @@ function (_React$Component) {
   }
 
   _createClass(ProjectPage, [{
+    key: "componentWillReceiveProps",
+    value: function componentWillReceiveProps(nextProps) {
+      if (this.props.project && this.props.project.id !== nextProps.match.params.project_id) {
+        this.props.fetchProject(nextProps.match.params.project_id);
+      }
+    }
+  }, {
     key: "componentDidMount",
     value: function componentDidMount() {
       this.props.fetchProject(this.props.match.params.project_id);
@@ -1936,6 +1984,13 @@ function (_React$Component) {
       }
     }
   }, {
+    key: "conditionalMenuDrop",
+    value: function conditionalMenuDrop() {
+      if (!this.state.hidden) {
+        this.menuDrop();
+      }
+    }
+  }, {
     key: "render",
     value: function render() {
       var _this2 = this;
@@ -1945,7 +2000,8 @@ function (_React$Component) {
       }
 
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_header_container__WEBPACK_IMPORTED_MODULE_1__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "setup-wrapper"
+        className: "setup-wrapper",
+        onClick: this.conditionalMenuDrop.bind(this)
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "pg-counter"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "1 of 3")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
@@ -2940,6 +2996,7 @@ var ProjectsReducer = function ProjectsReducer() {
     case _actions_project_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_PROJECT"]:
       return Object(lodash__WEBPACK_IMPORTED_MODULE_4__["merge"])({}, state, _defineProperty({}, action.payload.project.id, action.payload.project));
 
+    case _actions_project_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_PROJECTS"]:
     case _actions_session_actions__WEBPACK_IMPORTED_MODULE_2__["RECEIVE_CURRENT_USER"]:
     case _actions_user_actions__WEBPACK_IMPORTED_MODULE_1__["RECEIVE_USER"]:
       return Object(lodash__WEBPACK_IMPORTED_MODULE_4__["merge"])({}, state, action.payload.projects);
@@ -3112,6 +3169,9 @@ var UsersReducer = function UsersReducer() {
     case _actions_project_actions__WEBPACK_IMPORTED_MODULE_2__["RECEIVE_PROJECT"]:
       return Object(lodash__WEBPACK_IMPORTED_MODULE_3__["merge"])({}, state, _defineProperty({}, action.payload.user.id, action.payload.user));
 
+    case _actions_project_actions__WEBPACK_IMPORTED_MODULE_2__["RECEIVE_PROJECTS"]:
+      return Object(lodash__WEBPACK_IMPORTED_MODULE_3__["merge"])({}, state, action.payload.users);
+
     default:
       return state;
   }
@@ -3175,7 +3235,7 @@ var fetchCategoryProjects = function fetchCategoryProjects(id) {
 /*!*******************************************!*\
   !*** ./frontend/util/project_api_util.js ***!
   \*******************************************/
-/*! exports provided: createProject, updateProject, updateProjectImage, submitProject, fetchProject, deleteProject */
+/*! exports provided: createProject, updateProject, updateProjectImage, submitProject, fetchProject, fetchProjects, deleteProject */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3185,6 +3245,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateProjectImage", function() { return updateProjectImage; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "submitProject", function() { return submitProject; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchProject", function() { return fetchProject; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchProjects", function() { return fetchProjects; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteProject", function() { return deleteProject; });
 var createProject = function createProject(props) {
   return $.ajax({
@@ -3228,6 +3289,12 @@ var fetchProject = function fetchProject(id) {
   return $.ajax({
     method: 'get',
     url: "api/projects/".concat(id)
+  });
+};
+var fetchProjects = function fetchProjects() {
+  return $.ajax({
+    method: 'get',
+    url: '/api/projects'
   });
 };
 var deleteProject = function deleteProject(id) {

@@ -1,6 +1,6 @@
 import { RECEIVE_USER } from '../actions/user_actions';
 import { RECEIVE_CURRENT_USER } from '../actions/session_actions';
-import { RECEIVE_PROJECT } from '../actions/project_actions';
+import { RECEIVE_PROJECT, RECEIVE_PROJECTS } from '../actions/project_actions';
 import { merge } from 'lodash';
 
 const UsersReducer = (state = {}, action) => {
@@ -10,6 +10,8 @@ const UsersReducer = (state = {}, action) => {
       return merge({}, state, {[action.payload.user.id]: action.payload.user});
     case RECEIVE_PROJECT:
       return merge({}, state, {[action.payload.user.id]: action.payload.user});
+    case RECEIVE_PROJECTS:
+      return merge({}, state, action.payload.users);
     default:
       return state;
   }

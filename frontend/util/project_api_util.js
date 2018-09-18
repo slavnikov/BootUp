@@ -47,6 +47,13 @@ export const fetchProject = (id) => {
   });
 };
 
+export const fetchProjects = () => {
+  return $.ajax({
+    method: 'get',
+    url: '/api/projects'
+  });
+};
+
 export const deleteProject = (id) => {
   return $.ajax({
     method: 'delete',

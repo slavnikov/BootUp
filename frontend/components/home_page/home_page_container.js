@@ -1,18 +1,20 @@
 import { connect } from 'react-redux';
-import { fetchCategoryIndex, fetchCategoryProjects } from '../../actions/category_actions';
+import { fetchCategoryIndex } from '../../actions/category_actions';
+import { fetchProjects } from '../../actions/project_actions';
 import HomePage from './home_page';
 
 const mapStateToProps = (state) => {
   return ({
     categories: state.entities.categories,
-    projects: state.entities.projects
+    projects: state.entities.projects,
+    users: state.entities.users
   });
 };
 
 const mapDispatchToProps = (dispatch) => {
   return ({
     fetchCategoryIndex: () => dispatch(fetchCategoryIndex()),
-    fetchCategoryProjects: (id) => dispatch(fetchCategoryProjects(id)),
+    fetchProjects: () => dispatch(fetchProjects())
   });
 };
 

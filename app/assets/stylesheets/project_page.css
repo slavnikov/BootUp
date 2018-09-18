@@ -1,6 +1,6 @@
 .project-main {
-  height: 797px;
-  padding: 0px 15%;
+  height: auto;
+  padding: 0px 15% 30px 15%;
   width: 100%;
   box-sizing: border-box;
   background-color: #fbfbfa;
@@ -10,15 +10,14 @@
 .project-main section:first-child {
   height: 210px;
   margin: 0px 0px 36px 0px;
-  padding: 54px 10% 0px 10%;
+  padding: 54px 0px 0px 0px;
   box-sizing: border-box;
   display: flex;
 }
 
 .project-main section:last-child {
   display: flex;
-  margin: 0px 10%;
-
+  margin: 0px 0px 0px 0px;
 }
 
 #admin-info {
@@ -83,12 +82,18 @@
   margin-bottom: 1px;
 }
 
+#main-left {
+  width: 66%;
+}
+
 #project-picture {
-  width: 820px;
-  height: 460px;
+  width: 100%;
+  max-width: 820px;
+  height: auto;
+  max-height: 460px;
   background-color: grey;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   overflow-y: hidden;
 }
@@ -123,9 +128,8 @@
 }
 
 #main-right {
-  padding-left: 35px;
-  /* width: 381px; */
-  flex-grow: 1;
+  margin-left: 2%;
+  width: 34%;
   max-width: 450px;
   min-width: 300px;
 }
@@ -187,7 +191,7 @@
 }
 
 #project-bottom {
-  padding: 30px 10% 30px 20%;
+  padding: 30px 20% 30px 14%;
   display: flex;
 }
 

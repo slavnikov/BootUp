@@ -42,6 +42,12 @@ class Setup1Class extends React.Component {
     }
   }
 
+  conditionalMenuDrop () {
+    if (!this.state.hidden) {
+      this.menuDrop();
+    }
+  }
+
   render () {
     if (this.categories.length === 0) {
       return <LoadingSpinner/>;
@@ -49,7 +55,7 @@ class Setup1Class extends React.Component {
     return (
       <div>
         <HeaderC/>
-        <div className='setup-wrapper'>
+        <div className='setup-wrapper' onClick={this.conditionalMenuDrop.bind(this)}>
           <div className="pg-counter">
             <p >1 of 3</p>
           </div>

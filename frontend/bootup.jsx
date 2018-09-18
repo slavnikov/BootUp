@@ -60,8 +60,8 @@ document.addEventListener("DOMContentLoaded", () => {
   // window.receiveCurrentProjectProps = PrjActions.receiveCurrentProjectProps;
   // window.updateProject = PrjActions.updateProject;
   // window.createProject = PrjActions.createProject;
-  // window.fetchProject = PrjActions.fetchProject;
-  window.fetchCategoryProjects = CatActions.fetchCategoryProjects;
+  window.fetchProjects = PrjActions.fetchProjects;
+  // window.fetchCategoryProjects = CatActions.fetchCategoryProjects;
   // TESTING //
 
 });

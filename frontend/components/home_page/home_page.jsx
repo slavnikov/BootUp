@@ -15,16 +15,23 @@ class HomePage extends React.Component {
     if (this.state.category_id === null && nextProps.categories) {
       this.setState({category_id: Object.keys(nextProps.categories)[0]});
     }
+
   }
 
   componentDidMount () {
     this.props.fetchCategoryIndex();
+    this.props.fetchProjects();
   }
 
   render () {
-    if (Object.keys(this.props.categories).length === 0) {
+    if (Object.keys(this.props.categories).length === 0 || Object.keys(this.props.projects) .length === 0) {
       return <LoadingSpinner/>;
     }
+
+    const currCatId = parseInt(this.state.category_id) || parseInt(Object.keys(this.props.categories)[0]);
+    const projectsArr = Object.values(this.props.projects).filter((project) => {
+      return project.category_id === currCatId;
+    });
 
     return (
       <div>
@@ -63,8 +70,10 @@ class HomePage extends React.Component {
           }
         </ul>
         <HomeGallery
-          category_id={this.state.category_id}
           categories={this.props.categories}
+          currCatId={currCatId}
+          projectsArr={projectsArr}
+          users={this.props.users}
         />
       </div>
     );

@@ -3,6 +3,7 @@ import { receiveCurrentProject, clearCurrentProject } from './session_actions';
 
 export const RECEIVE_CURRENT_PROJECT_PROPS = 'RECEIVE_CURRENT_PROJECT_PROPS';
 export const RECEIVE_PROJECT = 'RECEIVE_PROJECT';
+export const RECEIVE_PROJECTS = 'RECEIVE_PROJECTS';
 // porject properties will be sent in in segments as user completes parts of form
 // project cannot be submitted until all necessary props are filled in
 // prj_props format {title: "some title", country: "USA"}
@@ -55,6 +56,14 @@ export const fetchProject = (id) => {
   };
 };
 
+export const fetchProjects = () => {
+  return (dispatch) => {
+    PrjUtil.fetchProjects().then((payload) => {
+      dispatch(receiveProjects(payload));
+    });
+  };
+};
+
 export const deleteProject = (id) => {
   return (dispatch) => {
     return PrjUtil.deleteProject(id);
@@ -64,6 +73,13 @@ export const deleteProject = (id) => {
 export const receiveProject = (payload) => {
   return ({
     type: RECEIVE_PROJECT,
+    payload: payload
+  });
+};
+
+export const receiveProjects = (payload) => {
+  return ({
+    type: RECEIVE_PROJECTS,
     payload: payload
   });
 };
