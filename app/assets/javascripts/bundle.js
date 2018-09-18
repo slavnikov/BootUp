@@ -806,7 +806,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var HomeGallery = function HomeGallery(props) {
-  debugger;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("main", {
     id: "home-gallery"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, props.categories[props.currCatId].name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
@@ -825,6 +824,8 @@ var HomeGallery = function HomeGallery(props) {
     id: "gallery-options"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, props.projectsArr.map(function (project, idx) {
     if (idx === 0) {
+      return;
+    } else if (!project.complete) {
       return;
     } else {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -932,7 +933,6 @@ function (_React$Component) {
       var projectsArr = Object.values(this.props.projects).filter(function (project) {
         return project.category_id === currCatId;
       });
-      debugger;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_header_container__WEBPACK_IMPORTED_MODULE_1__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         id: "home-subheader"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "September 17, 2018"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "Bringing creative projects to life.")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "TOTAL USERS"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "31")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "ACTIVE PROJECTS"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, " 6")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "LIVE PROJECTS"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "2"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
@@ -1308,7 +1308,8 @@ function (_React$Component) {
       if ([1, 2].every(function (idx) {
         return _this3.completeCount[idx];
       })) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+          to: "/project/".concat(this.props.currentProject.id),
           onClick: function onClick() {
             return _this3.props.submitProject(_this3.props.currentProject.id);
           }
@@ -1353,7 +1354,7 @@ function (_React$Component) {
         className: "overview-nav"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Project overview"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
         to: "/setup/project/basics"
-      }, this.checkForCompleteness(['title', 'subtitle', 'category_id', 'country', 'end_date', 'pledge_goal'], 1), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Basics"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Add an image, set your funidng goal, and more."))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+      }, this.checkForCompleteness(['title', 'subtitle', 'category_id', 'country', 'end_date', 'pledge_goal', 'imageUrl'], 1), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Basics"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Add an image, set your funidng goal, and more."))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
         to: "/setup/project/story"
       }, this.checkForCompleteness(['story'], 2), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Story"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Add a detailed project description.")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, Object.keys(this.completeCount).length, " of 2 complete"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "When everything is done, your project will go live instantly."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("footer", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: this.deleteProject.bind(this)
@@ -1475,7 +1476,7 @@ function (_React$Component) {
     key: "discardChanges",
     value: function discardChanges() {
       this.setState({
-        title: this.props.currentProject.title || "",
+        title: this.props.currentProject.title,
         subtitle: this.props.currentProject.subtitle,
         category_id: this.props.currentProject.category_id,
         country: this.props.currentProject.country,
@@ -1523,7 +1524,7 @@ function (_React$Component) {
     value: function checkForCompleteness() {
       var _this3 = this;
 
-      return ['title', 'subtitle', 'category_id', 'country', 'end_date', 'pledge_goal'].every(function (prop) {
+      return ['title', 'subtitle', 'category_id', 'country', 'end_date', 'pledge_goal', 'imageUrl'].every(function (prop) {
         return _this3.props.currentProject[prop];
       }) && ['title', 'subtitle', 'category_id', 'country', 'end_date', 'pledge_goal'].every(function (prop) {
         return _this3.props.currentProject[prop] === _this3.state[prop];
@@ -1534,6 +1535,7 @@ function (_React$Component) {
     value: function changesMade() {
       var _this4 = this;
 
+      debugger;
       var anyChanges = ['title', 'subtitle', 'category_id', 'country', 'end_date', 'pledge_goal'].every(function (prop) {
         return _this4.props.currentProject[prop] === _this4.state[prop];
       });

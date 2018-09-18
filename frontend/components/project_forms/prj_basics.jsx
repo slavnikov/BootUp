@@ -55,7 +55,7 @@ class ProjectBasics extends React.Component {
 
   discardChanges () {
     this.setState({
-      title: this.props.currentProject.title || "",
+      title: this.props.currentProject.title,
       subtitle: this.props.currentProject.subtitle,
       category_id: this.props.currentProject.category_id,
       country: this.props.currentProject.country,
@@ -91,7 +91,7 @@ class ProjectBasics extends React.Component {
   }
 
   checkForCompleteness () {
-    return (['title', 'subtitle', 'category_id', 'country', 'end_date', 'pledge_goal'].every((prop) => {
+    return (['title', 'subtitle', 'category_id', 'country', 'end_date', 'pledge_goal', 'imageUrl'].every((prop) => {
       return this.props.currentProject[prop];
     }) && ['title', 'subtitle', 'category_id', 'country', 'end_date', 'pledge_goal'].every((prop) => {
       return this.props.currentProject[prop] === this.state[prop];
@@ -99,6 +99,7 @@ class ProjectBasics extends React.Component {
   }
 
   changesMade () {
+    debugger
     const anyChanges = ['title', 'subtitle', 'category_id', 'country', 'end_date', 'pledge_goal'].every((prop) => {
       return this.props.currentProject[prop] === this.state[prop];
     });

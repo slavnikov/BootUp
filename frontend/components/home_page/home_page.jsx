@@ -35,8 +35,6 @@ class HomePage extends React.Component {
       return project.category_id === currCatId;
     });
 
-    debugger
-    
     return (
       <div>
         <HeaderC/>

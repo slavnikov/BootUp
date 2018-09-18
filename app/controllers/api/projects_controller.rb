@@ -27,7 +27,7 @@ class Api::ProjectsController < ApplicationController
   end
 
   def index
-    @projects = Project.all
+    @projects = Project.where(complete: true)
 
     render :index
   end
@@ -47,7 +47,7 @@ class Api::ProjectsController < ApplicationController
   def destroy
     @project = Project.find_by(id: params[:id])
     @project.destroy
-    
+
     render :show
   end
 

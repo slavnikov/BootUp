@@ -33,7 +33,7 @@ class NewProjectOverview extends React.Component {
 
   submitButton () {
     if ([1,2].every((idx) => {return this.completeCount[idx];})) {
-      return <button onClick={() => {return this.props.submitProject(this.props.currentProject.id);}}>Submit Project</button>;
+      return <Link to ={`/project/${this.props.currentProject.id}`} onClick={() => {return this.props.submitProject(this.props.currentProject.id);}}>Submit Project</Link>;
     } else {
       return null;
     }
@@ -72,7 +72,7 @@ class NewProjectOverview extends React.Component {
           <section className='overview-nav'>
             <h2>Project overview</h2>
             <Link to='/setup/project/basics'>
-              {this.checkForCompleteness(['title', 'subtitle', 'category_id', 'country', 'end_date', 'pledge_goal'], 1)}
+              {this.checkForCompleteness(['title', 'subtitle', 'category_id', 'country', 'end_date', 'pledge_goal', 'imageUrl'], 1)}
               <div>
                 <h3>Basics</h3>
                 <p>Add an image, set your funidng goal, and more.</p>

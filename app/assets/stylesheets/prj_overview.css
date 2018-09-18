@@ -134,7 +134,7 @@
   cursor: pointer;
 }
 
-.overview-wrapper footer button {
+.overview-wrapper footer a {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -149,7 +149,7 @@
   transition: background-color 0.5s, margin-top 0.5s, margin-bottom 0.5s;
 }
 
-.overview-wrapper footer button:hover {
+.overview-wrapper footer a:hover {
   background-color: #023239;
   margin-top: -1px;
   margin-bottom: 1px;
