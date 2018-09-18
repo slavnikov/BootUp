@@ -42,7 +42,7 @@ class NewProjectOverview extends React.Component {
   componentDidMount () {
     if (this.props.currentUser && Object.values(this.props.tempPrjProps).length === 3) {
       this.props.createProject(merge(this.props.tempPrjProps, {admin_id: this.props.currentUser.id}));
-    } else if (this.props.currentProjectId && !this.props.currentProject) {
+    } else if (this.props.currentProjectId) {
       this.props.fetchProject(this.props.currentProjectId);
     }
     this.props.fetchCategoryIndex();

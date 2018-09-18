@@ -6,6 +6,7 @@ const Header = (props) => {
   return (
     <Switch>
       <Route path='/setup/project/basics'render={() => { return <HeaderNewProjectNav {...props}/>;}}/>;}}/>
+      <Route path='/setup/project/rewards'render={() => { return <HeaderNewProjectNav {...props}/>;}}/>;}}/>
       <Route path='/setup/project/story'render={() => { return <HeaderNewProjectNav {...props}/>;}}/>;}}/>
       <Route path='/setup/project/' render={() => { return <HeaderNewProject {...props}/>;}}/>
       <Route path='/setup' render={() => { return <HeaderSetup {...props}/>;}}/>

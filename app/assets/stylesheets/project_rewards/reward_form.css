@@ -1,0 +1,55 @@
+#reward-form {
+  padding: 0px 20%;
+  margin-top: 50px;
+  margin-bottom: 20px;
+}
+
+#reward-form div:last-child {
+  margin-bottom: 150px;
+}
+
+.reward-input {
+  width: 67%;
+  margin-top: 70px;
+  height: 180px;
+  border-bottom: 1px solid #DCDEDD;
+}
+
+.reward-input h2 {
+  color: #282828;
+  font-weight: lighter;
+  font-size: 17px;
+  margin-bottom: 0px;
+  margin-top: 0px;
+}
+
+.reward-input p {
+  color: #656969;
+  font-size: 13.5px;
+  margin-top: 10px;
+}
+
+.reward-input input{
+  height: 42px;
+  width: 100%;
+  padding: 12px;
+  box-sizing: border-box;
+  border: 1px solid #DCDEDD;
+}
+
+.reward-input input:focus, .reward-input textarea:focus {
+  outline: none;
+  border: 1px solid #009e74;
+}
+
+.reward-input input:hover, .reward-input textarea:hover {
+  border: 1px solid #009e74;
+}
+
+.reward-input textarea {
+  height: 84px;
+  width: 100%;
+  padding: 12px;
+  box-sizing: border-box;
+  border: 1px solid #DCDEDD;
+}

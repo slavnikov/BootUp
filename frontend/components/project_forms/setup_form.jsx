@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route, Link, Redirect, Switch } from 'react-router-dom';
 import { Setup1C, Setup2C, Setup3C, NewPrjOverviewC, ProjectBasicsC, ProjectStoryC} from './setup_container';
+import ProjectRewardsC from './prj_rewards_container';
 import {AuthRoute, ProtectedRoute} from '../../util/route_util';
 
 const SetupForm = (props) => {
@@ -25,8 +26,9 @@ const SetupForm = (props) => {
             }
           }}/>
         <ProtectedRoute path='/setup/project/overview' component={ NewPrjOverviewC }/>
-          <ProtectedRoute path='/setup/project/basics' component={ ProjectBasicsC }/>
+        <ProtectedRoute path='/setup/project/basics' component={ ProjectBasicsC }/>
         <ProtectedRoute path='/setup/project/story' component={ ProjectStoryC }/>
+        <ProtectedRoute path='/setup/project/rewards' component={ ProjectRewardsC }/>
       </Switch>
     </div>
   );

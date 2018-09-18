@@ -6,6 +6,7 @@
   justify-content: center;
   height: 212px;
   box-sizing: border-box;
+  padding: 0px 25%;
 }
 
 .basics-wrapper header h1 {
@@ -22,6 +23,7 @@
     color: #656969;
     font-size: 17.6px;
     letter-spacing: 0px;
+    text-align: center;
 }
 
 .form-li {

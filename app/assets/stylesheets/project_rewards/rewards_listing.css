@@ -1,0 +1,19 @@
+#rewards-listing {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 0px 20%;
+}
+
+.empty-reward {
+  height: 180px;
+  width: 100%;
+  border: 1px dashed #DCDEDD;
+  color: #656969;
+  background-color: #FBFBFA;
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 17.5px;
+}
