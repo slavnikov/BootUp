@@ -99,7 +99,6 @@ class ProjectBasics extends React.Component {
   }
 
   changesMade () {
-    debugger
     const anyChanges = ['title', 'subtitle', 'category_id', 'country', 'end_date', 'pledge_goal'].every((prop) => {
       return this.props.currentProject[prop] === this.state[prop];
     });

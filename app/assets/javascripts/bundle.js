@@ -837,7 +837,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var HomeGallery = function HomeGallery(props) {
-  debugger;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("main", {
     id: "home-gallery"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, props.categories[props.currCatId].name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
@@ -1589,7 +1588,6 @@ function (_React$Component) {
     value: function changesMade() {
       var _this4 = this;
 
-      debugger;
       var anyChanges = ['title', 'subtitle', 'category_id', 'country', 'end_date', 'pledge_goal'].every(function (prop) {
         return _this4.props.currentProject[prop] === _this4.state[prop];
       });
