@@ -1,4 +1,4 @@
-import { RECEIVE_PROJECT, RECEIVE_PROJECTS } from '../actions/project_actions';
+import { RECEIVE_PROJECT, RECEIVE_PROJECTS, REMOVE_PROJECT } from '../actions/project_actions';
 import { RECEIVE_USER } from '../actions/user_actions';
 import { RECEIVE_CURRENT_USER } from '../actions/session_actions';
 import { RECEIVE_CATEGORY_PROJECTS } from '../actions/category_actions';
@@ -14,6 +14,10 @@ const ProjectsReducer = (state = {}, action) => {
       return merge({}, state, action.payload.projects);
     case RECEIVE_CATEGORY_PROJECTS:
       return merge({}, state, action.projects.projects);
+    case REMOVE_PROJECT:
+      const newState = merge({}, state);
+      delete(newState[action.id]);
+      return newState;
     default:
       return state;
   }

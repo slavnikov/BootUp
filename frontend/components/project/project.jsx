@@ -9,7 +9,7 @@ class ProjectPage extends React.Component {
   }
 
   componentWillReceiveProps (nextProps) {
-    if (this.props.project && this.props.project.id !== nextProps.match.params.project_id) {
+    if (this.props.project && this.props.project.id !== parseInt(nextProps.match.params.project_id)) {
       this.props.fetchProject(nextProps.match.params.project_id);
     }
   }

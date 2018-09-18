@@ -89,6 +89,7 @@
 #project-picture {
   width: 100%;
   max-width: 820px;
+  min-width: 375px;
   height: auto;
   max-height: 460px;
   background-color: grey;

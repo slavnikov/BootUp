@@ -1,7 +1,7 @@
 class Api::ProjectsController < ApplicationController
   def create
     @project = Project.new(project_params)
-    debugger
+
     if @project.save
       user = current_user
       user.current_project_id = @project.id
@@ -47,6 +47,8 @@ class Api::ProjectsController < ApplicationController
   def destroy
     @project = Project.find_by(id: params[:id])
     @project.destroy
+    
+    render :show
   end
 
   private

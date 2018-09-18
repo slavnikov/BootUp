@@ -53,7 +53,7 @@ class NewProjectOverview extends React.Component {
       return <Redirect to='/'/>;
     }
 
-    if (!this.props.currentUser || !this.props.currentProject || !this.props.categories[1]) {
+    if (!this.props.currentUser || !this.props.currentProject || Object.keys(this.props.categories).length === 0) {
       return (
         <div className='spinner-wrapper'>
           <i className="fa fa-refresh fa-spin"></i>
@@ -72,7 +72,7 @@ class NewProjectOverview extends React.Component {
           <section className='overview-nav'>
             <h2>Project overview</h2>
             <Link to='/setup/project/basics'>
-              {this.checkForCompleteness(['title', 'subtitle', 'category', 'country', 'end_date', 'pledge_goal'], 1)}
+              {this.checkForCompleteness(['title', 'subtitle', 'category_id', 'country', 'end_date', 'pledge_goal'], 1)}
               <div>
                 <h3>Basics</h3>
                 <p>Add an image, set your funidng goal, and more.</p>

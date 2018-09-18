@@ -114,12 +114,12 @@
 }
 
 #gallery-thumb {
-  background-color: grey;
   width: 115px;
   min-width: 115px;
   height: 65px;
   margin-right: 30px;
   overflow-y: hidden;
+  background-color: transparent;
 }
 
 #gallery-thumb img {

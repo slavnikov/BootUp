@@ -55,7 +55,7 @@ class ProjectBasics extends React.Component {
 
   discardChanges () {
     this.setState({
-      title: this.props.currentProject.title,
+      title: this.props.currentProject.title || "",
       subtitle: this.props.currentProject.subtitle,
       category_id: this.props.currentProject.category_id,
       country: this.props.currentProject.country,
@@ -133,7 +133,7 @@ class ProjectBasics extends React.Component {
   }
 
   render () {
-    if (!this.categories[1]) {
+    if (Object.keys(this.props.categories).length === 0) {
       return <LoadingSpinner/>;
     }
 

@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const HomeGallery = (props) => {
-
+  debugger
   return (
     <main id='home-gallery'>
       <h1>{props.categories[props.currCatId].name}</h1>

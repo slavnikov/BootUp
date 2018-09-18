@@ -7,24 +7,26 @@ class HomePage extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      category_id: null
+      category_id: null,
+      loading: 0
     };
   }
 
   componentWillReceiveProps (nextProps) {
+    this.setState({loading: (this.state.loading-1)});
+
     if (this.state.category_id === null && nextProps.categories) {
       this.setState({category_id: Object.keys(nextProps.categories)[0]});
     }
-
   }
-
-  componentDidMount () {
+  componentWillMount () {
+    this.setState({loading: 2});
     this.props.fetchCategoryIndex();
     this.props.fetchProjects();
   }
 
   render () {
-    if (Object.keys(this.props.categories).length === 0 || Object.keys(this.props.projects) .length === 0) {
+    if (this.state.loading > 0) {
       return <LoadingSpinner/>;
     }
 
@@ -33,6 +35,8 @@ class HomePage extends React.Component {
       return project.category_id === currCatId;
     });
 
+    debugger
+    
     return (
       <div>
         <HeaderC/>
