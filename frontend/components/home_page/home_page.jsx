@@ -8,7 +8,10 @@ class HomePage extends React.Component {
     super(props);
     this.state = {
       category_id: null,
-      loading: 0
+      loading: 0,
+      user_count: this.props.site_data.user_count,
+      active_projects: this.props.site_data.active_projects,
+      live_projects: this.props.site_data.live_projects
     };
   }
 
@@ -18,6 +21,9 @@ class HomePage extends React.Component {
     if (this.state.category_id === null && nextProps.categories) {
       this.setState({category_id: Object.keys(nextProps.categories)[0]});
     }
+    if (nextProps.site_data.user_count && !this.state.user_count) {
+      this.setState(nextProps.site_data)
+    }
   }
   componentWillMount () {
     this.setState({loading: 2});
@@ -25,7 +31,13 @@ class HomePage extends React.Component {
     this.props.fetchProjects();
   }
 
+  componentDidMount () {
+    this.setState({loading: (this.state.loading + 1)});
+    this.props.fetchSiteData();
+  }
+
   render () {
+
     if (this.state.loading > 0) {
       return <LoadingSpinner/>;
     }
@@ -34,26 +46,27 @@ class HomePage extends React.Component {
     const projectsArr = Object.values(this.props.projects).filter((project) => {
       return project.category_id === currCatId;
     });
+    const date = new Date();
 
     return (
       <div>
         <HeaderC/>
         <span id='home-subheader'>
           <div>
-            <p>September 17, 2018</p>
+            <p>{date.toDateString()}</p>
             <h6>Bringing creative projects to life.</h6>
           </div>
           <div>
             <p>TOTAL USERS</p>
-            <h6>31</h6>
+            <h6>{this.state.user_count}</h6>
           </div>
           <div>
             <p>ACTIVE PROJECTS</p>
-            <h6> 6</h6>
+            <h6>{this.state.active_projects}</h6>
           </div>
           <div>
             <p>LIVE PROJECTS</p>
-            <h6>2</h6>
+            <h6>{this.state.live_projects}</h6>
           </div>
         </span>
         <ul id='home-nav'>

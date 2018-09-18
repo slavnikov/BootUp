@@ -340,6 +340,37 @@ var clearCurrentProject = function clearCurrentProject() {
 
 /***/ }),
 
+/***/ "./frontend/actions/site_data_actions.js":
+/*!***********************************************!*\
+  !*** ./frontend/actions/site_data_actions.js ***!
+  \***********************************************/
+/*! exports provided: RECEIVE_SITE_DATA, fetchSiteData, receiveSiteData */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_SITE_DATA", function() { return RECEIVE_SITE_DATA; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchSiteData", function() { return fetchSiteData; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveSiteData", function() { return receiveSiteData; });
+/* harmony import */ var _util_data_api_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/data_api_util */ "./frontend/util/data_api_util.js");
+var RECEIVE_SITE_DATA = 'RECEIVE_SITE_DATA';
+
+var fetchSiteData = function fetchSiteData() {
+  return function (dispatch) {
+    _util_data_api_util__WEBPACK_IMPORTED_MODULE_0__["fetchSiteData"]().then(function (data) {
+      dispatch(receiveSiteData(data));
+    });
+  };
+};
+var receiveSiteData = function receiveSiteData(data) {
+  return {
+    type: RECEIVE_SITE_DATA,
+    data: data
+  };
+};
+
+/***/ }),
+
 /***/ "./frontend/actions/ui_actions.js":
 /*!****************************************!*\
   !*** ./frontend/actions/ui_actions.js ***!
@@ -806,6 +837,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var HomeGallery = function HomeGallery(props) {
+  debugger;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("main", {
     id: "home-gallery"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, props.categories[props.currCatId].name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
@@ -893,7 +925,10 @@ function (_React$Component) {
     _this = _possibleConstructorReturn(this, _getPrototypeOf(HomePage).call(this, props));
     _this.state = {
       category_id: null,
-      loading: 0
+      loading: 0,
+      user_count: _this.props.site_data.user_count,
+      active_projects: _this.props.site_data.active_projects,
+      live_projects: _this.props.site_data.live_projects
     };
     return _this;
   }
@@ -910,6 +945,10 @@ function (_React$Component) {
           category_id: Object.keys(nextProps.categories)[0]
         });
       }
+
+      if (nextProps.site_data.user_count && !this.state.user_count) {
+        this.setState(nextProps.site_data);
+      }
     }
   }, {
     key: "componentWillMount",
@@ -919,6 +958,14 @@ function (_React$Component) {
       });
       this.props.fetchCategoryIndex();
       this.props.fetchProjects();
+    }
+  }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.setState({
+        loading: this.state.loading + 1
+      });
+      this.props.fetchSiteData();
     }
   }, {
     key: "render",
@@ -933,9 +980,10 @@ function (_React$Component) {
       var projectsArr = Object.values(this.props.projects).filter(function (project) {
         return project.category_id === currCatId;
       });
+      var date = new Date();
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_header_container__WEBPACK_IMPORTED_MODULE_1__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         id: "home-subheader"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "September 17, 2018"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "Bringing creative projects to life.")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "TOTAL USERS"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "31")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "ACTIVE PROJECTS"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, " 6")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "LIVE PROJECTS"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "2"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, date.toDateString()), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "Bringing creative projects to life.")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "TOTAL USERS"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, this.state.user_count)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "ACTIVE PROJECTS"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, this.state.active_projects)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "LIVE PROJECTS"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, this.state.live_projects))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
         id: "home-nav"
       }, Object.keys(this.props.categories).map(function (category_id) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
@@ -978,6 +1026,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_project_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/project_actions */ "./frontend/actions/project_actions.js");
 /* harmony import */ var _actions_ui_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/ui_actions */ "./frontend/actions/ui_actions.js");
 /* harmony import */ var _home_page__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./home_page */ "./frontend/components/home_page/home_page.jsx");
+/* harmony import */ var _actions_site_data_actions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../actions/site_data_actions */ "./frontend/actions/site_data_actions.js");
+
 
 
 
@@ -989,7 +1039,8 @@ var mapStateToProps = function mapStateToProps(state) {
     categories: state.entities.categories,
     projects: state.entities.projects,
     users: state.entities.users,
-    load_state: state.ui
+    load_state: state.ui,
+    site_data: state.siteData
   };
 };
 
@@ -1003,6 +1054,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     },
     dbFetchCommenced: function dbFetchCommenced() {
       return dispatch(Object(_actions_ui_actions__WEBPACK_IMPORTED_MODULE_3__["dbFetchCommenced"])());
+    },
+    fetchSiteData: function fetchSiteData() {
+      return dispatch(Object(_actions_site_data_actions__WEBPACK_IMPORTED_MODULE_5__["fetchSiteData"])());
     }
   };
 };
@@ -3081,6 +3135,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _session_reducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./session_reducer */ "./frontend/reducers/session_reducer.js");
 /* harmony import */ var _errors_reducer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./errors_reducer */ "./frontend/reducers/errors_reducer.js");
 /* harmony import */ var _entities_reducer__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./entities_reducer */ "./frontend/reducers/entities_reducer.js");
+/* harmony import */ var _site_data_reducer__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./site_data_reducer */ "./frontend/reducers/site_data_reducer.js");
+
 
 
 
@@ -3089,7 +3145,8 @@ __webpack_require__.r(__webpack_exports__);
 var RootReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
   entities: _entities_reducer__WEBPACK_IMPORTED_MODULE_4__["default"],
   session: _session_reducer__WEBPACK_IMPORTED_MODULE_2__["default"],
-  errors: _errors_reducer__WEBPACK_IMPORTED_MODULE_3__["default"]
+  errors: _errors_reducer__WEBPACK_IMPORTED_MODULE_3__["default"],
+  siteData: _site_data_reducer__WEBPACK_IMPORTED_MODULE_5__["default"]
 });
 /* harmony default export */ __webpack_exports__["default"] = (RootReducer);
 
@@ -3190,6 +3247,35 @@ var SessionReducer = function SessionReducer() {
 
 /***/ }),
 
+/***/ "./frontend/reducers/site_data_reducer.js":
+/*!************************************************!*\
+  !*** ./frontend/reducers/site_data_reducer.js ***!
+  \************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _actions_site_data_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/site_data_actions */ "./frontend/actions/site_data_actions.js");
+
+
+var SiteDataReducer = function SiteDataReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+
+  switch (action.type) {
+    case _actions_site_data_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_SITE_DATA"]:
+      return action.data;
+
+    default:
+      return state;
+  }
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (SiteDataReducer);
+
+/***/ }),
+
 /***/ "./frontend/reducers/users_reducer.js":
 /*!********************************************!*\
   !*** ./frontend/reducers/users_reducer.js ***!
@@ -3280,6 +3366,25 @@ var fetchCategoryProjects = function fetchCategoryProjects(id) {
   return $.ajax({
     method: 'get',
     url: "/api/categories/".concat(id)
+  });
+};
+
+/***/ }),
+
+/***/ "./frontend/util/data_api_util.js":
+/*!****************************************!*\
+  !*** ./frontend/util/data_api_util.js ***!
+  \****************************************/
+/*! exports provided: fetchSiteData */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchSiteData", function() { return fetchSiteData; });
+var fetchSiteData = function fetchSiteData() {
+  return $.ajax({
+    method: 'get',
+    url: '/api/usage'
   });
 };
 
