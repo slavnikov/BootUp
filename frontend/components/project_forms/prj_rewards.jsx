@@ -17,10 +17,12 @@ class ProjectRewards extends React.Component {
       delivery_date: "",
     };
     this.activateForm = this.activateForm.bind(this);
+    this.deactivateForm = this.deactivateForm.bind(this);
     this.edit = this.edit.bind(this);
   }
 
   componentDidUpdate (prevProps, prevState) {
+
     if (this.state.formActive && !prevState.formActive) {
       window.scroll({
         top: 1000,
@@ -32,6 +34,15 @@ class ProjectRewards extends React.Component {
 
   activateForm () {
     this.setState({formActive: true});
+  }
+
+  deactivateForm () {
+    this.setState({formActive: false});
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
   }
 
   componentDidMount () {
@@ -70,13 +81,14 @@ class ProjectRewards extends React.Component {
             value={this.state.value}
             delivery_date={this.state.delivery_date}
           />
-          <RewardFooter
-            name={this.state.name}
-            description={this.state.description}
-            value={this.state.value}
-            delivery_date={this.state.delivery_date}
-            currentProjectId={this.props.currentProjectId}
-            createReward={this.props.createReward}
+        <RewardFooter
+          name={this.state.name}
+          description={this.state.description}
+          value={this.state.value}
+          delivery_date={this.state.delivery_date}
+          currentProjectId={this.props.currentProjectId}
+          createReward={this.props.createReward}
+          deactivateForm={this.deactivateForm}
           />
         </main>
       </div>

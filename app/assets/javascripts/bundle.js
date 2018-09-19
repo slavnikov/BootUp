@@ -1923,6 +1923,7 @@ function (_React$Component) {
       delivery_date: ""
     };
     _this.activateForm = _this.activateForm.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.deactivateForm = _this.deactivateForm.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.edit = _this.edit.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     return _this;
   }
@@ -1943,6 +1944,18 @@ function (_React$Component) {
     value: function activateForm() {
       this.setState({
         formActive: true
+      });
+    }
+  }, {
+    key: "deactivateForm",
+    value: function deactivateForm() {
+      this.setState({
+        formActive: false
+      });
+      window.scroll({
+        top: 0,
+        left: 0,
+        behavior: 'smooth'
       });
     }
   }, {
@@ -1986,7 +1999,8 @@ function (_React$Component) {
         value: this.state.value,
         delivery_date: this.state.delivery_date,
         currentProjectId: this.props.currentProjectId,
-        createReward: this.props.createReward
+        createReward: this.props.createReward,
+        deactivateForm: this.deactivateForm
       })));
     }
   }]);
@@ -2230,6 +2244,7 @@ var RewardFooter = function RewardFooter(props) {
           project_id: props.currentProjectId
         }
       });
+      props.deactivateForm();
     }
   }, "Save"));
 };
@@ -2313,18 +2328,41 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var RewardsListing = function RewardsListing(props) {
-  debugger;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     id: "rewards-listing"
   }, [0, 1, 2].map(function (idx) {
     if (props.rewards[idx]) {
-      return null;
+      var reward = props.rewards[idx];
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        key: idx,
+        className: "filled-reward"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        id: "reward-value"
+      }, "$", reward.value), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        id: "reward-details"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, reward.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, reward.description)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        id: "reward-date"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Estimated deliver date:"), reward.delivery_date));
     } else {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         key: idx,
         className: "empty-reward",
         onClick: props.activateForm
       }, "+ once you add a reward, it will display here...");
+    }
+  }), props.rewards.map(function (reward, idx) {
+    if (idx >= 3) {
+      var _reward = props.rewards[idx];
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        key: idx,
+        className: "filled-reward"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        id: "reward-value"
+      }, "$", _reward.value), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        id: "reward-details"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, _reward.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, _reward.description)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        id: "reward-date"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Estimated deliver date:"), _reward.delivery_date));
     }
   }));
 };

@@ -12,9 +12,9 @@ const RewardFooter = (props) => {
               description: props.description,
               delivery_date: props.delivery_date,
               project_id: props.currentProjectId
-            }
-          });
-        }}>
+            }});
+            props.deactivateForm();
+          }}>
         Save
       </button>
     </footer>

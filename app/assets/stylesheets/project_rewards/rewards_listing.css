@@ -1,14 +1,14 @@
 #rewards-listing {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  padding: 0px 20%;
+  margin: 0px 20%;
+  overflow-y: scroll;
+  height: 606px;
+  overflow-x: auto;
 }
 
 .empty-reward {
   cursor: pointer;
   height: 180px;
-  width: 100%;
+  width: 99%;
   border: 1px dashed #DCDEDD;
   color: #656969;
   background-color: #FBFBFA;
@@ -17,4 +17,48 @@
   justify-content: center;
   align-items: center;
   font-size: 17.5px;
+}
+
+.filled-reward {
+  cursor: pointer;
+  height: 180px;
+  width: 99%;
+  border: 1px solid #DCDEDD;
+  color: #656969;
+  background-color: #ffffff;
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.filled-reward div {
+  width: 33%;
+  padding-top: 30px;
+  padding-right: 35px;
+  color: #282828;
+}
+
+#reward-value {
+  padding-left: 35px;
+  font-size: 20px;
+}
+
+#reward-details {
+}
+#reward-details h1, #reward-date h1 {
+  margin: 0px;
+  font-weight: lighter;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+#reward-details h2 {
+  color: #656969;
+  margin: 0px;
+  font-weight: lighter;
+  font-size: 16px;
+
+}
+
+#reward-date {
+
 }
