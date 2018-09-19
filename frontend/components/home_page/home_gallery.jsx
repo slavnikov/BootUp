@@ -26,7 +26,7 @@ const HomeGallery = (props) => {
                   return;
                 } else {
                   return <li>
-                    <div id='gallery-thumb'><img src={project.imageUrl}></img></div>
+                    <Link to={`/project/${project.id}`}><div id='gallery-thumb'><img src={project.imageUrl}></img></div></Link>
                     <div>
                       <Link to={`/project/${project.id}`}>{project.title}</Link>
                       <p>{project.subtitle}</p>

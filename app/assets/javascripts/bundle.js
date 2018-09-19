@@ -913,11 +913,13 @@ var HomeGallery = function HomeGallery(props) {
     } else if (!project.complete) {
       return;
     } else {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        to: "/project/".concat(project.id)
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "gallery-thumb"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         src: project.imageUrl
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
         to: "/project/".concat(project.id)
       }, project.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, project.subtitle)));
     }
@@ -1305,7 +1307,7 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
 
   if (Object.keys(state.entities.rewards).length > 0) {
     rewardsArr = Object.values(state.entities.rewards).filter(function (reward) {
-      return reward.project_id === state.session.currentProjectId;
+      return reward.project_id === parseInt(ownProps.match.params.project_id);
     });
   } else {
     rewardsArr = [];

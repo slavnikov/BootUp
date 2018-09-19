@@ -7,6 +7,7 @@ import { updateUser } from '../../actions/user_actions';
 const mapStateToProps = (state, ownProps) => {
   const project = state.entities.projects[ownProps.match.params.project_id];
   let admin;
+
   if (project) {
     admin = state.entities.users[project.admin_id];
   }
@@ -15,7 +16,7 @@ const mapStateToProps = (state, ownProps) => {
 
   if (Object.keys(state.entities.rewards).length > 0) {
     rewardsArr = Object.values(state.entities.rewards).filter((reward) => {
-      return reward.project_id === state.session.currentProjectId;
+      return reward.project_id === parseInt(ownProps.match.params.project_id);
     });
   } else {
     rewardsArr = [];
