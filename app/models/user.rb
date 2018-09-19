@@ -12,6 +12,8 @@ class User < ApplicationRecord
     primary_key: :id,
     class_name: :Project
 
+  has_many :backings
+
   def password=(password)
     @password = password
     self.password_digest = BCrypt::Password.create(password)

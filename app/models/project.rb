@@ -18,4 +18,6 @@ class Project < ApplicationRecord
     foreign_key: :project_id,
     primary_key: :id,
     class_name: :Reward
+
+  has_many :backings
 end

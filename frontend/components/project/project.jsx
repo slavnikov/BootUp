@@ -119,7 +119,11 @@ class ProjectPage extends React.Component {
           </div>
           <div id='prj-rewards'>
             <h1>Support</h1>
-            <ProjectSupport rewards={this.props.rewardsArr}/>
+            <ProjectSupport
+              rewards={this.props.rewardsArr}
+              createBacking={this.props.createBacking}
+              projectId={this.props.match.params.project_id}
+              userId={this.props.currentUserId}/>
           </div>
         </section>
       </div>

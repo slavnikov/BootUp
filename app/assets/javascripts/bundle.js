@@ -86,6 +86,26 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./frontend/actions/backing_actions.js":
+/*!*********************************************!*\
+  !*** ./frontend/actions/backing_actions.js ***!
+  \*********************************************/
+/*! exports provided: createBacking */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createBacking", function() { return createBacking; });
+/* harmony import */ var _util_backing_api_util_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/backing_api_util.js */ "./frontend/util/backing_api_util.js");
+
+var createBacking = function createBacking(backing) {
+  return function (dispatch) {
+    _util_backing_api_util_js__WEBPACK_IMPORTED_MODULE_0__["createBacking"](backing);
+  };
+};
+
+/***/ }),
+
 /***/ "./frontend/actions/category_actions.js":
 /*!**********************************************!*\
   !*** ./frontend/actions/category_actions.js ***!
@@ -1120,6 +1140,115 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 
 /***/ }),
 
+/***/ "./frontend/components/project/pledge_pane.jsx":
+/*!*****************************************************!*\
+  !*** ./frontend/components/project/pledge_pane.jsx ***!
+  \*****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+var PledgePane =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(PledgePane, _React$Component);
+
+  function PledgePane(props) {
+    var _this;
+
+    _classCallCheck(this, PledgePane);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(PledgePane).call(this, props));
+    _this.state = {
+      clicked: false,
+      value: _this.props.reward.value
+    };
+    return _this;
+  }
+
+  _createClass(PledgePane, [{
+    key: "handleClick",
+    value: function handleClick() {
+      this.setState({
+        clicked: true
+      });
+    }
+  }, {
+    key: "submitBacking",
+    value: function submitBacking() {
+      this.props.createBacking({
+        user_id: this.props.userId,
+        project_id: this.props.projectId,
+        value: this.state.value,
+        reward_id: this.props.reward.id
+      });
+      this.setState({
+        value: '',
+        clicked: false
+      });
+      window.scroll({
+        top: 0,
+        left: 0,
+        behavior: 'smooth'
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this2 = this;
+
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        id: "reward-pane"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Pledge of $", this.props.reward.value, " or more"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, this.props.reward.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, this.props.reward.description), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "ESTIMATED DELIVERY"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, this.props.reward.delivery_date), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: this.state.clicked ? '' : 'hidden'
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Pledge Amount"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "number",
+        onChange: function onChange(e) {
+          _this2.setState({
+            value: e.currentTarget.value
+          });
+        },
+        min: this.props.reward.value
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: this.submitBacking.bind(this)
+      }, "Continue")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        id: "foregorund",
+        className: this.state.clicked ? 'hidden' : '',
+        onClick: this.handleClick.bind(this)
+      }, "Select This Reward"));
+    }
+  }]);
+
+  return PledgePane;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+/* harmony default export */ __webpack_exports__["default"] = (PledgePane);
+
+/***/ }),
+
 /***/ "./frontend/components/project/project.jsx":
 /*!*************************************************!*\
   !*** ./frontend/components/project/project.jsx ***!
@@ -1263,7 +1392,10 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "About"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, this.props.project.story || "the story you tell us about your project will go here ...")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "prj-rewards"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Support"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_project_support__WEBPACK_IMPORTED_MODULE_2__["default"], {
-        rewards: this.props.rewardsArr
+        rewards: this.props.rewardsArr,
+        createBacking: this.props.createBacking,
+        projectId: this.props.match.params.project_id,
+        userId: this.props.currentUserId
       }))));
     }
   }]);
@@ -1289,6 +1421,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_project_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/project_actions */ "./frontend/actions/project_actions.js");
 /* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/session_actions */ "./frontend/actions/session_actions.js");
 /* harmony import */ var _actions_user_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../actions/user_actions */ "./frontend/actions/user_actions.js");
+/* harmony import */ var _actions_backing_actions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../actions/backing_actions */ "./frontend/actions/backing_actions.js");
+
 
 
 
@@ -1331,6 +1465,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     },
     updateUser: function updateUser(newProps) {
       return dispatch(Object(_actions_user_actions__WEBPACK_IMPORTED_MODULE_4__["updateUser"])(newProps));
+    },
+    createBacking: function createBacking(backing) {
+      return dispatch(Object(_actions_backing_actions__WEBPACK_IMPORTED_MODULE_5__["createBacking"])(backing));
     }
   };
 };
@@ -1350,21 +1487,108 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _pledge_pane__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./pledge_pane */ "./frontend/components/project/pledge_pane.jsx");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 
-var ProjectSupport = function ProjectSupport(props) {
-  if (props.rewards.length <= 0) {
-    return null;
+
+
+var ProjectSupport =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(ProjectSupport, _React$Component);
+
+  function ProjectSupport(props) {
+    var _this;
+
+    _classCallCheck(this, ProjectSupport);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(ProjectSupport).call(this, props));
+    _this.state = {
+      clicked: false,
+      value: ''
+    };
+    return _this;
   }
 
-  return props.rewards.map(function (reward) {
-    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      id: "reward-pane"
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Pledge of $", reward.value, " or more"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, reward.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, reward.description), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "ESTIMATED DELIVERY"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, reward.delivery_date), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      id: "foregorund"
-    }, "Select This Reward"));
-  });
-};
+  _createClass(ProjectSupport, [{
+    key: "handleClick",
+    value: function handleClick() {
+      this.setState({
+        clicked: true
+      });
+    }
+  }, {
+    key: "submitBacking",
+    value: function submitBacking() {
+      this.props.createBacking({
+        user_id: this.props.userId,
+        project_id: this.props.projectId,
+        value: this.state.value
+      });
+      this.setState({
+        value: '',
+        clicked: false
+      });
+      window.scroll({
+        top: 0,
+        left: 0,
+        behavior: 'smooth'
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this2 = this;
+
+      if (this.props.rewards.length <= 0) {
+        return null;
+      }
+
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        id: "reward-pane"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Make a pledge without a reward"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "number",
+        onFocus: this.handleClick.bind(this),
+        value: this.state.value,
+        onChange: function onChange(e) {
+          _this2.setState({
+            value: e.currentTarget.value
+          });
+        }
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: this.state.clicked ? '' : 'hidden'
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: this.submitBacking.bind(this)
+      }, "Continue"))), this.props.rewards.map(function (reward) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_pledge_pane__WEBPACK_IMPORTED_MODULE_1__["default"], {
+          reward: reward,
+          userId: _this2.props.userId,
+          projectId: _this2.props.projectId,
+          createBacking: _this2.props.createBacking
+        });
+      }));
+    }
+  }]);
+
+  return ProjectSupport;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
 /* harmony default export */ __webpack_exports__["default"] = (ProjectSupport);
 
@@ -3986,6 +4210,28 @@ var configureStore = function configureStore(presetConfig) {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (configureStore);
+
+/***/ }),
+
+/***/ "./frontend/util/backing_api_util.js":
+/*!*******************************************!*\
+  !*** ./frontend/util/backing_api_util.js ***!
+  \*******************************************/
+/*! exports provided: createBacking */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createBacking", function() { return createBacking; });
+var createBacking = function createBacking(backing) {
+  return $.ajax({
+    method: 'post',
+    url: '/api/backings',
+    data: {
+      backing: backing
+    }
+  });
+};
 
 /***/ }),
 
