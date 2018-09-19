@@ -1,6 +1,7 @@
 import React from 'react';
 
 const RewardsListing = (props) => {
+  debugger
   return (
     <div id='rewards-listing'>
       {

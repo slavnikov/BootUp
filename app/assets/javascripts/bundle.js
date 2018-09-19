@@ -279,10 +279,14 @@ var receiveProjects = function receiveProjects(payload) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createReward", function() { return createReward; });
 /* harmony import */ var _util_reward_api_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/reward_api_util */ "./frontend/util/reward_api_util.js");
+/* harmony import */ var _project_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./project_actions */ "./frontend/actions/project_actions.js");
+
 
 var createReward = function createReward(reward) {
   return function (dispatch) {
-    _util_reward_api_util__WEBPACK_IMPORTED_MODULE_0__["createReward"](reward);
+    _util_reward_api_util__WEBPACK_IMPORTED_MODULE_0__["createReward"](reward).then(function (project) {
+      dispatch(Object(_project_actions__WEBPACK_IMPORTED_MODULE_1__["receiveProject"])(project));
+    });
   };
 };
 
@@ -1912,7 +1916,6 @@ function (_React$Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(ProjectRewards).call(this, props));
     _this.state = {
-      rewards: _this.props.rewardsArr,
       formActive: false,
       name: "",
       value: "",
@@ -1943,6 +1946,11 @@ function (_React$Component) {
       });
     }
   }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.props.fetchProject(this.props.currentProjectId);
+    }
+  }, {
     key: "edit",
     value: function edit(field) {
       var _this2 = this;
@@ -1963,7 +1971,7 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("header", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Add your rewards"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Offer simple, meaningful rewards that bring backers closer to your project. Rewards don\u2019t have to be physical items. Consider special experiences or behind-the-scenes peeks into your project.")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_rewards_rewards_subheader__WEBPACK_IMPORTED_MODULE_2__["default"], {
         activateForm: this.activateForm
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_rewards_rewards_listing__WEBPACK_IMPORTED_MODULE_3__["default"], {
-        rewards: this.state.rewards,
+        rewards: this.props.rewardsArr,
         activateForm: this.activateForm
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_rewards_reward_form__WEBPACK_IMPORTED_MODULE_4__["default"], {
         formActive: this.state.formActive,
@@ -2001,7 +2009,9 @@ function (_React$Component) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _actions_reward_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../actions/reward_actions */ "./frontend/actions/reward_actions.js");
-/* harmony import */ var _prj_rewards__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./prj_rewards */ "./frontend/components/project_forms/prj_rewards.jsx");
+/* harmony import */ var _actions_project_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/project_actions */ "./frontend/actions/project_actions.js");
+/* harmony import */ var _prj_rewards__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./prj_rewards */ "./frontend/components/project_forms/prj_rewards.jsx");
+
 
 
 
@@ -2011,7 +2021,7 @@ var mapStateToProps = function mapStateToProps(state) {
 
   if (Object.keys(state.entities.rewards).length > 0) {
     rewardsArr = Object.values(state.entities.rewards).filter(function (reward) {
-      return rewards.project_id === state.session.currentProjectId;
+      return reward.project_id === state.session.currentProjectId;
     });
   } else {
     rewardsArr = [];
@@ -2027,11 +2037,14 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     createReward: function createReward(reward) {
       return dispatch(Object(_actions_reward_actions__WEBPACK_IMPORTED_MODULE_1__["createReward"])(reward));
+    },
+    fetchProject: function fetchProject(id) {
+      return dispatch(Object(_actions_project_actions__WEBPACK_IMPORTED_MODULE_2__["fetchProject"])(id));
     }
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_prj_rewards__WEBPACK_IMPORTED_MODULE_2__["default"]));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_prj_rewards__WEBPACK_IMPORTED_MODULE_3__["default"]));
 
 /***/ }),
 
@@ -2300,6 +2313,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var RewardsListing = function RewardsListing(props) {
+  debugger;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     id: "rewards-listing"
   }, [0, 1, 2].map(function (idx) {

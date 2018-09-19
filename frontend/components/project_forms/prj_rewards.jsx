@@ -10,7 +10,6 @@ class ProjectRewards extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      rewards: this.props.rewardsArr,
       formActive: false,
       name: "",
       value: "",
@@ -35,6 +34,10 @@ class ProjectRewards extends React.Component {
     this.setState({formActive: true});
   }
 
+  componentDidMount () {
+    this.props.fetchProject(this.props.currentProjectId);
+  }
+
   edit(field) {
     return (e) => {
       this.setState({[field]: e.currentTarget.value});
@@ -56,7 +59,7 @@ class ProjectRewards extends React.Component {
             activateForm={this.activateForm}
           />
           <RewardsListing
-            rewards={this.state.rewards}
+            rewards={this.props.rewardsArr}
             activateForm={this.activateForm}
           />
           <RewardForm
