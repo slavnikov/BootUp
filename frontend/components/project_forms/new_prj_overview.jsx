@@ -25,6 +25,15 @@ class NewProjectOverview extends React.Component {
       }
   }
 
+  checkForRewards () {
+    if (this.props.rewardsArr.length > 0) {
+      this.completeCount[2] = true;
+      return <i className="fa fa-check nav-item-complete"></i>;
+    } else {
+      return <i className="fa fa-check"></i>;
+    }
+  }
+
   deleteProject () {
     this.props.deleteProject(this.props.currentProject.id);
     this.props.clearCurrentProject();
@@ -32,7 +41,7 @@ class NewProjectOverview extends React.Component {
   }
 
   submitButton () {
-    if ([1,2].every((idx) => {return this.completeCount[idx];})) {
+    if ([1,2,3].every((idx) => {return this.completeCount[idx];})) {
       return <Link to ={`/project/${this.props.currentProject.id}`} onClick={() => {return this.props.submitProject(this.props.currentProject.id);}}>Submit Project</Link>;
     } else {
       return null;
@@ -78,15 +87,22 @@ class NewProjectOverview extends React.Component {
                 <p>Add an image, set your funidng goal, and more.</p>
               </div>
             </Link>
+            <Link to='/setup/project/rewards'>
+              {this.checkForRewards()}
+              <div>
+                <h3>Rewards</h3>
+                <p>Set the rewards for backing your project.</p>
+              </div>
+            </Link>
             <Link to='/setup/project/story'>
-              {this.checkForCompleteness(['story'], 2)}
+              {this.checkForCompleteness(['story'], 3)}
               <div>
                 <h3>Story</h3>
-                <p>Add a detailed project description.</p>
+                <p>Add a detailed description of the project.</p>
               </div>
             </Link>
           </section>
-          <h4>{Object.keys(this.completeCount).length} of 2 complete</h4>
+          <h4>{Object.keys(this.completeCount).length} of 3 complete</h4>
           <p>When everything is done, your project will go live instantly.</p>
           <footer>
             <button onClick={this.deleteProject.bind(this)}><i className="fa fa-trash-o"></i>Delete Project</button>

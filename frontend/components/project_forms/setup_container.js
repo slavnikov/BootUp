@@ -19,12 +19,23 @@ import ProjectBasics from './prj_basics';
 import ProjectStory from './prj_story';
 
 const mapStateToProps = (state) => {
+  let rewardsArr;
+
+  if (Object.keys(state.entities.rewards).length > 0) {
+    rewardsArr = Object.values(state.entities.rewards).filter((reward) => {
+      return reward.project_id === state.session.currentProjectId;
+    });
+  } else {
+    rewardsArr = [];
+  }
+
   return ({
     tempPrjProps: state.session.tempPrjProps,
     currentUser: state.entities.users[state.session.currentUserId],
     currentProject: state.entities.projects[state.session.currentProjectId],
     currentProjectId: state.session.currentProjectId,
-    categories: state.entities.categories
+    categories: state.entities.categories,
+    rewardsArr: rewardsArr
   });
 };
 

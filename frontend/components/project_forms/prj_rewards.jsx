@@ -79,8 +79,6 @@ class ProjectRewards extends React.Component {
   }
 
   render () {
-    window.props = this.props;
-    window.state = this.state;
     return (
       <div id='rewards-page-wrapper'>
         <HeaderC/>

@@ -1130,8 +1130,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _header_container__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../header_container */ "./frontend/components/header_container.js");
-/* harmony import */ var _util_loading_spinner__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../util/loading_spinner */ "./frontend/components/util/loading_spinner.jsx");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+/* harmony import */ var _project_support__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./project_support */ "./frontend/components/project/project_support.jsx");
+/* harmony import */ var _util_loading_spinner__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../util/loading_spinner */ "./frontend/components/util/loading_spinner.jsx");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1149,6 +1150,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -1201,7 +1203,7 @@ function (_React$Component) {
       var _this = this;
 
       if (this.props.project.admin_id === this.props.currentUserId) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["Link"], {
           id: "edit-button",
           to: "/setup/project/overview",
           onClick: function onClick() {
@@ -1222,7 +1224,7 @@ function (_React$Component) {
     value: function render() {
       if (!this.props.project) {
         //loading screen
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_loading_spinner__WEBPACK_IMPORTED_MODULE_2__["default"], null));
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_loading_spinner__WEBPACK_IMPORTED_MODULE_3__["default"], null));
       } //loaing screen
 
 
@@ -1258,7 +1260,9 @@ function (_React$Component) {
         id: "prj-story"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "About"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, this.props.project.story || "the story you tell us about your project will go here ...")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "prj-rewards"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Support"))));
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Support"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_project_support__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        rewards: this.props.rewardsArr
+      }))));
     }
   }]);
 
@@ -1297,10 +1301,21 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
     admin = state.entities.users[project.admin_id];
   }
 
+  var rewardsArr;
+
+  if (Object.keys(state.entities.rewards).length > 0) {
+    rewardsArr = Object.values(state.entities.rewards).filter(function (reward) {
+      return reward.project_id === state.session.currentProjectId;
+    });
+  } else {
+    rewardsArr = [];
+  }
+
   return {
     project: project,
     admin: admin,
-    currentUserId: state.session.currentUserId
+    currentUserId: state.session.currentUserId,
+    rewardsArr: rewardsArr
   };
 };
 
@@ -1319,6 +1334,37 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_project__WEBPACK_IMPORTED_MODULE_1__["default"]));
+
+/***/ }),
+
+/***/ "./frontend/components/project/project_support.jsx":
+/*!*********************************************************!*\
+  !*** ./frontend/components/project/project_support.jsx ***!
+  \*********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+
+var ProjectSupport = function ProjectSupport(props) {
+  if (props.rewards.length <= 0) {
+    return null;
+  }
+
+  return props.rewards.map(function (reward) {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      id: "reward-pane"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Pledge of $", reward.value, " or more"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, reward.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, reward.description), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "ESTIMATED DELIVERY"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, reward.delivery_date), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      id: "foregorund"
+    }, "Select This Reward"));
+  });
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (ProjectSupport);
 
 /***/ }),
 
@@ -1399,6 +1445,20 @@ function (_React$Component) {
       }
     }
   }, {
+    key: "checkForRewards",
+    value: function checkForRewards() {
+      if (this.props.rewardsArr.length > 0) {
+        this.completeCount[2] = true;
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+          className: "fa fa-check nav-item-complete"
+        });
+      } else {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+          className: "fa fa-check"
+        });
+      }
+    }
+  }, {
     key: "deleteProject",
     value: function deleteProject() {
       this.props.deleteProject(this.props.currentProject.id);
@@ -1412,7 +1472,7 @@ function (_React$Component) {
     value: function submitButton() {
       var _this3 = this;
 
-      if ([1, 2].every(function (idx) {
+      if ([1, 2, 3].every(function (idx) {
         return _this3.completeCount[idx];
       })) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
@@ -1462,8 +1522,10 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Project overview"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
         to: "/setup/project/basics"
       }, this.checkForCompleteness(['title', 'subtitle', 'category_id', 'country', 'end_date', 'pledge_goal', 'imageUrl'], 1), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Basics"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Add an image, set your funidng goal, and more."))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        to: "/setup/project/rewards"
+      }, this.checkForRewards(), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Rewards"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Set the rewards for backing your project."))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
         to: "/setup/project/story"
-      }, this.checkForCompleteness(['story'], 2), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Story"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Add a detailed project description.")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, Object.keys(this.completeCount).length, " of 2 complete"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "When everything is done, your project will go live instantly."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("footer", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      }, this.checkForCompleteness(['story'], 3), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Story"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Add a detailed description of the project.")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, Object.keys(this.completeCount).length, " of 3 complete"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "When everything is done, your project will go live instantly."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("footer", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: this.deleteProject.bind(this)
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
         className: "fa fa-trash-o"
@@ -2026,8 +2088,6 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      window.props = this.props;
-      window.state = this.state;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "rewards-page-wrapper"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_header_container__WEBPACK_IMPORTED_MODULE_1__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("main", {
@@ -2979,12 +3039,23 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var mapStateToProps = function mapStateToProps(state) {
+  var rewardsArr;
+
+  if (Object.keys(state.entities.rewards).length > 0) {
+    rewardsArr = Object.values(state.entities.rewards).filter(function (reward) {
+      return reward.project_id === state.session.currentProjectId;
+    });
+  } else {
+    rewardsArr = [];
+  }
+
   return {
     tempPrjProps: state.session.tempPrjProps,
     currentUser: state.entities.users[state.session.currentUserId],
     currentProject: state.entities.projects[state.session.currentProjectId],
     currentProjectId: state.session.currentProjectId,
-    categories: state.entities.categories
+    categories: state.entities.categories,
+    rewardsArr: rewardsArr
   };
 };
 

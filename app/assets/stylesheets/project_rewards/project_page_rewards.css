@@ -1,0 +1,22 @@
+#foregorund {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  background-color: #19a781;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: transparent;
+  opacity: 0;
+  transition: opacity 0.5s, color 0.3s, font-size 0.3s;
+  cursor: pointer;
+  font-size: 30px;
+}
+
+#foregorund:hover {
+  font-size: 16px;
+  opacity: 0.85;
+  color: white;
+}

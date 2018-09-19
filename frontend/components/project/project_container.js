@@ -11,10 +11,21 @@ const mapStateToProps = (state, ownProps) => {
     admin = state.entities.users[project.admin_id];
   }
 
+  let rewardsArr;
+
+  if (Object.keys(state.entities.rewards).length > 0) {
+    rewardsArr = Object.values(state.entities.rewards).filter((reward) => {
+      return reward.project_id === state.session.currentProjectId;
+    });
+  } else {
+    rewardsArr = [];
+  }
+
   return ({
     project: project,
     admin: admin,
-    currentUserId: state.session.currentUserId
+    currentUserId: state.session.currentUserId,
+    rewardsArr: rewardsArr
   });
 };
 

@@ -1,5 +1,6 @@
 import React from 'react';
 import HeaderC from '../header_container';
+import ProjectSupport from './project_support';
 import LoadingSpinner from '../util/loading_spinner';
 import { Link } from 'react-router-dom';
 
@@ -118,6 +119,7 @@ class ProjectPage extends React.Component {
           </div>
           <div id='prj-rewards'>
             <h1>Support</h1>
+            <ProjectSupport rewards={this.props.rewardsArr}/>
           </div>
         </section>
       </div>
