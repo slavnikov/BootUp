@@ -222,7 +222,7 @@
     padding: 25px;
 display: flex;
 justify-content: flex-end;
-border-top: 1px solid #dcdedd
+border-top: 1px solid #dcdedd;
 }
 
 .basics-wrapper footer button {

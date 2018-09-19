@@ -1,5 +1,5 @@
 class Reward < ApplicationRecord
-  validates :name, :description, :value, :project_id, presence: true
+  validates :name, :description, :value, :project_id, :delivery_date, presence: true
 
   belongs_to :project,
    foreign_key: :project_id,

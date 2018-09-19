@@ -1,3 +1,7 @@
+#rewards-page-wrapper {
+  padding-bottom: 150px;
+}
+
 #reward-form {
   padding: 0px 20%;
   margin-top: 50px;
@@ -5,11 +9,10 @@
 }
 
 #reward-form div:last-child {
-  margin-bottom: 150px;
+  /* margin-bottom: 75px; */
 }
 
 .reward-input {
-  width: 67%;
   margin-top: 70px;
   height: 180px;
   border-bottom: 1px solid #DCDEDD;
@@ -27,6 +30,7 @@
   color: #656969;
   font-size: 13.5px;
   margin-top: 10px;
+  line-height: 20px;
 }
 
 .reward-input input{
@@ -52,4 +56,77 @@
   padding: 12px;
   box-sizing: border-box;
   border: 1px solid #DCDEDD;
+}
+
+#form-preview-wrapper {
+  display: flex;
+}
+
+#reward-form form {
+  width: 67%;
+  margin-right: 3%;
+  min-width: 420px;
+}
+
+#reward-preview {
+  min-width: 205px;
+  margin-top: 70px;
+  width: 33%;
+}
+
+#reward-preview-text {
+  margin: 0px;
+  border: 0px;
+  max-height: 60px;
+}
+
+#reward-preview-text p {
+  font-size: 14px;
+  line-height: 22px;
+}
+
+#reward-pane {
+  background-color: #fbfbfa;
+      border: 1px solid #e8e8e8;
+      margin-top: 25px;
+      padding: 30px;
+      position: sticky;
+      top: 30px;
+}
+
+#reward-pane h1 {
+  margin: 0px 0px 30px 0px;
+  font-size: 18px;
+  font-weight: lighter;
+  color: #282828;
+}
+
+#reward-pane h3 {
+  margin: 0px;
+  font-weight: lighter;
+  font-size: 16px;
+  color: #282828;
+}
+
+#reward-pane h6 {
+  margin-bottom: 31px;
+  margin-top: 12px;
+  font-weight: lighter;
+  font-size: 14px;
+  color: #656969;
+  line-height: 23px;
+}
+
+#reward-pane h4 {
+  margin: 0px;
+      font-weight: lighter;
+      font-size: 10px;
+      color: #656969;
+}
+
+#reward-pane h5 {
+  font-weight: lighter;
+      color: #282828;
+      font-size: 14px;
+      margin-top: 5px;
 }

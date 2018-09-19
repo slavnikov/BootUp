@@ -1,0 +1,49 @@
+#rewards-page-wrapper footer {
+  position: fixed;
+  bottom: 0;
+    right: 0;
+    width: 100%;
+    background-color: #fbfbfa;
+    padding: 25px;
+display: flex;
+justify-content: flex-end;
+border-top: 1px solid #dcdedd;
+}
+
+#rewards-page-wrapper footer button {
+  width: 170px;
+  margin-left: 10px;
+  height: 42px;
+  border: none;
+  background-color: #009E74;
+  color: white;
+  font-size: 14px;
+  transition: background-color 0.5s, margin-top 0.5s, margin-bottom 0.5s;
+}
+
+#rewards-page-wrapper footer button:hover{
+  background-color: #037362;
+  cursor: pointer;
+  margin-top: -1px;
+}
+
+#rewards-page-wrapper footer a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  width: 170px;
+  margin-left: 10px;
+  height: 42px;
+  border: none;
+  background-color: #034752;
+  color: white;
+  font-size: 14px;
+  transition: background-color 0.5s, margin-top 0.5s, margin-bottom 0.5s;
+}
+
+#rewards-page-wrapper footer a:hover {
+  background-color: #023239;
+  margin-top: -1px;
+  margin-bottom: 1px;
+}

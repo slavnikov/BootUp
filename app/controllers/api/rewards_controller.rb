@@ -1,8 +1,8 @@
 class Api::RewardsController < ApplicationController
   def create
     @reward = Reward.new(reward_params)
-
-    if @rewards.save
+    debugger
+    if @reward.save
       render json: 'success', status: 200
     else
       render json: 'error', status: 500
@@ -12,6 +12,6 @@ class Api::RewardsController < ApplicationController
   private
 
   def reward_params
-    params.require(:reward).permit(:name, :description, :value, :project_id)
+    params.require(:reward).permit(:name, :description, :value, :project_id, :delivery_date)
   end
 end

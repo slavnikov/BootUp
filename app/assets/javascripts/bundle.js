@@ -1871,8 +1871,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _header_container__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../header_container */ "./frontend/components/header_container.js");
 /* harmony import */ var _rewards_rewards_subheader__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./rewards/rewards_subheader */ "./frontend/components/project_forms/rewards/rewards_subheader.jsx");
 /* harmony import */ var _rewards_rewards_listing__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./rewards/rewards_listing */ "./frontend/components/project_forms/rewards/rewards_listing.jsx");
-/* harmony import */ var _rewards_reward_form__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./rewards/reward_form */ "./frontend/components/project_forms/rewards/reward_form.jsx");
+/* harmony import */ var _rewards_reward_form__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./rewards/reward_form */ "./frontend/components/project_forms/rewards/reward_form.jsx");
+/* harmony import */ var _rewards_reward_footer__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./rewards/reward_footer */ "./frontend/components/project_forms/rewards/reward_footer.jsx");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -1882,13 +1885,14 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
 
 
 
@@ -1908,21 +1912,74 @@ function (_React$Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(ProjectRewards).call(this, props));
     _this.state = {
-      rewards: _this.props.rewardsArr
+      rewards: _this.props.rewardsArr,
+      formActive: false,
+      name: "",
+      value: "",
+      description: "",
+      delivery_date: ""
     };
+    _this.activateForm = _this.activateForm.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.edit = _this.edit.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     return _this;
   }
 
   _createClass(ProjectRewards, [{
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(prevProps, prevState) {
+      if (this.state.formActive && !prevState.formActive) {
+        window.scroll({
+          top: 1000,
+          left: 0,
+          behavior: 'smooth'
+        });
+      }
+    }
+  }, {
+    key: "activateForm",
+    value: function activateForm() {
+      this.setState({
+        formActive: true
+      });
+    }
+  }, {
+    key: "edit",
+    value: function edit(field) {
+      var _this2 = this;
+
+      return function (e) {
+        _this2.setState(_defineProperty({}, field, e.currentTarget.value));
+      };
+    }
+  }, {
     key: "render",
     value: function render() {
       window.props = this.props;
       window.state = this.state;
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_header_container__WEBPACK_IMPORTED_MODULE_1__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("main", {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        id: "rewards-page-wrapper"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_header_container__WEBPACK_IMPORTED_MODULE_1__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("main", {
         className: "basics-wrapper"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("header", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Add your rewards"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Offer simple, meaningful rewards that bring backers closer to your project. Rewards don\u2019t have to be physical items. Consider special experiences or behind-the-scenes peeks into your project.")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_rewards_rewards_subheader__WEBPACK_IMPORTED_MODULE_2__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_rewards_rewards_listing__WEBPACK_IMPORTED_MODULE_3__["default"], {
-        rewards: this.state.rewards
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_rewards_reward_form__WEBPACK_IMPORTED_MODULE_5__["default"], null)));
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("header", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Add your rewards"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Offer simple, meaningful rewards that bring backers closer to your project. Rewards don\u2019t have to be physical items. Consider special experiences or behind-the-scenes peeks into your project.")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_rewards_rewards_subheader__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        activateForm: this.activateForm
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_rewards_rewards_listing__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        rewards: this.state.rewards,
+        activateForm: this.activateForm
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_rewards_reward_form__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        formActive: this.state.formActive,
+        edit: this.edit,
+        name: this.state.name,
+        description: this.state.description,
+        value: this.state.value,
+        delivery_date: this.state.delivery_date
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_rewards_reward_footer__WEBPACK_IMPORTED_MODULE_5__["default"], {
+        name: this.state.name,
+        description: this.state.description,
+        value: this.state.value,
+        delivery_date: this.state.delivery_date,
+        currentProjectId: this.props.currentProjectId,
+        createReward: this.props.createReward
+      })));
     }
   }]);
 
@@ -2135,6 +2192,39 @@ function (_React$Component) {
 
 /***/ }),
 
+/***/ "./frontend/components/project_forms/rewards/reward_footer.jsx":
+/*!*********************************************************************!*\
+  !*** ./frontend/components/project_forms/rewards/reward_footer.jsx ***!
+  \*********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+
+var RewardFooter = function RewardFooter(props) {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("footer", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    onClick: function onClick() {
+      props.createReward({
+        reward: {
+          name: props.name,
+          value: parseInt(props.value),
+          description: props.description,
+          delivery_date: props.delivery_date,
+          project_id: props.currentProjectId
+        }
+      });
+    }
+  }, "Save"));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (RewardFooter);
+
+/***/ }),
+
 /***/ "./frontend/components/project_forms/rewards/reward_form.jsx":
 /*!*******************************************************************!*\
   !*** ./frontend/components/project_forms/rewards/reward_form.jsx ***!
@@ -2149,21 +2239,47 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var RewardForm = function RewardForm(props) {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    id: "reward-form"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    id: "rewards-subheader-text"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Add a reward"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Offer tangible or intangible things that bring backers closer to your project.")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "reward-input"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Title"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Briefly describe this reward."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-    type: "text"
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "reward-input"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Pledge amount"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Set a minimum pledge amount for this reward."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-    type: "number"
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "reward-input"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Description"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Describe this reward in more detail."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", null)));
+  if (!props.formActive) {
+    return null;
+  } else {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      id: "reward-form"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      id: "rewards-subheader-text"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Add a reward"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Offer tangible or intangible things that bring backers closer to your project.")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      id: "form-preview-wrapper"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "reward-input"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Title"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Briefly describe this reward."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      type: "text",
+      value: props.name,
+      onChange: props.edit('name')
+    })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "reward-input"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Pledge amount"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Set a minimum pledge amount for this reward."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      type: "number",
+      value: props.value,
+      onChange: props.edit('value')
+    })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "reward-input"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Description"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Describe this reward in more detail."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
+      value: props.description,
+      onChange: props.edit('description')
+    })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "reward-input"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Estimated Delivery"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Give yourself plenty of time. It is better to deliver to backers ahead of schedule than behind."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      type: "date",
+      value: props.deliver_date,
+      onChange: props.edit('delivery_date')
+    }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("aside", {
+      id: "reward-preview"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "reward-input",
+      id: "reward-preview-text"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Reward Preview"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Get a glimpse of how this reward will look on your project page.")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      id: "reward-pane"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Pledge of $", props.value || '1', " or more"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, props.name || "Reward Title"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, props.description || "Reward description..."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "ESTIMATED DELIVERY"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, props.delivery_date || "reward deliver date")))));
+  }
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (RewardForm);
@@ -2192,7 +2308,8 @@ var RewardsListing = function RewardsListing(props) {
     } else {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         key: idx,
-        className: "empty-reward"
+        className: "empty-reward",
+        onClick: props.activateForm
       }, "+ once you add a reward, it will display here...");
     }
   }));
@@ -2220,7 +2337,9 @@ var RewardsSubheader = function RewardsSubheader(props) {
     className: "rewards-subheader"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     id: "rewards-subheader-text"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Rewards"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "It's good to provide a range of prices but not too many options.")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", null, "+Add a reward"));
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Rewards"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "It's good to provide a range of prices but not too many options.")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    onClick: props.activateForm
+  }, "+Add a reward"));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (RewardsSubheader);
@@ -3276,7 +3395,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _users_reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./users_reducer */ "./frontend/reducers/users_reducer.js");
 /* harmony import */ var _projects_reducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./projects_reducer */ "./frontend/reducers/projects_reducer.js");
 /* harmony import */ var _categories_reducer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./categories_reducer */ "./frontend/reducers/categories_reducer.js");
-/* harmony import */ var _rewards_reducer__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./rewards_reducer */ "./frontend/reducers/rewards_reducer.js");
+/* harmony import */ var _rewards_reducer__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./rewards_reducer */ "./frontend/reducers/rewards_reducer.js");
 
 
 
@@ -3286,7 +3405,7 @@ var EntitiesReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers
   users: _users_reducer__WEBPACK_IMPORTED_MODULE_1__["default"],
   projects: _projects_reducer__WEBPACK_IMPORTED_MODULE_2__["default"],
   categories: _categories_reducer__WEBPACK_IMPORTED_MODULE_3__["default"],
-  rewards: _rewards_reducer__WEBPACK_IMPORTED_MODULE_5__["default"]
+  rewards: _rewards_reducer__WEBPACK_IMPORTED_MODULE_4__["default"]
 });
 /* harmony default export */ __webpack_exports__["default"] = (EntitiesReducer);
 
@@ -3754,7 +3873,8 @@ __webpack_require__.r(__webpack_exports__);
 var createReward = function createReward(reward) {
   return $.ajax({
     method: 'post',
-    url: '/api/rewards'
+    url: '/api/rewards',
+    data: reward
   });
 };
 

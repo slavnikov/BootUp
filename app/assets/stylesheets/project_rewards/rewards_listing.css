@@ -6,6 +6,7 @@
 }
 
 .empty-reward {
+  cursor: pointer;
   height: 180px;
   width: 100%;
   border: 1px dashed #DCDEDD;

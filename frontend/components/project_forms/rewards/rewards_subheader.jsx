@@ -7,7 +7,7 @@ const RewardsSubheader = (props) => {
         <h2>Rewards</h2>
         <p>It's good to provide a range of prices but not too many options.</p>
       </div>
-      <button>+Add a reward</button>
+      <button onClick={props.activateForm}>+Add a reward</button>
     </div>
   );
 };

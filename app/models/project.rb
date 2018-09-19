@@ -13,4 +13,9 @@ class Project < ApplicationRecord
     foreign_key: :category_id,
     primary_key: :id,
     class_name: :Category
+
+  has_many :rewards,
+    foreign_key: :project_id,
+    primary_key: :id,
+    class_name: :Reward
 end
