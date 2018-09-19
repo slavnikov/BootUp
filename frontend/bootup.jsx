@@ -1,4 +1,4 @@
-// This is the entry file for webpack.
+// SDG
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Root from './components/root';

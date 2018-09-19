@@ -9,18 +9,35 @@ const RewardsListing = (props) => {
           if (props.rewards[idx]) {
             const reward = props.rewards[idx];
             return (
-              <span key={idx} className='filled-reward'>
-                <div id='reward-value'>
-                  ${reward.value}
-                </div>
-                <div id='reward-details'>
-                  <h1>{reward.name}</h1>
-                  <h2>{reward.description}</h2>
-                </div>
-                <div id='reward-date'>
-                  <h1>Estimated deliver date:</h1>
-                  {reward.delivery_date}
-                </div>
+              <span
+                key={idx}
+                className='filled-reward'
+                >
+                <main
+                  onClick={() => {
+                    props.populateState(reward);
+                    props.activateForm();
+                  }}>
+                  <div id='reward-value'>
+                    ${reward.value}
+                  </div>
+                  <div id='reward-details'>
+                    <h1>{reward.name}</h1>
+                    <h2>{reward.description}</h2>
+                  </div>
+                  <div id='reward-date'>
+                    <h1>Estimated deliver date:</h1>
+                    {reward.delivery_date}
+                  </div>
+                </main>
+                <section>
+                  <button onClick={() => {
+                      props.deleteReward(reward.id);
+                      props.deactivateForm();
+                    }}>
+                    Delete
+                  </button>
+                </section>
               </span>
             );
           } else {
@@ -42,17 +59,26 @@ const RewardsListing = (props) => {
             const reward = props.rewards[idx];
             return (
               <span key={idx} className='filled-reward'>
-                <div id='reward-value'>
-                  ${reward.value}
-                </div>
-                <div id='reward-details'>
-                  <h1>{reward.name}</h1>
-                  <h2>{reward.description}</h2>
-                </div>
-                <div id='reward-date'>
-                  <h1>Estimated deliver date:</h1>
-                  {reward.delivery_date}
-                </div>
+                <main
+                  onClick={() => {
+                    props.populateState(reward);
+                    props.activateForm();
+                  }}>
+                  <div id='reward-value'>
+                    ${reward.value}
+                  </div>
+                  <div id='reward-details'>
+                    <h1>{reward.name}</h1>
+                    <h2>{reward.description}</h2>
+                  </div>
+                  <div id='reward-date'>
+                    <h1>Estimated deliver date:</h1>
+                    {reward.delivery_date}
+                  </div>
+                </main>
+                <section>
+                  <button onClick={() => props.deleteReward(reward.id)}>Delete</button>
+                </section>
               </span>
             );
           }

@@ -11,6 +11,7 @@ class ProjectRewards extends React.Component {
     super(props);
     this.state = {
       formActive: false,
+      id: null,
       name: "",
       value: "",
       description: "",
@@ -19,10 +20,11 @@ class ProjectRewards extends React.Component {
     this.activateForm = this.activateForm.bind(this);
     this.deactivateForm = this.deactivateForm.bind(this);
     this.edit = this.edit.bind(this);
+    this.resetState = this.resetState.bind(this);
+    this.populateState = this.populateState.bind(this);
   }
 
   componentDidUpdate (prevProps, prevState) {
-
     if (this.state.formActive && !prevState.formActive) {
       window.scroll({
         top: 1000,
@@ -30,6 +32,32 @@ class ProjectRewards extends React.Component {
         behavior: 'smooth'
       });
     }
+  }
+
+  edit(field) {
+    return (e) => {
+      this.setState({[field]: e.currentTarget.value});
+    };
+  }
+
+  populateState(reward) {
+    this.setState({
+      id: reward.id,
+      name: reward.name,
+      value: reward.value,
+      description: reward.description,
+      delivery_date: reward.delivery_date,
+    });
+  }
+
+  resetState() {
+    this.setState({
+      id: null,
+      name: "",
+      value: "",
+      description: "",
+      delivery_date: "",
+    });
   }
 
   activateForm () {
@@ -43,16 +71,11 @@ class ProjectRewards extends React.Component {
       left: 0,
       behavior: 'smooth'
     });
+    this.resetState();
   }
 
   componentDidMount () {
     this.props.fetchProject(this.props.currentProjectId);
-  }
-
-  edit(field) {
-    return (e) => {
-      this.setState({[field]: e.currentTarget.value});
-    };
   }
 
   render () {
@@ -72,6 +95,9 @@ class ProjectRewards extends React.Component {
           <RewardsListing
             rewards={this.props.rewardsArr}
             activateForm={this.activateForm}
+            deleteReward={this.props.deleteReward}
+            deactivateForm={this.deactivateForm}
+            populateState={this.populateState}
           />
           <RewardForm
             formActive={this.state.formActive}
@@ -81,14 +107,18 @@ class ProjectRewards extends React.Component {
             value={this.state.value}
             delivery_date={this.state.delivery_date}
           />
-        <RewardFooter
-          name={this.state.name}
-          description={this.state.description}
-          value={this.state.value}
-          delivery_date={this.state.delivery_date}
-          currentProjectId={this.props.currentProjectId}
-          createReward={this.props.createReward}
-          deactivateForm={this.deactivateForm}
+          <RewardFooter
+            formActive = {this.state.formActive}
+            id = {this.state.id}
+            name={this.state.name}
+            description={this.state.description}
+            value={this.state.value}
+            delivery_date={this.state.delivery_date}
+            currentProjectId={this.props.currentProjectId}
+            createReward={this.props.createReward}
+            updateReward={this.props.updateReward}
+            deactivateForm={this.deactivateForm}
+            resetState={this.resetState}
           />
         </main>
       </div>

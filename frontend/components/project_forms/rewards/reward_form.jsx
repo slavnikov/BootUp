@@ -31,7 +31,7 @@ const RewardForm = (props) => {
             <div className='reward-input'>
               <h2>Estimated Delivery</h2>
               <p>Give yourself plenty of time. It is better to deliver to backers ahead of schedule than behind.</p>
-              <input type='date' value={props.deliver_date} onChange={props.edit('delivery_date')}></input>
+              <input type='date' value={props.delivery_date} onChange={props.edit('delivery_date')}></input>
             </div>
           </form>
           <aside id='reward-preview'>
@@ -40,7 +40,7 @@ const RewardForm = (props) => {
               <p>Get a glimpse of how this reward will look on your project page.</p>
             </div>
             <div id='reward-pane'>
-              <h1>Pledge of ${props.value || '1'} or more</h1>
+              <h1>Pledge of ${props.value || 1} or more</h1>
               <h3>{props.name || "Reward Title"}</h3>
               <h6>{props.description || "Reward description..."}</h6>
               <h4>ESTIMATED DELIVERY</h4>

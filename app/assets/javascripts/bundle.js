@@ -272,21 +272,46 @@ var receiveProjects = function receiveProjects(payload) {
 /*!********************************************!*\
   !*** ./frontend/actions/reward_actions.js ***!
   \********************************************/
-/*! exports provided: createReward */
+/*! exports provided: REMOVE_REWARD, createReward, updateReward, deleteReward, removeReward */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "REMOVE_REWARD", function() { return REMOVE_REWARD; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createReward", function() { return createReward; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateReward", function() { return updateReward; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteReward", function() { return deleteReward; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "removeReward", function() { return removeReward; });
 /* harmony import */ var _util_reward_api_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/reward_api_util */ "./frontend/util/reward_api_util.js");
 /* harmony import */ var _project_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./project_actions */ "./frontend/actions/project_actions.js");
 
 
+var REMOVE_REWARD = 'REMOVE_REWARD';
 var createReward = function createReward(reward) {
   return function (dispatch) {
     _util_reward_api_util__WEBPACK_IMPORTED_MODULE_0__["createReward"](reward).then(function (project) {
       dispatch(Object(_project_actions__WEBPACK_IMPORTED_MODULE_1__["receiveProject"])(project));
     });
+  };
+};
+var updateReward = function updateReward(reward) {
+  return function (dispatch) {
+    _util_reward_api_util__WEBPACK_IMPORTED_MODULE_0__["updateReward"](reward).then(function (project) {
+      dispatch(Object(_project_actions__WEBPACK_IMPORTED_MODULE_1__["receiveProject"])(project));
+    });
+  };
+};
+var deleteReward = function deleteReward(id) {
+  return function (dispatch) {
+    _util_reward_api_util__WEBPACK_IMPORTED_MODULE_0__["deleteReward"](id).then(function (reward) {
+      dispatch(removeReward(reward.id));
+    });
+  };
+};
+var removeReward = function removeReward(id) {
+  return {
+    type: REMOVE_REWARD,
+    id: id
   };
 };
 
@@ -493,7 +518,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_category_actions__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./actions/category_actions */ "./frontend/actions/category_actions.js");
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-// This is the entry file for webpack.
+// SDG
 
 
 
@@ -1917,6 +1942,7 @@ function (_React$Component) {
     _this = _possibleConstructorReturn(this, _getPrototypeOf(ProjectRewards).call(this, props));
     _this.state = {
       formActive: false,
+      id: null,
       name: "",
       value: "",
       description: "",
@@ -1925,6 +1951,8 @@ function (_React$Component) {
     _this.activateForm = _this.activateForm.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.deactivateForm = _this.deactivateForm.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.edit = _this.edit.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.resetState = _this.resetState.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.populateState = _this.populateState.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     return _this;
   }
 
@@ -1938,6 +1966,37 @@ function (_React$Component) {
           behavior: 'smooth'
         });
       }
+    }
+  }, {
+    key: "edit",
+    value: function edit(field) {
+      var _this2 = this;
+
+      return function (e) {
+        _this2.setState(_defineProperty({}, field, e.currentTarget.value));
+      };
+    }
+  }, {
+    key: "populateState",
+    value: function populateState(reward) {
+      this.setState({
+        id: reward.id,
+        name: reward.name,
+        value: reward.value,
+        description: reward.description,
+        delivery_date: reward.delivery_date
+      });
+    }
+  }, {
+    key: "resetState",
+    value: function resetState() {
+      this.setState({
+        id: null,
+        name: "",
+        value: "",
+        description: "",
+        delivery_date: ""
+      });
     }
   }, {
     key: "activateForm",
@@ -1957,20 +2016,12 @@ function (_React$Component) {
         left: 0,
         behavior: 'smooth'
       });
+      this.resetState();
     }
   }, {
     key: "componentDidMount",
     value: function componentDidMount() {
       this.props.fetchProject(this.props.currentProjectId);
-    }
-  }, {
-    key: "edit",
-    value: function edit(field) {
-      var _this2 = this;
-
-      return function (e) {
-        _this2.setState(_defineProperty({}, field, e.currentTarget.value));
-      };
     }
   }, {
     key: "render",
@@ -1985,7 +2036,10 @@ function (_React$Component) {
         activateForm: this.activateForm
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_rewards_rewards_listing__WEBPACK_IMPORTED_MODULE_3__["default"], {
         rewards: this.props.rewardsArr,
-        activateForm: this.activateForm
+        activateForm: this.activateForm,
+        deleteReward: this.props.deleteReward,
+        deactivateForm: this.deactivateForm,
+        populateState: this.populateState
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_rewards_reward_form__WEBPACK_IMPORTED_MODULE_4__["default"], {
         formActive: this.state.formActive,
         edit: this.edit,
@@ -1994,13 +2048,17 @@ function (_React$Component) {
         value: this.state.value,
         delivery_date: this.state.delivery_date
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_rewards_reward_footer__WEBPACK_IMPORTED_MODULE_5__["default"], {
+        formActive: this.state.formActive,
+        id: this.state.id,
         name: this.state.name,
         description: this.state.description,
         value: this.state.value,
         delivery_date: this.state.delivery_date,
         currentProjectId: this.props.currentProjectId,
         createReward: this.props.createReward,
-        deactivateForm: this.deactivateForm
+        updateReward: this.props.updateReward,
+        deactivateForm: this.deactivateForm,
+        resetState: this.resetState
       })));
     }
   }]);
@@ -2054,6 +2112,12 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     },
     fetchProject: function fetchProject(id) {
       return dispatch(Object(_actions_project_actions__WEBPACK_IMPORTED_MODULE_2__["fetchProject"])(id));
+    },
+    deleteReward: function deleteReward(id) {
+      return dispatch(Object(_actions_reward_actions__WEBPACK_IMPORTED_MODULE_1__["deleteReward"])(id));
+    },
+    updateReward: function updateReward(reward) {
+      return dispatch(Object(_actions_reward_actions__WEBPACK_IMPORTED_MODULE_1__["updateReward"])(reward));
     }
   };
 };
@@ -2230,23 +2294,57 @@ function (_React$Component) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+
 
 
 var RewardFooter = function RewardFooter(props) {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("footer", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    onClick: function onClick() {
-      props.createReward({
-        reward: {
-          name: props.name,
-          value: parseInt(props.value),
-          description: props.description,
-          delivery_date: props.delivery_date,
-          project_id: props.currentProjectId
-        }
-      });
-      props.deactivateForm();
+  var cancelButton = function cancelButton() {
+    if (props.formActive) {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: props.deactivateForm
+      }, "Cancel");
     }
-  }, "Save"));
+  };
+
+  var mainButton = function mainButton() {
+    if (!props.formActive) {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        to: "/setup/project/story"
+      }, "Next: Story");
+    } else if (!props.id) {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: function onClick() {
+          props.createReward({
+            reward: {
+              name: props.name,
+              value: parseInt(props.value),
+              description: props.description,
+              delivery_date: props.delivery_date,
+              project_id: props.currentProjectId
+            }
+          });
+          props.deactivateForm();
+        }
+      }, "Save");
+    } else {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: function onClick() {
+          props.updateReward({
+            id: props.id,
+            name: props.name,
+            value: parseInt(props.value),
+            description: props.description,
+            delivery_date: props.delivery_date,
+            project_id: props.currentProjectId
+          });
+          props.deactivateForm();
+        }
+      }, "Update");
+    }
+  };
+
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("footer", null, cancelButton(), mainButton());
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (RewardFooter);
@@ -2297,7 +2395,7 @@ var RewardForm = function RewardForm(props) {
       className: "reward-input"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Estimated Delivery"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Give yourself plenty of time. It is better to deliver to backers ahead of schedule than behind."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
       type: "date",
-      value: props.deliver_date,
+      value: props.delivery_date,
       onChange: props.edit('delivery_date')
     }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("aside", {
       id: "reward-preview"
@@ -2306,7 +2404,7 @@ var RewardForm = function RewardForm(props) {
       id: "reward-preview-text"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Reward Preview"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Get a glimpse of how this reward will look on your project page.")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       id: "reward-pane"
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Pledge of $", props.value || '1', " or more"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, props.name || "Reward Title"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, props.description || "Reward description..."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "ESTIMATED DELIVERY"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, props.delivery_date || "reward deliver date")))));
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Pledge of $", props.value || 1, " or more"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, props.name || "Reward Title"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, props.description || "Reward description..."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "ESTIMATED DELIVERY"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, props.delivery_date || "reward deliver date")))));
   }
 };
 
@@ -2336,13 +2434,23 @@ var RewardsListing = function RewardsListing(props) {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         key: idx,
         className: "filled-reward"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("main", {
+        onClick: function onClick() {
+          props.populateState(reward);
+          props.activateForm();
+        }
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "reward-value"
       }, "$", reward.value), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "reward-details"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, reward.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, reward.description)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "reward-date"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Estimated deliver date:"), reward.delivery_date));
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Estimated deliver date:"), reward.delivery_date)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: function onClick() {
+          props.deleteReward(reward.id);
+          props.deactivateForm();
+        }
+      }, "Delete")));
     } else {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         key: idx,
@@ -2356,13 +2464,22 @@ var RewardsListing = function RewardsListing(props) {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         key: idx,
         className: "filled-reward"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("main", {
+        onClick: function onClick() {
+          props.populateState(_reward);
+          props.activateForm();
+        }
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "reward-value"
       }, "$", _reward.value), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "reward-details"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, _reward.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, _reward.description)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "reward-date"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Estimated deliver date:"), _reward.delivery_date));
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Estimated deliver date:"), _reward.delivery_date)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: function onClick() {
+          return props.deleteReward(_reward.id);
+        }
+      }, "Delete")));
     }
   }));
 };
@@ -3546,8 +3663,10 @@ var ProjectsReducer = function ProjectsReducer() {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_project_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/project_actions */ "./frontend/actions/project_actions.js");
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _actions_reward_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions/reward_actions */ "./frontend/actions/reward_actions.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_2__);
+
 
 
 
@@ -3557,7 +3676,12 @@ var RewardsReducer = function RewardsReducer() {
 
   switch (action.type) {
     case _actions_project_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_PROJECT"]:
-      return Object(lodash__WEBPACK_IMPORTED_MODULE_1__["merge"])({}, state, action.payload.rewards);
+      return Object(lodash__WEBPACK_IMPORTED_MODULE_2__["merge"])({}, state, action.payload.rewards);
+
+    case _actions_reward_actions__WEBPACK_IMPORTED_MODULE_1__["REMOVE_REWARD"]:
+      var newState = Object(lodash__WEBPACK_IMPORTED_MODULE_2__["merge"])({}, state);
+      delete newState[action.id];
+      return newState;
 
     default:
       return state;
@@ -3916,17 +4040,34 @@ var deleteProject = function deleteProject(id) {
 /*!******************************************!*\
   !*** ./frontend/util/reward_api_util.js ***!
   \******************************************/
-/*! exports provided: createReward */
+/*! exports provided: createReward, updateReward, deleteReward */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createReward", function() { return createReward; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateReward", function() { return updateReward; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteReward", function() { return deleteReward; });
 var createReward = function createReward(reward) {
   return $.ajax({
     method: 'post',
     url: '/api/rewards',
     data: reward
+  });
+};
+var updateReward = function updateReward(reward) {
+  return $.ajax({
+    method: 'patch',
+    url: "/api/rewards/".concat(reward.id),
+    data: {
+      reward: reward
+    }
+  });
+};
+var deleteReward = function deleteReward(id) {
+  return $.ajax({
+    method: 'delete',
+    url: "/api/rewards/".concat(id)
   });
 };
 

@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { createReward } from '../../actions/reward_actions';
+import { createReward, deleteReward, updateReward } from '../../actions/reward_actions';
 import { fetchProject } from '../../actions/project_actions';
 import ProjectRewards from './prj_rewards';
 
@@ -24,6 +24,8 @@ const mapDispatchToProps = (dispatch) => {
   return ({
     createReward: (reward) => dispatch(createReward(reward)),
     fetchProject: (id) => dispatch(fetchProject(id)),
+    deleteReward: (id) => dispatch(deleteReward(id)),
+    updateReward: (reward) => dispatch(updateReward(reward)),
   });
 };
 

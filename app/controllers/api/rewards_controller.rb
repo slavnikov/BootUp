@@ -12,6 +12,26 @@ class Api::RewardsController < ApplicationController
     end
   end
 
+  def update
+    @reward = Reward.find_by(id: params[:id])
+
+    if @reward && @reward.update(reward_params)
+      @project = @reward.project
+      @user = @project.admin
+
+      render 'api/projects/show_payload'
+    else
+      render json: @reward.errors.full_messages, status: 404
+    end
+  end
+
+  def destroy
+    @reward = Reward.find_by(id: params[:id])
+    @reward.destroy
+
+    render :show
+  end
+
   private
 
   def reward_params
