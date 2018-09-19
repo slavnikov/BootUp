@@ -107,7 +107,7 @@ a1 = Project.create({
   end_date: '2018-12-24',
   complete: true
 })
-a1.image.attach(io: File.open("app/assets/images/starrynight.jpeg"), filename: "starrynight.jpeg")
+a1.image.attach(io: File.open("app/assets/images/starrynight.jpg"), filename: "starrynight.jpg")
 
 c1 = Project.create({
   title: "Make DC vs. Marvel Happen!",
