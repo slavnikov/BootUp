@@ -56,6 +56,23 @@ class ProjectPage extends React.Component {
     }
   }
 
+  calculateTimeLeft (endDate) {
+    const daysLeft = (Date.parse(endDate) - Date.now()) / 1000 / 60 / 60 / 24;
+
+    if (daysLeft > 1) {
+      return (
+        <div>
+          <h5>{Math.round(daysLeft)}</h5>
+          <h6>days to go</h6>
+        </div>
+      );
+    } else if (daysLeft > 0){
+      return <h5>Ends Today!</h5>;
+    } else {
+      return <h5>Ended</h5>;
+    }
+  }
+
   render () {
     if (!this.props.project) { //loading screen
       return (
@@ -64,6 +81,10 @@ class ProjectPage extends React.Component {
         </div>
       );
     }//loaing screen
+
+    const percentage = {
+      width: `${this.props.project.percentComplete || 0}%`,
+    };
 
     return (
       <div>
@@ -98,14 +119,14 @@ class ProjectPage extends React.Component {
             <div id='main-right'>
               <div id='money-bar'>
               </div>
-              <div id='green-money-bar'>
+              <div id='green-money-bar' style={percentage}>
               </div>
-              <h5 id='money-green'>$5,048</h5>
-              <h6>pledged of ${this.props.project.pledge_goal || " your pledge goal here..."}</h6>
-              <h5>155</h5>
+              <h5 id='money-green'>{`$ ${this.props.project.totalRaised}`}</h5>
+              <h6>pledged of ${this.props.project.pledge_goal || " your pledge goal here..."} goal</h6>
+              <h5>{this.props.project.totalBackers}</h5>
               <h6>backers</h6>
-              <h5>6</h5>
-              <h6>days to go</h6>
+              {this.calculateTimeLeft(this.props.project.end_date)}
+              <button className='light-green-button' onClick={()=> {window.scrollBy({top:900, behavior: 'smooth'})}}>Support This Project</button>
             </div>
           </section>
         </main>

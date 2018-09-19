@@ -7,3 +7,27 @@
   margin: 0 auto;
   display: table;
 }
+
+.light-green-button {
+  width: 100%;
+  height: 42px;
+  border: none;
+  background-color: #009E74;
+  color: white;
+  font-size: 14px;
+  margin-top: 31px;
+  transition: background-color 0.5s, margin-top 0s, margin-bottom 0s;
+}
+
+.light-green-button:hover {
+  background-color: #037362;
+  cursor: pointer;
+  margin-top: 30px;
+  margin-bottom: 1px;
+}
+
+.light-green-button:focus {
+  margin-top: 31px;
+  margin-bottom: 0px;
+  outline: none;
+}

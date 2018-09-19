@@ -3,7 +3,10 @@ class Api::BackingsController < ApplicationController
     @backing = Backing.new(backing_params)
 
     if @backing.save
-      render :show
+      @project = @backing.project
+      @user = @project.admin
+
+      render 'api/projects/show_payload'
     else
       render json: @backing.errors.full_messages, status: 404
     end

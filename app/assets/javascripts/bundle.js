@@ -97,10 +97,14 @@
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createBacking", function() { return createBacking; });
 /* harmony import */ var _util_backing_api_util_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/backing_api_util.js */ "./frontend/util/backing_api_util.js");
+/* harmony import */ var _project_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./project_actions */ "./frontend/actions/project_actions.js");
+
 
 var createBacking = function createBacking(backing) {
   return function (dispatch) {
-    _util_backing_api_util_js__WEBPACK_IMPORTED_MODULE_0__["createBacking"](backing);
+    _util_backing_api_util_js__WEBPACK_IMPORTED_MODULE_0__["createBacking"](backing).then(function (payload) {
+      dispatch(Object(_project_actions__WEBPACK_IMPORTED_MODULE_1__["receiveProject"])(payload));
+    });
   };
 };
 
@@ -1351,6 +1355,19 @@ function (_React$Component) {
       }
     }
   }, {
+    key: "calculateTimeLeft",
+    value: function calculateTimeLeft(endDate) {
+      var daysLeft = (Date.parse(endDate) - Date.now()) / 1000 / 60 / 60 / 24;
+
+      if (daysLeft > 1) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, Math.round(daysLeft)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "days to go"));
+      } else if (daysLeft > 0) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "Ends Today!");
+      } else {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "Ended");
+      }
+    }
+  }, {
     key: "render",
     value: function render() {
       if (!this.props.project) {
@@ -1359,6 +1376,9 @@ function (_React$Component) {
       } //loaing screen
 
 
+      var percentage = {
+        width: "".concat(this.props.project.percentComplete || 0, "%")
+      };
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_header_container__WEBPACK_IMPORTED_MODULE_1__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("main", {
         className: "project-main"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
@@ -1380,10 +1400,19 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "money-bar"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        id: "green-money-bar"
+        id: "green-money-bar",
+        style: percentage
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
         id: "money-green"
-      }, "$5,048"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "pledged of $", this.props.project.pledge_goal || " your pledge goal here..."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "155"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "backers"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "6"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "days to go")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+      }, "$ ".concat(this.props.project.totalRaised)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "pledged of $", this.props.project.pledge_goal || " your pledge goal here...", " goal"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, this.props.project.totalBackers), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "backers"), this.calculateTimeLeft(this.props.project.end_date), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "light-green-button",
+        onClick: function onClick() {
+          window.scrollBy({
+            top: 900,
+            behavior: 'smooth'
+          });
+        }
+      }, "Support This Project")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
         id: "prj-nav"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Campaign")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
         id: "project-bottom"

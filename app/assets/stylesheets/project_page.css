@@ -147,8 +147,8 @@
   position: relative;
   top: -23px;
   height: 3px;
-  width: 50%;
   background-color: #037362;
+  max-width: 100%;
 }
 
 #money-green {
