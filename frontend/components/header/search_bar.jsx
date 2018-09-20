@@ -21,7 +21,7 @@ class SearchBar extends React.Component {
             }}>
           </input>
         </form>
-        <i class="fa fa-times" onClick={this.props.toggleSearch}></i>
+        <i className="fa fa-times" onClick={this.props.toggleSearch}></i>
       </span>
     );
   }

@@ -56,7 +56,7 @@ const HeaderBasic = (props) => {
         <div id="div3">
           <div id='search-button' onClick={props.toggleSearch}>
             Search
-            <i class="fa fa-search"></i>
+            <i className="fa fa-search"></i>
           </div>
           <HeaderButton
             currentUserId={ props.currentUserId }
@@ -174,7 +174,7 @@ const HeaderButton = (props) => {
     );
   } else {
     return (
-      <div id="div3">
+      <div>
         <Link to='/login' >Sign in</Link>
       </div>
     );

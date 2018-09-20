@@ -1,13 +1,12 @@
 import React from 'react';
 import HeaderC from '../header_container';
-import LoadingSpinner from '../util/loading_spinner';
 import HomeGallery from './home_gallery';
 
 class HomePage extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      category_id: null,
+      categoryId: null,
       loading: 0,
       user_count: this.props.site_data.user_count,
       active_projects: this.props.site_data.active_projects,
@@ -16,38 +15,22 @@ class HomePage extends React.Component {
   }
 
   componentWillReceiveProps (nextProps) {
-    this.setState({loading: (this.state.loading-1)});
-
-    if (this.state.category_id === null && nextProps.categories) {
-      this.setState({category_id: Object.keys(nextProps.categories)[0]});
+    if (this.state.categoryId === null && nextProps.categories) {
+      this.setState({categoryId: Object.keys(nextProps.categories)[0]});
     }
     if (nextProps.site_data.user_count && !this.state.user_count) {
-      this.setState(nextProps.site_data)
+      this.setState(nextProps.site_data);
     }
-  }
-  componentWillMount () {
-    this.setState({loading: 2});
-    this.props.fetchCategoryIndex();
-    this.props.fetchProjects();
   }
 
   componentDidMount () {
-    this.setState({loading: (this.state.loading + 1)});
+    this.props.fetchCategoryIndex();
+    this.props.fetchProjects();
     this.props.fetchSiteData();
   }
 
   render () {
-
-    if (this.state.loading > 0) {
-      return <LoadingSpinner/>;
-    }
-
-    const currCatId = parseInt(this.state.category_id) || parseInt(Object.keys(this.props.categories)[0]);
-    const projectsArr = Object.values(this.props.projects).filter((project) => {
-      return project.category_id === currCatId;
-    });
     const date = new Date();
-
     return (
       <div>
         <HeaderC/>
@@ -76,8 +59,8 @@ class HomePage extends React.Component {
                 <li
                   key={category_id}
                   id={category_id}
-                  onClick={() => {this.setState({category_id: category_id});}}
-                  className={this.state.category_id === category_id ? 'chosen-nav' : ''}>
+                  onClick={() => {this.setState({categoryId: category_id});}}
+                  className={this.state.categoryId === category_id ? 'chosen-nav' : ''}>
                   {this.props.categories[category_id].name}
                 </li>
               );
@@ -85,10 +68,10 @@ class HomePage extends React.Component {
           }
         </ul>
         <HomeGallery
-          categories={this.props.categories}
-          currCatId={currCatId}
-          projectsArr={projectsArr}
-          users={this.props.users}
+          categories={this.props.categories || {}}
+          currCatId={this.state.categoryId}
+          projects={this.props.projects || {}}
+          users={this.props.users || {}}
         />
       </div>
     );

@@ -59,9 +59,10 @@ class ProjectSupport extends React.Component {
     return (
       <div>
         {this.defaultSupportField()}
-        {this.props.rewards.map((reward) => {
+        {this.props.rewards.map((reward, idx) => {
           return (
             <PledgePane
+              key={idx}
               reward={reward}
               adminId={this.props.adminId}
               userId = {this.props.userId}

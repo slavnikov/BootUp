@@ -499,26 +499,6 @@ var receiveSiteData = function receiveSiteData(data) {
 
 /***/ }),
 
-/***/ "./frontend/actions/ui_actions.js":
-/*!****************************************!*\
-  !*** ./frontend/actions/ui_actions.js ***!
-  \****************************************/
-/*! exports provided: DB_FETCH_COMMENCED, dbFetchCommenced */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DB_FETCH_COMMENCED", function() { return DB_FETCH_COMMENCED; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "dbFetchCommenced", function() { return dbFetchCommenced; });
-var DB_FETCH_COMMENCED = 'DB_FETCH_COMMENCED';
-var dbFetchCommenced = function dbFetchCommenced() {
-  return {
-    type: DB_FETCH_COMMENCED
-  };
-};
-
-/***/ }),
-
 /***/ "./frontend/actions/user_actions.js":
 /*!******************************************!*\
   !*** ./frontend/actions/user_actions.js ***!
@@ -860,7 +840,7 @@ var HeaderBasic = function HeaderBasic(props) {
     id: "search-button",
     onClick: props.toggleSearch
   }, "Search", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    class: "fa fa-search"
+    className: "fa fa-search"
   })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(HeaderButton, {
     currentUserId: props.currentUserId,
     endSession: props.endSession,
@@ -980,9 +960,7 @@ var HeaderButton = function HeaderButton(props) {
       onClick: props.endSession
     }, "Log Out"))));
   } else {
-    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      id: "div3"
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
       to: "/login"
     }, "Sign in"));
   }
@@ -1059,7 +1037,7 @@ function (_React$Component) {
           });
         }
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-        class: "fa fa-times",
+        className: "fa fa-times",
         onClick: this.props.toggleSearch
       }));
     }
@@ -1273,37 +1251,50 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+/* harmony import */ var _util_loading_spinner__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../util/loading_spinner */ "./frontend/components/util/loading_spinner.jsx");
+
 
 
 
 var HomeGallery = function HomeGallery(props) {
-  if (props.projectsArr.length < 1) {
-    return null;
+  if (!Object.keys(props.projects).length || !Object.keys(props.categories).length || !Object.keys(props.users).length) {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_loading_spinner__WEBPACK_IMPORTED_MODULE_2__["default"], null);
+  }
+
+  var currCatId = props.currCatId || Object.keys(props.categories)[0];
+  var projectsArr = Object.values(props.projects).filter(function (project) {
+    return project.category_id === parseInt(currCatId);
+  });
+
+  if (projectsArr.length < 1) {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_loading_spinner__WEBPACK_IMPORTED_MODULE_2__["default"], null);
   }
 
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("main", {
     id: "home-gallery"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, props.categories[props.currCatId].name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, props.categories[currCatId].name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
     id: "galleries"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("aside", {
     id: "feature"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "FEATURED PROJECT"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     id: "featured-image"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-    to: "/project/".concat(props.projectsArr[0].id)
+    to: "/project/".concat(projectsArr[0].id)
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-    src: props.projectsArr[0].imageUrl
+    src: projectsArr[0].imageUrl
   }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     id: "feature-titles"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, props.projectsArr[0].title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "by ".concat(props.users[props.projectsArr[0].admin_id].name)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "".concat(props.projectsArr[0].percentComplete, "% FUNDED")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("aside", {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, projectsArr[0].title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "by ".concat(props.users[projectsArr[0].admin_id].name)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "".concat(projectsArr[0].percentComplete, "% FUNDED")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("aside", {
     id: "gallery-options"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, props.projectsArr.map(function (project, idx) {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, projectsArr.map(function (project, idx) {
     if (idx === 0) {
       return;
     } else if (!project.complete) {
       return;
     } else {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+        key: idx
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
         to: "/project/".concat(project.id)
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "gallery-thumb"
@@ -1332,8 +1323,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _header_container__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../header_container */ "./frontend/components/header_container.js");
-/* harmony import */ var _util_loading_spinner__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../util/loading_spinner */ "./frontend/components/util/loading_spinner.jsx");
-/* harmony import */ var _home_gallery__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./home_gallery */ "./frontend/components/home_page/home_gallery.jsx");
+/* harmony import */ var _home_gallery__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./home_gallery */ "./frontend/components/home_page/home_gallery.jsx");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1356,7 +1346,6 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
-
 var HomePage =
 /*#__PURE__*/
 function (_React$Component) {
@@ -1369,7 +1358,7 @@ function (_React$Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(HomePage).call(this, props));
     _this.state = {
-      category_id: null,
+      categoryId: null,
       loading: 0,
       user_count: _this.props.site_data.user_count,
       active_projects: _this.props.site_data.active_projects,
@@ -1381,13 +1370,9 @@ function (_React$Component) {
   _createClass(HomePage, [{
     key: "componentWillReceiveProps",
     value: function componentWillReceiveProps(nextProps) {
-      this.setState({
-        loading: this.state.loading - 1
-      });
-
-      if (this.state.category_id === null && nextProps.categories) {
+      if (this.state.categoryId === null && nextProps.categories) {
         this.setState({
-          category_id: Object.keys(nextProps.categories)[0]
+          categoryId: Object.keys(nextProps.categories)[0]
         });
       }
 
@@ -1396,20 +1381,10 @@ function (_React$Component) {
       }
     }
   }, {
-    key: "componentWillMount",
-    value: function componentWillMount() {
-      this.setState({
-        loading: 2
-      });
-      this.props.fetchCategoryIndex();
-      this.props.fetchProjects();
-    }
-  }, {
     key: "componentDidMount",
     value: function componentDidMount() {
-      this.setState({
-        loading: this.state.loading + 1
-      });
+      this.props.fetchCategoryIndex();
+      this.props.fetchProjects();
       this.props.fetchSiteData();
     }
   }, {
@@ -1417,14 +1392,6 @@ function (_React$Component) {
     value: function render() {
       var _this2 = this;
 
-      if (this.state.loading > 0) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_loading_spinner__WEBPACK_IMPORTED_MODULE_2__["default"], null);
-      }
-
-      var currCatId = parseInt(this.state.category_id) || parseInt(Object.keys(this.props.categories)[0]);
-      var projectsArr = Object.values(this.props.projects).filter(function (project) {
-        return project.category_id === currCatId;
-      });
       var date = new Date();
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_header_container__WEBPACK_IMPORTED_MODULE_1__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         id: "home-subheader"
@@ -1436,16 +1403,16 @@ function (_React$Component) {
           id: category_id,
           onClick: function onClick() {
             _this2.setState({
-              category_id: category_id
+              categoryId: category_id
             });
           },
-          className: _this2.state.category_id === category_id ? 'chosen-nav' : ''
+          className: _this2.state.categoryId === category_id ? 'chosen-nav' : ''
         }, _this2.props.categories[category_id].name);
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_home_gallery__WEBPACK_IMPORTED_MODULE_3__["default"], {
-        categories: this.props.categories,
-        currCatId: currCatId,
-        projectsArr: projectsArr,
-        users: this.props.users
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_home_gallery__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        categories: this.props.categories || {},
+        currCatId: this.state.categoryId,
+        projects: this.props.projects || {},
+        users: this.props.users || {}
       }));
     }
   }]);
@@ -1469,10 +1436,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _actions_category_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../actions/category_actions */ "./frontend/actions/category_actions.js");
 /* harmony import */ var _actions_project_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/project_actions */ "./frontend/actions/project_actions.js");
-/* harmony import */ var _actions_ui_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/ui_actions */ "./frontend/actions/ui_actions.js");
-/* harmony import */ var _home_page__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./home_page */ "./frontend/components/home_page/home_page.jsx");
-/* harmony import */ var _actions_site_data_actions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../actions/site_data_actions */ "./frontend/actions/site_data_actions.js");
-
+/* harmony import */ var _home_page__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./home_page */ "./frontend/components/home_page/home_page.jsx");
+/* harmony import */ var _actions_site_data_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../actions/site_data_actions */ "./frontend/actions/site_data_actions.js");
 
 
 
@@ -1497,16 +1462,13 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     fetchProjects: function fetchProjects() {
       return dispatch(Object(_actions_project_actions__WEBPACK_IMPORTED_MODULE_2__["fetchProjects"])());
     },
-    dbFetchCommenced: function dbFetchCommenced() {
-      return dispatch(Object(_actions_ui_actions__WEBPACK_IMPORTED_MODULE_3__["dbFetchCommenced"])());
-    },
     fetchSiteData: function fetchSiteData() {
-      return dispatch(Object(_actions_site_data_actions__WEBPACK_IMPORTED_MODULE_5__["fetchSiteData"])());
+      return dispatch(Object(_actions_site_data_actions__WEBPACK_IMPORTED_MODULE_4__["fetchSiteData"])());
     }
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_home_page__WEBPACK_IMPORTED_MODULE_4__["default"]));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_home_page__WEBPACK_IMPORTED_MODULE_3__["default"]));
 
 /***/ }),
 
@@ -1981,8 +1943,9 @@ function (_React$Component) {
         return this.defaultSupportField();
       }
 
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.defaultSupportField(), this.props.rewards.map(function (reward) {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.defaultSupportField(), this.props.rewards.map(function (reward, idx) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_pledge_pane__WEBPACK_IMPORTED_MODULE_1__["default"], {
+          key: idx,
           reward: reward,
           adminId: _this3.props.adminId,
           userId: _this3.props.userId,
