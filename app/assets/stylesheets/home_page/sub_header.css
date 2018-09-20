@@ -4,6 +4,7 @@
   border-bottom: 1px solid #656969;
   height: 90px;
   box-sizing: border-box;
+  min-width: 1150px;
 }
 
 #home-subheader div {
@@ -24,4 +25,8 @@
   font-size: 15px;
   color: #282828;
   margin-top: 4px;
+}
+
+#home-subheader div:last-child {
+  border-right: 0px;
 }
