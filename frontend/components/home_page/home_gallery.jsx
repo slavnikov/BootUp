@@ -51,6 +51,7 @@ const HomeGallery = (props) => {
                     <div>
                       <Link to={`/project/${project.id}`}>{project.title}</Link>
                       <p>{project.subtitle}</p>
+                      <p>{`${project.percentComplete}% complete`}</p>
                     </div>
                   </li>;
                 }

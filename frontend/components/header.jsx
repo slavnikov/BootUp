@@ -146,7 +146,7 @@ const HeaderButton = (props) => {
   if (props.currentUserId) {
     return (
       <div>
-        <button className="profilePic" onClick={menuToggle}></button>
+        <button className="profilePic" onClick={menuToggle}><i className="fa fa-user-circle"></i></button>
         <menu className="hidden" id="menu">
           <header>{props.users[props.currentUserId].name}</header>
           <main>

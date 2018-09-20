@@ -10,7 +10,7 @@ class HomePage extends React.Component {
       loading: 0,
       user_count: this.props.site_data.user_count,
       active_projects: this.props.site_data.active_projects,
-      live_projects: this.props.site_data.live_projects
+      backings: this.props.site_data.backings
     };
   }
 
@@ -48,8 +48,8 @@ class HomePage extends React.Component {
             <h6>{this.state.active_projects}</h6>
           </div>
           <div>
-            <p>LIVE PROJECTS</p>
-            <h6>{this.state.live_projects}</h6>
+            <p>BACKINGS</p>
+            <h6>{this.state.backings}</h6>
           </div>
         </span>
         <ul id='home-nav'>

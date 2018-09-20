@@ -121,18 +121,30 @@
   height: 36px;
   width: 36px;
   border-radius: 50%;
-  background-color: black;
+  background-color: white;
   border: 0px;
   padding: 0px;
   float: right;
+  transition: box-shadow 0.3s;
 }
 
 .profilePic:hover {
   cursor: pointer;
+  box-shadow: 0 3px 6px 0 rgba(0,0,0,0.3);
 }
 
 .profilePic:focus {
   outline: 0px;
+}
+
+.fa-user-circle {
+  color: #282828;
+  font-size: 35px;
+  transition: font-size 0.3s;
+}
+
+.fa-user-circle:hover {
+  font-size: 35.3px;
 }
 
 .user-menu {

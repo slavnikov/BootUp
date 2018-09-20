@@ -1,1 +1,1 @@
-json.extract! @data, :user_count, :active_projects, :live_projects
+json.extract! @data, :user_count, :active_projects, :backings

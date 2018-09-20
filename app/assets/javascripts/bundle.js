@@ -944,7 +944,9 @@ var HeaderButton = function HeaderButton(props) {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
       className: "profilePic",
       onClick: menuToggle
-    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("menu", {
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+      className: "fa fa-user-circle"
+    })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("menu", {
       className: "hidden",
       id: "menu"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("header", null, props.users[props.currentUserId].name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("main", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
@@ -1302,7 +1304,7 @@ var HomeGallery = function HomeGallery(props) {
         src: project.imageUrl
       }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
         to: "/project/".concat(project.id)
-      }, project.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, project.subtitle)));
+      }, project.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, project.subtitle), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "".concat(project.percentComplete, "% complete"))));
     }
   })))));
 };
@@ -1362,7 +1364,7 @@ function (_React$Component) {
       loading: 0,
       user_count: _this.props.site_data.user_count,
       active_projects: _this.props.site_data.active_projects,
-      live_projects: _this.props.site_data.live_projects
+      backings: _this.props.site_data.backings
     };
     return _this;
   }
@@ -1395,7 +1397,7 @@ function (_React$Component) {
       var date = new Date();
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_header_container__WEBPACK_IMPORTED_MODULE_1__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         id: "home-subheader"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, date.toDateString()), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "Bringing creative projects to life.")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "TOTAL USERS"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, this.state.user_count)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "ACTIVE PROJECTS"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, this.state.active_projects)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "LIVE PROJECTS"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, this.state.live_projects))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, date.toDateString()), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "Bringing creative projects to life.")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "TOTAL USERS"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, this.state.user_count)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "ACTIVE PROJECTS"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, this.state.active_projects)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "BACKINGS"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, this.state.backings))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
         id: "home-nav"
       }, Object.keys(this.props.categories).map(function (category_id) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {

@@ -16,7 +16,7 @@
 
 #search-render li:hover {
   border-top: 1px solid #f8f8f8;
-  box-shadow: 0 2px 6px 0 rgba(0,0,0,0.17)
+  box-shadow: 0 2px 6px 0 rgba(0,0,0,0.17);
 }
 
 #search-render li a {

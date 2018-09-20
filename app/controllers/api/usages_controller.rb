@@ -3,7 +3,7 @@ class Api::UsagesController < ApplicationController
     @data = {
       user_count: User.count,
       active_projects: Project.count,
-      live_projects: Project.where(complete: true).count
+      backings: Backing.count,
     }
 
     return :show
