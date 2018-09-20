@@ -33,7 +33,7 @@ class Api::ProjectsController < ApplicationController
   end
 
   def index
-    @projects = Project.where(complete: true)
+    @projects = Project.where(complete: true).includes('admin', 'backings')
 
     render :index
   end

@@ -20,20 +20,4 @@ class Project < ApplicationRecord
     class_name: :Reward
 
   has_many :backings
-
-  def total_backers
-    self.backings.count
-  end
-
-  def total_raised
-    self.backings.inject(0) { |sum, backing| sum += backing.value }
-  end
-
-  def percentage_complete
-    if self.pledge_goal > 0
-      ((self.total_raised / self.pledge_goal.to_f) * 100).round
-    else
-      0
-    end
-  end
 end

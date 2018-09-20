@@ -1295,7 +1295,7 @@ var HomeGallery = function HomeGallery(props) {
     src: props.projectsArr[0].imageUrl
   }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     id: "feature-titles"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, props.projectsArr[0].title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "by ".concat(props.users[props.projectsArr[0].admin_id].name)))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("aside", {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, props.projectsArr[0].title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "by ".concat(props.users[props.projectsArr[0].admin_id].name)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "".concat(props.projectsArr[0].percentComplete, "% FUNDED")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("aside", {
     id: "gallery-options"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, props.projectsArr.map(function (project, idx) {
     if (idx === 0) {

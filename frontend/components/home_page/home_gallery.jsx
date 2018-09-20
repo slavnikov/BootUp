@@ -18,6 +18,7 @@ const HomeGallery = (props) => {
             <div id='feature-titles'>
               <h1>{props.projectsArr[0].title}</h1>
               <h4>{`by ${props.users[props.projectsArr[0].admin_id].name}`}</h4>
+              <h5>{`${props.projectsArr[0].percentComplete}% FUNDED`}</h5>
             </div>
         </aside>
         <aside id='gallery-options'>

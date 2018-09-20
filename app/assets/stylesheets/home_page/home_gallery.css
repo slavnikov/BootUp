@@ -42,9 +42,10 @@
 
 #feature-titles {
   position: relative;
-  bottom: 135px;
-  left: 20px;
-  width: 80%;
+      bottom: 165px;
+      left: 20px;
+      width: 80%;
+      padding-top: 7px;
 }
 
 #feature-titles h1{
@@ -59,12 +60,23 @@
 
 #feature-titles h4 {
   font-weight: lighter;
-  display: inline;
+  display: table;
   background-color: white;
   font-size: 16px;
   text-transform: capitalize;
   padding: 7px;
   margin: 0px;
+  margin-top: -8px;
+}
+
+#feature-titles h5 {
+  background-color: white;
+display: inline-block;
+font-weight: bolder;
+padding: 5px;
+/* color: #282828; */
+margin-top: 10px;
+font-size: 14px;
 }
 
 #featured-image img {
