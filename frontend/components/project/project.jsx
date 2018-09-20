@@ -126,7 +126,7 @@ class ProjectPage extends React.Component {
               <h5>{this.props.project.totalBackers}</h5>
               <h6>backers</h6>
               {this.calculateTimeLeft(this.props.project.end_date)}
-              <button className='light-green-button' onClick={()=> {window.scrollBy({top:900, behavior: 'smooth'})}}>Support This Project</button>
+              <button className='light-green-button' onClick={()=> {window.scrollBy({top:900, behavior: 'smooth'});}}>Support This Project</button>
             </div>
           </section>
         </main>
@@ -141,6 +141,7 @@ class ProjectPage extends React.Component {
           <div id='prj-rewards'>
             <h1>Support</h1>
             <ProjectSupport
+              adminId={this.props.project.admin_id}
               rewards={this.props.rewardsArr}
               createBacking={this.props.createBacking}
               projectId={this.props.match.params.project_id}

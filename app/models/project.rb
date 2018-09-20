@@ -30,6 +30,10 @@ class Project < ApplicationRecord
   end
 
   def percentage_complete
-    ((self.total_raised / self.pledge_goal.to_f) * 100).round
+    if self.pledge_goal > 0
+      ((self.total_raised / self.pledge_goal.to_f) * 100).round
+    else
+      0
+    end
   end
 end

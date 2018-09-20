@@ -22,7 +22,13 @@ class Api::ProjectsController < ApplicationController
 
       render :show_payload
     else
-      render json: @project.errors.full_messages, status: 422
+      errors = []
+      @project.errors.full_messages.each do |error|
+        if error == "Title has already been taken"
+          errors << "There is already a project with that name. Please pick another."
+        end
+      end
+      render json: errors, status: 422
     end
   end
 

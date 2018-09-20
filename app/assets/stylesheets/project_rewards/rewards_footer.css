@@ -47,3 +47,7 @@ border-top: 1px solid #dcdedd;
   margin-top: -1px;
   margin-bottom: 1px;
 }
+
+.pale {
+  opacity: 0.5;
+}

@@ -1,5 +1,6 @@
 import * as PrjUtil from '../util/project_api_util';
 import { receiveCurrentProject, clearCurrentProject } from './session_actions';
+import { receiveProjectError } from './error_actions';
 
 export const RECEIVE_CURRENT_PROJECT_PROPS = 'RECEIVE_CURRENT_PROJECT_PROPS';
 export const RECEIVE_PROJECT = 'RECEIVE_PROJECT';
@@ -27,9 +28,15 @@ export const createProject = (props) => {
 
 export const updateProject = (formData) => {
   return (dispatch) => {
-    PrjUtil.updateProject(formData).then((payload) => {
-      dispatch(receiveProject(payload));
-    });
+    PrjUtil.updateProject(formData).then(
+      (payload) => {
+        dispatch(receiveProject(payload));
+        dispatch(receiveProjectError([]));
+      },
+      (errors) => {
+        dispatch(receiveProjectError(errors.responseJSON));
+      }
+    );
   };
 };
 

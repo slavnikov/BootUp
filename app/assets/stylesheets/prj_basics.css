@@ -26,6 +26,10 @@
     text-align: center;
 }
 
+.basics-form {
+  padding-bottom: 50px;
+}
+
 .form-li {
   border-bottom: 1px solid #dcdedd;
   display: flex;
@@ -265,4 +269,14 @@ border-top: 1px solid #dcdedd;
 
 .basics-form div:last-child {
   margin-bottom: 42px;
+}
+
+#footer-errors {
+  height: 42px;
+display: flex;
+align-items: center;
+background-color: #dd919d;
+padding: 0px 12px;
+font-size: 15px;
+color: #383838;
 }

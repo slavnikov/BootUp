@@ -111,7 +111,7 @@ class ProjectBasics extends React.Component {
 
   finalButton () {
     if (this.checkForCompleteness()) {
-      return <Link to='/setup/project/story'>Next: Story</Link>;
+      return <Link to='/setup/project/rewards'>Next: Rewards</Link>;
     } else {
       return <button onClick={this.saveChanges.bind(this)}>Save</button>;
     }
@@ -129,6 +129,19 @@ class ProjectBasics extends React.Component {
           Select image file
         </div>
       );
+    }
+  }
+
+  renderErrors() {
+
+    if (this.props.projectErrors.length > 0) {
+      return (
+        <aside id='footer-errors'>
+          {this.props.projectErrors[0]}
+        </aside>
+      );
+    } else {
+      return null;
     }
   }
 
@@ -308,6 +321,7 @@ class ProjectBasics extends React.Component {
           </div>
         </form>
         <footer>
+          {this.renderErrors()}
           {this.changesMade()}
           {this.finalButton()}
         </footer>

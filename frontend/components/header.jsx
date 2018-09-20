@@ -97,7 +97,9 @@ const HeaderNewProjectNav = (props) => {
         <Link to='/' ><p className="nav-logo">BootUp</p></Link>
         <Link to='/setup/project/basics'>Basics</Link>
         <i className="fa fa-caret-right"></i>
-          <Link to='/setup/project/story'>Story</Link>
+        <Link to='/setup/project/rewards'>Rewards</Link>
+        <i className="fa fa-caret-right"></i>
+        <Link to='/setup/project/story'>Story</Link>
       </div>
       <div id="div6">
         <Link to='/setup/project/overview'>Exit to Project Overview</Link>

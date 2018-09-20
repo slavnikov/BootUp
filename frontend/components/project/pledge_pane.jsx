@@ -43,7 +43,11 @@ class PledgePane extends React.Component {
             onChange={(e)=> {this.setState({value: e.currentTarget.value});}}
             min={this.props.reward.value}>
           </input>
-          <button onClick={this.submitBacking.bind(this)}>Continue</button>
+          <button
+            className={(this.props.userId === this.props.adminId) || !this.props.userId ? 'deactivated pale' : ''}
+            onClick={this.submitBacking.bind(this)}>
+            Continue
+          </button>
         </div>
         <div
           id='foregorund'

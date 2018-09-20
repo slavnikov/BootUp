@@ -162,17 +162,26 @@ var receiveCategoryIndex = function receiveCategoryIndex(categories) {
 /*!*******************************************!*\
   !*** ./frontend/actions/error_actions.js ***!
   \*******************************************/
-/*! exports provided: RECEIVE_SESSION_ERROR, receiveSessionError */
+/*! exports provided: RECEIVE_SESSION_ERROR, RECEIVE_PROJECT_ERROR, receiveSessionError, receiveProjectError */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_SESSION_ERROR", function() { return RECEIVE_SESSION_ERROR; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_PROJECT_ERROR", function() { return RECEIVE_PROJECT_ERROR; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveSessionError", function() { return receiveSessionError; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveProjectError", function() { return receiveProjectError; });
 var RECEIVE_SESSION_ERROR = 'RECEIVE_SESSION_ERROR';
+var RECEIVE_PROJECT_ERROR = 'RECEIVE_PROJECT_ERROR';
 var receiveSessionError = function receiveSessionError(errorArr) {
   return {
     type: RECEIVE_SESSION_ERROR,
+    errors: errorArr
+  };
+};
+var receiveProjectError = function receiveProjectError(errorArr) {
+  return {
+    type: RECEIVE_PROJECT_ERROR,
     errors: errorArr
   };
 };
@@ -205,6 +214,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveProjects", function() { return receiveProjects; });
 /* harmony import */ var _util_project_api_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/project_api_util */ "./frontend/util/project_api_util.js");
 /* harmony import */ var _session_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./session_actions */ "./frontend/actions/session_actions.js");
+/* harmony import */ var _error_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./error_actions */ "./frontend/actions/error_actions.js");
+
 
 
 var RECEIVE_CURRENT_PROJECT_PROPS = 'RECEIVE_CURRENT_PROJECT_PROPS';
@@ -233,6 +244,9 @@ var updateProject = function updateProject(formData) {
   return function (dispatch) {
     _util_project_api_util__WEBPACK_IMPORTED_MODULE_0__["updateProject"](formData).then(function (payload) {
       dispatch(receiveProject(payload));
+      dispatch(Object(_error_actions__WEBPACK_IMPORTED_MODULE_2__["receiveProjectError"])([]));
+    }, function (errors) {
+      dispatch(Object(_error_actions__WEBPACK_IMPORTED_MODULE_2__["receiveProjectError"])(errors.responseJSON));
     });
   };
 };
@@ -890,6 +904,10 @@ var HeaderNewProjectNav = function HeaderNewProjectNav(props) {
   }, "Basics"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
     className: "fa fa-caret-right"
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+    to: "/setup/project/rewards"
+  }, "Rewards"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+    className: "fa fa-caret-right"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     to: "/setup/project/story"
   }, "Story")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     id: "div6"
@@ -1259,6 +1277,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var HomeGallery = function HomeGallery(props) {
+  if (props.projectsArr.length < 1) {
+    return null;
+  }
+
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("main", {
     id: "home-gallery"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, props.categories[props.currCatId].name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
@@ -1581,6 +1603,7 @@ function (_React$Component) {
         },
         min: this.props.reward.value
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: this.props.userId === this.props.adminId || !this.props.userId ? 'deactivated pale' : '',
         onClick: this.submitBacking.bind(this)
       }, "Continue")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "foregorund",
@@ -1765,6 +1788,7 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "About"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, this.props.project.story || "the story you tell us about your project will go here ...")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "prj-rewards"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Support"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_project_support__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        adminId: this.props.project.admin_id,
         rewards: this.props.rewardsArr,
         createBacking: this.props.createBacking,
         projectId: this.props.match.params.project_id,
@@ -1926,13 +1950,9 @@ function (_React$Component) {
       });
     }
   }, {
-    key: "render",
-    value: function render() {
+    key: "defaultSupportField",
+    value: function defaultSupportField() {
       var _this2 = this;
-
-      if (this.props.rewards.length <= 0) {
-        return null;
-      }
 
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "reward-pane"
@@ -1948,13 +1968,26 @@ function (_React$Component) {
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: this.state.clicked ? '' : 'hidden'
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: this.props.userId === this.props.adminId || !this.props.userId ? 'deactivated pale' : '',
         onClick: this.submitBacking.bind(this)
-      }, "Continue"))), this.props.rewards.map(function (reward) {
+      }, "Continue"))));
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this3 = this;
+
+      if (this.props.rewards.length <= 0) {
+        return this.defaultSupportField();
+      }
+
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.defaultSupportField(), this.props.rewards.map(function (reward) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_pledge_pane__WEBPACK_IMPORTED_MODULE_1__["default"], {
           reward: reward,
-          userId: _this2.props.userId,
-          projectId: _this2.props.projectId,
-          createBacking: _this2.props.createBacking
+          adminId: _this3.props.adminId,
+          userId: _this3.props.userId,
+          projectId: _this3.props.projectId,
+          createBacking: _this3.props.createBacking
         });
       }));
     }
@@ -2320,8 +2353,8 @@ function (_React$Component) {
     value: function finalButton() {
       if (this.checkForCompleteness()) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-          to: "/setup/project/story"
-        }, "Next: Story");
+          to: "/setup/project/rewards"
+        }, "Next: Rewards");
       } else {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
           onClick: this.saveChanges.bind(this)
@@ -2344,6 +2377,17 @@ function (_React$Component) {
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
           className: "fa fa-file-image-o"
         })), "Select image file");
+      }
+    }
+  }, {
+    key: "renderErrors",
+    value: function renderErrors() {
+      if (this.props.projectErrors.length > 0) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("aside", {
+          id: "footer-errors"
+        }, this.props.projectErrors[0]);
+      } else {
+        return null;
       }
     }
   }, {
@@ -2507,7 +2551,7 @@ function (_React$Component) {
         type: "number",
         value: this.state.pledge_goal || "",
         onChange: this.edit('pledge_goal')
-      })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("footer", null, this.changesMade(), this.finalButton())));
+      })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("footer", null, this.renderErrors(), this.changesMade(), this.finalButton())));
     }
   }]);
 
@@ -2958,6 +3002,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var RewardFooter = function RewardFooter(props) {
+  var checkCompleteion = function checkCompleteion() {
+    return [props.name.length, props.value, props.description.length, props.delivery_date.length].every(function (val) {
+      return val > 0;
+    });
+  };
+
   var cancelButton = function cancelButton() {
     if (props.formActive) {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
@@ -2973,6 +3023,7 @@ var RewardFooter = function RewardFooter(props) {
       }, "Next: Story");
     } else if (!props.id) {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: checkCompleteion() ? '' : 'deactivated pale',
         onClick: function onClick() {
           props.createReward({
             reward: {
@@ -2988,6 +3039,7 @@ var RewardFooter = function RewardFooter(props) {
       }, "Save");
     } else {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: checkCompleteion() ? '' : 'deactivated',
         onClick: function onClick() {
           props.updateReward({
             id: props.id,
@@ -3041,7 +3093,7 @@ var RewardForm = function RewardForm(props) {
       onChange: props.edit('name')
     })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "reward-input"
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Pledge amount"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Set a minimum pledge amount for this reward."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Pledge amount"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Set a minimum pledge amount for this reward. (Must be at least $1.)"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
       type: "number",
       value: props.value,
       onChange: props.edit('value')
@@ -3654,7 +3706,8 @@ var mapStateToProps = function mapStateToProps(state) {
     currentProject: state.entities.projects[state.session.currentProjectId],
     currentProjectId: state.session.currentProjectId,
     categories: state.entities.categories,
-    rewardsArr: rewardsArr
+    rewardsArr: rewardsArr,
+    projectErrors: state.errors.projectsErrors
   };
 };
 
@@ -4261,12 +4314,44 @@ var EntitiesReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var _session_errors_reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./session_errors_reducer */ "./frontend/reducers/session_errors_reducer.js");
+/* harmony import */ var _project_errors_reducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./project_errors_reducer */ "./frontend/reducers/project_errors_reducer.js");
+
 
 
 var ErrorsReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
-  sessionErrors: _session_errors_reducer__WEBPACK_IMPORTED_MODULE_1__["default"]
+  sessionErrors: _session_errors_reducer__WEBPACK_IMPORTED_MODULE_1__["default"],
+  projectsErrors: _project_errors_reducer__WEBPACK_IMPORTED_MODULE_2__["default"]
 });
 /* harmony default export */ __webpack_exports__["default"] = (ErrorsReducer);
+
+/***/ }),
+
+/***/ "./frontend/reducers/project_errors_reducer.js":
+/*!*****************************************************!*\
+  !*** ./frontend/reducers/project_errors_reducer.js ***!
+  \*****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _actions_error_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/error_actions */ "./frontend/actions/error_actions.js");
+
+
+var ProjectErrorsReducer = function ProjectErrorsReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+
+  switch (action.type) {
+    case _actions_error_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_PROJECT_ERROR"]:
+      return action.errors;
+
+    default:
+      return state;
+  }
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (ProjectErrorsReducer);
 
 /***/ }),
 

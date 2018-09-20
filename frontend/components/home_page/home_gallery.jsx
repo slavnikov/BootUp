@@ -2,6 +2,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const HomeGallery = (props) => {
+  if(props.projectsArr.length < 1) {
+    return null;
+  }
+
   return (
     <main id='home-gallery'>
       <h1>{props.categories[props.currCatId].name}</h1>

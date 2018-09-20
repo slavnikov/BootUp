@@ -3,6 +3,15 @@ import { Link } from 'react-router-dom';
 
 const RewardFooter = (props) => {
 
+  const checkCompleteion = () => {
+    return [
+      props.name.length,
+      props.value,
+      props.description.length,
+      props.delivery_date.length
+    ].every((val) => {return val > 0;});
+  };
+
   const cancelButton = () => {
     if (props.formActive) {
       return (
@@ -19,6 +28,7 @@ const RewardFooter = (props) => {
       return <Link to='/setup/project/story'>Next: Story</Link>;
     } else if (!props.id) {
       return <button
+        className={checkCompleteion() ? '' : 'deactivated pale'}
         onClick={() => {
           props.createReward({
             reward: {
@@ -34,6 +44,7 @@ const RewardFooter = (props) => {
       </button>;
     } else {
       return <button
+        className={checkCompleteion() ? '' : 'deactivated'}
         onClick={() => {
           props.updateReward({
             id: props.id,

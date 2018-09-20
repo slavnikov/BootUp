@@ -35,7 +35,8 @@ const mapStateToProps = (state) => {
     currentProject: state.entities.projects[state.session.currentProjectId],
     currentProjectId: state.session.currentProjectId,
     categories: state.entities.categories,
-    rewardsArr: rewardsArr
+    rewardsArr: rewardsArr,
+    projectErrors: state.errors.projectsErrors,
   });
 };
 

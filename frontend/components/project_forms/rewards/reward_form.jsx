@@ -20,7 +20,7 @@ const RewardForm = (props) => {
             </div>
             <div className='reward-input'>
               <h2>Pledge amount</h2>
-              <p>Set a minimum pledge amount for this reward.</p>
+              <p>Set a minimum pledge amount for this reward. (Must be at least $1.)</p>
               <input type='number' value={props.value} onChange={props.edit('value')}></input>
             </div>
             <div className='reward-input'>
