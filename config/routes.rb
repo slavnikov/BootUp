@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     resources :projects, only: [:create, :update, :destroy, :show, :index]
     resources :categories, only: [:index, :show]
     resources :rewards, only: [:create, :update, :destroy]
+    resources :search, only: :show
     resources :backings, only: :create
     resource :usage, only: :show
   end

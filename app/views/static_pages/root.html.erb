@@ -5,10 +5,10 @@
 <% if logged_in? %>
   <script type="text/javascript">
     window.current_user = <%= render('api/users/user.json.jbuilder', user: current_user).html_safe %>;
+    window.projects = <%= render('api/projects/index.json.jbuilder', projects: current_user.projects).html_safe %>;
     <% if current_user.current_project_id %>
       window.current_project = <%= render('api/projects/project.json.jbuilder', project: Project.find_by(id: current_user.current_project_id)).html_safe %>
       window.current_project_id = <%= current_user.current_project_id %>;
-      window.projects = <%= render('api/projects/index.json.jbuilder', projects: current_user.projects).html_safe %>;
     <% else %>
       window.current_project = {};
     <% end %>

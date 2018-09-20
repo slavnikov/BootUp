@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import Header from './header';
 import {endSession} from '../actions/session_actions';
+import { search } from '../actions/search_actions';
 
 const mapStateToProps = (state) => {
   let projects;
@@ -20,7 +21,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return ({
-    endSession: () => dispatch(endSession())
+    endSession: () => dispatch(endSession()),
+    search: (query, alreadyFetched) => dispatch(search(query, alreadyFetched)),
   });
 };
 

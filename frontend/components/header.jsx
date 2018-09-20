@@ -1,36 +1,71 @@
 import React from 'react';
 import { Route, Link, Switch} from 'react-router-dom';
 import LogInContainer from './session_forms/log_in_container';
+import SearchRender from './header/search_render_container';
+import SearchBar from './header/search_bar';
 
-const Header = (props) => {
-  return (
-    <Switch>
-      <Route path='/setup/project/basics'render={() => { return <HeaderNewProjectNav {...props}/>;}}/>;}}/>
-      <Route path='/setup/project/rewards'render={() => { return <HeaderNewProjectNav {...props}/>;}}/>;}}/>
-      <Route path='/setup/project/story'render={() => { return <HeaderNewProjectNav {...props}/>;}}/>;}}/>
-      <Route path='/setup/project/' render={() => { return <HeaderNewProject {...props}/>;}}/>
-      <Route path='/setup' render={() => { return <HeaderSetup {...props}/>;}}/>
-      <Route path='/' render={() => { return <HeaderBasic {...props}/>;}}/>;
-    </Switch>
-  );
+class Header extends React.Component {
+  constructor (props) {
+    super(props);
+    this.state = {
+      searching: false,
+    };
+    this.toggleSearch = this.toggleSearch.bind(this);
+  }
 
-};
+  toggleSearch () {
+    this.setState({searching: !this.state.searching});
+  }
+
+  render () {
+    return (
+      <div>
+        <Switch>
+          <Route path='/setup/project/basics'render={() => { return <HeaderNewProjectNav {...this.props}/>;}}/>;}}/>
+          <Route path='/setup/project/rewards'render={() => { return <HeaderNewProjectNav {...this.props}/>;}}/>;}}/>
+          <Route path='/setup/project/story'render={() => { return <HeaderNewProjectNav {...this.props}/>;}}/>;}}/>
+          <Route path='/setup/project/' render={() => { return <HeaderNewProject {...this.props}/>;}}/>
+          <Route path='/setup' render={() => { return <HeaderSetup {...this.props}/>;}}/>
+          <Route path='/' render={() => { return <HeaderBasic {...this.props}
+            toggleSearch={this.toggleSearch}
+            searching={this.state.searching}
+            search={this.props.search}/>;}}
+            />;
+        </Switch>
+        <SearchRender searching={this.state.searching} toggleSearch={this.toggleSearch}/>
+      </div>
+    );
+  }
+}
 
 const HeaderBasic = (props) => {
   return (
-    <div className="basic-header">
-      <div id="div1">
-        <Link to='/setup/1' >Start a project</Link>
+    <div>
+      <SearchBar
+        searching={props.searching}
+        search={props.search}
+        toggleSearch={props.toggleSearch}
+      />
+      <div className="basic-header">
+        <div id="div1">
+          <Link to='/setup/1' >Start a project</Link>
+        </div>
+        <div id="div2">
+          <Link to='/' ><p className="logo">BootUp</p></Link>
+        </div>
+        <div id="div3">
+          <div id='search-button' onClick={props.toggleSearch}>
+            Search
+            <i class="fa fa-search"></i>
+          </div>
+          <HeaderButton
+            currentUserId={ props.currentUserId }
+            endSession={ props.endSession }
+            users={props.users}
+            projects={props.projects}
+            />
+        </div>
       </div>
-      <div id="div2">
-        <Link to='/' ><p className="logo">BootUp</p></Link>
-      </div>
-      <HeaderButton
-        currentUserId={ props.currentUserId }
-        endSession={ props.endSession }
-        users={props.users}
-        projects={props.projects}
-        />
     </div>
   );
 };
@@ -43,12 +78,14 @@ const HeaderNewProject = (props) => {
       <div id="div2">
         <Link to='/' ><p className="logo">BootUp</p></Link>
       </div>
-      <HeaderButton
-        currentUserId={ props.currentUserId }
-        endSession={ props.endSession }
-        users={props.users}
-        projects={props.projects}
-        />
+      <div id='div3'>
+        <HeaderButton
+          currentUserId={ props.currentUserId }
+          endSession={ props.endSession }
+          users={props.users}
+          projects={props.projects}
+          />
+      </div>
     </div>
   );
 };
@@ -77,12 +114,14 @@ const HeaderSetup =  (props) => {
       <div id="div2">
         <Link to='/' ><p className="logo">BootUp</p></Link>
       </div>
-      <HeaderButton
-        currentUserId={ props.currentUserId }
-        endSession={ props.endSession }
-        users={props.users}
-        projects={props.projects}
-        />
+      <div id='div3'>
+        <HeaderButton
+          currentUserId={ props.currentUserId }
+          endSession={ props.endSession }
+          users={props.users}
+          projects={props.projects}
+          />
+      </div>
     </div>
   );
 };
@@ -104,7 +143,7 @@ const HeaderButton = (props) => {
 
   if (props.currentUserId) {
     return (
-      <div id="div3">
+      <div>
         <button className="profilePic" onClick={menuToggle}></button>
         <menu className="hidden" id="menu">
           <header>{props.users[props.currentUserId].name}</header>

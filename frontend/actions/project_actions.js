@@ -59,7 +59,7 @@ export const fetchProject = (id) => {
 
 export const fetchProjects = () => {
   return (dispatch) => {
-    PrjUtil.fetchProjects().then((payload) => {
+    return PrjUtil.fetchProjects().then((payload) => {
       dispatch(receiveProjects(payload));
     });
   };

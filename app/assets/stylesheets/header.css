@@ -5,6 +5,7 @@
   align-items: center;
   justify-content: space-between;
   border-bottom: 1px solid #656969;
+  background-color: white;
 }
 
 .setup-header {
@@ -38,7 +39,12 @@
 
 #div1 {width: 33%;}
 #div2 {width: 34%;}
-#div3 {width: 33%;}
+#div3 {
+  width: 33%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
 #div5 {
   width: 50%;
   display: flex;
@@ -68,6 +74,21 @@
 
 .fa-caret-right {
   color: #E8E8E8;
+}
+
+#search-button {
+  font-size: 14px;
+  color: #282828;
+  margin-right: 20px;
+  cursor: pointer;
+}
+
+#search-button:hover {
+  color: #037362
+}
+
+.fa-search {
+  margin-left: 5px;
 }
 
 #div3 a {float: right;}

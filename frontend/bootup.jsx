@@ -11,6 +11,7 @@ import * as UserActions from './actions/user_actions';
 import * as SessActions from './actions/session_actions';
 import * as PrjActions from './actions/project_actions';
 import * as CatActions from './actions/category_actions';
+import * as SearchActions from './actions/search_actions';
 //TESTING//
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -60,8 +61,9 @@ document.addEventListener("DOMContentLoaded", () => {
   // window.receiveCurrentProjectProps = PrjActions.receiveCurrentProjectProps;
   // window.updateProject = PrjActions.updateProject;
   // window.createProject = PrjActions.createProject;
-  window.fetchProjects = PrjActions.fetchProjects;
+  // window.fetchProjects = PrjActions.fetchProjects;
   // window.fetchCategoryProjects = CatActions.fetchCategoryProjects;
+    window.search = SearchActions.search;
   // TESTING //
 
 });
