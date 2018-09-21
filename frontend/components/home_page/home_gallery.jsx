@@ -27,15 +27,23 @@ const HomeGallery = (props) => {
     return Date.parse(b.updated_at) - Date.parse(a.updated_at);
   });
 
+  const backgroundImage = (project) => {
+    return (
+      {
+        backgroundImage: `url(${project.imageUrl})`
+      }
+    );
+  };
+
   return (
     <main id='home-gallery'>
       <h1>{props.categories[currCatId].name}</h1>
       <section id='galleries'>
         <aside id='feature'>
           <p>FEATURED PROJECT</p>
-            <div id='featured-image'>
-              <Link to={`/project/${projectsArr[0].id}`}><img src={projectsArr[0].imageUrl}></img></Link>
-            </div>
+
+              <Link to={`/project/${projectsArr[0].id}`}><div id='featured-image' style={backgroundImage(projectsArr[0])}></div></Link>
+
             <div id='feature-titles'>
               <h1>{projectsArr[0].title}</h1>
               <h4>{`by ${props.users[projectsArr[0].admin_id].name}`}</h4>

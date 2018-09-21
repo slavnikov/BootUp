@@ -1275,19 +1275,25 @@ var HomeGallery = function HomeGallery(props) {
   projectsArr = projectsArr.sort(function (a, b) {
     return Date.parse(b.updated_at) - Date.parse(a.updated_at);
   });
+
+  var backgroundImage = function backgroundImage(project) {
+    return {
+      backgroundImage: "url(".concat(project.imageUrl, ")")
+    };
+  };
+
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("main", {
     id: "home-gallery"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, props.categories[currCatId].name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
     id: "galleries"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("aside", {
     id: "feature"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "FEATURED PROJECT"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    id: "featured-image"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "FEATURED PROJECT"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     to: "/project/".concat(projectsArr[0].id)
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-    src: projectsArr[0].imageUrl
-  }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    id: "featured-image",
+    style: backgroundImage(projectsArr[0])
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     id: "feature-titles"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, projectsArr[0].title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "by ".concat(props.users[projectsArr[0].admin_id].name)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "".concat(projectsArr[0].percentComplete, "% FUNDED")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("aside", {
     id: "gallery-options"

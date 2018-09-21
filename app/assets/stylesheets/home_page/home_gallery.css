@@ -23,6 +23,7 @@
 
 #feature {
   color: #282828;
+  width: 650px;
 }
 
 #feature:hover {
@@ -38,6 +39,8 @@
   overflow-x: hidden;
   overflow-y: hidden;
   display: flex;
+  background-position: center center;
+  background-size: cover;
 }
 
 #feature-titles {
@@ -46,6 +49,7 @@
       left: 20px;
       width: 80%;
       padding-top: 7px;
+      min-width: 520px;
 }
 
 #feature-titles h1{
@@ -55,7 +59,7 @@
   font-size: 29px;
   padding: 11px;
   margin: 0px;
-  max-width: 90%;
+  max-width: 100%;
 }
 
 #feature-titles h4 {
