@@ -1265,13 +1265,16 @@ var HomeGallery = function HomeGallery(props) {
 
   var currCatId = props.currCatId || Object.keys(props.categories)[0];
   var projectsArr = Object.values(props.projects).filter(function (project) {
-    return project.category_id === parseInt(currCatId);
+    return project.category_id === parseInt(currCatId) && project.complete;
   });
 
   if (projectsArr.length < 1) {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_loading_spinner__WEBPACK_IMPORTED_MODULE_2__["default"], null);
   }
 
+  projectsArr = projectsArr.sort(function (a, b) {
+    return Date.parse(b.updated_at) - Date.parse(a.updated_at);
+  });
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("main", {
     id: "home-gallery"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, props.categories[currCatId].name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {

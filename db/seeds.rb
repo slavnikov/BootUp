@@ -105,7 +105,7 @@ end
 7.times do |idx|
   f = Project.create({
     title: Faker::Movie.quote,
-    subtitle: Faker::MichaelScott.quote,
+    subtitle: Faker::MichaelScott.quote[0, 50] + "...",
     category_id: film_id,
     admin_id: User.all.sample.id,
     pledge_goal: pledge_goals.sample,
@@ -150,7 +150,7 @@ end
 7.times do |idx|
   p = Project.create({
     title: Faker::GreekPhilosophers.quote,
-    subtitle: Faker::MichaelScott.quote,
+    subtitle: Faker::MichaelScott.quote[0, 50] + "...",
     category_id: photo_id,
     admin_id: User.all.sample.id,
     pledge_goal: pledge_goals.sample,

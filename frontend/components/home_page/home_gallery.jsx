@@ -14,13 +14,18 @@ const HomeGallery = (props) => {
 
   const currCatId = props.currCatId || Object.keys(props.categories)[0];
 
-  const projectsArr = Object.values(props.projects).filter((project) => {
-    return project.category_id === parseInt(currCatId);
+  let projectsArr = Object.values(props.projects).filter((project) => {
+    return project.category_id === parseInt(currCatId) && project.complete;
   });
+
 
   if (projectsArr.length < 1) {
     return <LoadingSpinner/>;
   }
+
+  projectsArr = projectsArr.sort((a, b) => {
+    return Date.parse(b.updated_at) - Date.parse(a.updated_at);
+  });
 
   return (
     <main id='home-gallery'>

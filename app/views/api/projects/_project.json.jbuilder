@@ -7,7 +7,7 @@ def total_raised(project)
 end
 
 def percentage_complete(project)
-  if project.pledge_goal > 0
+  if project.pledge_goal && project.pledge_goal > 0
     ((total_raised(project) / project.pledge_goal.to_f) * 100).round
   else
     0
@@ -15,7 +15,7 @@ def percentage_complete(project)
 end
 
 if project
-  json.extract! project, :id, :admin_id, :title, :subtitle, :category_id, :sub_category, :country, :story, :end_date, :pledge_goal, :complete
+  json.extract! project, :id, :admin_id, :title, :subtitle, :category_id, :sub_category, :country, :story, :end_date, :pledge_goal, :complete, :updated_at
   json.percentComplete percentage_complete(project)
   json.totalRaised total_raised(project)
   json.totalBackers total_backers(project)
