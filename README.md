@@ -10,7 +10,7 @@ Creators can initiate projects and offer rewards to users who back them. Users c
 
 
 
-## Technologies Used
+# Technologies Used
 
 ### Ruby on Rails
 
@@ -55,4 +55,38 @@ const mapStateToProps = (state) => {
 The great benefit of sending all data to a single place and then disseminating the data to different components greatly reduces instances of conflicting data persisting in different components when modified in one but not the other and confines all data receit logic to a handful of files. 
 
 ### React
-The React library supplies the tools for automated re-rendering of pages upon information update. It also allows for very syntactically simple modular page design with heirarchical rendering and child components within the parent. As user interacts with the app, the effects of those interactions are logged as changes in the state of a given component (or possibly the Redux store that passes the changes along to the React component) and the page reacts (see what I did there) to the changes by re-rendering itself or its child components which are affected by the change.  
+The React library supplies the tools for automated re-rendering of pages upon information update. It also allows for very syntactically simple modular page design with heirarchical rendering and child components within the parent. As user interacts with the app, the effects of those interactions are logged as changes in the state of a given component (or possibly the Redux store that passes the changes along to the React component) and the page reacts (see what I did there) to the changes by re-rendering itself or its child components which are affected by the change.
+The overall modular structore of React components is made up of a Redux store connected parent rendering children to which it passes the store's information as properties upon rendering.
+```javascript 
+render () {
+    return (
+      <div id='rewards-page-wrapper'>
+        <HeaderC/> //rendering of an imported child component without passing of properties 
+        <main className='basics-wrapper'>
+          <header>
+            <h1>Add your rewards</h1>
+            <h2>Offer simple, meaningful rewards that bring backers closer to your project. ...</h2>
+          </header>
+          <RewardsSubheader
+            activateForm={this.activateForm}
+          />
+          <RewardsListing  //rendering a child compoent with passing of properties
+            rewards={this.props.rewardsArr} //passing a property received via parent's store connection
+            activateForm={this.activateForm}
+            deleteReward={this.props.deleteReward}
+            deactivateForm={this.deactivateForm}
+            populateState={this.populateState}
+          />
+          <RewardForm
+            formActive={this.state.formActive}
+            edit={this.edit}
+            name={this.state.name}
+            description={this.state.description}
+            value={this.state.value}
+            delivery_date={this.state.delivery_date}
+          />
+```
+---
+
+
+# Features
