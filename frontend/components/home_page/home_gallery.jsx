@@ -46,7 +46,7 @@ const HomeGallery = (props) => {
           <ul>
             {
               projectsArr.map((project, idx) => {
-                if (idx === 0) {
+                if (idx === 0 || idx > 6) {
                   return;
                 } else if (!project.complete) {
                   return;

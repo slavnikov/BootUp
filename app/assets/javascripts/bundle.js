@@ -1292,7 +1292,7 @@ var HomeGallery = function HomeGallery(props) {
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, projectsArr[0].title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "by ".concat(props.users[projectsArr[0].admin_id].name)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "".concat(projectsArr[0].percentComplete, "% FUNDED")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("aside", {
     id: "gallery-options"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, projectsArr.map(function (project, idx) {
-    if (idx === 0) {
+    if (idx === 0 || idx > 6) {
       return;
     } else if (!project.complete) {
       return;

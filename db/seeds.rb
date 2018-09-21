@@ -58,8 +58,14 @@ days = (1..28).to_a
 years = (2019..2020).to_a
 
 7.times do |idx|
-  m = Project.create({
-    title: Faker::Music.album,
+  title = Faker::Music.album
+
+  while Project.find_by(title: title)
+    title = Faker::Music.album
+  end
+
+  m = Project.create!({
+    title: title,
     subtitle: Faker::GreekPhilosophers.quote,
     category_id: music_id,
     admin_id: User.all.sample.id,
@@ -73,8 +79,14 @@ years = (2019..2020).to_a
 end
 
 7.times do |idx|
-  a = Project.create({
-    title: Faker::BreakingBad.episode,
+  title = Faker::BreakingBad.episode
+
+  while Project.find_by(title: title)
+    title = Faker::BreakingBad.episode
+  end
+
+  a = Project.create!({
+    title: title,
     subtitle: Faker::GreekPhilosophers.quote,
     category_id: art_id,
     admin_id: User.all.sample.id,
@@ -88,8 +100,14 @@ end
 end
 
 7.times do |idx|
-  c = Project.create({
-    title: Faker::WorldOfWarcraft.quote,
+  title = Faker::WorldOfWarcraft.quote
+
+  while Project.find_by(title: title)
+    title = Faker::WorldOfWarcraft.quote
+  end
+
+  c = Project.create!({
+    title: title,
     subtitle: Faker::Movie.quote,
     category_id: comics_id,
     admin_id: User.all.sample.id,
@@ -103,8 +121,14 @@ end
 end
 
 7.times do |idx|
-  f = Project.create({
-    title: Faker::Movie.quote,
+  title = Faker::Movie.quote
+
+  while Project.find_by(title: title)
+    title = Faker::Movie.quote
+  end
+
+  f = Project.create!({
+    title: title,
     subtitle: Faker::MichaelScott.quote[0, 50] + "...",
     category_id: film_id,
     admin_id: User.all.sample.id,
@@ -118,7 +142,7 @@ end
 end
 
 7.times do |idx|
-  fd = Project.create({
+  fd = Project.create!({
     title: Faker::Food.dish + " " + Faker::Food.dish,
     subtitle: Faker::GreekPhilosophers.quote,
     category_id: food_id,
@@ -133,8 +157,14 @@ end
 end
 
 7.times do |idx|
-  g = Project.create({
-    title: Faker::LeagueOfLegends.quote,
+  title = Faker::LeagueOfLegends.quote
+
+  while Project.find_by(title: title)
+    title = Faker::LeagueOfLegends.quote
+  end
+
+  g = Project.create!({
+    title: title,
     subtitle: Faker::RickAndMorty.quote,
     category_id: games_id,
     admin_id: User.all.sample.id,
@@ -148,8 +178,14 @@ end
 end
 
 7.times do |idx|
-  p = Project.create({
-    title: Faker::GreekPhilosophers.quote,
+  title = Faker::GreekPhilosophers.quote
+
+  while Project.find_by(title: title)
+    title = Faker::GreekPhilosophers.quote
+  end
+
+  p = Project.create!({
+    title: title,
     subtitle: Faker::MichaelScott.quote[0, 50] + "...",
     category_id: photo_id,
     admin_id: User.all.sample.id,
@@ -163,8 +199,14 @@ end
 end
 
 7.times do |idx|
-  t = Project.create({
-    title: Faker::Company.catch_phrase,
+  title = Faker::Company.catch_phrase
+
+  while Project.find_by(title: title)
+    title = Faker::Company.catch_phrase
+  end
+
+  t = Project.create!({
+    title: title,
     subtitle: Faker::Company.bs,
     category_id: tech_id,
     admin_id: User.all.sample.id,
@@ -178,7 +220,7 @@ end
 end
 
 112.times do
-  Reward.create({
+  Reward.create!({
     name: Faker::Dota.item,
     description: Faker::Hacker.say_something_smart,
     value: [1,5,10,25,70,100,500,1000].sample,
@@ -188,7 +230,7 @@ end
 end
 
 560.times do
-  Backing.create({
+  Backing.create!({
     user_id: User.all.sample.id,
     project_id: Project.all.sample.id,
     value: [1, 5, 10, 20, 30, 50, 100, 200, 250, 500, 1000].sample
