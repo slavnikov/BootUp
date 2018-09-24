@@ -149,4 +149,45 @@ Since the page could potentially be called for a project that had not been creat
 <% end %>
 ```
 
-### 
+### Intuitive Validations
+
+Because projects on BootUp can take a long time to complete, and it would not be unusual for users to take more than one day to work on them, it would be inefficient to handle the validation for project completeness via a call to the database. If that was a requirement, the implication would be that a project has to be completed in a single sitting.
+
+Instead of posting error messages about missing project parameters, users are allowed to fill out the forms partially and get intuitive feedback on the project overview page about whether they are done with a particular section.
+
+![alt text](/app/assets/images/screengrabs/validations.jpg "Intuitive Validations")
+
+This is handled by conditional React rendering. A separate method takes in a set of parameters that it checks for completion with the current project.
+
+```javascript
+// /frontend/components/project_forms/new_prj_overview.jsx
+
+checkForCompleteness (prj_params, idx) {
+  const all_done = prj_params.every((param) => {
+    return this.props.currentProject[param];
+  });
+
+  if (all_done) {
+    this.completeCount[idx] = true;
+    return <i className="fa fa-check nav-item-complete"></i>;
+  } else {
+    return <i className="fa fa-check"></i>;
+    }
+}
+```
+
+It also modifies an object in the page's local state with indices of each of the pages when they are complete. This part of the local state is then read to determine whether the submit button should be displayed at the bottom of the page.
+
+```javascript
+// /frontend/components/project_forms/new_prj_overview.jsx
+
+submitButton () {
+  if ([1,2,3].every((idx) => {return this.completeCount[idx];})) {
+    return <Link to ={`/project/${this.props.currentProject.id}`} onClick={() => {return this.props.submitProject(this.props.currentProject.id);}}>Submit Project</Link>;
+  } else {
+    return null;
+  }
+}
+```
+
+Since the project has already been created in the database and has simply been being updated by the completeness of the different forms, the project submit button sends an update request that modifies the 'complete' field in the project's database row which marks it available for being displayed on the homepage or coming back as a search result for the public.
