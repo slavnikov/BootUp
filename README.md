@@ -1,6 +1,6 @@
 ![alt text](/app/assets/images/logo.jpg "BootUp Logo")
 
-BootUp is a functional clone of the Kickstarter website. It is designed to allow content creators to apply for crowdfunding directly from their potential customer: instead of raising venture capital and lunching a product on the hope of generating interest, people with ideas can pitch them to the world and get funded ahead of even making their product.
+BootUp is a functional clone of the Kickstarter website. It is designed to allow content creators to apply for crowdfunding directly from their potential customer: instead of raising venture capital and launching a product on the hope of generating interest, people with ideas can pitch them to the world and get funded ahead of even making their product.
 
 Creators can initiate projects and offer rewards to users who back them. Users can browse and discover different initiatives that might interest them, and use their money to back the products or caues which they would like to see come to pass. This model allows passion and dedication, not promise of profitability, to support the creation of new and innovative products and see the funding of initiatives which would otherwise die in a bank's loan office.
 
@@ -38,7 +38,7 @@ const ProjectsReducer = (state = {}, action) => {
       return merge({}, state, action.payload.projects);
  ...
 ```
-...and these modifications to the store state are then distriuted as properties (props) to the page components which display them.
+...and these modifications to the store state are then distributed as properties (props) to the page components which display them.
 ```javascript
 const mapStateToProps = (state) => {
 ...
@@ -52,11 +52,11 @@ const mapStateToProps = (state) => {
     projectErrors: state.errors.projectsErrors,
     ...
 ```
-The great benefit of sending all data to a single place and then disseminating the data to different components greatly reduces instances of conflicting data persisting in different components when modified in one but not the other and confines all data receit logic to a handful of files.
+The great benefit of sending all data to a single place and then disseminating the data to different components greatly reduces instances of conflicting data persisting in different components when modified in one but not the other and confines all data receiving logic to a handful of files.
 
 ### React
 The React library supplies the tools for automated re-rendering of pages upon information update. It also allows for very syntactically simple modular page design with heirarchical rendering and child components within the parent. As user interacts with the app, the effects of those interactions are logged as changes in the state of a given component (or possibly the Redux store that passes the changes along to the React component) and the page reacts (see what I did there) to the changes by re-rendering itself or its child components which are affected by the change.
-The overall modular structore of React components is made up of a Redux store connected parent rendering children to which it passes the store's information as properties upon rendering.
+The overall modular structure of React components is made up of a Redux store connected parent rendering children to which it passes the store's information as properties upon rendering.
 ```javascript
 render () {
     return (
@@ -190,4 +190,4 @@ submitButton () {
 }
 ```
 
-Since the project has already been created in the database and has simply been being updated by the completeness of the different forms, the project submit button sends an update request that modifies the 'complete' field in the project's database row which marks it available for being displayed on the homepage or coming back as a search result for the public.
+Since the project has already been created in the database and has simply been being updated by the completeness of the different forms, the project submit button sends an update request that modifies the complete field in the project's database row which marks it available for being displayed on the homepage or coming back as a search result for the public.

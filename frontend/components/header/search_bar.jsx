@@ -6,6 +6,12 @@ class SearchBar extends React.Component {
     this.state = {
       dataFetched: false
     };
+    this.timeout = null;
+    this.commenceSearch = this.commenceSearch.bind(this);
+  }
+
+  commenceSearch(e) {
+    return null;
   }
 
   render () {
