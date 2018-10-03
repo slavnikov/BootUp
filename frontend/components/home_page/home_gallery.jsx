@@ -42,13 +42,13 @@ const HomeGallery = (props) => {
         <aside id='feature'>
           <p>FEATURED PROJECT</p>
 
-              <Link to={`/project/${projectsArr[0].id}`}><div id='featured-image' style={backgroundImage(projectsArr[0])}></div></Link>
+            <Link to={`/project/${projectsArr[0].id}`}><div id='featured-image' style={backgroundImage(projectsArr[0])}></div></Link>
 
-            <div id='feature-titles'>
+            <Link id='feature-titles' to={`/project/${projectsArr[0].id}`}>
               <h1>{projectsArr[0].title}</h1>
               <h4>{`by ${props.users[projectsArr[0].admin_id].name}`}</h4>
               <h5>{`${projectsArr[0].percentComplete}% FUNDED`}</h5>
-            </div>
+            </Link>
         </aside>
         <aside id='gallery-options'>
           <ul>

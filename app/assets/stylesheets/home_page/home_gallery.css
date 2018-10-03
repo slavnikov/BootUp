@@ -23,10 +23,15 @@
 
 #feature {
   color: #282828;
-  width: 650px;
+  width: 600px;
 }
 
-#feature:hover {
+#feature a {
+  color: #282828;
+  text-decoration: none;
+}
+
+#feature:hover a {
   color: #037362;
 }
 
@@ -45,11 +50,12 @@
 
 #feature-titles {
   position: relative;
-      bottom: 165px;
-      left: 20px;
-      width: 80%;
-      padding-top: 7px;
-      min-width: 520px;
+  bottom: 165px;
+  left: 20px;
+  width: 80%;
+  padding-top: 7px;
+  display: initial;
+  cursor: pointer;
 }
 
 #feature-titles h1{
@@ -59,7 +65,8 @@
   font-size: 29px;
   padding: 11px;
   margin: 0px;
-  max-width: 100%;
+  max-width: 520px;
+  cursor: pointer;
 }
 
 #feature-titles h4 {

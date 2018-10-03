@@ -1300,8 +1300,9 @@ var HomeGallery = function HomeGallery(props) {
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     id: "featured-image",
     style: backgroundImage(projectsArr[0])
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    id: "feature-titles"
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+    id: "feature-titles",
+    to: "/project/".concat(projectsArr[0].id)
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, projectsArr[0].title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "by ".concat(props.users[projectsArr[0].admin_id].name)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "".concat(projectsArr[0].percentComplete, "% FUNDED")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("aside", {
     id: "gallery-options"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, projectsArr.map(function (project, idx) {
