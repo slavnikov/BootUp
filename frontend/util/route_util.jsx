@@ -16,7 +16,7 @@ const Auth = ({component: Component, path, loggedIn, exact, tempPrjProps}) => {
 
 
 const Protected = ({component: Component, path, loggedIn, exact}) => {
-  return <Route route={path} exact={exact} render={(props) => {
+  return <Route path={path} exact={exact} render={(props) => {
       if (loggedIn) {
         return <Component {...props} />;
       } else {

@@ -13,10 +13,10 @@ const App = () => {
   return (
     <div>
       <Route exact path='/' component={ HomePageC }/>
-      <Route path='/project/:project_id' component={ ProjectPage }/>
+      <AuthRoute path='/signup' component = { SignUpC }/>
+      <AuthRoute path='/login' component = { LoginC }/>
       <ProtectedRoute path='/profile' component={UserProfile}/>
-      <AuthRoute exact path='/login' component = { LoginC }/>
-      <AuthRoute exact path='/signup' component = { SignUpC }/>
+      <Route path='/project/:project_id' component={ ProjectPage }/>
       <Route path='/setup' component = { SetupFormC }/>
     </div>
   );
