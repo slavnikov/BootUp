@@ -4250,15 +4250,63 @@ function (_React$Component) {
   _inherits(UserProfile, _React$Component);
 
   function UserProfile(props) {
+    var _this;
+
     _classCallCheck(this, UserProfile);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(UserProfile).call(this, props));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(UserProfile).call(this, props));
+    _this.state = {
+      name: _this.props.currentUser.name,
+      email: _this.props.currentUser.email,
+      location: _this.props.currentUser.location,
+      biography: _this.props.currentUser.biography
+    };
+    return _this;
   }
 
   _createClass(UserProfile, [{
     key: "render",
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_header_container__WEBPACK_IMPORTED_MODULE_1__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Hello World!"));
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_header_container__WEBPACK_IMPORTED_MODULE_1__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("main", {
+        className: "profile-wrapper"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("header", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Profile"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Keep your info up to date")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+        className: "profile-form"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-li"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "li-text"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "Name"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Let the BootUp community know what to call you.")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "li-inputs"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "text",
+        value: this.state.name
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-li"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "li-text"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "Email"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "This is how we know who you are so please keep us updated.")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "li-inputs"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "text",
+        value: this.state.email
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-li"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "li-text"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "Location"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Tell us where you're from.")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "li-inputs"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "text",
+        value: this.state.location
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-li"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "li-text"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "Biography"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Share your story with the rest of the Booters out there.")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "li-inputs"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
+        value: this.state.biography
+      })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("footer", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", null, "Update Profile"))));
     }
   }]);
 

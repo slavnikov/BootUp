@@ -1,4 +1,4 @@
-.basics-wrapper header {
+.basics-wrapper header, .profile-wrapper header {
   border-bottom: 1px solid #dcdedd;
   display: flex;
   flex-direction: column;
@@ -9,7 +9,11 @@
   padding: 0px 25%;
 }
 
-.basics-wrapper header h1 {
+.profile-wrapper header {
+  align-items: flex-start;
+}
+
+.basics-wrapper header h1, .profile-wrapper header h1 {
   margin-bottom: 0px;
   font-weight: lighter;
   color: #282828;
@@ -17,7 +21,7 @@
   letter-spacing: 1.1px;
 }
 
-.basics-wrapper header h2 {
+.basics-wrapper header h2, .profile-wrapper h3 {
   margin-top: 19px;
     font-weight: lighter;
     color: #656969;
@@ -26,7 +30,7 @@
     text-align: center;
 }
 
-.basics-form {
+.basics-form, .profile-form {
   padding-bottom: 50px;
 }
 
@@ -98,8 +102,17 @@
 
 .li-inputs textarea {
   height: 200px;
+  padding: 12px;
+  font-family: "Maison Neue Book", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
+.li-inputs textarea:focus {
+  border: 1px solid #009e74;
+  outline: none;
+}
+.li-inputs textarea:hover {
+  border: 1px solid #009e74;
+}
 
 #category-button-basics{
   position: relative;
@@ -217,19 +230,19 @@
   outline: none;
 }
 
-.basics-wrapper footer {
+.basics-wrapper footer, .profile-wrapper footer {
   position: fixed;
   bottom: 0;
-    right: 0;
-    width: 100%;
-    background-color: #fbfbfa;
-    padding: 25px;
-display: flex;
-justify-content: flex-end;
-border-top: 1px solid #dcdedd;
+  right: 0;
+  width: 100%;
+  background-color: #fbfbfa;
+  padding: 25px;
+  display: flex;
+  justify-content: flex-end;
+  border-top: 1px solid #dcdedd;
 }
 
-.basics-wrapper footer button {
+.basics-wrapper footer button, .profile-wrapper footer button {
   width: 170px;
   margin-left: 10px;
   height: 42px;
@@ -240,7 +253,7 @@ border-top: 1px solid #dcdedd;
   transition: background-color 0.5s, margin-top 0.5s, margin-bottom 0.5s;
 }
 
-.basics-wrapper footer button:hover{
+.basics-wrapper footer button:hover, .profile-wrapper footer button:hover {
   background-color: #037362;
   cursor: pointer;
   margin-top: -1px;
@@ -267,7 +280,7 @@ border-top: 1px solid #dcdedd;
   margin-bottom: 1px;
 }
 
-.basics-form div:last-child {
+.basics-form div:last-child, .profile-form div:last-child {
   margin-bottom: 42px;
 }
 
