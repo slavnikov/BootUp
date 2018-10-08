@@ -1,8 +1,8 @@
 ![alt text](/app/assets/images/logo.jpg "BootUp Logo")
 
-BootUp is a functional clone of the Kickstarter website. It is designed to allow content creators to apply for crowdfunding directly from their potential customer: instead of raising venture capital and launching a product on the hope of generating interest, people with ideas can pitch them to the world and get funded ahead of even making their product.
+BootUp is a web application inspired by Kickstarter. It is designed to allow content creators to apply for crowdfunding directly from their potential customer: instead of raising venture capital and launching a product on the hope of generating interest, people with ideas can pitch them to the world and get funded ahead of even making their product.
 
-Creators can initiate projects and offer rewards to users who back them. Users can browse and discover different initiatives that might interest them, and use their money to back the products or caues which they would like to see come to pass. This model allows passion and dedication, not promise of profitability, to support the creation of new and innovative products and see the funding of initiatives which would otherwise die in a bank's loan office.
+Creators can initiate projects and offer rewards to users who back them. Users can browse and discover different initiatives that might interest them, and use their money to back the products or cause which they would like to see come to pass. This model allows passion and dedication, not promise of profitability, to support the creation of new and innovative products and see the funding of initiatives which would otherwise die in a bank's loan office.
 
 [Visit the Live BootUp App Now!](https://boot-up-fullstack.herokuapp.com/#/)
 
@@ -16,7 +16,7 @@ Creators can initiate projects and offer rewards to users who back them. Users c
 
 The backend of the BootUp app is built on the Ruby on Rails framework. Rails starts by managing the routing of http requests to the app's API. It is then also responsible for analyzing those requests, and responding with appropriate data from the Postgresql database.
 
-The Rails ActiveRecord class is already optimized for handling requests for linked resources and so minimizing the number of actual calls to the databse. In the case of BootUp, it allows a single line of code to fetch an index of completed projects along with associated creators, backings, and linked image blobs with a single call to the databse.
+The Rails ActiveRecord class is already optimized for handling requests for linked resources and so minimizing the number of actual calls to the database. In the case of BootUp, it allows a single line of code to fetch an index of completed projects along with associated creators, backings, and linked image blobs with a single call to the database.
 
 ```ruby
 Project.with_attached_image.where(complete: true).includes('admin', 'backings')
@@ -24,7 +24,7 @@ Project.with_attached_image.where(complete: true).includes('admin', 'backings')
 
 ### Redux
 
-The redux 'single source of truth' model ensures that all data coming back from the Rails backend is maintained in a single frontend store. As a user interacts with the application, the interactions set of actions which are pre-built to modify specific data.
+The Redux 'single source of truth' model ensures that all data coming back from the Rails backend is maintained in a single frontend store. As a user interacts with the application, the interactions set of actions which are pre-built to modify specific data.
 
 These actions are caught and parsed to modify the state of the store ...
 ```javascript
@@ -55,7 +55,7 @@ const mapStateToProps = (state) => {
 The great benefit of sending all data to a single place and then disseminating the data to different components greatly reduces instances of conflicting data persisting in different components when modified in one but not the other and confines all data receiving logic to a handful of files.
 
 ### React
-The React library supplies the tools for automated re-rendering of pages upon information update. It also allows for very syntactically simple modular page design with heirarchical rendering and child components within the parent. As user interacts with the app, the effects of those interactions are logged as changes in the state of a given component (or possibly the Redux store that passes the changes along to the React component) and the page reacts (see what I did there) to the changes by re-rendering itself or its child components which are affected by the change.
+The React library supplies the tools for automated re-rendering of pages upon information update. It also allows for very syntactically simple modular page design with hierarchical rendering and child components within the parent. As user interacts with the app, the effects of those interactions are logged as changes in the state of a given component (or possibly the Redux store that passes the changes along to the React component) and the page reacts (see what I did there) to the changes by re-rendering itself or its child components which are affected by the change.
 The overall modular structure of React components is made up of a Redux store connected parent rendering children to which it passes the store's information as properties upon rendering.
 ```javascript
 render () {
@@ -166,13 +166,14 @@ checkForCompleteness (prj_params, idx) {
   const all_done = prj_params.every((param) => {
     return this.props.currentProject[param];
   });
+  let completeClass = "";
 
   if (all_done) {
     this.completeCount[idx] = true;
-    return <i className="fa fa-check nav-item-complete"></i>;
-  } else {
-    return <i className="fa fa-check"></i>;
-    }
+    completeClass = "nav-item-complete"
+  }
+
+  return <i className=`fa fa-check ${completeClass}`></i>;
 }
 ```
 
@@ -182,7 +183,7 @@ It also modifies an object in the page's local state with indices of each of the
 // /frontend/components/project_forms/new_prj_overview.jsx
 
 submitButton () {
-  if ([1,2,3].every((idx) => {return this.completeCount[idx];})) {
+  if ([1,2,3].every(idx => return this.completeCount[idx])) {
     return <Link to ={`/project/${this.props.currentProject.id}`} onClick={() => {return this.props.submitProject(this.props.currentProject.id);}}>Submit Project</Link>;
   } else {
     return null;
