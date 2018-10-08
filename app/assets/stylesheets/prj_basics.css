@@ -104,6 +104,7 @@
   height: 200px;
   padding: 12px;
   font-family: "Maison Neue Book", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  border: 1px solid #dcdedd;
 }
 
 .li-inputs textarea:focus {
@@ -240,6 +241,8 @@
   display: flex;
   justify-content: flex-end;
   border-top: 1px solid #dcdedd;
+  min-height: 93px;
+  box-sizing: border-box;
 }
 
 .basics-wrapper footer button, .profile-wrapper footer button {

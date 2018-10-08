@@ -4224,6 +4224,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _util_loading_spinner__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../util/loading_spinner */ "./frontend/components/util/loading_spinner.jsx");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -4265,6 +4267,33 @@ function (_React$Component) {
   }
 
   _createClass(UserProfile, [{
+    key: "edit",
+    value: function edit(field) {
+      var _this2 = this;
+
+      return function (e) {
+        _this2.setState(_defineProperty({}, field, e.currentTarget.value));
+      };
+    }
+  }, {
+    key: "enableButton",
+    value: function enableButton() {
+      var _this3 = this;
+
+      var anyChanges = Object.keys(this.state).some(function (field) {
+        return _this3.state[field] !== _this3.props.currentUser[field];
+      });
+      var noBlanks = [this.state.email, this.state.name].every(function (value) {
+        return value.replace(/\s/g, '').length !== 0;
+      });
+
+      if (anyChanges && noBlanks) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", null, "Update Profile");
+      } else {
+        return null;
+      }
+    }
+  }, {
     key: "render",
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_header_container__WEBPACK_IMPORTED_MODULE_1__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("main", {
@@ -4275,20 +4304,22 @@ function (_React$Component) {
         className: "form-li"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "li-text"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "Name"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Let the BootUp community know what to call you.")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "Name*"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Let the BootUp community know what to call you.")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "li-inputs"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
-        value: this.state.name
+        value: this.state.name,
+        onChange: this.edit('name')
       }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form-li"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "li-text"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "Email"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "This is how we know who you are so please keep us updated.")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "Email*"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "This is how we know who you are so please keep us updated.")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "li-inputs"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
-        value: this.state.email
+        value: this.state.email,
+        onChange: this.edit('email')
       }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form-li"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -4297,7 +4328,8 @@ function (_React$Component) {
         className: "li-inputs"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
-        value: this.state.location
+        value: this.state.location,
+        onChange: this.edit('location')
       }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form-li"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -4305,8 +4337,9 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "Biography"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Share your story with the rest of the Booters out there.")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "li-inputs"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
-        value: this.state.biography
-      })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("footer", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", null, "Update Profile"))));
+        value: this.state.biography,
+        onChange: this.edit('biography')
+      })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("footer", null, this.enableButton())));
     }
   }]);
 

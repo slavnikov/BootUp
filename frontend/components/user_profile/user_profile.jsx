@@ -13,6 +13,27 @@ class UserProfile extends React.Component {
     };
   }
 
+  edit (field) {
+    return (e) => {
+      this.setState({[field]: e.currentTarget.value});
+    };
+  }
+
+  enableButton () {
+    const anyChanges = Object.keys(this.state).some((field) => {
+      return this.state[field] !== this.props.currentUser[field];
+    });
+    const noBlanks = [this.state.email, this.state.name].every((value) => {
+      return value.replace(/\s/g,'').length !== 0;
+    });
+
+    if (anyChanges && noBlanks) {
+      return <button>Update Profile</button>;
+    } else {
+      return null;
+    }
+  }
+
   render() {
     return (
       <div>
@@ -25,21 +46,21 @@ class UserProfile extends React.Component {
           <form className='profile-form'>
             <div className='form-li'>
               <div className='li-text'>
-                <h6>Name</h6>
+                <h6>Name*</h6>
                 <p>Let the BootUp community know what to call you.</p>
               </div>
               <div className='li-inputs'>
-                <input type='text' value={this.state.name}></input>
+                <input type='text' value={this.state.name} onChange={this.edit('name')}></input>
               </div>
             </div>
 
             <div className='form-li'>
               <div className='li-text'>
-                <h6>Email</h6>
+                <h6>Email*</h6>
                 <p>This is how we know who you are so please keep us updated.</p>
               </div>
               <div className='li-inputs'>
-                <input type='text' value={this.state.email}></input>
+                <input type='text' value={this.state.email} onChange={this.edit('email')}></input>
               </div>
             </div>
 
@@ -49,7 +70,7 @@ class UserProfile extends React.Component {
                 <p>Tell us where you're from.</p>
               </div>
               <div className='li-inputs'>
-                <input type='text' value={this.state.location}></input>
+                <input type='text' value={this.state.location} onChange={this.edit('location')}></input>
               </div>
             </div>
 
@@ -59,12 +80,12 @@ class UserProfile extends React.Component {
                 <p>Share your story with the rest of the Booters out there.</p>
               </div>
               <div className='li-inputs'>
-                <textarea value={this.state.biography}></textarea>
+                <textarea value={this.state.biography} onChange={this.edit('biography')}></textarea>
               </div>
             </div>
           </form>
           <footer>
-            <button>Update Profile</button>
+            {this.enableButton()}
           </footer>
         </main>
       </div>

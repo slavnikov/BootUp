@@ -133,7 +133,6 @@ class ProjectBasics extends React.Component {
   }
 
   renderErrors() {
-
     if (this.props.projectErrors.length > 0) {
       return (
         <aside id='footer-errors'>
