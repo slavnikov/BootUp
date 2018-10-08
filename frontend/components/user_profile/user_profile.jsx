@@ -8,9 +8,11 @@ class UserProfile extends React.Component {
   }
 
   render() {
-    debugger
     return (
-      <h1>Hello World!</h1>
+      <div>
+        <HeaderC/>
+        <h1>Hello World!</h1>
+      </div>
     );
   }
 }
