@@ -2212,7 +2212,7 @@ function (_React$Component) {
     _this.state = {
       categories_hidden: true,
       countries_hidden: true,
-      title: _this.props.currentProject.title,
+      title: _this.props.currentProject.title || "Your Project Title",
       subtitle: _this.props.currentProject.subtitle,
       category_id: _this.props.currentProject.category_id,
       country: _this.props.currentProject.country,
@@ -2262,7 +2262,7 @@ function (_React$Component) {
     key: "discardChanges",
     value: function discardChanges() {
       this.setState({
-        title: this.props.currentProject.title,
+        title: this.props.currentProject.title || "Your Project Title",
         subtitle: this.props.currentProject.subtitle,
         category_id: this.props.currentProject.category_id,
         country: this.props.currentProject.country,
@@ -4276,6 +4276,17 @@ function (_React$Component) {
       };
     }
   }, {
+    key: "saveChanges",
+    value: function saveChanges() {
+      this.props.updateUser({
+        id: this.props.currentUser.id,
+        name: this.state.name,
+        email: this.state.email,
+        location: this.state.location,
+        biography: this.state.biography
+      });
+    }
+  }, {
     key: "enableButton",
     value: function enableButton() {
       var _this3 = this;
@@ -4288,7 +4299,9 @@ function (_React$Component) {
       });
 
       if (anyChanges && noBlanks) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", null, "Update Profile");
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          onClick: this.saveChanges.bind(this)
+        }, "Update Profile");
       } else {
         return null;
       }

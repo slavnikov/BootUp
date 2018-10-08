@@ -10,7 +10,7 @@ class ProjectBasics extends React.Component {
     this.state = {
       categories_hidden: true,
       countries_hidden: true,
-      title: this.props.currentProject.title,
+      title: this.props.currentProject.title || "Your Project Title",
       subtitle: this.props.currentProject.subtitle,
       category_id: this.props.currentProject.category_id,
       country: this.props.currentProject.country,
@@ -55,7 +55,7 @@ class ProjectBasics extends React.Component {
 
   discardChanges () {
     this.setState({
-      title: this.props.currentProject.title,
+      title: this.props.currentProject.title || "Your Project Title",
       subtitle: this.props.currentProject.subtitle,
       category_id: this.props.currentProject.category_id,
       country: this.props.currentProject.country,

@@ -19,6 +19,16 @@ class UserProfile extends React.Component {
     };
   }
 
+  saveChanges() {
+    this.props.updateUser({
+      id: this.props.currentUser.id,
+      name: this.state.name,
+      email: this.state.email,
+      location: this.state.location,
+      biography: this.state.biography
+    });
+  }
+
   enableButton () {
     const anyChanges = Object.keys(this.state).some((field) => {
       return this.state[field] !== this.props.currentUser[field];
@@ -28,7 +38,7 @@ class UserProfile extends React.Component {
     });
 
     if (anyChanges && noBlanks) {
-      return <button>Update Profile</button>;
+      return <button onClick={this.saveChanges.bind(this)}>Update Profile</button>;
     } else {
       return null;
     }
