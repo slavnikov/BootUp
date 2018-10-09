@@ -1742,13 +1742,31 @@ function (_React$Component) {
       var percentage = {
         width: "".concat(this.props.project.percentComplete || 0, "%")
       };
+
+      var menuToggle = function menuToggle() {
+        var menu = document.getElementById('admin-details');
+        menu.classList.toggle('hidden');
+      };
+
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_header_container__WEBPACK_IMPORTED_MODULE_1__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("main", {
         className: "project-main"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         id: "admin-info"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        id: "admin-pic"
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "By\xA0", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", null, this.props.admin.name)), this.rednerEditButton()), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "adminPic",
+        onClick: menuToggle
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "fa fa-user-circle"
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        id: "admin-details",
+        className: "hidden"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, this.props.admin.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        class: "fa fa-at"
+      }), " ", this.props.admin.email), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        class: "fa fa-map-marker"
+      }), " ", this.props.admin.location), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        class: "fa fa-file-text-o"
+      }), " ", this.props.admin.biography)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "By\xA0", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", null, this.props.admin.name)), this.rednerEditButton()), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         id: "project-titles"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, this.props.project.title || "your project title will go here..."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, this.props.project.subtitle)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "main-left"

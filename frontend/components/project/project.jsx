@@ -86,16 +86,24 @@ class ProjectPage extends React.Component {
       width: `${this.props.project.percentComplete || 0}%`,
     };
 
+    const menuToggle = () => {
+      const menu = document.getElementById('admin-details');
+      menu.classList.toggle('hidden');
+    };
+
     return (
       <div>
         <HeaderC/>
         <main className='project-main'>
           <section>
             <span id='admin-info'>
-              <a>
-                <div id='admin-pic'>
+                <button className="adminPic" onClick={menuToggle}><i className="fa fa-user-circle"></i></button>
+                <div id="admin-details" className="hidden">
+                  <h3>{this.props.admin.name}</h3>
+                  <h4><i class="fa fa-at"></i> {this.props.admin.email}</h4>
+                  <h4><i class="fa fa-map-marker"></i> {this.props.admin.location}</h4>
+                  <p><i class="fa fa-file-text-o"></i> {this.props.admin.biography}</p>
                 </div>
-              </a>
               <span>
                 By&nbsp;<a>{this.props.admin.name}</a>
               </span>

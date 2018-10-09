@@ -128,7 +128,7 @@
   transition: box-shadow 0.3s;
 }
 
-.profilePic:hover {
+.profilePic:hover{
   cursor: pointer;
   box-shadow: 0 3px 6px 0 rgba(0,0,0,0.3);
 }

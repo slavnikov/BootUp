@@ -27,7 +27,68 @@
   margin-bottom: 18px;
   display: flex;
   flex-direction: column;
+  padding-top: 7px;
+}
 
+.adminPic {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  background-color: white;
+  border: 0px;
+  padding: 0px;
+  float: right;
+  transition: box-shadow 0.3s;
+}
+
+.adminPic i {
+  font-size: 40px;
+}
+
+.adminPic button {
+  width: 40px;
+  height: 40px;
+}
+
+.adminPic i:hover {
+  font-size: 40px;
+}
+
+.adminPic:hover {
+  cursor: pointer;
+  box-shadow: 0 5px 6px 0 rgba(0,0,0,0.3);
+}
+
+.adminPic:focus {
+  outline: none;
+}
+
+#admin-details {
+  position: absolute;
+  border: 1px solid #e8e8e8;
+  background-color: white;
+  left: 15%;
+  top: 180px;
+  width: 250px;
+  padding: 20px;
+  box-shadow: 0 5px 6px 0 rgba(0,0,0,0.3);
+}
+
+#admin-details h3, #admin-details h4 {
+  margin: 0px;
+  margin-bottom: 10px;
+  color: #282828;
+  font-weight: lighter;
+}
+
+#admin-details p {
+  color: #656969;
+  margin-bottom: 0px;
+}
+
+#admin-info button {
+  margin-bottom: 10px;
+  font-size: 40px;
 }
 
 #admin-pic {
