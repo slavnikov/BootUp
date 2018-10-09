@@ -3,15 +3,15 @@ import React from 'react';
 class SearchBar extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      dataFetched: false
-    };
     this.timeout = null;
-    this.commenceSearch = this.commenceSearch.bind(this);
   }
 
-  commenceSearch(e) {
-    return null;
+  delayedSearch(e) {
+    let event = e;
+    Object.freeze(event);
+    return function () {
+      this.props.search(event.currentTarget.value);
+    };
   }
 
   render () {
@@ -22,8 +22,8 @@ class SearchBar extends React.Component {
             type='text'
             placeholder='Search form projects by title and subtitle'
             onChange={(e) => {
-              this.props.search(e.currentTarget.value, this.state.dataFetched);
-              this.setState({dataFetched: true});
+              clearTimeout(this.timeout);
+              this.timeout = setTimeout(this.delayedSearch(e).bind(this), 1e3);
             }}>
           </input>
         </form>

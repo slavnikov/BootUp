@@ -378,19 +378,15 @@ var receiveSearchResults = function receiveSearchResults(results) {
     results: results
   };
 };
-var search = function search(query, alreadyFetched) {
+var search = function search(query) {
   return function (dispatch) {
-    if (!alreadyFetched) {
-      dispatch(Object(_project_actions__WEBPACK_IMPORTED_MODULE_1__["fetchProjects"])()).then(function () {
-        _util_search_api_util__WEBPACK_IMPORTED_MODULE_0__["search"](query).then(function (response) {
-          dispatch(receiveSearchResults(response.searchResults));
-        });
+    _util_search_api_util__WEBPACK_IMPORTED_MODULE_0__["search"](query).then(function (payload) {
+      dispatch(Object(_project_actions__WEBPACK_IMPORTED_MODULE_1__["receiveProjects"])(payload));
+      var searchResults = Object.values(payload.projects).map(function (project) {
+        return project.id;
       });
-    } else {
-      _util_search_api_util__WEBPACK_IMPORTED_MODULE_0__["search"](query).then(function (response) {
-        dispatch(receiveSearchResults(response.searchResults));
-      });
-    }
+      dispatch(receiveSearchResults(searchResults));
+    }); // }
   };
 };
 
@@ -1008,13 +1004,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 
 
@@ -1029,18 +1025,18 @@ function (_React$Component) {
     _classCallCheck(this, SearchBar);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(SearchBar).call(this, props));
-    _this.state = {
-      dataFetched: false
-    };
     _this.timeout = null;
-    _this.commenceSearch = _this.commenceSearch.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     return _this;
   }
 
   _createClass(SearchBar, [{
-    key: "commenceSearch",
-    value: function commenceSearch(e) {
-      return null;
+    key: "delayedSearch",
+    value: function delayedSearch(e) {
+      var event = e;
+      Object.freeze(event);
+      return function () {
+        this.props.search(event.currentTarget.value);
+      };
     }
   }, {
     key: "render",
@@ -1054,11 +1050,8 @@ function (_React$Component) {
         type: "text",
         placeholder: "Search form projects by title and subtitle",
         onChange: function onChange(e) {
-          _this2.props.search(e.currentTarget.value, _this2.state.dataFetched);
-
-          _this2.setState({
-            dataFetched: true
-          });
+          clearTimeout(_this2.timeout);
+          _this2.timeout = setTimeout(_this2.delayedSearch(e).bind(_this2), 1e3);
         }
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
         className: "fa fa-times",

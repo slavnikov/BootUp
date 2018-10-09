@@ -1,8 +1,8 @@
 class Api::SearchController < ApplicationController
   def show
     pattern = params[:id]
-    @results = Project.where("lower (title) like ?", "%#{pattern}%")
+    @projects = Project.where("lower (title) like ?", "%#{pattern}%")
 
-    render :show
+    render '/api/projects/index.json.jbuilder'
   end
 end
