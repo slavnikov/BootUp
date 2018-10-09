@@ -219,5 +219,10 @@
 }
 
 #prj-rewards #reward-pane {
-  position: initial;
+  position: relative;
+}
+
+#prj-rewards #reward-pane:last-child {
+  position: relative;
+  margin-bottom: 50px;
 }
