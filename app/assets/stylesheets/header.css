@@ -172,7 +172,7 @@
 
 .user-menu main {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   height: 280px;
 }
 
@@ -183,7 +183,7 @@
   margin: 0px;
 }
 
-#ddm-project-list h3 {
+#ddm-project-list h3, #profile-info h3 {
   margin: 0px 0px 10px 0px;
   font-size: 13px;
   font-weight: bold;
@@ -197,7 +197,7 @@
   float: none;
 }
 
-#ddm-project-list li a h6 {
+#ddm-project-list li a h6{
   margin: 0px 0px 0px 15px;
   font-weight: lighter;
   font-size: 14px;
@@ -242,6 +242,31 @@
   text-decoration: underline;
   cursor: pointer;
   color: #037362;
+}
+
+#profile-info {
+  width: 50%;
+  padding-left: 36px;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+#profile-info h6 {
+  font-size: 13.5px;
+  color: #282828;
+  margin-top: 0px;
+  margin-bottom: 12px;
+  font-weight: lighter;
+}
+
+#profile-info p {
+  font-size: 13px;
+  color: #282828;
+}
+
+#profile-info a {
+  float: left;
+  display: contents;
 }
 
 .hidden {

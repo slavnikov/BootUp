@@ -944,6 +944,7 @@ var HeaderButton = function HeaderButton(props) {
   };
 
   if (props.currentUserId) {
+    var currentUser = props.users[props.currentUserId];
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
       className: "profilePic",
       onClick: menuToggle
@@ -952,7 +953,18 @@ var HeaderButton = function HeaderButton(props) {
     })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("menu", {
       className: "hidden",
       id: "menu"
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("header", null, props.users[props.currentUserId].name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("main", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("header", null, currentUser.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("main", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      id: "profile-info"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+      to: '/profile',
+      onClick: menuToggle
+    }, "PROFILE")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+      class: "fa fa-at"
+    }), "   ", currentUser.email), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+      class: "fa fa-map-marker"
+    }), " ", currentUser.location), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+      class: "fa fa-file-text-o"
+    }), " ", currentUser.biography)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
       id: "ddm-project-list"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "MY PROJECTS"), props.projects.map(function (project, idx) {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {

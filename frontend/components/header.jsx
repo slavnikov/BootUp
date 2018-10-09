@@ -144,14 +144,20 @@ const HeaderButton = (props) => {
   };
 
   if (props.currentUserId) {
+    const currentUser = props.users[props.currentUserId];
+
     return (
       <div>
         <button className="profilePic" onClick={menuToggle}><i className="fa fa-user-circle"></i></button>
         <menu className="hidden" id="menu">
-          <header>{props.users[props.currentUserId].name}</header>
+          <header>{currentUser.name}</header>
           <main>
-            <div></div>
-            <div></div>
+            <div id='profile-info'>
+              <h3><Link to={'/profile'} onClick={menuToggle}>PROFILE</Link></h3>
+              <h6><i class="fa fa-at"></i>   {currentUser.email}</h6>
+              <h6><i class="fa fa-map-marker"></i> {currentUser.location}</h6>
+              <p><i class="fa fa-file-text-o"></i> {currentUser.biography}</p>
+            </div>
             <ul id='ddm-project-list'>
               <h3>MY PROJECTS</h3>
               {props.projects.map((project, idx) => {
