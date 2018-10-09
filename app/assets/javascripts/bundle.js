@@ -4307,6 +4307,15 @@ function (_React$Component) {
       }
     }
   }, {
+    key: "renderErrors",
+    value: function renderErrors() {
+      if (this.props.sessionErrors.length > 0) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("aside", {
+          id: "fotter-errors"
+        }, this.props.sessionErrors[0]);
+      }
+    }
+  }, {
     key: "render",
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_header_container__WEBPACK_IMPORTED_MODULE_1__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("main", {
@@ -4352,7 +4361,7 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
         value: this.state.biography,
         onChange: this.edit('biography')
-      })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("footer", null, this.enableButton())));
+      })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("footer", null, this.renderErrors(), this.enableButton())));
     }
   }]);
 
@@ -4381,7 +4390,8 @@ __webpack_require__.r(__webpack_exports__);
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
-    currentUser: state.entities.users[state.session.currentUserId]
+    currentUser: state.entities.users[state.session.currentUserId],
+    sessionErrors: state.errors.sessionErrors
   };
 };
 

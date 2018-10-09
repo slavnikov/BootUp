@@ -44,6 +44,16 @@ class UserProfile extends React.Component {
     }
   }
 
+  renderErrors() {
+    if (this.props.sessionErrors.length > 0) {
+      return (
+        <aside id='fotter-errors'>
+          {this.props.sessionErrors[0]}
+        </aside>
+      );
+    }
+  }
+
   render() {
     return (
       <div>
@@ -95,6 +105,7 @@ class UserProfile extends React.Component {
             </div>
           </form>
           <footer>
+            {this.renderErrors()}
             {this.enableButton()}
           </footer>
         </main>
