@@ -217,3 +217,7 @@
   color: #282828;
   line-height: 33px;
 }
+
+#prj-rewards #reward-pane {
+  position: initial;
+}
