@@ -4261,7 +4261,8 @@ function (_React$Component) {
       name: _this.props.currentUser.name,
       email: _this.props.currentUser.email,
       location: _this.props.currentUser.location,
-      biography: _this.props.currentUser.biography
+      biography: _this.props.currentUser.biography,
+      bad_email: null
     };
     return _this;
   }
@@ -4309,7 +4310,13 @@ function (_React$Component) {
   }, {
     key: "renderErrors",
     value: function renderErrors() {
-      if (this.props.sessionErrors.length > 0) {
+      if (this.props.sessionErrors.length > 0 && (this.state.bad_email === this.state.email || !this.state.bad_email)) {
+        if (!this.state.bad_email) {
+          this.setState({
+            bad_email: this.state.email
+          });
+        }
+
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("aside", {
           id: "footer-errors"
         }, this.props.sessionErrors[0]);

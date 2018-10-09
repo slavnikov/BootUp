@@ -10,6 +10,7 @@ class UserProfile extends React.Component {
       email: this.props.currentUser.email,
       location: this.props.currentUser.location,
       biography: this.props.currentUser.biography,
+      bad_email: null,
     };
   }
 
@@ -45,7 +46,10 @@ class UserProfile extends React.Component {
   }
 
   renderErrors() {
-    if (this.props.sessionErrors.length > 0) {
+    if (this.props.sessionErrors.length > 0 && (this.state.bad_email === this.state.email || !this.state.bad_email)) {
+      if (!this.state.bad_email) {
+        this.setState({bad_email: this.state.email});
+      }
       return (
         <aside id='footer-errors'>
           {this.props.sessionErrors[0]}
