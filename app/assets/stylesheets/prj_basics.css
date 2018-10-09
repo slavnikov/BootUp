@@ -289,10 +289,10 @@
 
 #footer-errors {
   height: 42px;
-display: flex;
-align-items: center;
-background-color: #dd919d;
-padding: 0px 12px;
-font-size: 15px;
-color: #383838;
+  display: flex;
+  align-items: center;
+  background-color: #dd919d;
+  padding: 0px 12px;
+  font-size: 15px;
+  color: #383838;
 }

@@ -4311,7 +4311,7 @@ function (_React$Component) {
     value: function renderErrors() {
       if (this.props.sessionErrors.length > 0) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("aside", {
-          id: "fotter-errors"
+          id: "footer-errors"
         }, this.props.sessionErrors[0]);
       }
     }
@@ -4677,6 +4677,8 @@ var RootReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])(
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_error_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/error_actions */ "./frontend/actions/error_actions.js");
+/* harmony import */ var _actions_user_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions/user_actions */ "./frontend/actions/user_actions.js");
+
 
 
 var SessionErrorsReducer = function SessionErrorsReducer() {
@@ -4686,6 +4688,9 @@ var SessionErrorsReducer = function SessionErrorsReducer() {
   switch (action.type) {
     case _actions_error_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_SESSION_ERROR"]:
       return action.errors;
+
+    case _actions_user_actions__WEBPACK_IMPORTED_MODULE_1__["RECEIVE_USER"]:
+      return [];
 
     default:
       return state;

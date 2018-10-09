@@ -47,7 +47,7 @@ class UserProfile extends React.Component {
   renderErrors() {
     if (this.props.sessionErrors.length > 0) {
       return (
-        <aside id='fotter-errors'>
+        <aside id='footer-errors'>
           {this.props.sessionErrors[0]}
         </aside>
       );
