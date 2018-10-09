@@ -32,6 +32,7 @@ class UserProfile extends React.Component {
 
   enableButton () {
     const anyChanges = Object.keys(this.state).some((field) => {
+      if(field === "bad_email") {return false;}
       return this.state[field] !== this.props.currentUser[field];
     });
     const noBlanks = [this.state.email, this.state.name].every((value) => {

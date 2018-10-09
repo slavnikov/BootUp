@@ -4293,6 +4293,10 @@ function (_React$Component) {
       var _this3 = this;
 
       var anyChanges = Object.keys(this.state).some(function (field) {
+        if (field === "bad_email") {
+          return false;
+        }
+
         return _this3.state[field] !== _this3.props.currentUser[field];
       });
       var noBlanks = [this.state.email, this.state.name].every(function (value) {
