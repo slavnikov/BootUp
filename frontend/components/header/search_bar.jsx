@@ -23,7 +23,7 @@ class SearchBar extends React.Component {
             placeholder='Search form projects by title and subtitle'
             onChange={(e) => {
               clearTimeout(this.timeout);
-              this.timeout = setTimeout(this.delayedSearch(e).bind(this), 1e3);
+              this.timeout = setTimeout(this.delayedSearch(e).bind(this), 8e2);
             }}>
           </input>
         </form>
