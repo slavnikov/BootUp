@@ -1051,7 +1051,7 @@ function (_React$Component) {
         placeholder: "Search form projects by title and subtitle",
         onChange: function onChange(e) {
           clearTimeout(_this2.timeout);
-          _this2.timeout = setTimeout(_this2.delayedSearch(e).bind(_this2), 8e2);
+          _this2.timeout = setTimeout(_this2.delayedSearch(e).bind(_this2), 7e2);
         }
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
         className: "fa fa-times",
