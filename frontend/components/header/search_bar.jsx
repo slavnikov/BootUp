@@ -7,10 +7,9 @@ class SearchBar extends React.Component {
   }
 
   delayedSearch(e) {
-    let event = e;
-    Object.freeze(event);
+    let query = e.currentTarget.value;
     return function () {
-      this.props.search(event.currentTarget.value);
+      this.props.search(query);
     };
   }
 

@@ -1032,10 +1032,9 @@ function (_React$Component) {
   _createClass(SearchBar, [{
     key: "delayedSearch",
     value: function delayedSearch(e) {
-      var event = e;
-      Object.freeze(event);
+      var query = e.currentTarget.value;
       return function () {
-        this.props.search(event.currentTarget.value);
+        this.props.search(query);
       };
     }
   }, {
