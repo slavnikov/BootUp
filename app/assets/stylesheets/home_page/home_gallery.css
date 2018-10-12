@@ -113,6 +113,7 @@ font-size: 14px;
 #gallery-options ul li {
   box-sizing: border-box;
   display: flex;
+  /* justify-content: space-between; */
   align-items: center;
   height: 102px;
   width: 100%;
@@ -122,9 +123,20 @@ font-size: 14px;
   font-size: 14px;
 }
 
+#gallery-options ul li span{
+  width: 17.5%;
+}
+
+#gallery-options aside{
+  flex-grow: 1;
+}
+
 #gallery-options ul li a {
   color: #282828;
   text-decoration: none;
+}
+#gallery-options ul li div {
+  max-width: 50%;
 }
 
 #gallery-options ul li a:hover {

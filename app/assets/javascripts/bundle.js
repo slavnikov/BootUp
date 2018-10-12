@@ -1328,7 +1328,11 @@ var HomeGallery = function HomeGallery(props) {
         src: project.imageUrl
       }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
         to: "/project/".concat(project.id)
-      }, project.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, project.subtitle), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "".concat(project.percentComplete, "% complete"))));
+      }, project.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, project.subtitle), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "".concat(project.percentComplete, "% complete"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("aside", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        class: "fa fa-user"
+      }), " ", props.users[project.admin_id].name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        class: "fa fa-map-marker"
+      }), " ", props.users[project.admin_id].location)));
     }
   })))));
 };

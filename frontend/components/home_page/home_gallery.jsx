@@ -66,6 +66,11 @@ const HomeGallery = (props) => {
                       <p>{project.subtitle}</p>
                       <p>{`${project.percentComplete}% complete`}</p>
                     </div>
+                    <aside></aside>
+                    <span>
+                      <p><i class="fa fa-user"></i> {props.users[project.admin_id].name}</p>
+                      <p><i class="fa fa-map-marker"></i> {props.users[project.admin_id].location}</p>
+                    </span>
                   </li>;
                 }
               })
