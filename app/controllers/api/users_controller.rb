@@ -24,6 +24,11 @@ class Api::UsersController < ApplicationController
   def update
     @user = User.find_by(id: params[:id])
 
+    unless logged_in? && current_user.id == @user.id
+      render json: [], status: 422
+      return
+    end
+
     if @user.update(user_params)
       @projects = @user.projects
 

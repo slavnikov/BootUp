@@ -1,5 +1,10 @@
 class Api::BackingsController < ApplicationController
   def create
+    unless logged_in? && current_user.id == backing_params[:user_id].to_i
+      render json: [], status: 500
+      return
+    end
+
     @backing = Backing.new(backing_params)
 
     if @backing.save

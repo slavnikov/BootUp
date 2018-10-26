@@ -565,28 +565,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _components_root__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/root */ "./frontend/components/root.jsx");
 /* harmony import */ var _store_store__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./store/store */ "./frontend/store/store.js");
-/* harmony import */ var _util_users_api_util__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./util/users_api_util */ "./frontend/util/users_api_util.js");
-/* harmony import */ var _util_project_api_util__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./util/project_api_util */ "./frontend/util/project_api_util.js");
-/* harmony import */ var _actions_user_actions__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./actions/user_actions */ "./frontend/actions/user_actions.js");
-/* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./actions/session_actions */ "./frontend/actions/session_actions.js");
-/* harmony import */ var _actions_project_actions__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./actions/project_actions */ "./frontend/actions/project_actions.js");
-/* harmony import */ var _actions_category_actions__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./actions/category_actions */ "./frontend/actions/category_actions.js");
-/* harmony import */ var _actions_search_actions__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./actions/search_actions */ "./frontend/actions/search_actions.js");
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 // SDG
 
 
 
- //TESTING//
-
-
-
-
-
-
-
- //TESTING//
 
 document.addEventListener("DOMContentLoaded", function () {
   var preloaded_state = {};
@@ -622,23 +606,7 @@ document.addEventListener("DOMContentLoaded", function () {
   var root = document.getElementById('root');
   react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_root__WEBPACK_IMPORTED_MODULE_2__["default"], {
     store: store
-  }), root); // TESTING //
-
-  window.getState = store.getState; // V
-
-  window.dispatch = store.dispatch; // window.createUser = UserUtils.createUser; // V
-  // window.fetchUser = UserUtils.fetchUser; //V
-  // window.createUser = UserActions.createUser; // V
-  // window.fetchUser = UserActions.fetchUser; //V
-  // window.createSession = SessActions.createSession;
-  // window.endSession = SessActions.endSession;
-  // window.receiveCurrentProjectProps = PrjActions.receiveCurrentProjectProps;
-  // window.updateProject = PrjActions.updateProject;
-  // window.createProject = PrjActions.createProject;
-  // window.fetchProjects = PrjActions.fetchProjects;
-  // window.fetchCategoryProjects = CatActions.fetchCategoryProjects;
-
-  window.search = _actions_search_actions__WEBPACK_IMPORTED_MODULE_10__["search"]; // TESTING //
+  }), root);
 });
 
 /***/ }),

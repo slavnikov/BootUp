@@ -1,5 +1,11 @@
 class Api::ProjectsController < ApplicationController
+
   def create
+    unless logged_in?
+      render json: [], status: 422
+      return
+    end
+
     @project = Project.new(project_params)
 
     if @project.save
@@ -16,6 +22,11 @@ class Api::ProjectsController < ApplicationController
 
   def update
     @project = Project.find_by(id: params[:id])
+
+    unless logged_in? && @project.admin.id == current_user.id
+      render json: [], status: 422
+      return
+    end
 
     if @project.update(project_params)
       @user = @project.admin
@@ -52,9 +63,13 @@ class Api::ProjectsController < ApplicationController
 
   def destroy
     @project = Project.find_by(id: params[:id])
-    @project.destroy
 
-    render :show
+    if logged_in? && current_user.id == @project.admin.id
+      @project.destroy
+      render :show
+    else
+      render json: [], status: 422
+    end
   end
 
   private
